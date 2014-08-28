@@ -1,1 +1,45 @@
-<p>This is the login view.</p>
+<div class="container">
+  <div class="row">
+    <div class="center-form panel">
+      <div class="panel-body">
+        <h2 class="text-center">Log in</h2>
+        <form method="post" ng-submit="login()" name="loginForm">
+          <div class="form-group has-feedback">
+            <input class="form-control input-lg" type="text" name="email" ng-model="email" placeholder="Email" required autofocus>
+            <i class="fa fa-envelope fa-lg form-control-feedback"></i>
+          </div>
+
+          <div class="form-group has-feedback">
+            <input class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="Password" required>
+            <i class="fa fa-key fa-lg form-control-feedback"></i>
+          </div>
+
+          <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-lg  btn-block btn-success">Log in</button>
+
+          <br/>
+
+          <p class="text-center">
+            <a href="#">Forgot your password?</a>
+          </p>
+
+          <p class="text-center text-muted">
+            <small>Don't have an account yet? <a href="/#/signup">Sign up</a></small>
+          </p>
+
+          <div class="signup-or-separator">
+            <h6 class="text">or</h6>
+            <hr>
+          </div>
+        </form>
+
+        <button class="btn btn-block btn-reddit" ng-click="authenticate('reddit')">
+          <i class="fa fa-reddit fa-lg"></i> Sign in with Reddit
+        </button>
+
+        <button class="btn btn-block btn-github" ng-click="authenticate('github')">
+          <i class="fa fa-github fa-lg"></i> Sign in with GitHub
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
