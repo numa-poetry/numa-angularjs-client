@@ -8,3 +8,8 @@ Angular.js client for Warrior Poets.
 3. Install components: `bower install`
 4. Launch: `grunt serve --no-color`
 5. Visit: `http://localhost:9000`
+
+#### Shoutouts to:
+* [FontAwesome](https://github.com/FortAwesome/Font-Awesome)
+* [Bootswatch](https://github.com/thomaspark/bootswatch/)
+* [Satellizer](https://github.com/sahat/satellizer/)
