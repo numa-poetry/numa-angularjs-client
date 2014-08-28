@@ -15,17 +15,19 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'Satellizer',
+    'mgcrea.ngStrap'
     // xeditable
     // angularSpinner
     // angularModalService
     // ui.bootstrap
 
   ])
-  .config(function ($routeProvider, $httpProvider) {
+  .config(function ($routeProvider, $httpProvider, $authProvider) {
 
     /**
-     * Redirect user to login if user tries to access authenticated route 
+     * Redirect user to login if user tries to access authenticated route
      */
     var ensureAuthentication = function() {
 
@@ -45,6 +47,10 @@ angular
       };
     };
 
+    $authProvider.github({
+      clientId: 'a6cf7f2af1739f24601f'
+    });
+
     $routeProvider
       .when('/', {
         templateUrl    : 'views/main.html',
@@ -56,10 +62,14 @@ angular
       })
       .when('/login', {
         templateUrl    : 'views/login.html',
-        controller     : 'LoginCtrl',
+        controller     : 'LoginCtrl'/*,*/
         // need this for query parameters to be correctly set in the URL on
         // session expiration redirection to login page from userFactory
-        reloadOnSearch : false
+        // reloadOnSearch : false
+      })
+      .when('/logout', {
+        template       : null,
+        controller     : 'LogoutCtrl'
       })
       .when('/signup', {
         templateUrl    : 'views/signup.html',
@@ -76,5 +86,5 @@ angular
 
     // Add user's session token to all intercepted $resource calls
     $httpProvider.interceptors.push('tokenInterceptorFactory');
-      
+
   });

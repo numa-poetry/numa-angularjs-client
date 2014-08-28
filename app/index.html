@@ -14,6 +14,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -33,7 +34,8 @@
           <li class="active"><a ng-href="#">Home</a></li>
           <li><a ng-href="#/about">About</a></li>
           <li><a ng-href="#">Contact</a></li>
-          <li><a ng-href="#/login">Login</a></li>
+          <li ng-if="!isAuthenticated"><a ng-href="#/login">Login</a></li>
+          <li ng-if="isAuthenticated"><a ng-href="#/logout">Logout</a></li>
         </ul>
         <h3 class="text-muted">warriorPoets</h3>
       </div>
@@ -74,11 +76,16 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- Include Bootstrap JS here -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <!-- Include Satellizer here -->
+    <script src="scripts/vendor/satellizer.js"></script>
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
@@ -95,6 +102,7 @@
     <script src="scripts/services/tokeninterceptorfactory.js"></script>
     <script src="scripts/services/helperfactory.js"></script>
     <script src="scripts/services/userfactory.js"></script>
+    <script src="scripts/controllers/logout.js"></script>
     <!-- endbuild -->
 
   </body>

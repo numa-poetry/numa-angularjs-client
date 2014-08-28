@@ -9,8 +9,9 @@
  */
 angular.module('warriorPoetsApp')
   .controller('LoginCtrl', ['$location', '$scope', 'helperFactory',
-    'userFactory', 'storageFactory',
-    function ($location, $scope, helperFactory, userFactory, storageFactory) {
+    'userFactory', 'storageFactory', '$auth', '$alert',
+    function ($location, $scope, helperFactory, userFactory, storageFactory,
+      $auth, $alert) {
 
       var _sessionExpired = false;
 
@@ -22,6 +23,25 @@ angular.module('warriorPoetsApp')
 // functions -------------------------------------------------------------------
 
       $scope.go = helperFactory.go;
+
+      $scope.authenticate = function(provider) {
+        $auth.authenticate(provider)
+          .then(function(res) {
+            $alert({
+              type        : 'material',
+              dismissable : false,
+              duration    : 5,
+              placement   : top,
+              title       : 'Hello, ' + res.displayName + '!',
+              content     : 'You have successfully logged in'
+            });
+            console.log(res);
+          })
+          .catch(function(res) {
+            console.log('WRONG');
+            console.log(res);
+          });
+      };
 
       $scope.login = function(isValidForm) {
         if (isValidForm) {

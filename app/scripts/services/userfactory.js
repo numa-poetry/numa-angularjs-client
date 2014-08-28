@@ -9,9 +9,9 @@
  */
 angular.module('warriorPoetsApp')
   .factory('userFactory', ['endpointConstants', '$resource', 'storageFactory',
-    '$rootScope', '$location', 'helperFactory',
+    '$rootScope', '$location', /*'helperFactory',*/
     function(endpointConstants, $resource, storageFactory, $rootScope,
-      $location, helperFactory) {
+      $location/*, helperFactory*/) {
 
       var _userId;
       var _userEmail;
@@ -36,7 +36,8 @@ angular.module('warriorPoetsApp')
 
             $rootScope.$broadcast('finishedSettingUserDataOnPageRefresh');
           }, function(err) {
-            if (/* session expired */) {
+            /* session expired */
+            // if () {
               // storageFactory.deleteUserId();
               // storageFactory.deleteUserToken();
               // userFactory.deleteUserInfo();
@@ -45,14 +46,14 @@ angular.module('warriorPoetsApp')
               // successful login, redirect to previous view
               // var previousView = $location.url();
               // $location.path('/login').search('session', 'expired').search('previousView', previousView);
-              helperFactory.deleteDataAndRedirectToLogin($location.url());
-            }
+              // helperFactory.deleteDataAndRedirectToLogin($location.url());
+            // }
           });
         }
       };
 
 // setters ---------------------------------------------------------------------
-      
+
       userFactory.setUserInfo = function(id, username, email) {
         _userId     = id;
         _username   = username;
