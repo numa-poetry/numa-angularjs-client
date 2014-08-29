@@ -51,6 +51,10 @@ angular
       clientId: 'a6cf7f2af1739f24601f'
     });
 
+    $authProvider.google({
+      clientId: '636774587721-nmkg52cbr188p3rpjda5l0jlndq3ngb0.apps.googleusercontent.com'
+    });
+
     $routeProvider
       .when('/', {
         templateUrl    : 'views/main.html',

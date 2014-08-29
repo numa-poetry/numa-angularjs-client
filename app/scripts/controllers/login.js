@@ -9,9 +9,9 @@
  */
 angular.module('warriorPoetsApp')
   .controller('LoginCtrl', ['$location', '$scope', 'helperFactory',
-    'userFactory', 'storageFactory', '$auth', '$alert',
+    'userFactory', 'storageFactory', '$auth', '$alert', '$resource', '$http',
     function ($location, $scope, helperFactory, userFactory, storageFactory,
-      $auth, $alert) {
+      $auth, $alert, $resource, $http) {
 
       var _sessionExpired = false;
 
@@ -24,23 +24,79 @@ angular.module('warriorPoetsApp')
 
       $scope.go = helperFactory.go;
 
+      // $scope.redditOauth = function() {
+
+      //   return {
+      //     login : function() {
+      //       var resource = $resource('https://ssl.reddit.com/api/v1/authorize', {
+      //         client_id     : 'QWgNmA7jVv4KWA',
+      //         response_type : 'code',
+      //         state         : 'Random_String',
+      //         redirect_uri  : 'http://localhost:9000',
+      //         duration      : 'temporary',
+      //         scope         : 'identity'
+      //       }).save([]);
+
+      //       resource.$promise.then(function(res) {
+      //         console.log('Response:', res);
+      //       }, function(err) {
+      //         console.log('Error:', err);
+      //       });
+      //     }
+      //   };
+      // };
+
       $scope.authenticate = function(provider) {
-        $auth.authenticate(provider)
-          .then(function(res) {
-            $alert({
-              type        : 'material',
-              dismissable : false,
-              duration    : 5,
-              placement   : top,
-              title       : 'Hello, ' + res.displayName + '!',
-              content     : 'You have successfully logged in'
-            });
-            console.log(res);
-          })
-          .catch(function(res) {
-            console.log('WRONG');
-            console.log(res);
+        if (provider === 'reddit') {
+          // var resource = $resource('https://ssl.reddit.com/api/v1/authorize', {
+          //   client_id     : 'QWgNmA7jVv4KWA',
+          //   response_type : 'code',
+          //   state         : 'Random_String',
+          //   redirect_uri  : window.location.origin,
+          //   duration      : 'temporary',
+          //   scope         : 'identity'
+          // }).save([]);
+
+          // resource.$promise.then(function(res) {
+          //   console.log('Response:', res);
+          // }, function(err) {
+          //   console.log('Error:', err);
+          // });
+
+          $http({
+            method: 'POST',
+            url: 'https://ssl.reddit.com/api/v1/authorize',
+            data: {
+              client_id     : 'QWgNmA7jVv4KWA',
+              response_type : 'code',
+              state         : 'Random_String',
+              redirect_uri  : window.location.origin,
+              duration      : 'temporary',
+              scope         : 'identity'
+            }
+          }).success(function(data, status, headers, config) {
+            console.log('SUC:', data);
+          }).error(function(data, status, headers, config) {
+            console.log('ERR:', data);
           });
+
+        } else {
+          $auth.authenticate(provider)
+            .then(function(res) {
+              $alert({
+                type        : 'material',
+                dismissable : false,
+                duration    : 5,
+                placement   : top,
+                title       : 'Hello, ' + res.displayName + '!',
+                content     : 'You have successfully logged in'
+              });
+              console.log(res);
+            })
+            .catch(function(res) {
+              console.log('Error:', res);
+            });
+        }
       };
 
       $scope.login = function(isValidForm) {

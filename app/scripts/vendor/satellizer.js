@@ -23,7 +23,7 @@
 
   var providers = {
     google: {
-      url: '/auth/google',
+      url: 'http://localhost:3000/auth/google',
       authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
       redirectUri: window.location.origin,
       scope: 'openid profile email',

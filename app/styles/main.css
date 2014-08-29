@@ -113,6 +113,18 @@ body {
   background-color: #303030;
 }
 
+.btn-google-plus {
+  color: #fff;
+  background-color: #dd4b39;
+  border: 1px solid #d54331;
+}
+
+.btn-google-plus:hover,
+.btn-google-plus:focus {
+  color: #fff;
+  background-color: #cb3927;
+}
+
 .panel {
   border-color: #cfd9D7;
   border-radius: 2px;
