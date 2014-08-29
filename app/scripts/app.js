@@ -95,7 +95,7 @@ angular
       // Add user's session token to all intercepted $resource calls
       $httpProvider.interceptors.push('tokenInterceptorFactory');
 
-      // Enable HTML5 pushState
-      $locationProvider.html5Mode(true);
+      // Disable HTML5 pushState
+      $locationProvider.html5Mode(false).hashPrefix('!');
     }
   ]);

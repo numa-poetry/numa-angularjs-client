@@ -27,7 +27,7 @@
 
     <!-- This tag is necessary to enable HTML5 History API in AngularJS.
     This will allow us to have clean URLs without the # symbol. -->
-    <base href="/">
+    <!-- <base href="/"> -->
 
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -49,10 +49,10 @@
         </div>
         <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
           <ul class="nav navbar-nav pull-right">
-            <li data-match-route="/$"><a ng-href="/">Home</a></li>
-            <li data-match-route="/about"><a ng-href="/about">About</a></li>
-            <li data-match-route="/login" ng-if="!isAuthenticated"><a ng-href="/login">Login</a></li>
-            <li data-match-route="/logout" ng-if="isAuthenticated"><a ng-href="/logout">Logout</a></li>
+            <li data-match-route="/$"><a ng-href="/#!/">Home</a></li>
+            <li data-match-route="/#!/about"><a ng-href="/#!/about">About</a></li>
+            <li data-match-route="/#!/login" ng-if="!isAuthenticated"><a ng-href="/#!/login">Login</a></li>
+            <li data-match-route="/#!/logout" ng-if="isAuthenticated"><a ng-href="/#!/logout">Logout</a></li>
           </ul>
         </div>
       </div>
