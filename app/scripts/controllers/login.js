@@ -91,10 +91,14 @@ angular.module('warriorPoetsApp')
                 title       : 'Hello, ' + res.displayName + '!',
                 content     : 'You have successfully logged in'
               });
-              console.log(res);
+              console.log('RES:',res);
             })
             .catch(function(res) {
-              console.log('Error:', res);
+              $alert({
+                content   : res.data.message,
+                type      : 'material',
+                duration: 3
+              });
             });
         }
       };

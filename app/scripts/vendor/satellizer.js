@@ -38,7 +38,7 @@
       }
     },
     facebook: {
-      url: '/auth/facebook',
+      url: 'http://localhost:3000/auth/facebook',
       authorizationEndpoint: 'https://www.facebook.com/dialog/oauth',
       redirectUri: window.location.origin + '/',
       scope: 'email',

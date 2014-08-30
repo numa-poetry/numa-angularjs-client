@@ -59,6 +59,10 @@ angular
         clientId: '636774587721-nmkg52cbr188p3rpjda5l0jlndq3ngb0.apps.googleusercontent.com'
       });
 
+      $authProvider.facebook({
+        clientId: '551613144966753'
+      });
+
       $routeProvider
         .when('/', {
           templateUrl    : 'views/main.html',
@@ -95,7 +99,7 @@ angular
       // Add user's session token to all intercepted $resource calls
       $httpProvider.interceptors.push('tokenInterceptorFactory');
 
-      // Disable HTML5 pushState
-      $locationProvider.html5Mode(false).hashPrefix('!');
+      // Disable HTML5 pushState <- screws up Facebook Oauth.
+      // $locationProvider.html5Mode(false).hashPrefix('!');
     }
   ]);

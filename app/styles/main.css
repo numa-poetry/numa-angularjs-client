@@ -101,6 +101,18 @@ body {
   background-color: #CEE3F8;
 }
 
+.btn-faceboo {
+  color: #fff;
+  background-color: #3b5998;
+  border: 1px solid #335190;
+}
+
+.btn-faceboo:hover,
+.btn-faceboo:focus {
+  color: #fff;
+  background-color: #294786;
+}
+
 .btn-github {
   color: #fff;
   background-color: #444;
