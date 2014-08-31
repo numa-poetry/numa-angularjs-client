@@ -24,9 +24,9 @@ angular.module('warriorPoetsApp')
         // expired' message to the user. After successful login redirect user to
         // previous view.
         deleteDataAndRedirectToLogin : function(previousView) {
-          storageFactory.deleteUserId();
-          storageFactory.deleteuserToken();
-          userFactory.deleteUserInfo();
+          storageFactory.deleteId();
+          storageFactory.deleteToken();
+          userFactory.deleteInfo();
           $location.path('/login').search('session', 'expired').search('previousView', previousView);
         }
       };

@@ -10,8 +10,9 @@
 angular.module('warriorPoetsApp')
   .controller('LoginCtrl', ['$location', '$scope', 'helperFactory',
     'userFactory', 'storageFactory', '$auth', '$alert', '$resource', '$http',
+    '$rootScope',
     function ($location, $scope, helperFactory, userFactory, storageFactory,
-      $auth, $alert, $resource, $http) {
+      $auth, $alert, $resource, $http, $rootScope) {
 
       var _sessionExpired = false;
 
@@ -103,51 +104,60 @@ angular.module('warriorPoetsApp')
         }
       };
 
-      $scope.login = function(isValidForm) {
-        if (isValidForm) {
-          $scope.err = null;
-          // usSpinnerService.spin('spinner');
+      $scope.login = function() {
+        // usSpinnerService.spin('spinner');
+        var req         = {};
+        req.displayName = $scope.displayName;
+        req.password    = $scope.password;
 
-          $scope.master = {};
-          $scope.master = angular.copy($scope.user);
-          var resource  = userFactory.rLogin($scope.master);
+        console.log('REQ:', req);
+        var resource    = userFactory.rLogin(req);
 
-          resource.$promise.then(function(res) {
-            userFactory.setUserInfo(res.id, res.username, res.email);
-            storageFactory.setUserId(res.id);
-            storageFactory.setUserToken(res.token);
-
-            // Redirect to previous view if session expired
-            var previousView = $location.search().previousView;
-
-            if (_sessionExpired === true && previousView) {
-              $scope.go(previousView);
-            } else {
-              // $scope.go('/dashboard');
-            }
-
-            _sessionExpired = false;
-
-            // Clear the query string parameters from the URL
-            $location.url($location.path());
-
-            // usSpinnerService.stop('spinner');
-          }, function(err) {
-            console.log(err);
-            $scope.err = err.data.message;
-            // handle 500 error
-            storageFactory.deleteUserId();
-            storageFactory.deleteUserToken();
-            // usSpinnerService.stop('spinner');
+        resource.$promise.then(function(res) {
+          $alert({
+            type        : 'material',
+            dismissable : false,
+            duration    : 5,
+            placement   : top,
+            title       : 'Hello, ' + req.displayName + '!',
+            content     : 'You have successfully logged in'
           });
-        }
-      };
+          console.log('RES:', res);
+          userFactory.setInfo(res.id, req.displayName);
+          storageFactory.setId(res.id);
+          storageFactory.setToken(res.token);
 
-      $scope.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-      ];
+          $location.path('/');
+
+          $rootScope.isAuthenticated = true; // temp fix to work with satellizer
+
+          // Redirect to previous view if session expired
+          var previousView = $location.search().previousView;
+
+          // if (_sessionExpired === true && previousView) {
+          //   $scope.go(previousView);
+          // } else {
+            // $scope.go('/dashboard');
+          // }
+
+          // _sessionExpired = false;
+
+          // Clear the query string parameters from the URL
+          // $location.url($location.path());
+
+          // usSpinnerService.stop('spinner');
+        }, function(err) {
+          $alert({
+            content   : err.data.message,
+            type      : 'material',
+            duration: 3
+          });
+          console.log('ERR:', err);
+          storageFactory.deleteId();
+          storageFactory.deleteToken();
+          // usSpinnerService.stop('spinner');
+        });
+      };
 
     }
   ]);

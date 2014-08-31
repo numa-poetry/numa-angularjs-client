@@ -4,14 +4,15 @@
       <div class="panel-body">
         <h2 class="text-center">Log in</h2>
         <form method="post" ng-submit="login()" name="loginForm">
+
           <div class="form-group has-feedback">
-            <input class="form-control input-lg" type="text" name="email" ng-model="email" placeholder="Email" required autofocus>
-            <i class="fa fa-envelope fa-lg form-control-feedback"></i>
+            <input class="form-control input-lg" type="text" name="displayName" ng-model="displayName" placeholder="Username" required autofocus>
+            <i class="ion-person form-control-feedback" style="font-size: 20px;"></i>
           </div>
 
           <div class="form-group has-feedback">
             <input class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="Password" required>
-            <i class="fa fa-key fa-lg form-control-feedback"></i>
+            <i class="ion-key form-control-feedback" style="font-size: 20px;"></i>
           </div>
 
           <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-lg  btn-block btn-success">Log in</button>

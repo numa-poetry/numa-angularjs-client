@@ -9,48 +9,54 @@
  */
 angular.module('warriorPoetsApp')
   .controller('SignupCtrl', ['$location', '$scope', 'helperFactory',
-    'userFactory', 'storageFactory',
-    function ($location, $scope, helperFactory, userFactory, storageFactory) {
+    'userFactory', 'storageFactory', '$alert', '$rootScope',
+    function ($location, $scope, helperFactory, userFactory, storageFactory,
+      $alert, $rootScope) {
 
 // functions -------------------------------------------------------------------
 
       $scope.go = helperFactory.go;
 
-      $scope.signUp = function(isValidForm) {
-        if (isValidForm) {
-          // usSpinnerService.spin('spinner');
+      $scope.signUp = function() {
+        // usSpinnerService.spin('spinner');
+        var req         = {};
+        req.displayName = $scope.displayName;
+        req.email       = $scope.email;
+        req.password    = $scope.password;
 
-          $scope.err    = null;
-          $scope.master = {};
-          $scope.master = angular.copy($scope.user);
-          var resource  = userFactory.rSignUp($scope.master);
+        console.log('REQ:', req);
+        var resource    = userFactory.rSignUp(req);
 
-          resource.$promise.then(function(res) {
-            userFactory.setUserInfo(res.id, res.username, res.email);
-            storageFactory.setUserId(res.id);
-            storageFactory.setUserToken(res.token);
-
-            // $location.path('/dashboard');
-
-            // Clear the query string parameters from the URL
-            $location.url($location.path());
-
-            // usSpinnerService.stop('spinner');
-          }, function(err) {
-            $scope.err = err.data.message;
-
-            // handle 500 err
-
-            // usSpinnerService.stop('spinner');
+        resource.$promise.then(function(res) {
+          $alert({
+            type        : 'material',
+            dismissable : false,
+            duration    : 5,
+            placement   : top,
+            title       : 'Hello, ' + req.displayName + '!',
+            content     : 'You have successfully signed up'
           });
-        }
+          console.log('RES:', res);
+          userFactory.setInfo(res.id, req.displayName);
+          storageFactory.setId(res.id);
+          storageFactory.setToken(res.token);
+
+          $location.path('/');
+
+          $rootScope.isAuthenticated = true; // temp fix to work with satellizer
+          // Clear the query string parameters from the URL
+          // $location.url($location.path());
+
+          // usSpinnerService.stop('spinner');
+        }, function(err) {
+          $alert({
+            content   : err.data.message,
+            type      : 'material',
+            duration: 3
+          });
+          console.log('ERR:', err);
+          // usSpinnerService.stop('spinner');
+        });
       };
-
-      $scope.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-      ];
-
     }
   ]);

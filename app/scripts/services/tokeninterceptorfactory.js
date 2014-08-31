@@ -15,9 +15,9 @@ angular.module('warriorPoetsApp')
 
         request : function(config) {
           config.headers = config.headers || {};
-          var userToken = storageFactory.getUserToken();
-          if (userToken) {
-            config.headers.Authorization = 'Bearer ' + userToken;
+          var token = storageFactory.getToken();
+          if (token) {
+            config.headers.Authorization = 'Bearer ' + token;
           }
           return config;
         },

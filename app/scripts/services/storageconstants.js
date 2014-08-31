@@ -10,7 +10,7 @@
 angular.module('warriorPoetsApp')
   .constant('storageConstants', {
 
-    userId : 'userId'
-    
+    id : 'id'
+
   }
 );

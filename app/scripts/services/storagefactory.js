@@ -15,32 +15,32 @@ angular.module('warriorPoetsApp')
 
 // setters ---------------------------------------------------------------------
 
-      storageFactory.setUserToken = function(token) {
-        $window.sessionStorage.userToken = token;
+      storageFactory.setToken = function(token) {
+        $window.localStorage.token = token;
       };
 
-      storageFactory.setUserId = function(id) {
-        $cookieStore.put(storageConstants.userId, id);
+      storageFactory.setId = function(id) {
+        $cookieStore.put(storageConstants.id, id);
       };
 
 // getters ---------------------------------------------------------------------
 
-      storageFactory.getUserId = function() {
-        return $cookieStore.get(storageConstants.userId);
+      storageFactory.getId = function() {
+        return $cookieStore.get(storageConstants.id);
       };
 
-      storageFactory.getUserToken = function() {
-        return $window.sessionStorage.userToken;
+      storageFactory.getToken = function() {
+        return $window.localStorage.token;
       };
 
 // deletes ---------------------------------------------------------------------
 
-      storageFactory.deleteUserId = function() {
-        $cookieStore.remove(storageConstants.userId);
+      storageFactory.deleteId = function() {
+        $cookieStore.remove(storageConstants.id);
       };
 
-      storageFactory.deleteUserToken = function() {
-        delete $window.sessionStorage.userToken;
+      storageFactory.deleteToken = function() {
+        delete $window.localStorage.token;
       };
 
       return storageFactory;
