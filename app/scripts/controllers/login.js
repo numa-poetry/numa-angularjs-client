@@ -10,9 +10,9 @@
 angular.module('warriorPoetsApp')
   .controller('LoginCtrl', ['$location', '$scope', 'helperFactory',
     'userFactory', 'storageFactory', '$auth', '$alert', '$resource', '$http',
-    '$rootScope',
+    '$rootScope', 'usSpinnerService',
     function ($location, $scope, helperFactory, userFactory, storageFactory,
-      $auth, $alert, $resource, $http, $rootScope) {
+      $auth, $alert, $resource, $http, $rootScope, usSpinnerService) {
 
       var _sessionExpired = false;
 
@@ -48,6 +48,8 @@ angular.module('warriorPoetsApp')
       // };
 
       $scope.authenticate = function(provider) {
+        usSpinnerService.spin('login-spinner');
+
         if (provider === 'reddit') {
           // var resource = $resource('https://ssl.reddit.com/api/v1/authorize', {
           //   client_id     : 'QWgNmA7jVv4KWA',
@@ -80,7 +82,7 @@ angular.module('warriorPoetsApp')
           }).error(function(data, status, headers, config) {
             console.log('ERR:', data);
           });
-
+          usSpinnerService.stop('login-spinner');
         } else {
           $auth.authenticate(provider)
             .then(function(res) {
@@ -90,22 +92,28 @@ angular.module('warriorPoetsApp')
                 duration    : 5,
                 placement   : top,
                 title       : 'Hello, ' + res.displayName + '!',
-                content     : 'You have successfully logged in'
+                content     : 'You have successfully logged in.'
               });
               console.log('RES:',res);
+              usSpinnerService.stop('login-spinner');
             })
             .catch(function(res) {
               $alert({
-                content   : res.data.message,
-                type      : 'material',
-                duration: 3
+                type        : 'material',
+                dismissable : false,
+                title       : 'Oops! ',
+                content     : res.data.message,
+                duration    : 3
               });
+              usSpinnerService.stop('login-spinner');
             });
         }
+
       };
 
       $scope.login = function() {
-        // usSpinnerService.spin('spinner');
+        usSpinnerService.spin('login-spinner');
+
         var req         = {};
         req.displayName = $scope.displayName;
         req.password    = $scope.password;
@@ -120,7 +128,7 @@ angular.module('warriorPoetsApp')
             duration    : 5,
             placement   : top,
             title       : 'Hello, ' + req.displayName + '!',
-            content     : 'You have successfully logged in'
+            content     : 'You have successfully logged in.'
           });
           console.log('RES:', res);
           userFactory.setInfo(res.id, req.displayName);
@@ -144,18 +152,18 @@ angular.module('warriorPoetsApp')
 
           // Clear the query string parameters from the URL
           // $location.url($location.path());
-
-          // usSpinnerService.stop('spinner');
-        }, function(err) {
+          usSpinnerService.stop('login-spinner');
+        }, function(res) {
           $alert({
-            content   : err.data.message,
-            type      : 'material',
-            duration: 3
+            type        : 'material',
+            dismissable : false,
+            title       : 'Oops! ',
+            content     : res.data.message,
+            duration    : 3
           });
-          console.log('ERR:', err);
           storageFactory.deleteId();
           storageFactory.deleteToken();
-          // usSpinnerService.stop('spinner');
+          usSpinnerService.stop('login-spinner');
         });
       };
 

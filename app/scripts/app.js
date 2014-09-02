@@ -19,10 +19,10 @@ angular
     'ngMessages',
     'Satellizer',
     'mgcrea.ngStrap',
+    'angularSpinner',
     // include specific directive (possible conflict with AngularStrap)
     'ui.bootstrap.collapse'
     // xeditable
-    // angularSpinner
     // angularModalService
     // ui.bootstrap
 
@@ -99,9 +99,11 @@ angular
       // Add user's session token to all intercepted $resource calls
       $httpProvider.interceptors.push('tokenInterceptorFactory');
 
+      // https://stackoverflow.com/questions/16677528/location-switching-between-html5-and-hashbang-mode-link-rewriting
+
       // Disable HTML5 pushState <- screws up Facebook Oauth.
       // $locationProvider.html5Mode(false).hashPrefix('!');
 
-      $locationProvider.html5Mode(true).hashPrefix('!');
+      // $locationProvider.html5Mode(true).hashPrefix('!');
     }
   ]);

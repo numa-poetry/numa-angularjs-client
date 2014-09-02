@@ -49,10 +49,10 @@
         </div>
         <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
           <ul class="nav navbar-nav pull-right">
-            <li data-match-route="/$"><a ng-href="/#!">Home</a></li>
-            <li data-match-route="/about"><a ng-href="/#!/about">About</a></li>
-            <li data-match-route="/login" ng-if="!isAuthenticated"><a ng-href="/#!/login">Login</a></li>
-            <li data-match-route="/logout" ng-if="isAuthenticated"><a ng-href="/#!/logout">Logout</a></li>
+            <li data-match-route="/$"><a ng-href="/#/">Home</a></li>
+            <li data-match-route="/about"><a ng-href="/#/about">About</a></li>
+            <li data-match-route="/login" ng-if="!isAuthenticated"><a ng-href="/#/login">Login</a></li>
+            <li data-match-route="/logout" ng-if="isAuthenticated"><a ng-href="/#/logout">Logout</a></li>
           </ul>
         </div>
       </div>
@@ -97,6 +97,8 @@
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -123,6 +125,8 @@
     <script src="scripts/services/userfactory.js"></script>
     <script src="scripts/controllers/logout.js"></script>
     <script src="scripts/controllers/navbar.js"></script>
+    <script src="scripts/directives/passwordstrength.js"></script>
+    <script src="scripts/directives/repeatpassword.js"></script>
     <!-- endbuild -->
 
   </body>

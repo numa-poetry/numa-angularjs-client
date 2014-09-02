@@ -9,16 +9,17 @@
  */
 angular.module('warriorPoetsApp')
   .controller('SignupCtrl', ['$location', '$scope', 'helperFactory',
-    'userFactory', 'storageFactory', '$alert', '$rootScope',
+    'userFactory', 'storageFactory', '$alert', '$rootScope', 'usSpinnerService',
     function ($location, $scope, helperFactory, userFactory, storageFactory,
-      $alert, $rootScope) {
+      $alert, $rootScope, usSpinnerService) {
 
 // functions -------------------------------------------------------------------
 
       $scope.go = helperFactory.go;
 
       $scope.signUp = function() {
-        // usSpinnerService.spin('spinner');
+        usSpinnerService.spin('signup-spinner');
+
         var req         = {};
         req.displayName = $scope.displayName;
         req.email       = $scope.email;
@@ -34,7 +35,7 @@ angular.module('warriorPoetsApp')
             duration    : 5,
             placement   : top,
             title       : 'Hello, ' + req.displayName + '!',
-            content     : 'You have successfully signed up'
+            content     : 'You have successfully signed up.'
           });
           console.log('RES:', res);
           userFactory.setInfo(res.id, req.displayName);
@@ -47,15 +48,16 @@ angular.module('warriorPoetsApp')
           // Clear the query string parameters from the URL
           // $location.url($location.path());
 
-          // usSpinnerService.stop('spinner');
-        }, function(err) {
+          usSpinnerService.stop('signup-spinner');
+        }, function(res) {
           $alert({
-            content   : err.data.message,
-            type      : 'material',
-            duration: 3
+            type        : 'material',
+            dismissable : false,
+            title       : 'Oops! ',
+            content     : res.data.message,
+            duration    : 3
           });
-          console.log('ERR:', err);
-          // usSpinnerService.stop('spinner');
+          usSpinnerService.stop('signup-spinner');
         });
       };
     }

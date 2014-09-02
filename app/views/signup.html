@@ -3,6 +3,9 @@
     <div class="center-form panel">
       <div class="panel-body">
         <h2 class="text-center">Sign up</h2>
+
+        <span spinner-key="signup-spinner" us-spinner="{lines: 17, length: 0, width: 6, radius: 17, corners: 0.7, rotate: 0, trail: 50, speed: 1.0, direction: 1, shadow: on, hwaccel: on}"></span>
+
         <form method="post" ng-submit="signUp()" name="signupForm">
           <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.fullName.$invalid && signupForm.fullName.$dirty }">
             <input class="form-control input-lg" type="text" name="displayName" ng-model="displayName" placeholder="Username" required autofocus>
@@ -30,12 +33,26 @@
             </div>
           </div>
 
-          <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small></p>
+          <div class="form-group has-feedback" ng-class="{ 'has-success' : signupForm.confirmPassword.$valid && signupForm.confirmPassword.$dirty, 'has-error' : signupForm.confirmPassword.$invalid && signupForm.confirmPassword.$dirty }">
+            <input class="form-control input-lg" type="password"
+                   name="confirmPassword" ng-model="confirmPassword"
+                   repeat-password="password" placeholder="Confirm Password"
+                   required>
+            <i class="ion-checkmark-round form-control-feedback" style="font-size: 20px;"></i>
+            <div class="help-block text-danger my-special-animation"
+                 ng-if="signupForm.confirmPassword.$dirty"
+                 ng-messages="signupForm.confirmPassword.$error">
+              <div ng-message="required">You must confirm password.</div>
+              <div ng-message="repeat">Passwords do not match.</div>
+            </div>
+          </div>
+
+          <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a ng-click="go('')">terms & conditions</a> and <a ng-click="go('')">privacy policy</a></small></p>
 
           <button type="submit" ng-disabled="signupForm.$invalid" class="btn btn-lg btn-block btn-primary">Sign up</button>
           <br/>
 
-          <p class="text-center text-muted">Already have an account? <a href="/#/login">Log in now</a></p>
+          <p class="text-center text-muted">Already have an account? <a ng-click="go('/login')">Log in now</a></p>
         </form>
       </div>
     </div>
