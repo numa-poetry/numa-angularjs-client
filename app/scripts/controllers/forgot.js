@@ -47,21 +47,3 @@ angular.module('warriorPoetsApp')
 
     }
   ]);
-
-
-
-
-          // var resource = $resource('https://ssl.reddit.com/api/v1/authorize', {
-          //   client_id     : 'QWgNmA7jVv4KWA',
-          //   response_type : 'code',
-          //   state         : 'Random_String',
-          //   redirect_uri  : window.location.origin,
-          //   duration      : 'temporary',
-          //   scope         : 'identity'
-          // }).save([]);
-
-          // resource.$promise.then(function(res) {
-          //   console.log('Response:', res);
-          // }, function(err) {
-          //   console.log('Error:', err);
-          // });

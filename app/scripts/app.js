@@ -21,7 +21,8 @@ angular
     'mgcrea.ngStrap',
     'angularSpinner',
     // include specific directive (possible conflict with AngularStrap)
-    'ui.bootstrap.collapse'
+    'ui.bootstrap.collapse',
+    'ngProgress'
     // xeditable
     // angularModalService
     // ui.bootstrap
