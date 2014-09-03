@@ -14,15 +14,21 @@ angular.module('warriorPoetsApp')
   .constant('endpointConstants', {
 
     // GET
-    allUsers   : serverDomain + apiVersion + '/user',
-    
-    // POST
-    userSignup : serverDomain + apiVersion + '/signup',
+    allUsers       : serverDomain + apiVersion + '/user',
 
     // POST
-    userLogin  : serverDomain + apiVersion + '/login',
+    userSignup     : serverDomain + apiVersion + '/signup',
+
+    // POST
+    userLogin      : serverDomain + apiVersion + '/login',
 
     // GET, DELETE
-    user       : serverDomain + apiVersion + '/user/:id'
+    user           : serverDomain + apiVersion + '/user/:id',
+
+    // POST
+    forgotPassword : serverDomain + apiVersion + '/forgot',
+
+    // GET, POST
+    resetPassword  : serverDomain + apiVersion + '/reset/:token'
 
   });

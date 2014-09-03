@@ -228,6 +228,23 @@ body {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
+.alert-material-err {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 1;
+  display: inline-block;
+  min-height: 48px;
+  padding: 13px 24px 12px;
+  font-family: 'Roboto', sans-serif;
+  color: #f1f1f1;
+  cursor: default;
+  background: #990000;
+  border-radius: 2px;
+  outline: none;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
 [ng-click],
 [data-ng-click],
 [x-ng-click] {

@@ -89,8 +89,16 @@ angular
         })
         .when('/profile', {
           templateUrl    : 'views/profile.html',
-          controller     : 'ProfileCtrl',
-          resolve        : ensureAuthentication()
+          controller     : 'ProfileCtrl'/*,
+          resolve        : ensureAuthentication()*/
+        })
+        .when('/forgot', {
+          templateUrl    : 'views/forgot.html',
+          controller     : 'ForgotCtrl'
+        })
+        .when('/reset', {
+          templateUrl: 'views/reset.html',
+          controller: 'ResetCtrl'
         })
         .otherwise({
           redirectTo     : '/'

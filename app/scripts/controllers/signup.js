@@ -51,11 +51,11 @@ angular.module('warriorPoetsApp')
           usSpinnerService.stop('signup-spinner');
         }, function(res) {
           $alert({
-            type        : 'material',
-            dismissable : false,
+            type        : 'material-err',
+            dismissable : true,
             title       : 'Oops! ',
             content     : res.data.message,
-            duration    : 3
+            duration    : 5
           });
           usSpinnerService.stop('signup-spinner');
         });

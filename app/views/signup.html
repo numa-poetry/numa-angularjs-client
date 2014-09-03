@@ -34,11 +34,13 @@
           </div>
 
           <div class="form-group has-feedback" ng-class="{ 'has-success' : signupForm.confirmPassword.$valid && signupForm.confirmPassword.$dirty, 'has-error' : signupForm.confirmPassword.$invalid && signupForm.confirmPassword.$dirty }">
-            <input class="form-control input-lg" type="password"
-                   name="confirmPassword" ng-model="confirmPassword"
-                   repeat-password="password" placeholder="Confirm Password"
-                   required>
-            <i class="ion-checkmark-round form-control-feedback" style="font-size: 20px;"></i>
+            <input class="form-control input-lg" type="password" name="confirmPassword" ng-model="confirmPassword" repeat-password="password" placeholder="Confirm Password" required>
+            <div class="form-control-feedback" ng-if="signupForm.confirmPassword.$valid">
+              <i class="ion-locked form-control-feedback" style="font-size: 20px;"></i>
+            </div>
+            <div class="form-control-feedback" ng-if="signupForm.confirmPassword.$invalid">
+              <i class="ion-unlocked form-control-feedback" style="font-size: 20px;"></i>
+            </div>
             <div class="help-block text-danger my-special-animation"
                  ng-if="signupForm.confirmPassword.$dirty"
                  ng-messages="signupForm.confirmPassword.$error">

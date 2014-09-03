@@ -99,11 +99,11 @@ angular.module('warriorPoetsApp')
             })
             .catch(function(res) {
               $alert({
-                type        : 'material',
-                dismissable : false,
+                type        : 'material-err',
+                dismissable : true,
                 title       : 'Oops! ',
                 content     : res.data.message,
-                duration    : 3
+                duration    : 5
               });
               usSpinnerService.stop('login-spinner');
             });
@@ -155,11 +155,11 @@ angular.module('warriorPoetsApp')
           usSpinnerService.stop('login-spinner');
         }, function(res) {
           $alert({
-            type        : 'material',
-            dismissable : false,
+            type        : 'material-err',
+            dismissable : true,
             title       : 'Oops! ',
             content     : res.data.message,
-            duration    : 3
+            duration    : 5
           });
           storageFactory.deleteId();
           storageFactory.deleteToken();
