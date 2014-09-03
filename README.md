@@ -1,6 +1,6 @@
-# Warrior Poets Client
+# Numa Client
 
-Angular.js client for Warrior Poets.
+Angular.js client for Numa.
 
 ### Instructions
 1. Clone the repo: `git clone https://github.com/trance-with-me/warrior-poets-client-2.git`
