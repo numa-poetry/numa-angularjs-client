@@ -16,7 +16,7 @@ angular.module('warriorPoetsApp')
 // setters ---------------------------------------------------------------------
 
       storageFactory.setToken = function(token) {
-        $window.localStorage.token = token;
+        $window.localStorage.satellizer_token = token;
       };
 
       storageFactory.setId = function(id) {
@@ -30,7 +30,7 @@ angular.module('warriorPoetsApp')
       };
 
       storageFactory.getToken = function() {
-        return $window.localStorage.token;
+        return $window.localStorage.satellizer_token;
       };
 
 // deletes ---------------------------------------------------------------------
@@ -40,7 +40,7 @@ angular.module('warriorPoetsApp')
       };
 
       storageFactory.deleteToken = function() {
-        delete $window.localStorage.token;
+        delete $window.localStorage.satellizer_token;
       };
 
       return storageFactory;
