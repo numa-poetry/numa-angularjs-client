@@ -250,3 +250,16 @@ body {
 [x-ng-click] {
   cursor: pointer;
 }
+
+.btn-text-link {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  color: #2196F3;
+  cursor: pointer;
+}
+
+.btn-text-link:hover{
+  text-decoration: underline;
+  color: #1B71CB;
+}

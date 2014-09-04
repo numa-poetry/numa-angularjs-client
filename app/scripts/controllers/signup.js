@@ -10,8 +10,16 @@
 angular.module('warriorPoetsApp')
   .controller('SignupCtrl', ['$location', '$scope', 'helperFactory',
     'userFactory', 'storageFactory', '$alert', '$rootScope', 'usSpinnerService',
+    '$q', '$sce', '$tooltip',
     function ($location, $scope, helperFactory, userFactory, storageFactory,
-      $alert, $rootScope, usSpinnerService) {
+      $alert, $rootScope, usSpinnerService, $q, $sce, $tooltip) {
+
+      $scope.popover = {
+        title   : 'Protect your privacy',
+        content : 'If you close your browser without logging out, we\'ll store an access token to remember you.<br />' +
+          'Other people who use this computer will also be able to log in as you.',
+        checked : false
+      };
 
 // functions -------------------------------------------------------------------
 
@@ -20,10 +28,11 @@ angular.module('warriorPoetsApp')
       $scope.signUp = function() {
         usSpinnerService.spin('signup-spinner');
 
-        var req         = {};
-        req.displayName = $scope.displayName;
-        req.email       = $scope.email;
-        req.password    = $scope.password;
+        var req          = {};
+        req.displayName  = $scope.displayName;
+        // req.email        = $scope.email;
+        req.password     = $scope.password;
+        req.stayLoggedIn = $scope.stayLoggedIn;
 
         console.log('REQ:', req);
         var resource    = userFactory.rSignUp(req);

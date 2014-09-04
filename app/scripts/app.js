@@ -29,7 +29,9 @@ angular
 
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
-    function ($routeProvider, $httpProvider, $authProvider, $locationProvider) {
+    '$popoverProvider', '$tooltipProvider',
+    function ($routeProvider, $httpProvider, $authProvider, $locationProvider,
+      $popoverProvider, $tooltipProvider) {
 
       /**
        * Redirect user to login if user tries to access authenticated route
@@ -107,6 +109,14 @@ angular
 
       // Add user's session token to all intercepted $resource calls
       $httpProvider.interceptors.push('tokenInterceptorFactory');
+
+      angular.extend($popoverProvider.defaults, {
+        html: true
+      });
+
+      angular.extend($tooltipProvider.defaults, {
+        html: true
+      });
 
       // https://stackoverflow.com/questions/16677528/location-switching-between-html5-and-hashbang-mode-link-rewriting
 

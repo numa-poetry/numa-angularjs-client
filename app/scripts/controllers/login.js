@@ -10,9 +10,17 @@
 angular.module('warriorPoetsApp')
   .controller('LoginCtrl', ['$location', '$scope', 'helperFactory',
     'userFactory', 'storageFactory', '$auth', '$alert', '$resource', '$http',
-    '$rootScope', 'usSpinnerService', 'ngProgress',
+    '$rootScope', 'usSpinnerService', 'ngProgress', '$q', '$sce', '$tooltip',
     function ($location, $scope, helperFactory, userFactory, storageFactory,
-      $auth, $alert, $resource, $http, $rootScope, usSpinnerService, ngProgress) {
+      $auth, $alert, $resource, $http, $rootScope, usSpinnerService, ngProgress,
+      $q, $sce, $tooltip) {
+
+      $scope.popover = {
+        title   : 'Protect your privacy',
+        content : 'If you close your browser without logging out, we\'ll store an access token to remember you.<br />' +
+          'Other people who use this computer will also be able to log in as you.',
+        checked : false
+      };
 
       var _sessionExpired = false;
 
@@ -120,9 +128,10 @@ angular.module('warriorPoetsApp')
         ngProgress.color('#3D71FF');
         ngProgress.start();
 
-        var req         = {};
-        req.displayName = $scope.displayName;
-        req.password    = $scope.password;
+        var req          = {};
+        req.displayName  = $scope.displayName;
+        req.password     = $scope.password;
+        req.stayLoggedIn = $scope.stayLoggedIn;
 
         console.log('REQ:', req);
         var resource    = userFactory.rLogin(req);
