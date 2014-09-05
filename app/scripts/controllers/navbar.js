@@ -13,11 +13,5 @@ angular.module('warriorPoetsApp')
 
       $scope.isCollapsed = true;
 
-      $scope.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-      ];
-
     }
   ]);

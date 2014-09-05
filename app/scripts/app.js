@@ -20,18 +20,19 @@ angular
     'Satellizer',
     'mgcrea.ngStrap',
     'angularSpinner',
-    // include specific directive (possible conflict with AngularStrap)
+    'ngProgress',
+    // include specific directives from Angular UI (conflicts with AngularStrap)
     'ui.bootstrap.collapse',
-    'ngProgress'
+    'ui.bootstrap.dropdown'
     // xeditable
     // angularModalService
     // ui.bootstrap
 
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
-    '$popoverProvider', '$tooltipProvider',
+    '$popoverProvider', '$tooltipProvider', '$modalProvider',
     function ($routeProvider, $httpProvider, $authProvider, $locationProvider,
-      $popoverProvider, $tooltipProvider) {
+      $popoverProvider, $tooltipProvider, $modalProvider) {
 
       /**
        * Redirect user to login if user tries to access authenticated route
@@ -115,6 +116,10 @@ angular
       });
 
       angular.extend($tooltipProvider.defaults, {
+        html: true
+      });
+
+      angular.extend($modalProvider.defaults, {
         html: true
       });
 

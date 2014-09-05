@@ -8,11 +8,13 @@
  * Controller of the warriorPoetsApp
  */
 angular.module('warriorPoetsApp')
-  .controller('MainCtrl', ['$scope', 'storageFactory',
-    function ($scope, storageFactory) {
+  .controller('MainCtrl', ['$scope', 'storageFactory', 'userFactory',
+    function ($scope, storageFactory, userFactory) {
+
+      userFactory.init();
 
 // functions -------------------------------------------------------------------
-  
+
       $scope.isLoggedIn = function() {
         var userToken = storageFactory.getUserToken();
         var userId    = storageFactory.getUserId();
@@ -24,11 +26,5 @@ angular.module('warriorPoetsApp')
         }
       };
 
-      $scope.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-      ];
-      
     }
   ]);

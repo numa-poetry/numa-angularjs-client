@@ -106,6 +106,7 @@ angular.module('warriorPoetsApp')
               });
               console.log('RES:',res);
               ngProgress.complete();
+              $rootScope.displayName = req.displayName;
               usSpinnerService.stop('login-spinner');
             })
             .catch(function(res) {
@@ -152,6 +153,7 @@ angular.module('warriorPoetsApp')
 
           $location.path('/');
 
+          $rootScope.displayName     = req.displayName;
           $rootScope.isAuthenticated = true; // temp fix to work with satellizer
 
           // Redirect to previous view if session expired

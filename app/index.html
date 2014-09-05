@@ -52,7 +52,17 @@
             <li data-match-route="/$"><a ng-href="/#/">Home</a></li>
             <li data-match-route="/about"><a ng-href="/#/about">About</a></li>
             <li data-match-route="/login" ng-if="!isAuthenticated"><a ng-href="/#/login">Login</a></li>
-            <li data-match-route="/logout" ng-if="isAuthenticated"><a ng-href="/#/logout">Logout</a></li>
+            <li ng-if="isAuthenticated" class="nav-divider"></li>
+            <li ng-if="isAuthenticated" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {{ displayName }} <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a ng-href="/#/profile">Profile</a></li>
+                <li class="divider"></li>
+                <li><a ng-href="/#/logout">Logout</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

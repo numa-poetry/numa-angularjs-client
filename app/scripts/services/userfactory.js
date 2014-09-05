@@ -28,13 +28,14 @@ angular.module('warriorPoetsApp')
         if (_sToken && _sId) {
           var resource = $resource(endpointConstants.user, {
             id : _sId
-          }).get([]);
+          }).get();
 
           resource.$promise.then(function(res) {
             userFactory.setInfo(res.id, res.displayName);
-
+            $rootScope.displayName     = res.displayName;
+            $rootScope.isAuthenticated = true; // temp fix to work with satellizer
             $rootScope.$broadcast('finishedSettingUserDataOnPageRefresh');
-          }, function(err) {
+          }, function(res) {
             /* session expired */
             // if () {
               // storageFactory.deleteId();
@@ -103,14 +104,15 @@ angular.module('warriorPoetsApp')
         return $resource(endpointConstants.userLogin).save([], info);
       };
 
-      userFactory.rLogoutUser = function() {
+      userFactory.rLogout = function() {
         return $resource(endpointConstants.userLogout).get([]);
       };
 
-      userFactory.rDeleteUser = function(Id) {
+      userFactory.rDeleteAccount = function() {
+        console.log('_id:', _id);
         return $resource(endpointConstants.user, {
-          id : Id
-        }).get([]);
+          id : _id
+        }).delete();
       };
 
       return userFactory;
