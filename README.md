@@ -3,11 +3,13 @@
 Angular.js client for Numa.
 
 ### Instructions
-1. Clone the repo: `git clone https://github.com/trance-with-me/warrior-poets-client-2.git`
-2. Install packages: `npm install`
-3. Install components: `bower install`
-4. Launch: `grunt serve --no-color`
-5. Visit: `http://localhost:9000`
+* Download and install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
+* Download and install [Node.js package manager](https://github.com/npm/npm).
+* Clone the repo: `git clone https://github.com/trance-with-me/warrior-poets-client-2.git`
+* Install packages: `npm install`
+* Install components: `bower install`
+* Launch: `grunt serve --no-color`
+* Visit: `http://localhost:9000`
 
 #### Shoutouts to:
 * [FontAwesome](https://github.com/FortAwesome/Font-Awesome)
