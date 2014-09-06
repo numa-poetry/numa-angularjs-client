@@ -247,8 +247,12 @@ body {
 
 [ng-click],
 [data-ng-click],
-[x-ng-click] {
-  cursor: pointer;
+[x-ng-click],
+a[onclick],
+button,
+a:not([name]) {
+  cursor: url(http://www.slaw.ca/quill_icon.png) 0 25, auto;
+  /*cursor: pointer*/
 }
 
 .btn-text-link {
@@ -260,6 +264,7 @@ body {
 }
 
 .btn-text-link:hover{
+  cursor: url(http://www.slaw.ca/quill_icon.png) 0 25, auto;
   text-decoration: underline;
   color: #1B71CB;
 }

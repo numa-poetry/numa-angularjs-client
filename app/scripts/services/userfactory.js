@@ -9,9 +9,9 @@
  */
 angular.module('warriorPoetsApp')
   .factory('userFactory', ['endpointConstants', '$resource', 'storageFactory',
-    '$rootScope', '$location', /*'helperFactory',*/
+    '$rootScope', '$location', /*'helperFactory',*/ '$auth', '$alert',
     function(endpointConstants, $resource, storageFactory, $rootScope,
-      $location/*, helperFactory*/) {
+      $location, $auth, $alert /*, helperFactory*/) {
 
       var _id;
       var _displayName;
@@ -36,18 +36,44 @@ angular.module('warriorPoetsApp')
             $rootScope.isAuthenticated = true; // temp fix to work with satellizer
             $rootScope.$broadcast('finishedSettingUserDataOnPageRefresh');
           }, function(res) {
-            /* session expired */
-            // if () {
-              // storageFactory.deleteId();
-              // storageFactory.deleteUserToken();
-              // userFactory.deleteInfo();
-
-              // On refresh if session expired return user to login and upon
-              // successful login, redirect to previous view
-              // var previousView = $location.url();
-              // $location.path('/login').search('session', 'expired').search('previousView', previousView);
-              // helperFactory.deleteDataAndRedirectToLogin($location.url());
-            // }
+            // if backend is down
+            if (res.status === 0) {
+              $auth.logout()
+                .then(function() {
+                  $alert({
+                    type        : 'material-err',
+                    title       : 'We\'ve lost connection to our backend.',
+                    content     : 'Please try logging back in',
+                    duration    : 4,
+                    dismissable : true
+                  });
+                  storageFactory.deleteId();
+                  storageFactory.deleteToken();
+                  userFactory.deleteInfo();
+                });
+              $location.path('/login');
+            }
+            if (res.data.type === 'token_expired') {
+              $auth.logout()
+                .then(function() {
+                  $alert({
+                    type        : 'material-err',
+                    title       : 'Your session has expired!',
+                    content     : 'Please log back in to continue',
+                    duration    : 4,
+                    dismissable : true
+                  });
+                  storageFactory.deleteId();
+                  storageFactory.deleteToken();
+                  userFactory.deleteInfo();
+                });
+              $location.path('/login');
+            }
+            // On refresh if session expired return user to login and upon
+            // successful login, redirect to previous view
+            // var previousView = $location.url();
+            // $location.path('/login').search('session', 'expired').search('previousView', previousView);
+            // helperFactory.deleteDataAndRedirectToLogin($location.url());
           });
         }
       };

@@ -110,15 +110,32 @@ angular.module('warriorPoetsApp')
               usSpinnerService.stop('login-spinner');
             })
             .catch(function(res) {
-              $alert({
-                type        : 'material-err',
-                dismissable : true,
-                title       : 'Oops! ',
-                content     : res.data.message,
-                duration    : 5
-              });
+              // if backend is down
+              if (res.status === 0) {
+                $auth.logout()
+                  .then(function() {
+                    $alert({
+                      type        : 'material-err',
+                      title       : 'We\'ve lost connection to our backend.',
+                      content     : 'Please try logging back in. If the problem persists, try again later.',
+                      duration    : 6,
+                      dismissable : true
+                    });
+                  });
+              } else {
+                $alert({
+                  type        : 'material-err',
+                  dismissable : true,
+                  title       : 'Oops! ',
+                  content     : res.data.message,
+                  duration    : 5
+                });
+              }
+              storageFactory.deleteId();
+              storageFactory.deleteToken();
+              // usSpinnerService.stop('login-spinner');
+              $location.path('/login');
               ngProgress.complete();
-              usSpinnerService.stop('login-spinner');
             });
         }
 
@@ -172,16 +189,31 @@ angular.module('warriorPoetsApp')
           usSpinnerService.stop('login-spinner');
           ngProgress.complete();
         }, function(res) {
-          $alert({
-            type        : 'material-err',
-            dismissable : true,
-            title       : 'Oops! ',
-            content     : res.data.message,
-            duration    : 5
-          });
+          // if backend is down
+          if (res.status === 0) {
+            $auth.logout()
+              .then(function() {
+                $alert({
+                  type        : 'material-err',
+                  title       : 'We\'ve lost connection to our backend.',
+                  content     : 'Please try logging back in. If the problem persists, try again later.',
+                  duration    : 6,
+                  dismissable : true
+                });
+              });
+          } else {
+            $alert({
+              type        : 'material-err',
+              dismissable : true,
+              title       : 'Oops! ',
+              content     : res.data.message,
+              duration    : 5
+            });
+          }
           storageFactory.deleteId();
           storageFactory.deleteToken();
-          usSpinnerService.stop('login-spinner');
+          // usSpinnerService.stop('login-spinner');
+          $location.path('/login');
           ngProgress.complete();
         });
       };
