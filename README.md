@@ -3,6 +3,8 @@
 ### Instructions
 * Download and install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
 * Download and install [Node.js package manager](https://github.com/npm/npm).
+* Install [Grunt](http://gruntjs.com/): `npm install -g grunt-cli` 
+* Install [Bower](http://bower.io/): `npm install -g bower`
 * Clone the repo: `git clone https://github.com/trance-with-me/numa-client.git`
 * Install packages: `npm install`
 * Install dependencies: `bower install`
