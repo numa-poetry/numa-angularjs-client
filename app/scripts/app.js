@@ -23,7 +23,7 @@ angular
     'ngProgress',
     // include specific directives from Angular UI (conflicts with AngularStrap)
     'ui.bootstrap.collapse',
-    'ui.bootstrap.dropdown'
+    'ui.bootstrap.dropdown',
     // xeditable
     // angularModalService
     // ui.bootstrap
