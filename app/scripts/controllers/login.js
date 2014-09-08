@@ -57,7 +57,7 @@ angular.module('warriorPoetsApp')
 
       $scope.authenticate = function(provider) {
         usSpinnerService.spin('login-spinner');
-        ngProgress.color('#3D71FF');
+        // ngProgress.color('#3D71FF');
         ngProgress.start();
         if (provider === 'reddit') {
           // var resource = $resource('https://ssl.reddit.com/api/v1/authorize', {
@@ -143,7 +143,7 @@ angular.module('warriorPoetsApp')
 
       $scope.login = function() {
         usSpinnerService.spin('login-spinner');
-        ngProgress.color('#3D71FF');
+        // ngProgress.color('#3D71FF');
         ngProgress.start();
 
         var req          = {};

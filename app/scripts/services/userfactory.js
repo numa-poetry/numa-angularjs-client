@@ -9,16 +9,20 @@
  */
 angular.module('warriorPoetsApp')
   .factory('userFactory', ['endpointConstants', '$resource', 'storageFactory',
-    '$rootScope', '$location', /*'helperFactory',*/ '$auth', '$alert',
+    '$rootScope', '$location', /*'helperFactory',*/ '$auth', '$alert', '$http',
     function(endpointConstants, $resource, storageFactory, $rootScope,
-      $location, $auth, $alert /*, helperFactory*/) {
+      $location, $auth, $alert /*, helperFactory*/, $http) {
 
       var _id;
       var _displayName;
+      var _joinedDate;
+      var _email;
       var _sId        = storageFactory.getId();
       var _sToken     = storageFactory.getToken();
       var _isLoggedIn = false;
       var userFactory = {};
+      var serverDomain = 'http://localhost:3000';
+      var apiVersion   = '/api/v1';
 
 // helper functions ------------------------------------------------------------
 
@@ -31,10 +35,12 @@ angular.module('warriorPoetsApp')
           }).get();
 
           resource.$promise.then(function(res) {
-            userFactory.setInfo(res.id, res.displayName);
+            userFactory.setInfo(res.id, res.displayName, res.joinedDate.split('T')[0],
+              res.email);
+
             $rootScope.displayName     = res.displayName;
             $rootScope.isAuthenticated = true; // temp fix to work with satellizer
-            $rootScope.$broadcast('finishedSettingUserDataOnPageRefresh');
+            $rootScope.$emit('finishedSettingUserDataOnPageRefresh');
           }, function(res) {
             // if backend is down
             if (res.status === 0) {
@@ -80,9 +86,11 @@ angular.module('warriorPoetsApp')
 
 // setters ---------------------------------------------------------------------
 
-      userFactory.setInfo = function(id, displayName) {
+      userFactory.setInfo = function(id, displayName, joinedDate, email) {
         _id          = id;
         _displayName = displayName;
+        _joinedDate  = joinedDate;
+        _email       = email;
         _isLoggedIn  = true;
       };
 
@@ -96,6 +104,14 @@ angular.module('warriorPoetsApp')
 
       userFactory.setDisplayName = function(displayName) {
         _displayName = displayName;
+      };
+
+      userFactory.setJoinedDate = function(joinedDate) {
+        _joinedDate = joinedDate;
+      };
+
+      userFactory.setEmail = function(email) {
+        _email = email;
       };
 
 // getters ---------------------------------------------------------------------
@@ -112,11 +128,21 @@ angular.module('warriorPoetsApp')
         return _displayName;
       };
 
+      userFactory.getJoinedDate = function() {
+        return _joinedDate;
+      };
+
+      userFactory.getEmail = function() {
+        return _email;
+      };
+
 // deletes ---------------------------------------------------------------------
 
       userFactory.deleteInfo = function() {
         _id          = undefined;
         _displayName = undefined;
+        _joinedDate  = undefined;
+        _email       = undefined;
         _isLoggedIn  = false;
       };
 
@@ -131,14 +157,32 @@ angular.module('warriorPoetsApp')
       };
 
       userFactory.rLogout = function() {
-        return $resource(endpointConstants.userLogout).get([]);
+        return $resource(endpointConstants.userLogout).get();
       };
 
       userFactory.rDeleteAccount = function() {
-        console.log('_id:', _id);
         return $resource(endpointConstants.user, {
-          id : _id
+          id : _sId
         }).delete();
+      };
+
+      // different than init, gets more attributes than displayName
+      userFactory.rGetUser = function() {
+        return $resource(endpointConstants.user, {
+          id : _sId
+        }).get();
+      };
+
+// $http calls -----------------------------------------------------------------
+
+      userFactory.hUpdateUser = function(info) {
+        return $http({
+          method: 'PUT',
+          url: serverDomain + apiVersion + '/user/' + _sId,
+          data: {
+            email: info.email
+          }
+        });
       };
 
       return userFactory;

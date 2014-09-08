@@ -22,7 +22,7 @@ angular.module('warriorPoetsApp')
     // POST
     userLogin      : serverDomain + apiVersion + '/login',
 
-    // GET, DELETE
+    // GET, DELETE, PUT
     user           : serverDomain + apiVersion + '/user/:id',
 
     // POST

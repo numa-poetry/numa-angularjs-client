@@ -1,14 +1,56 @@
-<div class="container">
-  <div class="row">
-    <div class="center-form panel">
-      <div class="panel-body">
-        <h2 class="text-center">Profile</h2>
+<div class="center-form panel">
+  <div class="panel-body">
 
-        <button type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top" data-template="views/deleteaccountmodal.html" bs-modal="modal">
-          <small>Delete/Unlink Account</small>
-        </button>
+    <div ng-hide="editorEnabled">
 
+      <div class="row">
+        <div class="col-xs-12 col-sm-8">
+          <h2>{{ displayName }}</h2>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="" class="center-block img-circle img-responsive" style="margin-bottom: 10px;">
+        </div>
       </div>
+
+      <ul class="list-group">
+        <li class="list-group-item dropdown-toggle text-right" ng-if="joinedDate"><span class="pull-left"><strong>Joined</strong></span> {{ joinedDate }}</li>
+        <li class="list-group-item dropdown-toggle text-right" ng-if="email"><span class="pull-left"><strong>Email</strong></span> {{ email }}</li>
+        <!-- <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Expressions</strong></span> 2</li>
+        <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span> 15</li> -->
+      </ul>
+      <button type="button" class="btn btn-lg btn-primary pull-right" ng-click="enableEditor()">Edit</button>
     </div>
+    <div ng-show="editorEnabled">
+      <h2 class="text-center">Edit Profile</h2>
+
+      <form method="put" name="editForm">
+
+        <div class="form-group has-feedback" ng-class="{ 'has-error' : editForm.email.$invalid && editForm.email.$dirty }">
+          <input class="form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="Email" required
+          ng-pattern="/^[A-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">
+          <i class="ion-email form-control-feedback" style="font-size: 20px;"></i>
+          <div class="help-block text-danger" ng-if="editForm.email.$dirty" ng-messages="editForm.email.$error">
+            <div ng-message="required">Your email address is required.</div>
+            <div ng-message="pattern">Your email address is invalid.</div>
+          </div>
+        </div>
+
+        <!-- <button type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top" data-template="views/deleteaccountmodal.html" bs-modal="modal">
+          Delete/Unlink Account
+        </button> -->
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <button type="button" class="btn btn-lg btn-block btn-success" ng-click="save()">Save</button>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <button type="button" class="btn btn-lg btn-block btn-failure" ng-click="disableEditor()">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
   </div>
 </div>
+
