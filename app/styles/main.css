@@ -80,6 +80,10 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+  .center-form {
+    width: 330px;
+  }
+
 }
 
 /*********************
@@ -159,6 +163,10 @@ body {
 .center-form {
   /*width: 330px;*/
   margin: 5% auto;
+}
+
+.expanded {
+  width: auto;
 }
 
 .has-feedback .form-control-feedback {
