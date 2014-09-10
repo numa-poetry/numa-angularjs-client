@@ -173,6 +173,12 @@ angular.module('warriorPoetsApp')
         }).get();
       };
 
+      userFactory.rGetProfileImage = function(info) {
+        return $resource(endpointConstants.userProfileImage, {
+          id : _sId
+        }).save([], info);
+      };
+
 // $http calls -----------------------------------------------------------------
 
       userFactory.hUpdateUser = function(info) {
