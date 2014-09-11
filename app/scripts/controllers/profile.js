@@ -19,7 +19,6 @@ angular.module('warriorPoetsApp')
         $scope.email           = userFactory.getEmail();
         $scope.joinedDate      = userFactory.getJoinedDate();
         $scope.profileImageUrl = userFactory.getProfileImageUrl();
-        console.log($scope.profileImageUrl);
       });
 
       $scope.modal = {
@@ -139,6 +138,7 @@ angular.module('warriorPoetsApp')
                   content     : 'Profile pic updated.',
                   duration    : 5
                 });
+                $scope.profileImageUrl = res.profileImageUrl;
                 console.log(res);
                 $scope.uploading = false;
               }, function(res) {
