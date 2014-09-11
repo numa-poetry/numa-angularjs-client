@@ -229,9 +229,8 @@
 
                 console.log('untouched res:', response);
 
-                Local.parseUser(response.data[config.tokenName], deferred);
-
-                // return response; /* ADDED BY ME */
+                // third param added by me
+                Local.parseUser(response.data[config.tokenName], deferred, response);
               })
               .catch(function(response) {
                 deferred.reject(response);
@@ -279,7 +278,7 @@
       var local = {};
 
       // TODO: Move to shared service
-      local.parseUser = function(token, deferred) {
+      local.parseUser = function(token, deferred, response) {
         // TODO: Move userFromToken to shared service
         localStorage.setItem([config.tokenPrefix, config.tokenName].join('_'), token);
 
@@ -287,9 +286,13 @@
 
         var user = Utils.userFromToken(token);
 
+        console.log('User from token:', user);
+        console.log('TRUE RESP:', response);
+
         if (user) {
           $rootScope[config.user] = Utils.userFromToken(token);
-          deferred.resolve(user);
+          // deferred.resolve(user);
+          deferred.resolve(response);
         } else {
           deferred.resolve();
         }

@@ -28,9 +28,12 @@ angular.module('warriorPoetsApp')
 // helper functions ------------------------------------------------------------
 
       userFactory.init = function() {
+        var _sId         = storageFactory.getId();
+        var _sToken      = storageFactory.getToken();
         console.log('fetching and initializing user data');
 
-        if (_sToken && _sId) {
+        if (_sId && _sToken) {
+          console.log('creds good');
           var resource = $resource(endpointConstants.user, {
             id : _sId
           }).get();
@@ -45,6 +48,9 @@ angular.module('warriorPoetsApp')
             $rootScope.isAuthenticated = true; // temp fix to work with satellizer
             $rootScope.$emit('finishedSettingUserDataOnPageRefresh');
           }, function(res) {
+
+            console.log('err:', res);
+
             // if backend is down
             if (res.status === 0) {
               $auth.logout()
@@ -84,6 +90,9 @@ angular.module('warriorPoetsApp')
             // $location.path('/login').search('session', 'expired').search('previousView', previousView);
             // helperFactory.deleteDataAndRedirectToLogin($location.url());
           });
+        } else {
+          if (!_sId) console.log('no id');
+          if (!_sToken) console.log('no token');
         }
       };
 
@@ -151,11 +160,14 @@ angular.module('warriorPoetsApp')
 // deletes ---------------------------------------------------------------------
 
       userFactory.deleteInfo = function() {
-        _id          = undefined;
-        _displayName = undefined;
-        _joinedDate  = undefined;
-        _email       = undefined;
-        _isLoggedIn  = false;
+        _sId             = undefined;
+        _sToken          = undefined;
+        _id              = undefined;
+        _displayName     = undefined;
+        _joinedDate      = undefined;
+        _email           = undefined;
+        _profileImageUrl = undefined;
+        _isLoggedIn      = false;
       };
 
 // $resource calls -------------------------------------------------------------

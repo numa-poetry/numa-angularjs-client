@@ -25,18 +25,18 @@
     <!-- EDIT PROFILE VIEW -->
     <div ng-show="editorEnabled">
       <h2 class="text-center">Profile</h2>
-      <br/>
+      <hr>
 
       <!-- <h5><span class="label label-info">Profile picture</span></h5> -->
 
       <div class="row">
         <div class="col-xs-4 col-sm-3">
           <div ng-if="uploading"><i class="ion-ios7-reloading" style="font-size: 70px;"></i></div>
-          <img ng-if="!uploading" ng-src="{{ profileImageUrl }}" alt="" class="center-block img-circle img-responsive" style="margin-bottom: 10px;">
+          <img ng-if="!uploading" ng-src="{{ profileImageUrl }}" alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
         </div>
         <div class="col-xs-8 col-sm-9">
           <input name="file" type="file" file />
-          <button type="button" class="btn btn-md btn-primary" ng-click="upload()">Upload new picture</button>
+          <button type="button" class="btn btn-md btn-primary" style="margin-top: 10px;" ng-click="upload()">Upload new picture</button>
         </div>
       </div>
 
@@ -63,21 +63,23 @@
             <div ng-message="pattern">Your email address is invalid.</div>
           </div>
         </div>
-
-        <!-- <button type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top" data-template="views/deleteaccountmodal.html" bs-modal="modal">
-          Delete/Unlink Account
-        </button> -->
-
-        <div class="row">
-          <div class="col-xs-6 col-sm-6">
-            <button type="button" class="btn btn-lg btn-block btn-failure" ng-click="disableEditor()">Cancel</button>
-          </div>
-          <div class="col-xs-6 col-sm-6">
-            <button type="button" class="btn btn-lg btn-block btn-success" ng-click="save()">Update profile</button>
-          </div>
-        </div>
-
       </form>
+
+      <div class="row">
+        <div class="col-xs-6 col-sm-6">
+          <button type="button" class="btn btn-lg btn-block btn-failure" ng-click="disableEditor()">Cancel</button>
+        </div>
+        <div class="col-xs-6 col-sm-6">
+          <button type="button" class="btn btn-lg btn-block btn-success" ng-click="save()">Update profile</button>
+        </div>
+      </div>
+
+      <hr>
+
+      <button type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top" data-template="views/deleteaccountmodal.html" bs-modal="modal">
+        Delete/Unlink Account
+      </button>
+
     </div>
 
   </div>

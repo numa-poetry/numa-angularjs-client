@@ -11,13 +11,18 @@ angular.module('warriorPoetsApp')
   .controller('MainCtrl', ['$scope', 'storageFactory', 'userFactory',
     function ($scope, storageFactory, userFactory) {
 
-      userFactory.init();
+      // var id    = storageFactory.getId();
+      // var token = storageFactory.getToken();
+
+      // if (id && token) {
+      //   userFactory.init();
+      // }
 
 // functions -------------------------------------------------------------------
 
       $scope.isLoggedIn = function() {
-        var userToken = storageFactory.getUserToken();
-        var userId    = storageFactory.getUserId();
+        var userToken = storageFactory.getToken();
+        var userId    = storageFactory.getId();
 
         if (userToken && userId) {
           return true;

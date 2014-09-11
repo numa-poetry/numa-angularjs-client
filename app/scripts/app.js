@@ -41,17 +41,18 @@ angular
       var ensureAuthentication = function() {
 
         return {
-          load : function($q, $location, storageFactory) {
-            var deferred = $q.defer();
-            deferred.resolve();
-
-            var userToken = storageFactory.getUserToken();
-
-            if (userToken) {
-              return deferred.promise;
+          load: function($location, $auth, $rootScope, $alert) {
+            // temp fix for working with Satellizer
+            if (!$auth.isAuthenticated() && !$rootScope.isAuthenticated) {
+              $alert({
+                type        : 'material-err',
+                dismissable : true,
+                title       : 'Oops! ',
+                content     : 'You must be logged in to access this resource.',
+                duration    : 5
+              });
+              return $location.path('/login');
             }
-
-            $location.path('/login');
           }
         };
       };
@@ -70,43 +71,43 @@ angular
 
       $routeProvider
         .when('/', {
-          templateUrl    : 'views/main.html',
-          controller     : 'MainCtrl'
+          templateUrl : 'views/main.html',
+          controller  : 'MainCtrl'
         })
         .when('/about', {
-          templateUrl    : 'views/about.html',
-          controller     : 'AboutCtrl'
+          templateUrl : 'views/about.html',
+          controller  : 'AboutCtrl'
         })
         .when('/login', {
-          templateUrl    : 'views/login.html',
-          controller     : 'LoginCtrl'/*,*/
+          templateUrl : 'views/login.html',
+          controller  : 'LoginCtrl'/*,*/
           // need this for query parameters to be correctly set in the URL on
           // session expiration redirection to login page from userFactory
           // reloadOnSearch : false
         })
         .when('/logout', {
-          template       : null,
-          controller     : 'LogoutCtrl'
+          template    : null,
+          controller  : 'LogoutCtrl'
         })
         .when('/signup', {
-          templateUrl    : 'views/signup.html',
-          controller     : 'SignupCtrl'
+          templateUrl : 'views/signup.html',
+          controller  : 'SignupCtrl'
         })
         .when('/profile', {
-          templateUrl    : 'views/profile.html',
-          controller     : 'ProfileCtrl'/*,
-          resolve        : ensureAuthentication()*/
+          templateUrl : 'views/profile.html',
+          controller  : 'ProfileCtrl',
+          resolve     : ensureAuthentication()
         })
         .when('/forgot', {
-          templateUrl    : 'views/forgot.html',
-          controller     : 'ForgotCtrl'
+          templateUrl : 'views/forgot.html',
+          controller  : 'ForgotCtrl'
         })
         .when('/reset', {
-          templateUrl: 'views/reset.html',
-          controller: 'ResetCtrl'
+          templateUrl : 'views/reset.html',
+          controller  : 'ResetCtrl'
         })
         .otherwise({
-          redirectTo     : '/'
+          redirectTo  : '/'
         });
 
       // Add user's session token to all intercepted $resource calls

@@ -101,12 +101,18 @@ angular.module('warriorPoetsApp')
                 dismissable : false,
                 duration    : 5,
                 placement   : top,
-                title       : 'Hello, ' + res.displayName + '!',
+                title       : 'Hello, ' + res.data.displayName + '!',
                 content     : 'You have successfully logged in.'
               });
               console.log('RES:',res);
               ngProgress.complete();
-              $rootScope.displayName = req.displayName;
+
+              // look into how Satellizer handles response. _id vs id
+              userFactory.setInfo(res.data.id, res.data.displayName);
+              storageFactory.setId(res.data.id);
+              // storageFactory.setToken(res.token);
+
+              $rootScope.displayName = res.data.displayName;
               usSpinnerService.stop('login-spinner');
             })
             .catch(function(res) {
@@ -163,18 +169,17 @@ angular.module('warriorPoetsApp')
             title       : 'Hello, ' + req.displayName + '!',
             content     : 'You have successfully logged in.'
           });
-          console.log('RES:', res);
+
           userFactory.setInfo(res.id, req.displayName);
           storageFactory.setId(res.id);
           storageFactory.setToken(res.token);
-
           $location.path('/');
 
           $rootScope.displayName     = req.displayName;
           $rootScope.isAuthenticated = true; // temp fix to work with satellizer
 
           // Redirect to previous view if session expired
-          var previousView = $location.search().previousView;
+          // var previousView = $location.search().previousView;
 
           // if (_sessionExpired === true && previousView) {
           //   $scope.go(previousView);

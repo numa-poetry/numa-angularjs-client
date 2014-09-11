@@ -13,12 +13,23 @@ angular.module('warriorPoetsApp')
     function ($scope, userFactory, $alert, storageFactory, $location, ngProgress,
       $rootScope, $upload) {
 
-      userFactory.init();
+      // var id    = storageFactory.getId();
+      // var token = storageFactory.getToken();
 
-      $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
+      // if (id && token) {
+      //   console.log('calling init()');
+      userFactory.init();
+      // }
+
+      var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
+        console.log('$on');
         $scope.email           = userFactory.getEmail();
         $scope.joinedDate      = userFactory.getJoinedDate();
         $scope.profileImageUrl = userFactory.getProfileImageUrl();
+      });
+
+      $scope.$on('$destroy', function() {
+        unregister();
       });
 
       $scope.modal = {
