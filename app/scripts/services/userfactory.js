@@ -17,10 +17,11 @@ angular.module('warriorPoetsApp')
       var _displayName;
       var _joinedDate;
       var _email;
-      var _sId        = storageFactory.getId();
-      var _sToken     = storageFactory.getToken();
-      var _isLoggedIn = false;
-      var userFactory = {};
+      var _profileImageUrl;
+      var _sId         = storageFactory.getId();
+      var _sToken      = storageFactory.getToken();
+      var _isLoggedIn  = false;
+      var userFactory  = {};
       var serverDomain = 'http://localhost:3000';
       var apiVersion   = '/api/v1';
 
@@ -35,8 +36,10 @@ angular.module('warriorPoetsApp')
           }).get();
 
           resource.$promise.then(function(res) {
+            console.log(res);
+
             userFactory.setInfo(res.id, res.displayName, res.joinedDate.split('T')[0],
-              res.email);
+              res.email, res.profileImageUrl);
 
             $rootScope.displayName     = res.displayName;
             $rootScope.isAuthenticated = true; // temp fix to work with satellizer
@@ -86,12 +89,13 @@ angular.module('warriorPoetsApp')
 
 // setters ---------------------------------------------------------------------
 
-      userFactory.setInfo = function(id, displayName, joinedDate, email) {
-        _id          = id;
-        _displayName = displayName;
-        _joinedDate  = joinedDate;
-        _email       = email;
-        _isLoggedIn  = true;
+      userFactory.setInfo = function(id, displayName, joinedDate, email, profileImageUrl) {
+        _id              = id;
+        _displayName     = displayName;
+        _joinedDate      = joinedDate;
+        _email           = email;
+        _profileImageUrl = profileImageUrl;
+        _isLoggedIn      = true;
       };
 
       userFactory.setIsLoggedIn = function(isLoggedIn) {
@@ -114,6 +118,10 @@ angular.module('warriorPoetsApp')
         _email = email;
       };
 
+      userFactory.setProfileImageUrl = function(profileImageUrl) {
+        _profileImageUrl = profileImageUrl;
+      };
+
 // getters ---------------------------------------------------------------------
 
       userFactory.getIsLoggedIn = function() {
@@ -134,6 +142,10 @@ angular.module('warriorPoetsApp')
 
       userFactory.getEmail = function() {
         return _email;
+      };
+
+      userFactory.getProfileImageUrl = function() {
+        return _profileImageUrl;
       };
 
 // deletes ---------------------------------------------------------------------
@@ -173,7 +185,7 @@ angular.module('warriorPoetsApp')
         }).get();
       };
 
-      userFactory.rGetProfileImage = function(info) {
+      userFactory.rGetProfileImageUrl = function(info) {
         return $resource(endpointConstants.userProfileImage, {
           id : _sId
         }).save([], info);

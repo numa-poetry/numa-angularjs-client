@@ -16,23 +16,27 @@ angular.module('warriorPoetsApp')
       userFactory.init();
 
       $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
-        $scope.email      = userFactory.getEmail();
-        $scope.joinedDate = userFactory.getJoinedDate();
+        $scope.email           = userFactory.getEmail();
+        $scope.joinedDate      = userFactory.getJoinedDate();
+        $scope.profileImageUrl = userFactory.getProfileImageUrl();
+        console.log($scope.profileImageUrl);
       });
-
-      $scope.editorEnabled = false;
 
       $scope.modal = {
         'title' : 'Are you sure?'
       };
 
+      // Temporary Amazon S3 bucket credentials. All images stored here for processing,
+      // then transferred to permanent bucket.
       $scope.creds = {
         bucketName      : 'numa-temp',
         accessKeyId     : 'AKIAIQXDLJ23NA3YRHCQ',
         secretAccessKey : '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'
       };
 
-      $scope.sizeLimit = 5292880; // 5MB in bytes
+      $scope.editorEnabled = false;
+      $scope.sizeLimit     = 5292880; // 5MB in bytes
+      $scope.uploading     = false;
 
 // functions -------------------------------------------------------------------
 
@@ -52,6 +56,7 @@ angular.module('warriorPoetsApp')
       };
 
       $scope.upload = function() {
+        $scope.uploading      = true;
         $scope.uploadProgress = 0;
 
         // configure the S3 object
@@ -68,6 +73,7 @@ angular.module('warriorPoetsApp')
 
         if ($scope.file) {
 
+          // Check file extension
           if ($scope.file.type !== 'image/png' && $scope.file.type !== 'image/jpeg') {
             $alert({
               type        : 'material-err',
@@ -76,6 +82,7 @@ angular.module('warriorPoetsApp')
               content     : 'Only PNG and JPEG types are accepted.',
               duration    : 5
             });
+            $scope.uploading = false;
             return;
           }
 
@@ -90,7 +97,8 @@ angular.module('warriorPoetsApp')
                 $scope.fileSizeLabel() + '. Please upload a smaller image.',
               duration    : 5
             });
-            return false;
+            $scope.uploading = false;
+            return;
           }
 
           // Prepend unique string to prevent overwrites
@@ -105,7 +113,6 @@ angular.module('warriorPoetsApp')
 
           s3Bucket.putObject(params, function(err, data) {
             if (err) {
-              console.log(err.code, err.message);
               $alert({
                 type        : 'material-err',
                 dismissable : true,
@@ -113,27 +120,30 @@ angular.module('warriorPoetsApp')
                 content     : 'Please try again.',
                 duration    : 5
               });
-              return false;
+              console.log(err.code, err.message);
+              $scope.uploading = false;
+              return;
             } else {
-              // $alert({
-              //   type        : 'material',
-              //   dismissable : true,
-              //   title       : 'Success! ',
-              //   content     : 'Profile pic updated.',
-              //   duration    : 5
-              // });
-
-              // Call backend to move to permanent storage
+              // Call backend for image processing
               var req        = {};
               req.fileName   = uniqueFileName;
 
-              var resource = userFactory.rGetProfileImage(req);
+              var resource = userFactory.rGetProfileImageUrl(req);
 
               resource.$promise.then(function(res) {
                 // display it to user / store to userFactory
+                $alert({
+                  type        : 'material',
+                  dismissable : true,
+                  title       : 'Success! ',
+                  content     : 'Profile pic updated.',
+                  duration    : 5
+                });
                 console.log(res);
+                $scope.uploading = false;
               }, function(res) {
                 console.log(res);
+                $scope.uploading = false;
               });
 
             }
@@ -148,6 +158,7 @@ angular.module('warriorPoetsApp')
             content     : 'Please select an image to upload.',
             duration    : 5
           });
+          $scope.uploading = false;
         }
       };
 
