@@ -114,6 +114,8 @@
     <script src="bower_components/angular-spinner/angular-spinner.js"></script>
     <script src="bower_components/ngprogress/build/ngProgress.js"></script>
     <script src="bower_components/aws-sdk-js/dist/aws-sdk.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/trianglify/trianglify.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -122,6 +124,15 @@
 
     <!-- Include Satellizer here -->
     <script src="scripts/vendor/satellizer.js"></script>
+
+    <!-- Include Trianglify instance here -->
+    <script type="text/javascript">
+      var t = new Trianglify();
+      // var pattern = t.generate(1366, 768); // svg width, height
+      var pattern = t.generate(screen.width || window.innerWidth, screen.height || window.innerHeight);
+      // var pattern = t.generate(document.body.clientWidth, document.body.clientHeight);
+      document.body.setAttribute('style', 'background-image: '+pattern.dataUrl);
+    </script>
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
@@ -147,6 +158,5 @@
     <script src="scripts/directives/repeatpassword.js"></script>
     <script src="scripts/directives/file.js"></script>
     <!-- endbuild -->
-
   </body>
 </html>
