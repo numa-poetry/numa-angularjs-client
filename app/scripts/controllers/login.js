@@ -107,9 +107,8 @@ angular.module('warriorPoetsApp')
               console.log('RES:',res);
               ngProgress.complete();
 
-              // look into how Satellizer handles response. _id vs id
-              userFactory.setInfo(res.data.id, res.data.displayName);
-              storageFactory.setId(res.data.id);
+              userFactory.setInfo(res.id, res.displayName);
+              storageFactory.setId(res.id);
               // storageFactory.setToken(res.token);
 
               $rootScope.displayName = res.data.displayName;
@@ -173,6 +172,7 @@ angular.module('warriorPoetsApp')
           userFactory.setInfo(res.id, req.displayName);
           storageFactory.setId(res.id);
           storageFactory.setToken(res.token);
+
           $location.path('/');
 
           $rootScope.displayName     = req.displayName;

@@ -9,7 +9,7 @@
         </div>
         <div class="col-xs-12 col-sm-4">
             <!-- http://api.randomuser.me/portraits/men/49.jpg -->
-            <img ng-src="{{ profileImageUrl }}" alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
+            <img ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
         </div>
       </div>
 
@@ -19,7 +19,7 @@
         <!-- <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Expressions</strong></span> 2</li>
         <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span> 15</li> -->
       </ul>
-      <button type="button" class="btn btn-lg btn-primary pull-right" ng-click="enableEditor()">Edit Profile</button>
+      <button ng-show="currentUser == userToView" type="button" class="btn btn-lg btn-primary pull-right" ng-click="enableEditor()">Edit Profile</button>
     </div>
 
     <!-- EDIT PROFILE VIEW -->
@@ -32,7 +32,7 @@
       <div class="row">
         <div class="col-xs-4 col-sm-3">
           <div ng-if="uploading"><i class="ion-ios7-reloading" style="font-size: 70px;"></i></div>
-          <img ng-if="!uploading" ng-src="{{ profileImageUrl }}" alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
+          <img ng-if="!uploading" ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
         </div>
         <div class="col-xs-8 col-sm-9">
           <input name="file" type="file" file />

@@ -9,23 +9,23 @@
  */
 angular.module('warriorPoetsApp')
   .controller('ProfileCtrl', ['$scope', 'userFactory', '$alert', 'storageFactory',
-    '$location', 'ngProgress', '$rootScope', '$upload',
+    '$location', 'ngProgress', '$rootScope', '$upload', '$routeParams',
     function ($scope, userFactory, $alert, storageFactory, $location, ngProgress,
-      $rootScope, $upload) {
+      $rootScope, $upload, $routeParams) {
 
-      // var id    = storageFactory.getId();
-      // var token = storageFactory.getToken();
+      console.log('params=>', $routeParams.id);
 
-      // if (id && token) {
-      //   console.log('calling init()');
-      userFactory.init();
-      // }
+      $scope.currentUser = storageFactory.getId();
+      $scope.userToView  = $routeParams.id;
+
+      userFactory.init($routeParams.id);
 
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
         console.log('$on');
-        $scope.email           = userFactory.getEmail();
-        $scope.joinedDate      = userFactory.getJoinedDate();
-        $scope.profileImageUrl = userFactory.getProfileImageUrl();
+        $scope.displayName = userFactory.getDisplayName();
+        $scope.email       = userFactory.getEmail();
+        $scope.joinedDate  = userFactory.getJoinedDate();
+        $scope.avatarUrl   = userFactory.getAvatarUrl();
       });
 
       $scope.$on('$destroy', function() {
@@ -138,7 +138,7 @@ angular.module('warriorPoetsApp')
               var req        = {};
               req.fileName   = uniqueFileName;
 
-              var resource = userFactory.rGetProfileImageUrl(req);
+              var resource = userFactory.rGetAvatarUrl(req);
 
               resource.$promise.then(function(res) {
                 // display it to user / store to userFactory
@@ -149,7 +149,7 @@ angular.module('warriorPoetsApp')
                   content     : 'Profile pic updated.',
                   duration    : 5
                 });
-                $scope.profileImageUrl = res.profileImageUrl;
+                $scope.avatarUrl = res.avatarUrl;
                 console.log(res);
                 $scope.uploading = false;
               }, function(res) {
@@ -230,7 +230,7 @@ angular.module('warriorPoetsApp')
 
         var http = userFactory.hUpdateUser(req);
         http.then(function(res) {
-          // console.log('good res:', res);
+          console.log('good res:', res);
           $scope.editorEnabled = false;
           $scope.email = res.data.user.email;
           $alert({

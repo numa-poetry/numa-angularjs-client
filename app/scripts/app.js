@@ -93,7 +93,7 @@ angular
           templateUrl : 'views/signup.html',
           controller  : 'SignupCtrl'
         })
-        .when('/profile', {
+        .when('/profile/:id', {
           templateUrl : 'views/profile.html',
           controller  : 'ProfileCtrl',
           resolve     : ensureAuthentication()

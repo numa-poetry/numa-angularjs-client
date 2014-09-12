@@ -53,6 +53,7 @@ angular.module('warriorPoetsApp')
 
           $location.path('/');
 
+          $rootScope.displayName     = req.displayName;
           $rootScope.isAuthenticated = true; // temp fix to work with satellizer
           // Clear the query string parameters from the URL
           // $location.url($location.path());
