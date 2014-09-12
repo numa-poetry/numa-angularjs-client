@@ -169,6 +169,7 @@ angular.module('warriorPoetsApp')
             content     : 'You have successfully logged in.'
           });
 
+
           userFactory.setInfo(res.id, req.displayName);
           storageFactory.setId(res.id);
           storageFactory.setToken(res.token);
@@ -193,6 +194,7 @@ angular.module('warriorPoetsApp')
           // $location.url($location.path());
           usSpinnerService.stop('login-spinner');
           ngProgress.complete();
+          $rootScope.$emit('login');
         }, function(res) {
           // if backend is down
           if (res.status === 0) {

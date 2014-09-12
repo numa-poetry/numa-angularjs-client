@@ -9,7 +9,8 @@
  */
 angular.module('warriorPoetsApp')
   .controller('LogoutCtrl', ['$auth', '$alert', 'storageFactory', 'userFactory',
-    function ($auth, $alert, storageFactory, userFactory) {
+    '$rootScope',
+    function ($auth, $alert, storageFactory, userFactory, $rootScope) {
 
       $auth.logout()
         .then(function() {
@@ -23,6 +24,7 @@ angular.module('warriorPoetsApp')
           storageFactory.deleteId();
           storageFactory.deleteToken();
           userFactory.deleteInfo();
+          $rootScope.$emit('logout');
         });
 
     }

@@ -13,7 +13,22 @@ angular.module('warriorPoetsApp')
 
       $scope.isCollapsed = true;
 
-      $scope.id = storageFactory.getId();
+      var unregisterLogin = $rootScope.$on('login', function() {
+        // console.log('$on login');
+        $scope.id = storageFactory.getId();
+        // console.log('navbar id:', $scope.id);
+      });
+
+      var unregisterLogout = $rootScope.$on('logout', function() {
+        // console.log('$on logout');
+        $scope.id = undefined;
+        // console.log('navbar id:', $scope.id);
+      });
+
+      $scope.$on('$destroy', function() {
+        unregisterLogin();
+        unregisterLogout();
+      });
 
     }
   ]);

@@ -9,9 +9,9 @@
  */
 angular.module('warriorPoetsApp')
   .controller('ProfileCtrl', ['$scope', 'userFactory', '$alert', 'storageFactory',
-    '$location', 'ngProgress', '$rootScope', '$upload', '$routeParams',
+    '$location', 'ngProgress', '$rootScope', '$upload', '$routeParams', '$tooltip',
     function ($scope, userFactory, $alert, storageFactory, $location, ngProgress,
-      $rootScope, $upload, $routeParams) {
+      $rootScope, $upload, $routeParams, $tooltip) {
 
       console.log('params=>', $routeParams.id);
 
@@ -21,7 +21,6 @@ angular.module('warriorPoetsApp')
       userFactory.init($routeParams.id);
 
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
-        console.log('$on');
         $scope.displayName = userFactory.getDisplayName();
         $scope.email       = userFactory.getEmail();
         $scope.joinedDate  = userFactory.getJoinedDate();
@@ -33,7 +32,12 @@ angular.module('warriorPoetsApp')
       });
 
       $scope.modal = {
-        'title' : 'Are you sure?'
+        'title': 'Are you sure?'
+      };
+
+      $scope.tooltip = {
+        title   : 'Change your avatar',
+        checked : false
       };
 
       // Temporary Amazon S3 bucket credentials. All images stored here for processing,

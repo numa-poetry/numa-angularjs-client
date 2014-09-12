@@ -8,8 +8,9 @@
           <h2>{{ displayName }}</h2>
         </div>
         <div class="col-xs-12 col-sm-4">
-            <!-- http://api.randomuser.me/portraits/men/49.jpg -->
-            <img ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
+          <!-- http://api.randomuser.me/portraits/men/49.jpg -->
+          <img ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive" ng-click="enableEditor()" style="margin-bottom: 10px;"
+            data-placement="bottom" bs-tooltip="tooltip">
         </div>
       </div>
 
