@@ -40,7 +40,7 @@
     facebook: {
       url: 'http://localhost:3000/auth/facebook',
       authorizationEndpoint: 'https://www.facebook.com/dialog/oauth',
-      redirectUri: window.location.origin + '/',
+      redirectUri: window.location.origin + '/#!/', // add hashbang, '/' => '/#!/'
       scope: 'email',
       scopeDelimiter: ',',
       requiredUrlParams: ['display', 'scope'],

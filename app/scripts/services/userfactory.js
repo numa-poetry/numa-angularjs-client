@@ -28,8 +28,8 @@ angular.module('warriorPoetsApp')
 // helper functions ------------------------------------------------------------
 
       userFactory.init = function() {
-        var _sId         = storageFactory.getId();
-        var _sToken      = storageFactory.getToken();
+        var _sId    = storageFactory.getId();
+        var _sToken = storageFactory.getToken();
         console.log('fetching and initializing user data');
 
         if (_sId && _sToken) {
@@ -198,6 +198,7 @@ angular.module('warriorPoetsApp')
       };
 
       userFactory.rGetProfileImageUrl = function(info) {
+        console.log(_sId);
         return $resource(endpointConstants.userProfileImage, {
           id : _sId
         }).save([], info);

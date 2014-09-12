@@ -130,6 +130,6 @@ angular
       // Disable HTML5 pushState <- screws up Facebook Oauth.
       // $locationProvider.html5Mode(false).hashPrefix('!');
 
-      // $locationProvider.html5Mode(true).hashPrefix('!');
+      $locationProvider.hashPrefix('!');
     }
   ]);
