@@ -284,6 +284,8 @@ angular.module('warriorPoetsApp')
 // $http calls -----------------------------------------------------------------
 
       userFactory.hUpdateUser = function(info) {
+        var _sId = storageFactory.getId();
+        console.log(_sId);
         return $http({
           method: 'PUT',
           url: serverDomain + apiVersion + '/user/' + _sId,

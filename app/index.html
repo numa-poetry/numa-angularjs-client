@@ -51,17 +51,17 @@
         </div>
         <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
           <ul class="nav navbar-nav pull-right">
-            <li data-match-route="/$"><a ng-href="/#!/"><i class="ion-ios7-home" style="font-size: 20px;"></i></a></li>
+            <li data-match-route="/$"><a ng-href="/#!/"><i class="ion-ios7-home" style="font-size: 20px;"></i>&nbsp; Home</a></li>
             <li data-match-route="/login" ng-if="!isAuthenticated"><a ng-href="/#!/login">Login</a></li>
             <li ng-if="isAuthenticated" class="nav-divider"></li>
             <li ng-if="isAuthenticated" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {{ displayName }} <i class="ion-chevron-down"></i>
+                {{ displayName }} <i class="ion-arrow-down-b"></i>
               </a>
               <ul class="dropdown-menu" role="menu">
-                <li><a ng-href="/#!/profile/{{ id }}">Profile</a></li>
+                <li><a ng-href="/#!/profile/{{ id }}"><i class="ion-person" style="font-size: 20px;"></i>&nbsp; Profile</a></li>
                 <li class="divider"></li>
-                <li><a ng-href="/#!/logout">Logout</a></li>
+                <li><a ng-href="/#!/logout"><i class="ion-log-out" style="font-size: 20px;"></i>&nbsp; Logout</a></li>
               </ul>
             </li>
           </ul>

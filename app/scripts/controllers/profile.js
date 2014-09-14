@@ -229,8 +229,10 @@ angular.module('warriorPoetsApp')
       $scope.save = function() {
         ngProgress.start();
 
-        var req = {};
+        var req   = {};
         req.email = $scope.email;
+
+        console.log('req:',req);
 
         var http = userFactory.hUpdateUser(req);
         http.then(function(res) {
