@@ -11,12 +11,9 @@ angular.module('warriorPoetsApp')
   .controller('MainCtrl', ['$scope', 'storageFactory', 'userFactory',
     function ($scope, storageFactory, userFactory) {
 
-      // var id    = storageFactory.getId();
-      // var token = storageFactory.getToken();
-
-      // if (id && token) {
-      //   userFactory.init();
-      // }
+      // modify backend to only send back displayName
+      var id = storageFactory.getId();
+      userFactory.init(id);
 
 // functions -------------------------------------------------------------------
 

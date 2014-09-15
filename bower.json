@@ -20,7 +20,6 @@
     "angular-bootstrap": "~0.11.0",
     "ionicons": "~1.5.2",
     "angular-spinner": "~0.5.1",
-    "ngprogress": "~1.0.6",
     "aws-sdk-js": "~2.0.15",
     "trianglify": "~0.1.4"
   },

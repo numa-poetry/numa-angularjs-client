@@ -16,7 +16,6 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css" />
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
-    <link rel="stylesheet" href="bower_components/ngprogress/ngProgress.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -120,7 +119,6 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/spin.js/spin.js"></script>
     <script src="bower_components/angular-spinner/angular-spinner.js"></script>
-    <script src="bower_components/ngprogress/build/ngProgress.js"></script>
     <script src="bower_components/aws-sdk-js/dist/aws-sdk.js"></script>
     <script src="bower_components/d3/d3.js"></script>
     <script src="bower_components/trianglify/trianglify.js"></script>
@@ -134,11 +132,11 @@
     <script src="scripts/vendor/satellizer.js"></script>
 
     <!-- Include Trianglify instance here -->
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
       var t = new Trianglify();
       var pattern = t.generate(screen.width || window.innerWidth, screen.height || window.innerHeight);
       document.body.setAttribute('style', 'background-image: '+pattern.dataUrl+'; cursor: url(http://www.slaw.ca/quill_icon.png) 0 25, auto');
-    </script> -->
+    </script>
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
@@ -163,6 +161,10 @@
     <script src="scripts/directives/passwordstrength.js"></script>
     <script src="scripts/directives/repeatpassword.js"></script>
     <script src="scripts/directives/file.js"></script>
+    <script src="scripts/controllers/poems.js"></script>
+    <script src="scripts/controllers/comments.js"></script>
+    <script src="scripts/controllers/feed.js"></script>
+    <script src="scripts/controllers/create.js"></script>
     <!-- endbuild -->
   </body>
 </html>

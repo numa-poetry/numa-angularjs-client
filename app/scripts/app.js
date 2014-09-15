@@ -20,7 +20,6 @@ angular
     'Satellizer',
     'mgcrea.ngStrap',
     'angularSpinner',
-    'ngProgress',
     // include specific directives from Angular UI (conflicts with AngularStrap)
     'ui.bootstrap.collapse',
     'ui.bootstrap.dropdown',
@@ -95,8 +94,8 @@ angular
         })
         .when('/profile/:id', {
           templateUrl : 'views/profile.html',
-          controller  : 'ProfileCtrl',
-          resolve     : ensureAuthentication()
+          controller  : 'ProfileCtrl'/*,
+          resolve     : ensureAuthentication()*/
         })
         .when('/forgot', {
           templateUrl : 'views/forgot.html',
@@ -105,6 +104,22 @@ angular
         .when('/reset', {
           templateUrl : 'views/reset.html',
           controller  : 'ResetCtrl'
+        })
+        .when('/poems/:id', {
+          templateUrl: 'views/poem.html',
+          controller: 'PoemCtrl'
+        })
+        .when('/poems/:id/comments', {
+          templateUrl: 'views/comments.html',
+          controller: 'CommentsCtrl'
+        })
+        .when('/feed', {
+          templateUrl: 'views/feed.html',
+          controller: 'FeedCtrl'
+        })
+        .when('/poems/create', {
+          templateUrl: 'views/create.html',
+          controller: 'CreateCtrl'
         })
         .otherwise({
           redirectTo  : '/'

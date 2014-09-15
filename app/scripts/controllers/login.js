@@ -10,10 +10,10 @@
 angular.module('warriorPoetsApp')
   .controller('LoginCtrl', ['$location', '$scope', 'helperFactory',
     'userFactory', 'storageFactory', '$auth', '$alert', '$resource', '$http',
-    '$rootScope', 'usSpinnerService', 'ngProgress', '$q', '$sce', '$tooltip',
+    '$rootScope', 'usSpinnerService', '$q', '$sce', '$tooltip',
     function ($location, $scope, helperFactory, userFactory, storageFactory,
-      $auth, $alert, $resource, $http, $rootScope, usSpinnerService, ngProgress,
-      $q, $sce, $tooltip) {
+      $auth, $alert, $resource, $http, $rootScope, usSpinnerService, $q, $sce,
+      $tooltip) {
 
       $scope.popover = {
         title   : 'Protect your privacy',
@@ -57,8 +57,6 @@ angular.module('warriorPoetsApp')
 
       $scope.authenticate = function(provider) {
         usSpinnerService.spin('login-spinner');
-        // ngProgress.color('#3D71FF');
-        ngProgress.start();
         if (provider === 'reddit') {
           // var resource = $resource('https://ssl.reddit.com/api/v1/authorize', {
           //   client_id     : 'QWgNmA7jVv4KWA',
@@ -91,7 +89,6 @@ angular.module('warriorPoetsApp')
           }).error(function(data, status, headers, config) {
             console.log('ERR:', data);
           });
-          ngProgress.complete();
           usSpinnerService.stop('login-spinner');
         } else {
           $auth.authenticate(provider)
@@ -105,14 +102,13 @@ angular.module('warriorPoetsApp')
                 content     : 'You have successfully logged in.'
               });
               console.log('RES:',res);
-              ngProgress.complete();
 
-              userFactory.setInfo(res.id, res.displayName);
-              storageFactory.setId(res.id);
-              // storageFactory.setToken(res.token);
+              userFactory.setInfo(res.data.id, res.data.displayName);
+              storageFactory.setId(res.data.id);
 
               $rootScope.displayName = res.data.displayName;
               usSpinnerService.stop('login-spinner');
+              $rootScope.$emit('login');
             })
             .catch(function(res) {
               // if backend is down
@@ -140,7 +136,6 @@ angular.module('warriorPoetsApp')
               storageFactory.deleteToken();
               // usSpinnerService.stop('login-spinner');
               $location.path('/login');
-              ngProgress.complete();
             });
         }
 
@@ -148,8 +143,6 @@ angular.module('warriorPoetsApp')
 
       $scope.login = function() {
         usSpinnerService.spin('login-spinner');
-        // ngProgress.color('#3D71FF');
-        ngProgress.start();
 
         var req          = {};
         req.displayName  = $scope.displayName;
@@ -193,7 +186,6 @@ angular.module('warriorPoetsApp')
           // Clear the query string parameters from the URL
           // $location.url($location.path());
           usSpinnerService.stop('login-spinner');
-          ngProgress.complete();
           $rootScope.$emit('login');
         }, function(res) {
           // if backend is down
@@ -221,7 +213,6 @@ angular.module('warriorPoetsApp')
           storageFactory.deleteToken();
           // usSpinnerService.stop('login-spinner');
           $location.path('/login');
-          ngProgress.complete();
         });
       };
 

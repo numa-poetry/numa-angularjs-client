@@ -29,12 +29,12 @@ angular.module('warriorPoetsApp')
 
       // find a way to pull displayname or avatar on page refresh, or store in a cookie for the navbar
       userFactory.init = function(paramsId) {
-        var _sId    = storageFactory.getId();
+        var _sId = storageFactory.getId();
         // var _sToken = storageFactory.getToken();
         console.log('fetching and initializing user data');
 
         if (paramsId) {
-          console.log('params (id to look up) >', paramsId);
+          // console.log('params (id to look up) >', paramsId);
           var resource = $resource(endpointConstants.user, {
             id : paramsId
           }).get();

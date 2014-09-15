@@ -9,9 +9,9 @@
  */
 angular.module('warriorPoetsApp')
   .controller('ProfileCtrl', ['$scope', 'userFactory', '$alert', 'storageFactory',
-    '$location', 'ngProgress', '$rootScope', '$upload', '$routeParams', '$tooltip',
-    function ($scope, userFactory, $alert, storageFactory, $location, ngProgress,
-      $rootScope, $upload, $routeParams, $tooltip) {
+    '$location', '$rootScope', '$upload', '$routeParams', '$tooltip',
+    function ($scope, userFactory, $alert, storageFactory, $location, $rootScope,
+      $upload, $routeParams, $tooltip) {
 
       console.log('params=>', $routeParams.id);
 
@@ -227,8 +227,6 @@ angular.module('warriorPoetsApp')
       };
 
       $scope.save = function() {
-        ngProgress.start();
-
         var req   = {};
         req.email = $scope.email;
 
@@ -246,7 +244,6 @@ angular.module('warriorPoetsApp')
             placement   : top,
             content     : 'You have successfully updated your profile.'
           });
-          ngProgress.complete();
         }, function(res) {
           $alert({
             type        : 'material-err',
@@ -255,12 +252,10 @@ angular.module('warriorPoetsApp')
             content     : res.data.message,
             duration    : 5
           });
-          ngProgress.complete();
         });
       };
 
       $scope.deleteAccount = function() {
-        ngProgress.start();
         var resource = userFactory.rDeleteAccount();
 
         resource.$promise.then(function(res) {
@@ -279,7 +274,6 @@ angular.module('warriorPoetsApp')
           $location.path('/');
 
           $rootScope.isAuthenticated = false; // temp fix to work with satellizer
-          ngProgress.complete();
         }, function(res) {
           $alert({
             type        : 'material-err',
@@ -288,7 +282,6 @@ angular.module('warriorPoetsApp')
             content     : res.data.message,
             duration    : 5
           });
-          ngProgress.complete();
         });
 
       };
