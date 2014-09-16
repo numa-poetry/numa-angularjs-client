@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Warrior Poets</title>
+    <title>Numa</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Include Bootstrap CSS here -->
-    <link rel="stylesheet" type="text/css" href="bower_components/bootswatch/paper/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootswatch/yeti/bootstrap.min.css">
     <!-- <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css"> -->
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -37,12 +37,15 @@
     <!-- Add your site or application content here -->
     <div ng-include="'views/navbar.html'"></div>
     <div class="container" ng-view=""></div>
-    <div class="footer">
-      <ul>
-        <li><a ng-href="/#!/about">About</a></li>
-      </ul>
-    </div>
-
+    <footer style="background-color: #333333; border: 0;">
+      <div class="container">
+        <p>
+          <ul>
+            <li><a ng-href="/#!/about">About</a></li>
+          </ul>
+        </p>
+      </div>
+    </footer>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <!-- <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

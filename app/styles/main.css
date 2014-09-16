@@ -6,7 +6,7 @@
 /* Space out content a bit */
 body {
   /*padding-top: 20px;*/
-  padding-bottom: 20px;
+  /*padding-bottom: 20px;*/
   /* http://qrohlf.com/trianglify/ */
   background-image: url(../images/trianglify-background.svg), none;
   background-repeat: no-repeat;
@@ -284,4 +284,9 @@ a:not([name]) {
   cursor: url(http://www.slaw.ca/quill_icon.png) 0 25, auto;
   text-decoration: underline;
   color: #1B71CB;
+}
+
+.navbar-nav>li>a.profile-image {
+  padding-top: 10px;
+  padding-bottom: 7px;
 }

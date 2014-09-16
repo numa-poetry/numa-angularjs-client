@@ -117,7 +117,7 @@ angular
           templateUrl: 'views/feed.html',
           controller: 'FeedCtrl'
         })
-        .when('/poems/create', {
+        .when('/create', {
           templateUrl: 'views/create.html',
           controller: 'CreateCtrl'
         })
