@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top" role="navigation" bs-navbar>
+<div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavbarCtrl" bs-navbar>
   <div class="navbar-header">
     <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
       <span class="sr-only">Toggle navigation</span>
@@ -12,10 +12,10 @@
   </div>
   <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
     <ul class="nav navbar-nav pull-right">
-      <li data-match-route="/$"><a ng-href="/#!/"><i class="ion-ios7-home" style="font-size: 20px;"></i>&nbsp; Home</a></li>
+      <li data-match-route="/$"><a ng-href="/#!/"><i class="ion-ios7-home" style="font-size: 2 0px;"></i>&nbsp; Home</a></li>
       <li data-match-route="/login" ng-if="!isAuthenticated"><a ng-href="/#!/login">Login</a></li>
       <li ng-if="isAuthenticated" class="nav-divider"></li>
-      <li ng-if="isAuthenticated" class="dropdown">
+      <li ng-if="isAuthenticated" class="dropdown pull-right">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           {{ displayName }} <i class="ion-arrow-down-b"></i>
         </a>
