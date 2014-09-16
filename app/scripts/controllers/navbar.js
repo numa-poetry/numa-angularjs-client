@@ -9,20 +9,24 @@
  */
 angular.module('warriorPoetsApp')
   .controller('NavbarCtrl', ['$scope', 'storageFactory', '$rootScope',
-    function ($scope, storageFactory, $rootScope) {
+    'userFactory',
+    function ($scope, storageFactory, $rootScope, userFactory) {
 
       $scope.isCollapsed = true;
 
       var unregisterRefresh = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function() {
-        $scope.id = storageFactory.getId();
+        $scope.id        = storageFactory.getId();
+        $scope.avatarUrl = userFactory.getAvatarUrl();
       });
 
       var unregisterLogin = $rootScope.$on('login', function() {
-        $scope.id = storageFactory.getId();
+        $scope.id        = storageFactory.getId();
+        $scope.avatarUrl = userFactory.getAvatarUrl();
       });
 
       var unregisterLogout = $rootScope.$on('logout', function() {
-        $scope.id = undefined;
+        $scope.id        = undefined;
+        $scope.avatarUrl = undefined;
       });
 
       $scope.$on('$destroy', function() {

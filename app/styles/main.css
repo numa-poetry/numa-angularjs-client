@@ -1,9 +1,9 @@
 /* Space out content a bit */
 body {
-  padding-top: 20px;
+  /*padding-top: 20px;*/
   padding-bottom: 20px;
   /* http://qrohlf.com/trianglify/ */
-  /*background-image: url(../images/trianglify-background.svg), none;*/
+  background-image: url(../images/trianglify-background.svg), none;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
