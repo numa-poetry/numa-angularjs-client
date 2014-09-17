@@ -1,3 +1,7 @@
+@import url(http://fonts.googleapis.com/css?family=Lusitana);
+@import url(http://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope);
+@import url(http://fonts.googleapis.com/css?family=Lovers+Quarrel);
+
 .navbar {
   border: 0;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
@@ -289,4 +293,20 @@ a:not([name]) {
 .navbar-nav>li>a.profile-image {
   padding-top: 10px;
   padding-bottom: 7px;
+}
+
+.create-poem {
+  font-size: 15px;
+  font-family: 'Lusitana';
+  color: #000000;
+  border: none!important;
+  box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
+}
+
+.create-poem-title {
+  font-size: 80px;
+  /*line-height: 100px;*/
+  padding-bottom: 20px;
+  text-align: center;
+  font-family: 'Lovers Quarrel', 'Annie Use Your Telescope';
 }

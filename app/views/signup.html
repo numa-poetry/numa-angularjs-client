@@ -5,10 +5,10 @@
     <span spinner-key="signup-spinner" us-spinner="{lines: 17, length: 0, width: 6, radius: 17, corners: 0.7, rotate: 0, trail: 50, speed: 1.0, direction: 1, shadow: on, hwaccel: on}"></span>
 
     <form method="post" ng-submit="signUp()" name="signupForm">
-      <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.fullName.$invalid && signupForm.fullName.$dirty }">
+      <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.displayName.$invalid && signupForm.displayName.$dirty }">
         <input class="form-control input-lg" type="text" name="displayName" ng-model="displayName" placeholder="Username" required autofocus>
         <i class="ion-person form-control-feedback" style="font-size: 20px;"></i>
-        <div class="help-block text-danger" ng-if="signupForm.fullName.$dirty" ng-messages="signupForm.fullName.$error">
+        <div class="help-block text-danger" ng-if="signupForm.displayName.$dirty" ng-messages="signupForm.displayName.$error">
           <div ng-message="required">You must enter a username.</div>
         </div>
       </div>

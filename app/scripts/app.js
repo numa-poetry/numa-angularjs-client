@@ -24,6 +24,7 @@ angular
     'ui.bootstrap.collapse',
     'ui.bootstrap.dropdown',
     'plangular',
+    'contenteditable',
     'angularFileUpload'
     // xeditable
     // angularModalService

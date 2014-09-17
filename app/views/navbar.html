@@ -32,7 +32,7 @@
     <ul class="nav navbar-nav pull-right">
       <li data-match-route="/$"><a ng-href="/#!/"><i class="ion-home" style="font-size: 20px;"></i>&nbsp; Home</a></li>
       <li data-match-route="/feed"><a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i>&nbsp; Feed</a></li>
-      <li data-match-route="/create"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i>&nbsp; Create</a></li>
+      <li data-match-route="/create" ng-if="isAuthenticated"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i>&nbsp; Create</a></li>
       <li data-match-route="/login" ng-if="!isAuthenticated"><a ng-href="/#!/login"><i class="ion-log-in" style="font-size: 20px;"></i>&nbsp; Login</a></li>
       <li ng-if="isAuthenticated" class="nav-divider"></li>
       <li ng-if="isAuthenticated" class="dropdown pull-right">
