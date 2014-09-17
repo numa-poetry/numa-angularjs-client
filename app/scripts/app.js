@@ -23,6 +23,7 @@ angular
     // include specific directives from Angular UI (conflicts with AngularStrap)
     'ui.bootstrap.collapse',
     'ui.bootstrap.dropdown',
+    'plangular',
     'angularFileUpload'
     // xeditable
     // angularModalService

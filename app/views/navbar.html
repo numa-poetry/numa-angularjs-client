@@ -10,12 +10,31 @@
       <span>Numa</span>
     </a>
   </div>
+  <div plangular="https://soundcloud.com/tycho/sets/tycho-awake">
+    <div class="navbar-left" style="color: #FFFFFF; padding: 3px;">
+      <button class="btn btn-md btn-primary" ng-click="previous()">
+        <i class="ion-skip-backward" style="font-size: 20px;" ></i>
+      </button>
+      <button class="btn btn-md btn-primary" ng-click="player.playPause(player.i, player.playlistIndex)">
+        <i class="ion-play" ng-if="!player.playing" style="font-size: 20px;"></i>
+        <i class="ion-pause" ng-if="player.playing" style="font-size: 20px;"></i>
+      </button>
+      <button class="btn btn-md btn-primary" ng-click="next()">
+        <i class="ion-skip-forward" style="font-size: 20px;"></i>
+      </button>
+      &nbsp;
+      <i class="ion-loading-c" ng-show="!player.currentTrack"></i>
+      <span ng-show="player.currentTrack">"{{ player.currentTrack.title || '&nbsp;' }}" by {{ player.currentTrack.user.username || '&nbsp;' }}</span>
+      &nbsp;...
+      <small><i>{{ player.currentTime | prettyTime }} - {{ player.duration | prettyTime }}</i></small>
+    </div>
+  </div>
   <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
     <ul class="nav navbar-nav pull-right">
       <li data-match-route="/$"><a ng-href="/#!/"><i class="ion-home" style="font-size: 20px;"></i>&nbsp; Home</a></li>
       <li data-match-route="/feed"><a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i>&nbsp; Feed</a></li>
       <li data-match-route="/create"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i>&nbsp; Create</a></li>
-      <li data-match-route="/login" ng-if="!isAuthenticated"><a ng-href="/#!/login">Login</a></li>
+      <li data-match-route="/login" ng-if="!isAuthenticated"><a ng-href="/#!/login"><i class="ion-log-in" style="font-size: 20px;"></i>&nbsp; Login</a></li>
       <li ng-if="isAuthenticated" class="nav-divider"></li>
       <li ng-if="isAuthenticated" class="dropdown pull-right">
         <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
