@@ -9,9 +9,7 @@
     <a class="navbar-brand" ng-href="/#!/">
       <span>Numa</span>
     </a>
-  </div>
-  <div plangular="https://soundcloud.com/tycho/sets/tycho-awake">
-    <div class="navbar-left" style="color: #FFFFFF; padding: 3px;">
+    <div class="navbar-left" plangular="https://soundcloud.com/tycho/sets/tycho-awake" style="color: #FFFFFF; padding: 3px;">
       <button class="btn btn-md btn-primary" ng-click="previous()">
         <i class="ion-skip-backward" style="font-size: 20px;" ></i>
       </button>
@@ -24,9 +22,10 @@
       </button>
       &nbsp;
       <i class="ion-loading-c" ng-show="!player.currentTrack"></i>
-      <span ng-show="player.currentTrack">"{{ player.currentTrack.title || '&nbsp;' }}" by {{ player.currentTrack.user.username || '&nbsp;' }}</span>
-      &nbsp;...
-      <small><i>{{ player.currentTime | prettyTime }} - {{ player.duration | prettyTime }}</i></small>
+      <span ng-show="player.currentTrack">
+        "{{ player.currentTrack.title }}" by {{ player.currentTrack.user.username }}
+        &nbsp; <small><i>{{ player.currentTime | prettyTime }} - {{ player.duration | prettyTime }}</i></small>
+      </span>
     </div>
   </div>
   <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
