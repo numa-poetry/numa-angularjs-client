@@ -31,7 +31,10 @@ angular.module('warriorPoetsApp')
     // GET, POST
     resetPassword    : serverDomain + apiVersion + '/reset/:token',
 
-    // GET
-    userProfileImage : serverDomain + apiVersion + '/user/:id/profile/image'
+    // POST
+    userProfileImage : serverDomain + apiVersion + '/user/:id/profile/image',
+
+    // POST
+    userPoem         : serverDomain + apiVersion + '/user/:id/poem'
 
   });

@@ -142,7 +142,7 @@ angular.module('warriorPoetsApp')
               var req        = {};
               req.fileName   = uniqueFileName;
 
-              var resource = userFactory.rGetAvatarUrl(req);
+              var resource = userFactory.rSaveAvatarUrl(req);
 
               resource.$promise.then(function(res) {
                 // display it to user / store to userFactory

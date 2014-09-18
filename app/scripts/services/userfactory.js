@@ -273,10 +273,18 @@ angular.module('warriorPoetsApp')
         }).get();
       };
 
-      userFactory.rGetAvatarUrl = function(info) {
+      userFactory.rSaveAvatarUrl = function(info) {
         var _sId = storageFactory.getId();
         console.log(_sId);
         return $resource(endpointConstants.userProfileImage, {
+          id : _sId
+        }).save([], info);
+      };
+
+      userFactory.rSavePoem = function(info) {
+        _sId = storageFactory.getId();
+        console.log(_sId);
+        return $resource(endpointConstants.userPoem, {
           id : _sId
         }).save([], info);
       };
