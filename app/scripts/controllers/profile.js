@@ -169,7 +169,7 @@ angular.module('warriorPoetsApp')
 
             }
           }).on('httpUploadProgress', function(progress) {
-            $scope.uploadProgress = Math.round(progress.loaded / progress.total * 100);
+            console.log('percent completed:', Math.round(progress.loaded / progress.total * 100));
           });
         } else {
           $alert({
@@ -183,46 +183,47 @@ angular.module('warriorPoetsApp')
         }
       };
 
-      // $scope.onFileSelect = function(image) {
-      //   $scope.uploadInProgress = true;
-      //   $scope.uploadProgress = 0;
+      $scope.onFileSelect = function(image) {
+        $scope.uploading = true;
+        if (angular.isArray(image)) {
+          image = image[0];
+        }
 
-      //   if (angular.isArray(image)) {
-      //     image = image[0];
-      //   }
+        if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
+          $alert({
+            type        : 'material-err',
+            dismissable : true,
+            title       : 'Oops! ',
+            content     : 'Only PNG and JPEG types are accepted.',
+            duration    : 5
+          });
+          $scope.uploading = false;
+          return;
+        }
 
-      //   console.log('image:', image);
-      //   console.log('type:', image.type);
+        $scope.upload = $upload.upload({
+          url: 'http://localhost:3000/api/v1/user/' + userFactory.getId() + '/avatar',
+          method: 'POST',
+          file: image
+        }).progress(function(event) {
+          console.log('percent completed:', parseInt(100.0 * event.loaded / event.total));
+        }).success(function(data) {
+          console.log(data);
 
-      //   if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
-      //     $alert({
-      //       type        : 'material-err',
-      //       dismissable : true,
-      //       title       : 'Oops! ',
-      //       content     : 'Only PNG and JPEG types are accepted.',
-      //       duration    : 5
-      //     });
-      //     return;
-      //   }
-
-      //   $scope.upload = $upload.upload({
-      //     url: 'http://localhost:3000/api/v1/user/' + 'Azy18V47AbTZ09M69RJ1' + '/upload/image',
-      //     method: 'POST',
-      //     data: {
-      //       type: 'profile'
-      //     },
-      //     file: image
-      //   }).progress(function(event) {
-      //     $scope.uploadProgress = Math.floor(event.loaded / event.total);
-      //     // $scope.$apply();
-      //   }).success(function(data, status, headers, config) {
-      //     console.log('Photo uploaded!');
-      //     $scope.uploadedImage = JSON.parse(data);
-      //   }).error(function(err) {
-      //     $scope.uploadInProgress = false;
-      //     console.log('Error uploading file: ' + err.message || err);
-      //   });
-      // };
+          $alert({
+            type        : 'material',
+            dismissable : true,
+            title       : 'Success! ',
+            content     : 'Profile pic updated.',
+            duration    : 5
+          });
+          $scope.avatarUrl = data.avatarUrl;
+          $scope.uploading = false;
+        }).error(function(err) {
+          console.log('Error uploading file: ' + err.message || err);
+          $scope.uploading = false;
+        });
+      };
 
       $scope.enableEditor = function() {
         $scope.editorEnabled = true;

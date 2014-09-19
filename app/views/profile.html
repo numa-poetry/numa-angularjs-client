@@ -60,21 +60,22 @@
           <img ng-if="!uploading" ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
         </div>
         <div class="col-xs-8 col-sm-9">
-          <input name="file" type="file" file />
-          <button type="button" class="btn btn-md btn-primary" style="margin-top: 10px;" ng-click="upload()">Upload new picture</button>
+          <h4>Upload new avatar</h4>
+          <input type="file" ng-file-select="onFileSelect($files)" accept="image/png, image/jpeg">
         </div>
       </div>
 
-      <!-- Progress Bar -->
-      <!-- <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="{{ uploadProgress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploadProgress }}%;">
-          {{ uploadProgress == 0 ? '' : uploadProgress + '%' }}
+      <!-- OVERKILL -->
+      <!-- <div class="row">
+        <div class="col-xs-4 col-sm-3">
+          <div ng-if="uploading"><i class="ion-ios7-reloading" style="font-size: 80px;"></i></div>
+          <img ng-if="!uploading" ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
+        </div>
+        <div class="col-xs-8 col-sm-9">
+          <input name="file" type="file" file />
+          <button type="button" class="btn btn-md btn-primary" style="margin-top: 10px;" ng-click="upload()">Upload new avatar</button>
         </div>
       </div> -->
-
-      <!-- <label>Upload Profile Image</label> <input type="file" ng-file-select="onFileSelect($files)" accept="image/png, image/jpeg">
-      <span data-ng-if="uploadInProgress">Upload progress: {{ uploadProgress }}</span>
-      <img ng-src="uploadedImage" ng-if="uploadedImage"> -->
 
       <!-- <h5><span class="label label-info">Email</span></h5> -->
       <form method="put" name="editForm">
