@@ -18,6 +18,7 @@ angular.module('warriorPoetsApp')
       var _joinedDate;
       var _email;
       var _avatarUrl;
+      var _poems       = [];
       var _sId         = storageFactory.getId();
       var _sToken      = storageFactory.getToken();
       var _isLoggedIn  = false;
@@ -27,21 +28,22 @@ angular.module('warriorPoetsApp')
 
 // helper functions ------------------------------------------------------------
 
-      // find a way to pull displayname or avatar on page refresh, or store in a cookie for the navbar
-      userFactory.init = function(paramsId) {
+      userFactory.init = function(paramsId, type) {
         var _sId = storageFactory.getId();
-        // var _sToken = storageFactory.getToken();
         console.log('fetching and initializing user data');
 
         if (paramsId) {
-          // console.log('params (id to look up) >', paramsId);
+          var req  = {};
+          req.type = type;
+
           var resource = $resource(endpointConstants.user, {
             id : paramsId
-          }).get();
+          }).save(req);
 
           resource.$promise.then(function(res) {
             console.log(res);
 
+            // Store basic user info
             userFactory.setInfo(res.id, res.displayName, res.joinedDate.split('T')[0],
               res.email, res.avatarUrl);
 
@@ -51,6 +53,12 @@ angular.module('warriorPoetsApp')
               $rootScope.isAuthenticated = true; // temp fix to work with satellizer
             } else {
               console.log('Viewing other user profile');
+            }
+
+            // If 'Full' profile was requested, store poem titles
+            if (type === 'Full') {
+              console.log('NEED MORE TINGS');
+              userFactory.setPoems(res.poems);
             }
 
             $rootScope.$emit('finishedSettingUserDataOnPageRefresh');
@@ -207,6 +215,10 @@ angular.module('warriorPoetsApp')
         _avatarUrl = avatarUrl;
       };
 
+      userFactory.setPoems = function(poems) {
+        _poems = poems;
+      };
+
 // getters ---------------------------------------------------------------------
 
       userFactory.getIsLoggedIn = function() {
@@ -233,6 +245,10 @@ angular.module('warriorPoetsApp')
         return _avatarUrl;
       };
 
+      userFactory.getPoems = function() {
+        return _poems;
+      };
+
 // deletes ---------------------------------------------------------------------
 
       userFactory.deleteInfo = function() {
@@ -243,6 +259,7 @@ angular.module('warriorPoetsApp')
         _joinedDate  = undefined;
         _email       = undefined;
         _avatarUrl   = undefined;
+        _poems       = [];
         _isLoggedIn  = false;
       };
 

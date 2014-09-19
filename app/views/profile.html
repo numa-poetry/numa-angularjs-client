@@ -20,7 +20,31 @@
         <!-- <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Expressions</strong></span> 2</li>
         <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span> 15</li> -->
       </ul>
-      <button ng-show="currentUser == userToView" type="button" class="btn btn-lg btn-primary pull-right" ng-click="enableEditor()">Edit Profile</button>
+      <!-- <button ng-show="currentUser == userToView" type="button" class="btn btn-lg btn-primary pull-right" ng-click="enableEditor()">Edit Profile</button> -->
+
+      <!-- <div class="row"> -->
+        <tabset>
+          <!-- <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active"> -->
+
+            <tab>
+              <tab-heading>
+                <i class="ion-heart"></i>&nbsp; Poems <span class="badge">{{ poems.length }}</span>
+              </tab-heading>
+              <ul>
+                <li class="animate-repeat" ng-repeat="poem in poems">
+                  "{{ poem.title }}" - {{ poem.createdAt }}.
+                </li>
+              </ul>
+            </tab>
+            <tab>
+              <tab-heading>
+                <i class="ion-chatbubble"></i>&nbsp; Comments
+              </tab-heading>
+              TEST
+            </tab>
+          <!-- </tab> -->
+        </tabset>
+      <!-- </div> -->
     </div>
 
     <!-- EDIT PROFILE VIEW -->

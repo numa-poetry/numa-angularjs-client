@@ -13,7 +13,7 @@ angular.module('warriorPoetsApp')
 
       // modify backend to only send back displayName
       var id = storageFactory.getId();
-      userFactory.init(id);
+      userFactory.init(id, 'Basic');
 
 // functions -------------------------------------------------------------------
 

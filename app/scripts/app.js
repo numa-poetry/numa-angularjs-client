@@ -21,14 +21,15 @@ angular
     'mgcrea.ngStrap',
     'angularSpinner',
     // include specific directives from Angular UI (conflicts with AngularStrap)
+    'ui.bootstrap.tpls',
     'ui.bootstrap.collapse',
     'ui.bootstrap.dropdown',
+    'ui.bootstrap.tabs',
     'plangular',
     'contenteditable',
     'angularFileUpload'
     // xeditable
     // angularModalService
-    // ui.bootstrap
 
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',

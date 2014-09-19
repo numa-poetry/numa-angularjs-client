@@ -18,13 +18,14 @@ angular.module('warriorPoetsApp')
       $scope.currentUser = storageFactory.getId();
       $scope.userToView  = $routeParams.id;
 
-      userFactory.init($routeParams.id);
+      userFactory.init($routeParams.id, 'Full');
 
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
         $scope.displayName = userFactory.getDisplayName();
         $scope.email       = userFactory.getEmail();
         $scope.joinedDate  = userFactory.getJoinedDate();
         $scope.avatarUrl   = userFactory.getAvatarUrl();
+        $scope.poems       = userFactory.getPoems();
       });
 
       $scope.$on('$destroy', function() {
@@ -39,6 +40,11 @@ angular.module('warriorPoetsApp')
         title   : 'Change your avatar',
         checked : false
       };
+
+      $scope.tabs = [
+        { title:'Poems' },
+        { title:'Comments' }
+      ];
 
       // Temporary Amazon S3 bucket credentials. All images stored here for processing,
       // then transferred to permanent bucket.
