@@ -8,12 +8,16 @@
  * Controller of the warriorPoetsApp
  */
 angular.module('warriorPoetsApp')
-  .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory',
-    function ($scope, $routeParams, poemFactory) {
+  .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
+    'userFactory',
+    function ($scope, $routeParams, poemFactory, storageFactory, userFactory) {
 
-      var id = $routeParams.id;
-      if (id) {
-        var resource = poemFactory.get(id);
+      var userId = storageFactory.getId();
+      userFactory.init(userId, 'Basic');
+
+      var poemId = $routeParams.id;
+      if (poemId) {
+        var resource = poemFactory.get(poemId);
 
         resource.$promise.then(function(res) {
           console.log(res);

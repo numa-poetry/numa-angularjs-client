@@ -11,7 +11,6 @@ angular.module('warriorPoetsApp')
   .controller('MainCtrl', ['$scope', 'storageFactory', 'userFactory',
     function ($scope, storageFactory, userFactory) {
 
-      // modify backend to only send back displayName
       var id = storageFactory.getId();
       userFactory.init(id, 'Basic');
 

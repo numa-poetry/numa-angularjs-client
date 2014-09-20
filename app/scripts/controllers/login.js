@@ -134,7 +134,7 @@ angular.module('warriorPoetsApp')
               }
               storageFactory.deleteId();
               storageFactory.deleteToken();
-              // usSpinnerService.stop('login-spinner');
+              usSpinnerService.stop('login-spinner');
               $location.path('/login');
             });
         }
@@ -211,7 +211,7 @@ angular.module('warriorPoetsApp')
           }
           storageFactory.deleteId();
           storageFactory.deleteToken();
-          // usSpinnerService.stop('login-spinner');
+          usSpinnerService.stop('login-spinner');
           $location.path('/login');
         });
       };

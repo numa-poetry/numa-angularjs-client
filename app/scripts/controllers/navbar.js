@@ -9,10 +9,22 @@
  */
 angular.module('warriorPoetsApp')
   .controller('NavbarCtrl', ['$scope', 'storageFactory', '$rootScope',
-    'userFactory',
-    function ($scope, storageFactory, $rootScope, userFactory) {
+    'userFactory', '$tooltip', 'matchmedia',
+    function ($scope, storageFactory, $rootScope, userFactory, $tooltip,
+      matchmedia) {
 
+      $scope.onPhone     = false;
       $scope.isCollapsed = true;
+
+      $scope.tooltipCreate = {
+        title   : 'Create a poem.',
+        checked : false
+      };
+
+      $scope.tooltipFeed = {
+        title   : 'View the poem feed.',
+        checked : false
+      };
 
       var unregisterRefresh = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function() {
         $scope.id        = storageFactory.getId();
@@ -29,11 +41,23 @@ angular.module('warriorPoetsApp')
         $scope.avatarUrl = undefined;
       });
 
+      var unregisterMatchMediaOnPhone = matchmedia.onPhone(function() {
+        $scope.onPhone = !$scope.onPhone;
+      });
+
       $scope.$on('$destroy', function() {
         unregisterLogin();
         unregisterLogout();
         unregisterRefresh();
+        unregisterMatchMediaOnPhone();
       });
+
+
+// functions -------------------------------------------------------------------
+
+      $scope.collapse = function() {
+        $scope.isCollapsed = !$scope.isCollapsed;
+      };
 
     }
   ]);

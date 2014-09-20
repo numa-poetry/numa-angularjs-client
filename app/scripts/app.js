@@ -28,7 +28,8 @@ angular
     'plangular',
     'contenteditable',
     'angularFileUpload',
-    'wu.masonry'
+    'wu.masonry',
+    'matchmedia-ng'
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
     '$popoverProvider', '$tooltipProvider', '$modalProvider',
