@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Lusitana);
 @import url(http://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope);
 @import url(http://fonts.googleapis.com/css?family=Lovers+Quarrel);
+@import url(http://fonts.googleapis.com/css?family=Roboto);
 
 .navbar {
   border: 0;
@@ -295,18 +296,28 @@ a:not([name]) {
   padding-bottom: 7px;
 }
 
-.create-poem {
-  font-size: 15px;
+.poem-body {
+  font-size: 20px;
   font-family: 'Lusitana';
   color: #000000;
   border: none!important;
   box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
+  background-color: #FFFFFF;
 }
 
-.create-poem-title {
+.poem-title {
   font-size: 80px;
   /*line-height: 100px;*/
-  padding-bottom: 20px;
+  /*padding-bottom: 20px;*/
   text-align: center;
   font-family: 'Lovers Quarrel', 'Annie Use Your Telescope';
+}
+
+/* Source: http://snipplr.com/view/10979/css-cross-browser-word-wrap */
+.word-wrap {
+   white-space: pre-wrap;      /* CSS3 */
+   white-space: -moz-pre-wrap; /* Firefox */
+   white-space: -pre-wrap;     /* Opera <7 */
+   white-space: -o-pre-wrap;   /* Opera 7 */
+   word-wrap: break-word;      /* IE */
 }

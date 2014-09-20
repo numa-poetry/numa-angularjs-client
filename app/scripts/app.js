@@ -27,10 +27,8 @@ angular
     'ui.bootstrap.tabs',
     'plangular',
     'contenteditable',
-    'angularFileUpload'
-    // xeditable
-    // angularModalService
-
+    'angularFileUpload',
+    'wu.masonry'
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
     '$popoverProvider', '$tooltipProvider', '$modalProvider',
@@ -95,7 +93,7 @@ angular
           templateUrl : 'views/signup.html',
           controller  : 'SignupCtrl'
         })
-        .when('/profile/:id', {
+        .when('/user/:id', {
           templateUrl : 'views/profile.html',
           controller  : 'ProfileCtrl'/*,
           resolve     : ensureAuthentication()*/
@@ -108,11 +106,11 @@ angular
           templateUrl : 'views/reset.html',
           controller  : 'ResetCtrl'
         })
-        .when('/poems/:id', {
+        .when('/poem/:id', {
           templateUrl: 'views/poem.html',
           controller: 'PoemCtrl'
         })
-        .when('/poems/:id/comments', {
+        .when('/poem/:id/comments', {
           templateUrl: 'views/comments.html',
           controller: 'CommentsCtrl'
         })

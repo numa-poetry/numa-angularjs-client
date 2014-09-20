@@ -13,7 +13,8 @@ angular.module('warriorPoetsApp')
 
       return {
 
-        go : function(path) {
+        go : function(path, params) {
+          console.log(params);
           $location.path(path);
         },
 

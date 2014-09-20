@@ -8,7 +8,6 @@
           <h2>{{ displayName }}</h2>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <!-- http://api.randomuser.me/portraits/men/49.jpg -->
           <img ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive" ng-click="enableEditor()" style="margin-bottom: 10px;"
             data-placement="bottom" bs-tooltip="tooltip">
         </div>
@@ -17,42 +16,35 @@
       <ul class="list-group">
         <li class="list-group-item dropdown-toggle text-right" ng-if="joinedDate"><span class="pull-left"><strong>Joined</strong></span> {{ joinedDate }}</li>
         <li class="list-group-item dropdown-toggle text-right" ng-if="email"><span class="pull-left"><strong>Email</strong></span> {{ email }}</li>
-        <!-- <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Expressions</strong></span> 2</li>
-        <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span> 15</li> -->
+        <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span> ___</li>
       </ul>
       <!-- <button ng-show="currentUser == userToView" type="button" class="btn btn-lg btn-primary pull-right" ng-click="enableEditor()">Edit Profile</button> -->
 
-      <!-- <div class="row"> -->
-        <tabset>
-          <!-- <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active"> -->
-
-            <tab>
-              <tab-heading>
-                <i class="ion-heart"></i>&nbsp; Poems <span class="badge">{{ poems.length }}</span>
-              </tab-heading>
-              <ul>
-                <li class="animate-repeat" ng-repeat="poem in poems">
-                  "{{ poem.title }}" - {{ poem.createdAt }}.
-                </li>
-              </ul>
-            </tab>
-            <tab>
-              <tab-heading>
-                <i class="ion-chatbubble"></i>&nbsp; Comments
-              </tab-heading>
-              TEST
-            </tab>
-          <!-- </tab> -->
-        </tabset>
-      <!-- </div> -->
+      <tabset>
+        <tab>
+          <tab-heading>
+            <i class="ion-document-text"></i>&nbsp; Poems <span class="badge">{{ poems.length }}</span>
+          </tab-heading>
+          <div masonry>
+            <div class="masonry-brick" ng-repeat="poem in poems" ng-click="go('poem', poem.id)">
+              "{{ poem.title }}"
+            </div>
+          </div>
+        </tab>
+        <tab>
+          <tab-heading>
+            <i class="ion-chatbubble"></i>&nbsp; Comments
+          </tab-heading>
+          TEST
+        </tab>
+      </tabset>
     </div>
 
     <!-- EDIT PROFILE VIEW -->
     <div ng-show="editorEnabled">
       <h2 class="text-center">Profile</h2>
-      <hr>
 
-      <!-- <h5><span class="label label-info">Profile picture</span></h5> -->
+      <hr>
 
       <div class="row">
         <div class="col-xs-4 col-sm-3">

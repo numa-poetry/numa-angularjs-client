@@ -37,10 +37,10 @@
       <li ng-if="isAuthenticated" class="nav-divider"></li>
       <li ng-if="isAuthenticated" class="dropdown pull-right">
         <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
-          <img class="img-rounded" ng-src="{{ avatarUrl }}" style="min-height: 30px; height: 30px;">&nbsp; {{ displayName }} <i class="ion-arrow-down-b"></i>
+          <img class="img-circle" ng-src="{{ avatarUrl }}" style="min-height: 30px; height: 30px;">&nbsp; {{ displayName }} <i class="ion-arrow-down-b"></i>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li><a ng-href="/#!/profile/{{ id }}"><i class="ion-gear-a" style="font-size: 20px;"></i>&nbsp; Profile</a></li>
+          <li><a ng-href="/#!/user/{{ id }}"><i class="ion-gear-a" style="font-size: 20px;"></i>&nbsp; Profile</a></li>
           <li class="divider"></li>
           <li><a ng-href="/#!/logout"><i class="ion-log-out" style="font-size: 20px;"></i>&nbsp; Logout</a></li>
         </ul>

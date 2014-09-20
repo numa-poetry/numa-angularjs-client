@@ -34,7 +34,7 @@ angular.module('warriorPoetsApp')
           });
 
           var _sId = storageFactory.getId();
-          $location.path('/profile/' + _sId);
+          $location.path('/user/' + _sId);
         }, function(res) {
           $alert({
             type        : 'material-err',

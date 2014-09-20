@@ -13,7 +13,7 @@ angular.module('warriorPoetsApp')
     function ($scope, userFactory, $alert, storageFactory, $location, $rootScope,
       $upload, $routeParams, $tooltip) {
 
-      console.log('params=>', $routeParams.id);
+      // console.log('params=>', $routeParams.id);
 
       $scope.currentUser = storageFactory.getId();
       $scope.userToView  = $routeParams.id;
@@ -59,6 +59,10 @@ angular.module('warriorPoetsApp')
       $scope.uploading     = false;
 
 // functions -------------------------------------------------------------------
+
+      $scope.go = function(path, param) {
+        $location.path(path + '/' + param);
+      };
 
       $scope.fileSizeLabel = function() {
         // Convert bytes to MB

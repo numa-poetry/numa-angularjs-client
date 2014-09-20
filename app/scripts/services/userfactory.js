@@ -293,7 +293,7 @@ angular.module('warriorPoetsApp')
       userFactory.rSaveAvatarUrl = function(info) {
         var _sId = storageFactory.getId();
         console.log(_sId);
-        return $resource(endpointConstants.userProfileImage, {
+        return $resource(endpointConstants.userAvatar, {
           id : _sId
         }).save([], info);
       };
