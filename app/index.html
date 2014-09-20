@@ -22,9 +22,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <!-- style="cursor: url(http://www.slaw.ca/quill_icon.png) 0 25, auto;" -->
-  <body ng-app="warriorPoetsApp" style="cursor: url(http://www.slaw.ca/quill_icon.png) 0 25, auto;">
-  <!-- <body ng-app="warriorPoetsApp" style="cursor: url(images/quill_black.cur);"> -->
+  <body ng-app="warriorPoetsApp" style="cursor: url(images/quill_icon.png) 0 25, auto;">
 
     <!-- This tag is necessary to enable HTML5 History API in AngularJS.
     This will allow us to have clean URLs without the # symbol. -->
@@ -46,16 +44,6 @@
         </p>
       </div>
     </footer> -->
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <!-- <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script> -->
 
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
@@ -111,14 +99,15 @@
     <!-- Include Plangular here -->
     <script src="scripts/vendor/ng-plangular.min.js"></script>
 
+    <!-- ui-bootstrap-tpls.min.js == (ui-bootstrap.min.js + html templates) -->
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
     <!-- Include Trianglify instance here -->
     <!-- <script type="text/javascript">
       var t = new Trianglify();
       var pattern = t.generate(screen.width || window.innerWidth, screen.height || window.innerHeight);
       document.body.setAttribute('style', 'background-image: '+pattern.dataUrl+'; cursor: url(http://www.slaw.ca/quill_icon.png) 0 25, auto');
     </script> -->
-
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
@@ -143,11 +132,11 @@
     <script src="scripts/services/tokeninterceptorfactory.js"></script>
     <script src="scripts/services/helperfactory.js"></script>
     <script src="scripts/services/userfactory.js"></script>
+    <script src="scripts/services/poemfactory.js"></script>
 
     <script src="scripts/directives/passwordstrength.js"></script>
     <script src="scripts/directives/repeatpassword.js"></script>
     <script src="scripts/directives/file.js"></script>
-    <script src="scripts/services/poemfactory.js"></script>
     <!-- endbuild -->
   </body>
 </html>
