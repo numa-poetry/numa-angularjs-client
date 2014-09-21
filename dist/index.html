@@ -1,0 +1,18 @@
+<!doctype html> <html class="no-js"> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title>Numa</title> <meta name="description" content=""> <meta name="viewport" content="width=device-width,initial-scale=1"> <!-- Include Bootstrap CSS here, specify theme from bower_components --> <link rel="stylesheet" type="text/css" href="bower_components/bootswatch/yeti/bootstrap.min.css"> <!-- <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css"> --> <!-- Place favicon.ico and apple-touch-icon.png in the root directory --> <link rel="stylesheet" href="styles/vendor.90cedd2b.css"> <link rel="stylesheet" href="styles/main.d469b9cc.css">  <body ng-app="warriorPoetsApp" style="cursor: url(images/quill_icon.b1c7f2d5.png) 0 25, auto"> <!-- This tag is necessary to enable HTML5 History API in AngularJS.
+         This will allow us to have clean URLs without the # symbol. --> <!-- <base href="/"> --> <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]--> <!-- Add your site or application content here --> <div ng-include="'views/navbar.html'"></div> <div class="container" ng-view=""></div> <!-- <footer style="background-color: #333333; border: 0;">
+      <div class="container">
+        <p>
+          <ul>
+            <li><a ng-href="/#!/about">About</a></li>
+          </ul>
+        </p>
+      </div>
+    </footer> --> <!--[if lt IE 9]>
+    <script src="scripts/oldieshim.ff90b0fb.js"></script>
+    <![endif]--> <script src="scripts/vendor.3109eed1.js"></script> <!-- Include Bootstrap JS here --> <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script> <!-- Include Satellizer here --> <script src="scripts/vendor/satellizer.js"></script> <!-- Include Plangular here --> <script src="scripts/vendor/ng-plangular.min.js"></script> <!-- ui-bootstrap-tpls.min.js == (ui-bootstrap.min.js + html templates) --> <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script> <!-- Include Trianglify instance here --> <!-- Causing slowdown issues in Chrome --> <!-- <script type="text/javascript">
+      var t = new Trianglify();
+      var pattern = t.generate(screen.width || window.innerWidth, screen.height || window.innerHeight);
+      document.body.setAttribute('style', 'background-image: '+pattern.dataUrl+'; cursor: url(http://www.slaw.ca/quill_icon.png) 0 25, auto');
+    </script> --> <script src="scripts/scripts.d880c00e.js"></script>  
