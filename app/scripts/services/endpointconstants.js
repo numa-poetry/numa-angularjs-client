@@ -1,6 +1,12 @@
 'use strict';
 
+// Development
 var serverDomain = 'http://localhost:3000';
+
+// Production
+// var serverDomain = 'https://numarestfulapi-30069.onmodulus.net';
+// var serverDomain = 'https://numa.mod.bz';
+
 var apiVersion   = '/api/v1';
 
 /**
