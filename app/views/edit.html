@@ -1,1 +1,9 @@
-<p>This is the edit view.</p>
+<div class="form-group"style="height: 100%;">
+  <div class="row">
+    <div class="col-lg-12 poem-title" contenteditable="true" ng-model="title" strip-br="true" select-non-editable="true"></div>
+    <textarea class="form-control poem-body" ng-model="poem" rows="20" cols="20" style="white-space: pre-line;"></textarea>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <button type="button" class="btn btn-lg btn-block btn-primary pull-right" ng-click="updatePoem()">Update</button>
+  </div>
+</div>

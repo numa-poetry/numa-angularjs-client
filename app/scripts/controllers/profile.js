@@ -247,7 +247,7 @@ angular.module('warriorPoetsApp')
         http.then(function(res) {
           console.log('good res:', res);
           $scope.editorEnabled = false;
-          $scope.email = res.data.user.email;
+          $scope.email = $scope.email; // ?
           $alert({
             type        : 'material',
             dismissable : false,

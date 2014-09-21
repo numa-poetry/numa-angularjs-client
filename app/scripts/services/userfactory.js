@@ -249,6 +249,15 @@ angular.module('warriorPoetsApp')
         });
       };
 
+      userFactory.hUpdatePoem = function(info) {
+        var _sId = storageFactory.getId();
+        return $http({
+          method: 'PUT',
+          url: serverDomain + apiVersion + '/user/' + _sId + '/poem/' + info.id,
+          data: info
+        });
+      };
+
       return userFactory;
 
     }
