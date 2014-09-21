@@ -12,6 +12,9 @@ angular.module('warriorPoetsApp')
     '$location', 'storageFactory',
     function ($scope, $resource, $alert, userFactory, $location, storageFactory) {
 
+      var id = storageFactory.getId();
+      userFactory.init(id, 'Basic');
+
       $scope.title = 'Untitled';
 
 // functions -------------------------------------------------------------------

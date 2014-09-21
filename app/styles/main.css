@@ -303,9 +303,6 @@ a:not([name]) {
   border: none!important;
   box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
   background-color: #FFFFFF;
-  padding: 0px 25px 25px 25px;
-  white-space: pre-line;
-  display: inline-block;
 }
 
 .poem-title {

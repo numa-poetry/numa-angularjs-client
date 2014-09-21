@@ -9,23 +9,31 @@
  */
 angular.module('warriorPoetsApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
-    'userFactory',
-    function ($scope, $routeParams, poemFactory, storageFactory, userFactory) {
+    'userFactory', '$location',
+    function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
+      $location) {
 
-      var userId = storageFactory.getId();
-      userFactory.init(userId, 'Basic');
+      $scope.userId = storageFactory.getId();
+      userFactory.init($scope.userId, 'Basic');
 
       var poemId = $routeParams.id;
       if (poemId) {
         var resource = poemFactory.get(poemId);
 
         resource.$promise.then(function(res) {
-          console.log(res);
-          $scope.title = res.poem.title;
-          $scope.poem  = res.poem.poem;
+          $scope.creatorId = res.creator.id;
+          $scope.title     = res.poem.title;
+          $scope.poem      = res.poem.poem;
         }, function(res) {
           console.log(res);
         });
       }
+
+// functions -------------------------------------------------------------------
+
+      $scope.go = function(path) {
+        $location.path(path + '/' + poemId);
+      };
+
     }
   ]);

@@ -123,6 +123,11 @@ angular
           templateUrl: 'views/create.html',
           controller: 'CreateCtrl'
         })
+        // maybe change this to include userid?
+        .when('/edit/:id', {
+          templateUrl: 'views/edit.html',
+          controller: 'EditCtrl'
+        })
         .otherwise({
           redirectTo  : '/'
         });

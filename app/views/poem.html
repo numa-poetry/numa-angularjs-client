@@ -4,7 +4,9 @@
   </div>
 </div>
 <div class="row">
-    <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-1 poem-body">
-      {{ poem }}
-    </div>
+  <div class="poem-body"
+    style="padding: 0px 25px 25px 25px; white-space: pre-line;">
+    {{ poem }}
+  </div>
+  <button ng-show="userId === creatorId" type="button" class="btn btn-md btn-info pull-right" ng-click="go('edit')">Edit</button>
 </div>
