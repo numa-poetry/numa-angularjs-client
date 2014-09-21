@@ -8,7 +8,8 @@ bower_components/
 .sass-cache
 
 build/
-dist/
+# Git subtree command - http://yeoman.io/learning/deployment.html
+# dist/
 
 ### Node ###
 # Logs

@@ -147,11 +147,6 @@ angular
         html: true
       });
 
-      // https://stackoverflow.com/questions/16677528/location-switching-between-html5-and-hashbang-mode-link-rewriting
-
-      // Disable HTML5 pushState <- screws up Facebook Oauth.
-      // $locationProvider.html5Mode(false).hashPrefix('!');
-
       $locationProvider.hashPrefix('!');
     }
   ]);
