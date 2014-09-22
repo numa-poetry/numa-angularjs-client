@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:LogoutCtrl
+ * @name numaApp.controller:LogoutCtrl
  * @description
  * # LogoutCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('LogoutCtrl', ['$auth', '$alert', 'storageFactory', 'userFactory',
     '$rootScope',
     function ($auth, $alert, storageFactory, userFactory, $rootScope) {

@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name warriorPoetsApp.directive:passwordStrength
+ * @name numaApp.directive:passwordStrength
  * @description
  * # passwordStrength
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .directive('passwordStrength', function () {
     return {
       restrict: 'A',

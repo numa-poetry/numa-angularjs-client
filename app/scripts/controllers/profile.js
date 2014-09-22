@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:ProfileCtrl
+ * @name numaApp.controller:ProfileCtrl
  * @description
  * # ProfileCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('ProfileCtrl', ['$scope', 'userFactory', '$alert', 'storageFactory',
     '$location', '$rootScope', '$upload', '$routeParams', '$tooltip',
     function ($scope, userFactory, $alert, storageFactory, $location, $rootScope,

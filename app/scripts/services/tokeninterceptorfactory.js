@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name warriorPoetsApp.tokenInterceptorFactory
+ * @name numaApp.tokenInterceptorFactory
  * @description
  * # tokenInterceptorFactory
- * Factory in the warriorPoetsApp.
+ * Factory in the numaApp.
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .factory('tokenInterceptorFactory', ['$q', 'storageFactory',
     function($q, storageFactory) {
 

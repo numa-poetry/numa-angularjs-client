@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:AboutCtrl
+ * @name numaApp.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('AboutCtrl', ['$scope',
     function ($scope) {
 

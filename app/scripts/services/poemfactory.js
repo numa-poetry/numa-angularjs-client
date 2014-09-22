@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name warriorPoetsApp.poemFactory
+ * @name numaApp.poemFactory
  * @description
  * # poemFactory
- * Factory in the warriorPoetsApp.
+ * Factory in the numaApp.
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .factory('poemFactory', ['$resource', 'endpointConstants',
     function ($resource, endpointConstants) {
 

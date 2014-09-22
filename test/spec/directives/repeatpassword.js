@@ -3,7 +3,7 @@
 describe('Directive: repeatPassword', function () {
 
   // load the directive's module
-  beforeEach(module('warriorPoetsApp'));
+  beforeEach(module('numaApp'));
 
   var element,
     scope;

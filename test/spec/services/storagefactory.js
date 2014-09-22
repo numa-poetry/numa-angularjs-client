@@ -3,7 +3,7 @@
 describe('Service: storageFactory', function () {
 
   // load the service's module
-  beforeEach(module('warriorPoetsApp'));
+  beforeEach(module('numaApp'));
 
   // instantiate service
   var storageFactory;

@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name warriorPoetsApp.directive:file
+ * @name numaApp.directive:file
  * @description
  * # file
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .directive('file', function () {
     return {
       restrict: 'AE',

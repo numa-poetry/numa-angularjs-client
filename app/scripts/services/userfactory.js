@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name warriorPoetsApp.userFactory
+ * @name numaApp.userFactory
  * @description
  * # userFactory
- * Factory in the warriorPoetsApp.
+ * Factory in the numaApp.
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .factory('userFactory', ['endpointConstants', '$resource', 'storageFactory',
     '$rootScope', '$location', '$auth', '$alert', '$http',
     function(endpointConstants, $resource, storageFactory, $rootScope,
@@ -30,7 +30,7 @@ angular.module('warriorPoetsApp')
 
       userFactory.init = function(paramsId, type) {
         var _sId = storageFactory.getId();
-        console.log('fetching and initializing user data');
+        // console.log('fetching and initializing user data');
 
         if (paramsId) {
           var req  = {};
@@ -106,7 +106,7 @@ angular.module('warriorPoetsApp')
             // helperFactory.deleteDataAndRedirectToLogin($location.url());
           });
         } else {
-          if (!paramsId) { console.log('no params specified'); }
+          // if (!paramsId) { console.log('no params specified'); }
         }
       };
 

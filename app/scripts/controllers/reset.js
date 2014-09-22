@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:ResetCtrl
+ * @name numaApp.controller:ResetCtrl
  * @description
  * # ResetCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('ResetCtrl', ['$scope', '$alert', '$location', '$resource',
     'endpointConstants', 'usSpinnerService',
     function ($scope, $alert, $location, $resource, endpointConstants,

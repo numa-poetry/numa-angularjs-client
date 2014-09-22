@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name warriorPoetsApp.storageConstants
+ * @name numaApp.storageConstants
  * @description
  * # storageConstants
- * Constant in the warriorPoetsApp.
+ * Constant in the numaApp.
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .constant('storageConstants', {
 
     id : 'id'

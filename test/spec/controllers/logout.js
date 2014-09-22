@@ -3,7 +3,7 @@
 describe('Controller: LogoutCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('warriorPoetsApp'));
+  beforeEach(module('numaApp'));
 
   var LogoutCtrl,
     scope;

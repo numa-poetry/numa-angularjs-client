@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:ForgotCtrl
+ * @name numaApp.controller:ForgotCtrl
  * @description
  * # ForgotCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('ForgotCtrl', ['$scope', '$resource', 'endpointConstants', '$alert',
     '$location',
     function ($scope, $resource, endpointConstants, $alert, $location) {

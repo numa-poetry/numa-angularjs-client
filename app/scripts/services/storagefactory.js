@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name warriorPoetsApp.storageFactory
+ * @name numaApp.storageFactory
  * @description
  * # storageFactory
- * Factory in the warriorPoetsApp.
+ * Factory in the numaApp.
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .factory('storageFactory', ['storageConstants', '$cookieStore', '$window',
     function(storageConstants, $cookieStore, $window) {
 

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:FeedCtrl
+ * @name numaApp.controller:FeedCtrl
  * @description
  * # FeedCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('FeedCtrl', function ($scope) {
 
 

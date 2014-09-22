@@ -3,7 +3,7 @@
 describe('Controller: EditCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('warriorPoetsApp'));
+  beforeEach(module('numaApp'));
 
   var EditCtrl,
     scope;

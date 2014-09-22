@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:EditCtrl
+ * @name numaApp.controller:EditCtrl
  * @description
  * # EditCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('EditCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
     'userFactory', '$location', '$alert',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,

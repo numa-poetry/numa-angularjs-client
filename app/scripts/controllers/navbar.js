@@ -2,27 +2,27 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:NavbarCtrl
+ * @name numaApp.controller:NavbarCtrl
  * @description
  * # NavbarCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('NavbarCtrl', ['$scope', 'storageFactory', '$rootScope',
     'userFactory', '$tooltip', 'matchmedia',
     function ($scope, storageFactory, $rootScope, userFactory, $tooltip,
       matchmedia) {
 
-      $scope.onPhone     = false;
+      $scope.isPhone     = false;
       $scope.isCollapsed = true;
 
       $scope.tooltipCreate = {
-        title   : 'Create a poem.',
+        title   : 'Start writing.',
         checked : false
       };
 
       $scope.tooltipFeed = {
-        title   : 'View the poem feed.',
+        title   : 'Start reading.',
         checked : false
       };
 
@@ -42,7 +42,11 @@ angular.module('warriorPoetsApp')
       });
 
       var unregisterMatchMediaOnPhone = matchmedia.onPhone(function() {
-        $scope.onPhone = !$scope.onPhone;
+        if (matchmedia.isPhone()) {
+          $scope.isPhone = true;
+        } else {
+          $scope.isPhone = false;
+        }
       });
 
       $scope.$on('$destroy', function() {

@@ -11,12 +11,12 @@ var apiVersion   = '/api/v1';
 
 /**
  * @ngdoc service
- * @name warriorPoetsApp.endpointConstants
+ * @name numaApp.endpointConstants
  * @description
  * # endpointConstants
- * Constant in the warriorPoetsApp.
+ * Constant in the numaApp.
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .constant('endpointConstants', {
 
     // GET

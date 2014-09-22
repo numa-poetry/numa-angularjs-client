@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:LoginCtrl
+ * @name numaApp.controller:LoginCtrl
  * @description
  * # LoginCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('LoginCtrl', ['$location', '$scope', 'helperFactory',
     'userFactory', 'storageFactory', '$auth', '$alert', '$resource', '$http',
     '$rootScope', 'usSpinnerService', '$q', '$sce', '$tooltip',

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:PoemsCtrl
+ * @name numaApp.controller:PoemsCtrl
  * @description
  * # PoemsCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
     'userFactory', '$location',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,

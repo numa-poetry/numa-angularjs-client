@@ -9,7 +9,7 @@
     <a class="navbar-brand" ng-href="/#!/">
       <span>Numa</span>
     </a>
-    <div class="navbar-left" plangular="https://soundcloud.com/tycho/sets/tycho-awake" style="color: #FFFFFF; padding: 3px;">
+    <div class="navbar-left" plangular="https://soundcloud.com/numa-wp/sets/numa" style="color: #FFFFFF; padding: 3px;">
       <button class="btn btn-md btn-primary" ng-click="previous()">
         <i class="ion-skip-backward" style="font-size: 20px;" ></i>
       </button>
@@ -32,11 +32,11 @@
     <ul class="nav navbar-nav pull-right">
       <li data-match-route="/$"><a ng-href="/#!/"><i class="ion-home" style="font-size: 20px;"></i></a></li>
 
-      <li ng-show="!onPhone" data-match-route="/feed" data-placement="left" bs-tooltip="tooltipFeed"><a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a></li>
-      <li ng-show="onPhone" data-match-route="/feed" data-placement="bottom" bs-tooltip="tooltipFeed"><a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a></li>
+      <li ng-show="isPhone" data-match-route="/feed" data-placement="left" bs-tooltip="tooltipFeed"><a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a></li>
+      <li ng-show="!isPhone" data-match-route="/feed" data-placement="bottom" bs-tooltip="tooltipFeed"><a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a></li>
 
-      <li ng-show="!onPhone" data-match-route="/create" ng-show="isAuthenticated" data-placement="left" bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a></li>
-      <li ng-show="onPhone" data-match-route="/create" ng-show="isAuthenticated" data-placement="bottom" bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a></li>
+      <li ng-show="isPhone" data-match-route="/create" ng-show="isAuthenticated" data-placement="left" bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a></li>
+      <li ng-show="!isPhone" data-match-route="/create" ng-show="isAuthenticated" data-placement="bottom" bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a></li>
 
       <li data-match-route="/login" ng-show="!isAuthenticated"><a ng-href="/#!/login"><i class="ion-log-in" style="font-size: 20px;"></i>&nbsp; Login</a></li>
       <li ng-if="isAuthenticated" class="nav-divider"></li>

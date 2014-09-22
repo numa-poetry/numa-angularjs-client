@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name warriorPoetsApp.directive:repeatPassword
+ * @name numaApp.directive:repeatPassword
  * @description
  * # repeatPassword
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .directive('repeatPassword', function () {
     return {
       require: 'ngModel',

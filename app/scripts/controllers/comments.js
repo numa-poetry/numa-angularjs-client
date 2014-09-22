@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:CommentsCtrl
+ * @name numaApp.controller:CommentsCtrl
  * @description
  * # CommentsCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('CommentsCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

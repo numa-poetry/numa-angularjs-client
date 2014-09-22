@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name warriorPoetsApp
+ * @name numaApp
  * @description
- * # warriorPoetsApp
+ * # numaApp
  *
  * Main module of the application.
  */
 angular
-  .module('warriorPoetsApp', [
+  .module('numaApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

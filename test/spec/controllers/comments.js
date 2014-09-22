@@ -3,7 +3,7 @@
 describe('Controller: CommentsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('warriorPoetsApp'));
+  beforeEach(module('numaApp'));
 
   var CommentsCtrl,
     scope;

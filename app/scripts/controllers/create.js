@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name warriorPoetsApp.controller:CreateCtrl
+ * @name numaApp.controller:CreateCtrl
  * @description
  * # CreateCtrl
- * Controller of the warriorPoetsApp
+ * Controller of the numaApp
  */
-angular.module('warriorPoetsApp')
+angular.module('numaApp')
   .controller('CreateCtrl', ['$scope', '$resource', '$alert', 'userFactory',
     '$location', 'storageFactory',
     function ($scope, $resource, $alert, userFactory, $location, storageFactory) {
