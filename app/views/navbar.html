@@ -35,8 +35,8 @@
       <li ng-show="isPhone" data-match-route="/feed" data-placement="left" bs-tooltip="tooltipFeed"><a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a></li>
       <li ng-show="!isPhone" data-match-route="/feed" data-placement="bottom" bs-tooltip="tooltipFeed"><a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a></li>
 
-      <li ng-show="isPhone" data-match-route="/create" ng-show="isAuthenticated" data-placement="left" bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a></li>
-      <li ng-show="!isPhone" data-match-route="/create" ng-show="isAuthenticated" data-placement="bottom" bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a></li>
+      <li ng-show="isPhone && isAuthenticated" data-match-route="/create" data-placement="left" bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a></li>
+      <li ng-show="!isPhone && isAuthenticated" data-match-route="/create" data-placement="bottom" bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a></li>
 
       <li data-match-route="/login" ng-show="!isAuthenticated"><a ng-href="/#!/login"><i class="ion-log-in" style="font-size: 20px;"></i>&nbsp; Login</a></li>
       <li ng-if="isAuthenticated" class="nav-divider"></li>

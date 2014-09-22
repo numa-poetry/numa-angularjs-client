@@ -8,12 +8,18 @@
  * Factory in the numaApp.
  */
 angular.module('numaApp')
-  .factory('poemFactory', ['$resource', 'endpointConstants',
-    function ($resource, endpointConstants) {
+  .factory('poemFactory', ['$resource', 'endpointConstants', 'userFactory',
+    function ($resource, endpointConstants, userFactory) {
 
       var poemFactory = {};
 
-      poemFactory.get = function(id) {
+// $resource calls -------------------------------------------------------------
+
+      poemFactory.rGetAll = function() {
+        return $resource(endpointConstants.allPoems).query();
+      };
+
+      poemFactory.rGet = function(id) {
         return $resource(endpointConstants.poem, {
           id : id
         }).get();

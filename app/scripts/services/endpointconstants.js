@@ -43,7 +43,10 @@ angular.module('numaApp')
     // POST
     userPoem       : serverDomain + apiVersion + '/user/:id/poem',
 
+    // GET, PUT
+    poem           : serverDomain + apiVersion + '/poem/:id',
+
     // GET
-    poem           : serverDomain + apiVersion + '/poem/:id'
+    allPoems       : serverDomain + apiVersion + '/poem'
 
   });

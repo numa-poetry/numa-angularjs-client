@@ -1,1 +1,11 @@
-<p>Hi!</p>
+<p><strong>Page:</strong> {{tableParams.page()}}</p>
+<p><strong>Count per page:</strong> {{tableParams.count()}}</p>
+
+<div class="row">
+  <table class="table">
+    <tr ng-repeat="poem in poems">
+      <td data-title="'Title'">{{ poem.title }}</td>
+      <td data-title="'Author'">Test</td>
+    </tr>
+  </table>
+</div>

@@ -29,7 +29,8 @@ angular
     'contenteditable',
     'angularFileUpload',
     'wu.masonry',
-    'matchmedia-ng'
+    'matchmedia-ng',
+    'ngTable'
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
     '$popoverProvider', '$tooltipProvider', '$modalProvider',

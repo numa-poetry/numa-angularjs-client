@@ -18,7 +18,7 @@ angular.module('numaApp')
 
       var poemId = $routeParams.id;
       if (poemId) {
-        var resource = poemFactory.get(poemId);
+        var resource = poemFactory.rGet(poemId);
 
         resource.$promise.then(function(res) {
           $scope.creatorId = res.creator.id;
