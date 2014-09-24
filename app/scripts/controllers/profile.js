@@ -48,6 +48,8 @@ angular.module('numaApp')
 
       // Temporary Amazon S3 bucket credentials. All images stored here for processing,
       // then transferred to permanent bucket.
+
+      // Credentials invalidated for now.
       $scope.creds = {
         bucketName      : 'numa-temp',
         accessKeyId     : 'AKIAIQXDLJ23NA3YRHCQ',
@@ -59,10 +61,6 @@ angular.module('numaApp')
       $scope.uploading     = false;
 
 // functions -------------------------------------------------------------------
-
-      $scope.go = function(path, param) {
-        $location.path(path + '/' + param);
-      };
 
       $scope.fileSizeLabel = function() {
         // Convert bytes to MB

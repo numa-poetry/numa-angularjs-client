@@ -23,7 +23,9 @@
       &nbsp;
       <i class="ion-loading-c" ng-show="!player.currentTrack"></i>
       <span ng-show="player.currentTrack">
-        "{{ player.currentTrack.title }}" by {{ player.currentTrack.user.username }}
+        <a href="{{ player.currentTrack.permalink_url }}" target="_blank" style="color: #FFFFFF">
+          "{{ player.currentTrack.title }}" by {{ player.currentTrack.user.username }}
+        </a>
         &nbsp; <small><i>{{ player.currentTime | prettyTime }} - {{ player.duration | prettyTime }}</i></small>
       </span>
     </div>

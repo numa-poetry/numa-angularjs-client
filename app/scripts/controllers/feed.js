@@ -9,21 +9,24 @@
  */
 angular.module('numaApp')
   .controller('FeedCtrl', ['$scope', 'poemFactory', 'storageFactory',
-    'userFactory', 'ngTableParams',
-    function ($scope, poemFactory, storageFactory, userFactory, ngTableParams) {
+    'userFactory', 'ngTableParams', '$location',
+    function ($scope, poemFactory, storageFactory, userFactory, ngTableParams,
+      $location) {
 
       $scope.poems = [];
-      var id = storageFactory.getId();
+      var id       = storageFactory.getId();
       userFactory.init(id, 'Basic');
 
       var resource = poemFactory.rGetAll();
 
       resource.$promise.then(function(res) {
+        // console.log(res);
         $scope.poems = res;
       }, function(res) {
         console.log(res);
       });
 
+// functions -------------------------------------------------------------------
 
     }
   ]);

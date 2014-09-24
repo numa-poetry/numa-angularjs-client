@@ -1,11 +1,22 @@
-<p><strong>Page:</strong> {{tableParams.page()}}</p>
-<p><strong>Count per page:</strong> {{tableParams.count()}}</p>
-
-<div class="row">
-  <table class="table">
-    <tr ng-repeat="poem in poems">
-      <td data-title="'Title'">{{ poem.title }}</td>
-      <td data-title="'Author'">Test</td>
-    </tr>
-  </table>
+<div class="post row" ng-repeat="poem in poems">
+  <div class="col-xs-1">
+    {{ $index+1 }}.
+    <div>
+      <span class="vote up">
+        <i class="ion-heart" style="font-size: 15px;"></i>
+      </span>
+    </div>
+  </div>
+  <div class="col-md-9 col-xs-11">
+    <div class="feed-poem-title">
+      <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
+    </div>
+    <div class="feed-poem-info">
+      <span>created by <a ng-href="/#!/user/{{ poem.creator.id }}">{{ poem.creator.displayName }}</a></span>
+      <span>| 34 upvotes</span>
+      <span>| 7 comments</span>
+    </div>
+  </div>
+  <div class="col-md-2">
+  </div>
 </div>

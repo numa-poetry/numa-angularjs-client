@@ -36,8 +36,7 @@ angular.module('numaApp')
             title       : 'Poem saved.'
           });
 
-          var _sId = storageFactory.getId();
-          $location.path('/user/' + _sId);
+          $location.path('/feed');
         }, function(res) {
           $alert({
             type        : 'material-err',
