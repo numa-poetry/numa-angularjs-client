@@ -9,9 +9,8 @@
  */
 angular.module('numaApp')
   .controller('FeedCtrl', ['$scope', 'poemFactory', 'storageFactory',
-    'userFactory', 'ngTableParams', '$location',
-    function ($scope, poemFactory, storageFactory, userFactory, ngTableParams,
-      $location) {
+    'userFactory',
+    function ($scope, poemFactory, storageFactory, userFactory) {
 
       $scope.poems = [];
       var id       = storageFactory.getId();

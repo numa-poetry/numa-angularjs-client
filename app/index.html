@@ -14,12 +14,14 @@
     <link rel="stylesheet" type="text/css" href="bower_components/bootswatch/yeti/bootstrap.min.css">
     <!-- <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css"> -->
 
+    <!-- Include angular-selectize2 CSS here -->
+    <link rel="stylesheet" href="bower_components/selectize/dist/css/selectize.default.css">
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css" />
     <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
-    <link rel="stylesheet" href="bower_components/ng-table/ng-table.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -76,8 +78,6 @@
     <script src="bower_components/spin.js/spin.js"></script>
     <script src="bower_components/angular-spinner/angular-spinner.js"></script>
     <script src="bower_components/aws-sdk-js/dist/aws-sdk.js"></script>
-    <script src="bower_components/d3/d3.js"></script>
-    <script src="bower_components/trianglify/trianglify.js"></script>
     <script src="bower_components/angular-contenteditable/angular-contenteditable.js"></script>
     <script src="bower_components/get-style-property/get-style-property.js"></script>
     <script src="bower_components/get-size/get-size.js"></script>
@@ -93,9 +93,12 @@
     <script src="bower_components/angular-masonry/angular-masonry.js"></script>
     <script src="bower_components/matchmedia/matchMedia.js"></script>
     <script src="bower_components/matchmedia-ng/matchmedia-ng.js"></script>
-    <script src="bower_components/ng-table/ng-table.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+
+    <!-- Include angular-selectize2 here -->
+    <script type="text/javascript" src="bower_components/selectize/dist/js/standalone/selectize.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-selectize2/dist/selectize.js"></script>
 
     <!-- Include Bootstrap JS here -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -108,14 +111,6 @@
 
     <!-- ui-bootstrap-tpls.min.js == (ui-bootstrap.min.js + html templates) -->
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-
-    <!-- Include Trianglify instance here -->
-    <!-- Causing slowdown issues in Chrome -->
-    <!-- <script type="text/javascript">
-      var t = new Trianglify();
-      var pattern = t.generate(screen.width || window.innerWidth, screen.height || window.innerHeight);
-      document.body.setAttribute('style', 'background-image: '+pattern.dataUrl+'; cursor: url(http://www.slaw.ca/quill_icon.png) 0 25, auto');
-    </script> -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>

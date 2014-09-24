@@ -30,7 +30,7 @@ angular
     'angularFileUpload',
     'wu.masonry',
     'matchmedia-ng',
-    'ngTable'
+    'selectize'
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
     '$popoverProvider', '$tooltipProvider', '$modalProvider',

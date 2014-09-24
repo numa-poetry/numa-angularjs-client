@@ -32,6 +32,9 @@ angular.module('numaApp')
         var _sId = storageFactory.getId();
         // console.log('fetching and initializing user data');
 
+        // If no cookie found, logout
+        // console.log(_sId);
+
         if (paramsId) {
           var req  = {};
           req.type = type;

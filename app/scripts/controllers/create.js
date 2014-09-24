@@ -12,6 +12,14 @@ angular.module('numaApp')
     '$location', 'storageFactory',
     function ($scope, $resource, $alert, userFactory, $location, storageFactory) {
 
+      $scope.tagOptions = ['love', 'life', 'happiness'];
+
+      $scope.tagConfig = {
+        create: true,
+        delimiter: '|',
+        placeholder: 'Describe your poem...',
+      };
+
       var id = storageFactory.getId();
       userFactory.init(id, 'Basic');
 
@@ -23,6 +31,7 @@ angular.module('numaApp')
         var req   = {};
         req.poem  = $scope.poem;
         req.title = $scope.title;
+        req.tags  = $scope.tags;
         console.log('req:', req);
 
         var resource = userFactory.rSavePoem(req);
