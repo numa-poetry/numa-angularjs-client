@@ -12,6 +12,8 @@ angular.module('numaApp')
     'userFactory',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory) {
 
+      $scope.tags = {}; // This way $watch can update tags after the resource call
+
       $scope.userId = storageFactory.getId();
       userFactory.init($scope.userId, 'Basic');
 
@@ -23,7 +25,7 @@ angular.module('numaApp')
           $scope.creatorId = res.creator.id;
           $scope.title     = res.poem.title;
           $scope.poem      = res.poem.poem;
-          $scope.tags      = res.poem.tags;
+          $scope.tags      = res.poem.tags.join(', ');
         }, function(res) {
           console.log(res);
         });

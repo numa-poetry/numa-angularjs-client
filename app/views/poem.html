@@ -1,14 +1,11 @@
-<div class="row">
-  <div class="poem-title">
-    {{ title }}
-  </div>
+<div class="poem-title">
+  {{ title }}
 </div>
-<div class="row">
-  <div class="poem-body" style="padding: 0px 25px 25px 25px; white-space: pre-line;">
-    {{ poem }}
-  </div>
+<div class="poem-body" style="padding: 0px 25px 25px 25px; white-space: pre-line;">
+  {{ poem }}
+</div>
+<div style="padding-top: 15px;">
   <a ng-href="/#!/edit/{{ poemId }}" ng-show="userId === creatorId" type="button" class="btn btn-md btn-info pull-right">Edit</a>
-  <span ng-repeat="tag in tags">
-    {{ tag }}{{$last ? '' : ', '}}
-  </span>
 </div>
+<i class="ion-pricetags pull-right" ng-show="tags.length > 0" data-placement="left" title="Tags" data-content="{{ tags }}" bs-popover
+  style="font-size: 30px; color: #333333; padding-right: 15px;">

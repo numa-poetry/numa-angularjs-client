@@ -16,8 +16,7 @@ angular.module('numaApp')
 
       $scope.tagConfig = {
         create: true,
-        delimiter: '|',
-        placeholder: 'Describe your poem...',
+        placeholder: 'Add tags to your poem for others to easily find it...',
       };
 
       var id = storageFactory.getId();
@@ -32,7 +31,27 @@ angular.module('numaApp')
         req.poem  = $scope.poem;
         req.title = $scope.title;
         req.tags  = $scope.tags;
-        console.log('req:', req);
+        // console.log('req:', req);
+
+        if (req.poem === '' || req.poem === undefined) {
+          $alert({
+            type        : 'material-err',
+            dismissable : true,
+            duration    : 5,
+            content     : 'You haven\'t written anything yet!'
+          });
+          return;
+        }
+
+        if (req.title === '' || req.poem === undefined || req.title === 'Untitled') {
+          $alert({
+            type        : 'material-err',
+            dismissable : true,
+            duration    : 5,
+            content     : 'You haven\'t spiced up your title!'
+          });
+          return;
+        }
 
         var resource = userFactory.rSavePoem(req);
 

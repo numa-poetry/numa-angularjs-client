@@ -10,9 +10,8 @@
 angular.module('numaApp')
   .controller('SignupCtrl', ['$location', '$scope', 'helperFactory',
     'userFactory', 'storageFactory', '$alert', '$rootScope', 'usSpinnerService',
-    '$q', '$sce', '$tooltip',
     function ($location, $scope, helperFactory, userFactory, storageFactory,
-      $alert, $rootScope, usSpinnerService, $q, $sce, $tooltip) {
+      $alert, $rootScope, usSpinnerService) {
 
       $scope.popover = {
         title   : 'Protect your privacy',
