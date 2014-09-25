@@ -19,6 +19,7 @@ angular.module('numaApp')
       var _email;
       var _avatarUrl;
       var _poems       = [];
+      var _comments    = [];
       var _sId         = storageFactory.getId();
       var _sToken      = storageFactory.getToken();
       var _isLoggedIn  = false;
@@ -58,10 +59,10 @@ angular.module('numaApp')
               console.log('Viewing other user profile');
             }
 
-            // If 'Full' profile was requested, store poem titles
+            // If 'Full' profile was requested, store poem titles and comments
             if (type === 'Full') {
-              console.log('NEED MORE TINGS');
               userFactory.setPoems(res.poems);
+              userFactory.setComments(res.comments);
             }
 
             $rootScope.$emit('finishedSettingUserDataOnPageRefresh');
@@ -152,6 +153,10 @@ angular.module('numaApp')
         _poems = poems;
       };
 
+      userFactory.setComments = function(comments) {
+        _comments = comments;
+      };
+
 // getters ---------------------------------------------------------------------
 
       userFactory.getIsLoggedIn = function() {
@@ -182,6 +187,10 @@ angular.module('numaApp')
         return _poems;
       };
 
+      userFactory.getComments = function() {
+        return _comments;
+      };
+
 // deletes ---------------------------------------------------------------------
 
       userFactory.deleteInfo = function() {
@@ -193,6 +202,7 @@ angular.module('numaApp')
         _email       = undefined;
         _avatarUrl   = undefined;
         _poems       = undefined;
+        _comments    = undefined;
         _isLoggedIn  = false;
       };
 
@@ -252,9 +262,9 @@ angular.module('numaApp')
         var _sId = storageFactory.getId();
         console.log(_sId);
         return $http({
-          method: 'PUT',
-          url: serverDomain + apiVersion + '/user/' + _sId,
-          data: {
+          method : 'PUT',
+          url    : serverDomain + apiVersion + '/user/' + _sId,
+          data   : {
             email: info.email
           }
         });
@@ -263,9 +273,9 @@ angular.module('numaApp')
       userFactory.hUpdatePoem = function(info) {
         var _sId = storageFactory.getId();
         return $http({
-          method: 'PUT',
-          url: serverDomain + apiVersion + '/user/' + _sId + '/poem/' + info.id,
-          data: info
+          method : 'PUT',
+          url    : serverDomain + apiVersion + '/user/' + _sId + '/poem/' + info.id,
+          data   : info
         });
       };
 

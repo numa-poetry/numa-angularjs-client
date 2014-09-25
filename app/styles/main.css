@@ -328,12 +328,17 @@ a:not([name]) {
 }
 
 .up {
-  color: #F00;
+
+}
+
+.down {
+
 }
 
 .feed-poem-title {
   /*font-weight: bolder;*/
-  font-family: 'Open Sans', sans-serif;
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: 'Enriqueta';
   font-size: 25px;
 }
 
@@ -351,3 +356,16 @@ a:not([name]) {
   }
 }
 
+.comment {
+  font-family: 'Enriqueta';
+  font-size: 15px;
+}
+
+.comment-info {
+  font-size: 10px;
+}
+
+.comment-item {
+  background: none repeat scroll 0 0 #FFFAFA;
+  padding: 7px 0;
+}

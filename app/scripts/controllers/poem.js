@@ -9,8 +9,9 @@
  */
 angular.module('numaApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
-    'userFactory',
-    function ($scope, $routeParams, poemFactory, storageFactory, userFactory) {
+    'userFactory', '$alert',
+    function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
+      $alert) {
 
       $scope.tags = {}; // This way $watch can update tags after the resource call
 
@@ -23,7 +24,7 @@ angular.module('numaApp')
 
         resource.$promise.then(function(res) {
           console.log(res);
-          $scope.creatorId = res.creator.id;
+          $scope.creatorId = res.poem.creator.id;
           $scope.title     = res.poem.title;
           $scope.poem      = res.poem.poem;
           $scope.tags      = res.poem.tags.join(', ');
@@ -44,9 +45,21 @@ angular.module('numaApp')
         var resource = userFactory.rSaveComment(req, $scope.poemId);
 
         resource.$promise.then(function(res) {
-          console.log(res);
+          $alert({
+            type        : 'material',
+            dismissable : false,
+            duration    : 5,
+            placement   : top,
+            content     : 'Comment saved.'
+          });
         }, function(res) {
-          console.log(res);
+          $alert({
+            type        : 'material-err',
+            dismissable : true,
+            title       : 'Oops! ',
+            content     : res.data.message,
+            duration    : 5
+          });
         });
       };
 

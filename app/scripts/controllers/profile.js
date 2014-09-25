@@ -26,6 +26,7 @@ angular.module('numaApp')
         $scope.joinedDate  = userFactory.getJoinedDate();
         $scope.avatarUrl   = userFactory.getAvatarUrl();
         $scope.poems       = userFactory.getPoems();
+        $scope.comments    = userFactory.getComments();
       });
 
       $scope.$on('$destroy', function() {

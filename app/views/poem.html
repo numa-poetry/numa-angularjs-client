@@ -5,11 +5,36 @@
   {{ poem }}
 </div>
 <a ng-href="/#!/edit/{{ poemId }}" ng-show="userId === creatorId && isAuthenticated" type="button" class="btn btn-md btn-info pull-right">Edit</a>
-
-<!-- <i class="ion-pricetags pull-right" ng-show="tags.length > 0" data-placement="left" title="Tags" data-content="{{ tags }}" bs-popover
-  style="font-size: 30px; color: #333333; padding-right: 15px;"> -->
+<i class="ion-pricetags pull-right" ng-show="tags.length > 0" data-placement="left" title="Tags" data-content="{{ tags }}" bs-popover
+  style="font-size: 30px; color: #333333; padding-right: 15px; padding-top: 5px;"></i>
 
 <div class='form-group' style='padding-top: 65px;'>
   <textarea class='form-control poem-comment' ng-model='comment' rows='1' placeholder='Join the discussion...'></textarea>
   <button type="button" class="btn btn-sm btn-success pull-right" ng-click="saveComment()">Save</button>
+</div>
+
+<div class="comment-item row" style="margin-left: 1px; margin-right: 1px;" ng-repeat="comment in comments">
+  <div class="col-xs-1">
+    <div>
+      <span class="vote up">
+        <i class="ion-arrow-up-a" style="font-size: 15px;"></i>
+      </span>
+    </div>
+    <div>
+      <span class="vote down">
+        <i class="ion-arrow-down-a" style="font-size: 15px;"></i>
+      </span>
+    </div>
+  </div>
+  <div class="col-md-9 col-xs-11">
+    <div class="comment-info">
+      <span><a ng-href="/#!/user/{{ comment.creator.id }}">{{ comment.creator }}</a></span>
+      <span>| 34 points</span>
+    </div>
+    <div class="comment">
+      <span>{{ comment.comment }}</span>
+    </div>
+  </div>
+  <div class="col-md-2">
+  </div>
 </div>

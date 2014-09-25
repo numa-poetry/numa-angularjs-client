@@ -19,7 +19,7 @@ angular.module('numaApp')
       var resource = poemFactory.rGetAll();
 
       resource.$promise.then(function(res) {
-        // console.log(res);
+        console.log(res);
         $scope.poems = res;
       }, function(res) {
         console.log(res);

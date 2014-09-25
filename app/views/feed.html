@@ -1,9 +1,14 @@
 <div class="post row" ng-repeat="poem in poems">
   <div class="col-xs-1">
-    {{ $index+1 }}.
+    {{ $index+1 }}
     <div>
       <span class="vote up">
-        <i class="ion-heart" style="font-size: 15px;"></i>
+        <i class="ion-arrow-up-a" style="font-size: 15px;"></i>
+      </span>
+    </div>
+    <div>
+      <span class="vote down">
+        <i class="ion-arrow-down-a" style="font-size: 15px;"></i>
       </span>
     </div>
   </div>
@@ -13,8 +18,8 @@
     </div>
     <div class="feed-poem-info">
       <span>created by <a ng-href="/#!/user/{{ poem.creator.id }}">{{ poem.creator.displayName }}</a></span>
-      <span>| 34 upvotes</span>
-      <span>| 7 comments</span>
+      <span>| {{ poem.upvotes - poem.downvotes }} points</span>
+      <span>| {{ poem.numberOfComments }} comments</span>
     </div>
   </div>
   <div class="col-md-2">
