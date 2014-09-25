@@ -308,6 +308,15 @@ a:not([name]) {
   font-family: 'IM Fell Double Pica SC', serif;
 }
 
+.poem-comment {
+  font-size: 15px;
+  font-family: 'Enriqueta';
+  color: #000000;
+  border: none!important;
+  box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
+  background-color: #FFFAFA;
+}
+
 .post {
   background: none repeat scroll 0 0 #FFF;
   padding: 13px 5px;

@@ -4,8 +4,12 @@
 <div class="poem-body" style="padding: 0px 25px 25px 25px; white-space: pre-line;">
   {{ poem }}
 </div>
-<div style="padding-top: 15px;">
-  <a ng-href="/#!/edit/{{ poemId }}" ng-show="userId === creatorId" type="button" class="btn btn-md btn-info pull-right">Edit</a>
+<a ng-href="/#!/edit/{{ poemId }}" ng-show="userId === creatorId && isAuthenticated" type="button" class="btn btn-md btn-info pull-right">Edit</a>
+
+<!-- <i class="ion-pricetags pull-right" ng-show="tags.length > 0" data-placement="left" title="Tags" data-content="{{ tags }}" bs-popover
+  style="font-size: 30px; color: #333333; padding-right: 15px;"> -->
+
+<div class='form-group' style='padding-top: 65px;'>
+  <textarea class='form-control poem-comment' ng-model='comment' rows='1' placeholder='Join the discussion...'></textarea>
+  <button type="button" class="btn btn-sm btn-success pull-right" ng-click="saveComment()">Save</button>
 </div>
-<i class="ion-pricetags pull-right" ng-show="tags.length > 0" data-placement="left" title="Tags" data-content="{{ tags }}" bs-popover
-  style="font-size: 30px; color: #333333; padding-right: 15px;">

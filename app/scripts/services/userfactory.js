@@ -238,6 +238,14 @@ angular.module('numaApp')
         }).save([], info);
       };
 
+      userFactory.rSaveComment = function(info, poemId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userPoemComment, {
+          userId : _sId,
+          poemId : poemId
+        }).save([], info);
+      };
+
 // $http calls -----------------------------------------------------------------
 
       userFactory.hUpdateUser = function(info) {
