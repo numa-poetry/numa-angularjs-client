@@ -38,7 +38,8 @@ angular.module('numaApp')
             type        : 'material-err',
             dismissable : true,
             duration    : 5,
-            content     : 'You haven\'t written anything yet!'
+            content     : 'You haven\'t written anything yet!',
+            animation   : 'fadeZoomFadeDown'
           });
           return;
         }
@@ -48,7 +49,8 @@ angular.module('numaApp')
             type        : 'material-err',
             dismissable : true,
             duration    : 5,
-            content     : 'You haven\'t spiced up your title!'
+            content     : 'You haven\'t spiced up your title!',
+            animation   : 'fadeZoomFadeDown'
           });
           return;
         }
@@ -61,7 +63,8 @@ angular.module('numaApp')
             type        : 'material',
             dismissable : false,
             duration    : 5,
-            title       : 'Poem saved.'
+            title       : 'Poem saved.',
+            animation   : 'fadeZoomFadeDown'
           });
 
           $location.path('/feed');
@@ -71,7 +74,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops! ',
             content     : res.data.message,
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
         });
       };

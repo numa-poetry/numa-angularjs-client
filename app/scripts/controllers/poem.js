@@ -56,7 +56,8 @@ angular.module('numaApp')
             type        : 'material-err',
             dismissable : true,
             duration    : 5,
-            content     : 'You haven\'t written anything!'
+            content     : 'You haven\'t written anything!',
+            animation   : 'fadeZoomFadeDown'
           });
           return;
         }
@@ -69,7 +70,8 @@ angular.module('numaApp')
             dismissable : false,
             duration    : 5,
             placement   : top,
-            content     : 'Comment saved.'
+            content     : 'Comment saved.',
+            animation   : 'fadeZoomFadeDown'
           });
         }, function(res) {
           $alert({
@@ -77,7 +79,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops! ',
             content     : res.data.message,
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
         });
       };

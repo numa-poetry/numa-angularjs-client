@@ -22,11 +22,11 @@ angular.module('numaApp')
 
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
         $scope.displayName = userFactory.getDisplayName();
-        $scope.email       = userFactory.getEmail();
         $scope.joinedDate  = userFactory.getJoinedDate();
         $scope.avatarUrl   = userFactory.getAvatarUrl();
         $scope.poems       = userFactory.getPoems();
         $scope.comments    = userFactory.getComments();
+        $scope.email = $scope.workingEmail = userFactory.getEmail();
       });
 
       $scope.$on('$destroy', function() {
@@ -103,7 +103,8 @@ angular.module('numaApp')
               dismissable : true,
               title       : 'Oops! ',
               content     : 'Only PNG and JPEG types are accepted.',
-              duration    : 5
+              duration    : 5,
+              animation   : 'fadeZoomFadeDown'
             });
             $scope.uploading = false;
             return;
@@ -118,7 +119,8 @@ angular.module('numaApp')
               title       : 'Oops! ',
               content     : 'Maximum file size is 5 MB. Your image is ' +
                 $scope.fileSizeLabel() + '. Please upload a smaller image.',
-              duration    : 5
+              duration    : 5,
+              animation   : 'fadeZoomFadeDown'
             });
             $scope.uploading = false;
             return;
@@ -141,7 +143,8 @@ angular.module('numaApp')
                 dismissable : true,
                 title       : 'Oops! ',
                 content     : 'Please try again.',
-                duration    : 5
+                duration    : 5,
+                animation   : 'fadeZoomFadeDown'
               });
               console.log(err.code, err.message);
               $scope.uploading = false;
@@ -160,7 +163,8 @@ angular.module('numaApp')
                   dismissable : true,
                   title       : 'Success! ',
                   content     : 'Profile pic updated.',
-                  duration    : 5
+                  duration    : 5,
+                  animation   : 'fadeZoomFadeDown'
                 });
                 $scope.avatarUrl = res.avatarUrl;
                 console.log(res);
@@ -180,7 +184,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops! ',
             content     : 'Please select an image to upload.',
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
           $scope.uploading = false;
         }
@@ -198,7 +203,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops! ',
             content     : 'Only PNG and JPEG types are accepted.',
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
           $scope.uploading = false;
           return;
@@ -218,7 +224,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Success! ',
             content     : 'Profile pic updated.',
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
           $scope.avatarUrl = data.avatarUrl;
           $scope.uploading = false;
@@ -240,19 +247,19 @@ angular.module('numaApp')
         var req   = {};
         req.email = $scope.email;
 
-        console.log('req:',req);
+        // console.log('req:',req);
 
         var http = userFactory.hUpdateUser(req);
         http.then(function(res) {
-          console.log('good res:', res);
           $scope.editorEnabled = false;
-          $scope.email = $scope.email; // ?
+          $scope.workingEmail  = $scope.email;
           $alert({
             type        : 'material',
             dismissable : false,
             duration    : 5,
             placement   : top,
-            content     : 'You have successfully updated your profile.'
+            content     : 'You have successfully updated your profile.',
+            animation   : 'fadeZoomFadeDown'
           });
         }, function(res) {
           $alert({
@@ -260,7 +267,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops! ',
             content     : res.data.message,
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
         });
       };
@@ -275,7 +283,8 @@ angular.module('numaApp')
             duration    : 5,
             placement   : top,
             // title       : 'Hello, ' + req.displayName + '!',
-            content     : 'You have successfully deleted your account.'
+            content     : 'You have successfully deleted your account.',
+            animation   : 'fadeZoomFadeDown'
           });
           storageFactory.deleteId();
           storageFactory.deleteToken();
@@ -290,7 +299,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops! ',
             content     : res.data.message,
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
         });
 

@@ -43,7 +43,8 @@ angular.module('numaApp')
             duration    : 5,
             placement   : top,
             title       : 'Hello, ' + req.displayName + '!',
-            content     : 'You have successfully signed up.'
+            content     : 'You have successfully signed up.',
+            animation   : 'fadeZoomFadeDown'
           });
           console.log('RES:', res);
           userFactory.setInfo(res.id, req.displayName);
@@ -64,7 +65,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops! ',
             content     : res.data.message,
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
           usSpinnerService.stop('signup-spinner');
         });

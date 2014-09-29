@@ -11,6 +11,7 @@ body {
   background-image: url(../images/trianglify-background.svg), none;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -368,4 +369,48 @@ a:not([name]) {
 .comment-item {
   background: none repeat scroll 0 0 #FFFAFA;
   padding: 7px 0;
+}
+
+/*********************
+* Animations
+*********************/
+
+.fadeZoomFadeDown.ng-enter {
+  -webkit-animation-duration: 0.8s, 0.8s;
+  -moz-animation-duration: 0.8s, 0.8s;
+  -ms-animation-duration: 0.8s, 0.8s;
+  animation-duration: 0.8s, 0.8s;
+  -webkit-animation-name: fadeIn;
+  -moz-animation-name: fadeIn;
+  -ms-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.fadeZoomFadeDown.ng-leave {
+  -webkit-animation: fadeOutDown 0.8s;
+  -moz-animation: fadeOutDown 0.8s;
+  -ms-animation: fadeOutDown 0.8s;
+  animation: fadeOutDown 0.8s;
+}
+
+.fadeZoom.ng-enter {
+  -webkit-animation-duration: 0.6s, 0.2s;
+  -moz-animation-duration: 0.2s, 0.2s;
+  -ms-animation-duration: 0.2s, 0.2s;
+  animation-duration: 0.2s, 0.2s;
+  -webkit-animation-name: fadeIn;
+  -moz-animation-name: fadeIn;
+  -ms-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.fadeZoom.ng-leave {
+  -webkit-animation-duration: 0.2s, 0.2s;
+  -moz-animation-duration: 0.2s, 0.2s;
+  -ms-animation-duration: 0.2s, 0.2s;
+  animation-duration: 0.2s, 0.2s;
+  -webkit-animation-name: fadeOut;
+  -moz-animation-name: fadeOut;
+  -ms-animation-name: fadeOut;
+  animation-name: fadeOut;
 }

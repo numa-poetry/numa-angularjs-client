@@ -1,8 +1,8 @@
-<div class="center-form panel expanded">
-  <div class="panel-body">
-
-    <!-- PROFILE VIEW -->
-    <div ng-hide="editorEnabled">
+<!-- PROFILE VIEW -->
+<div ng-hide="editorEnabled">
+  <div class="panel panel-default">
+    <div class="panel-heading">Profile</div>
+    <div class="panel-body">
       <div class="row">
         <div class="col-xs-12 col-sm-8">
           <h2>{{ displayName }}</h2>
@@ -13,12 +13,17 @@
         </div>
       </div>
 
-      <ul class="list-group">
-        <li class="list-group-item dropdown-toggle text-right" ng-if="joinedDate"><span class="pull-left"><strong>Joined</strong></span> {{ joinedDate }}</li>
-        <li class="list-group-item dropdown-toggle text-right" ng-if="email"><span class="pull-left"><strong>Email</strong></span> {{ email }}</li>
-        <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span> ___</li>
+      <ul class="list-group" style="margin-bottom: 10px;">
+        <li class="list-group-item dropdown-toggle text-right" ng-if="joinedDate">
+          <span class="pull-left"><strong>Joined</strong></span>{{ joinedDate }}
+        </li>
+        <li class="list-group-item dropdown-toggle text-right" ng-if="email">
+          <span class="pull-left"><strong>Email</strong></span>{{ workingEmail }}
+        </li>
+        <!-- <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span> ___</li> -->
       </ul>
-      <!-- <button ng-show="currentUser == userToView" type="button" class="btn btn-lg btn-primary pull-right" ng-click="enableEditor()">Edit Profile</button> -->
+      <button ng-show="currentUser == userToView" type="button" class="btn btn-md btn-primary pull-right"
+        ng-click="enableEditor()" style="margin-bottom: 10px;">Edit Profile</button>
 
       <tabset>
         <tab>
@@ -33,19 +38,20 @@
         </tab>
         <tab>
           <tab-heading>
-            <i class="ion-chatbubble"></i>&nbsp; Comments
+            <i class="ion-chatbubble"></i>&nbsp; Comments <span class="badge">{{ comments.length }}</span>
           </tab-heading>
           TEST
         </tab>
       </tabset>
     </div>
+  </div>
+</div>
 
-    <!-- EDIT PROFILE VIEW -->
-    <div ng-show="editorEnabled">
-      <h2 class="text-center">Profile</h2>
-
-      <hr>
-
+<!-- EDIT PROFILE VIEW -->
+<div ng-show="editorEnabled">
+  <div class="panel panel-default">
+    <div class="panel-heading">Edit Profile</div>
+    <div class="panel-body">
       <div class="row">
         <div class="col-xs-4 col-sm-3">
           <div ng-if="uploading"><i class="ion-ios7-reloading" style="font-size: 80px;"></i></div>
@@ -69,13 +75,11 @@
         </div>
       </div> -->
 
-      <!-- <h5><span class="label label-info">Email</span></h5> -->
       <form method="put" name="editForm">
-
-        <div class="form-group has-feedback" ng-class="{ 'has-error' : editForm.email.$invalid && editForm.email.$dirty }">
+        <div class="form-group" ng-class="{ 'has-error' : editForm.email.$invalid && editForm.email.$dirty }">
+          <h4><i class="ion-at"></i> Email Address</h4>
           <input class="form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="Email" required
           ng-pattern="/^[A-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">
-          <i class="ion-email form-control-feedback" style="font-size: 20px;"></i>
           <div class="help-block text-danger" ng-if="editForm.email.$dirty" ng-messages="editForm.email.$error">
             <div ng-message="required">Your email address is required.</div>
             <div ng-message="pattern">Your email address is invalid.</div>
@@ -85,10 +89,10 @@
 
       <div class="row">
         <div class="col-xs-6 col-sm-6">
-          <button type="button" class="btn btn-lg btn-block btn-failure" ng-click="disableEditor()">Back</button>
+          <button type="button" class="btn btn-md btn-block btn-failure" ng-click="disableEditor()">Back</button>
         </div>
         <div class="col-xs-6 col-sm-6">
-          <button type="button" class="btn btn-lg btn-block btn-success" ng-click="save()">Update profile</button>
+          <button type="button" class="btn btn-md btn-block btn-success" ng-click="save()">Update profile</button>
         </div>
       </div>
 
@@ -97,8 +101,6 @@
       <button type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top" data-template="views/deleteaccountmodal.html" bs-modal="modal">
         Delete/Unlink Account
       </button>
-
     </div>
-
   </div>
 </div>

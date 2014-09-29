@@ -33,7 +33,8 @@ angular.module('numaApp')
               dismissable : true,
               title       : 'Oops! ',
               content     : 'Looks like your reset token expired and/or the specified user does not exists. Please request to reset your password again.',
-              duration    : 6
+              duration    : 6,
+              animation   : 'fadeZoomFadeDown'
             });
 
             // clear parameters
@@ -50,7 +51,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops! ',
             content     : 'Please follow the link in the email we sent you to reset your password.',
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
 
           // clear parameters
@@ -84,7 +86,8 @@ angular.module('numaApp')
               duration    : 5,
               placement   : top,
               title       : 'Success!',
-              content     : 'Your password has been changed.'
+              content     : 'Your password has been changed.',
+              animation   : 'fadeZoomFadeDown'
             });
 
             $location.path('/login');
@@ -95,7 +98,8 @@ angular.module('numaApp')
               dismissable : true,
               title       : 'Oops!',
               content     : 'Please try again. If the problem persists please request to reset your password again.',
-              duration    : 5
+              duration    : 5,
+              animation   : 'fadeZoomFadeDown'
             });
           });
         } else {
@@ -105,7 +109,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops!',
             content     : 'Looks like your reset token expired and/or the specified user does not exists. Please request to reset your password again.',
-            duration    : 6
+            duration    : 6,
+            animation   : 'fadeZoomFadeDown'
           });
 
           // clear parameters

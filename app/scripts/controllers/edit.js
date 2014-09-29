@@ -55,7 +55,8 @@ angular.module('numaApp')
             type        : 'material',
             dismissable : false,
             duration    : 5,
-            title       : 'Poem saved.'
+            title       : 'Poem saved.',
+            animation   : 'fadeZoomFadeDown'
           });
 
           $location.path('/poem/' + req.id);
@@ -65,7 +66,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops! ',
             content     : res.data.message,
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
         });
       };

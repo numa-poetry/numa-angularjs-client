@@ -27,7 +27,8 @@ angular.module('numaApp')
             duration    : 5,
             placement   : top,
             // title       : 'Hello, ' + res.displayName + '!',
-            content     : 'An email has been sent to you with further instructions.'
+            content     : 'An email has been sent to you with further instructions.',
+            animation   : 'fadeZoomFadeDown'
           });
           console.log('RES:',res);
 
@@ -39,7 +40,8 @@ angular.module('numaApp')
             dismissable : true,
             title       : 'Oops! ',
             content     : res.data.message,
-            duration    : 5
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
           });
           console.log('RES:',res);
         });

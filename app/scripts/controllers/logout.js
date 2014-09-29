@@ -19,7 +19,8 @@ angular.module('numaApp')
             title       : 'You have been logged out!',
             content     : 'Now fuck off, mate.',
             duration    : 4,
-            dismissable : false
+            dismissable : false,
+            animation   : 'fadeZoomFadeDown'
           });
           storageFactory.deleteId();
           storageFactory.deleteToken();

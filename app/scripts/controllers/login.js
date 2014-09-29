@@ -98,7 +98,8 @@ angular.module('numaApp')
                 duration    : 5,
                 placement   : top,
                 title       : 'Hello, ' + res.data.displayName + '!',
-                content     : 'You have successfully logged in.'
+                content     : 'You have successfully logged in.',
+                animation   : 'fadeZoomFadeDown'
               });
               console.log('RES:',res);
 
@@ -119,7 +120,8 @@ angular.module('numaApp')
                       title       : 'We\'ve lost connection to our backend.',
                       content     : 'Please try logging back in. If the problem persists, try again later.',
                       duration    : 6,
-                      dismissable : true
+                      dismissable : true,
+                      animation   : 'fadeZoomFadeDown'
                     });
                   });
               } else {
@@ -128,7 +130,8 @@ angular.module('numaApp')
                   dismissable : true,
                   title       : 'Oops! ',
                   content     : res.data.message,
-                  duration    : 5
+                  duration    : 5,
+                  animation   : 'fadeZoomFadeDown'
                 });
               }
               storageFactory.deleteId();
@@ -158,7 +161,8 @@ angular.module('numaApp')
             duration    : 5,
             placement   : top,
             title       : 'Hello, ' + req.displayName + '!',
-            content     : 'You have successfully logged in.'
+            content     : 'You have successfully logged in.',
+            animation   : 'fadeZoomFadeDown'
           });
 
 
@@ -196,7 +200,8 @@ angular.module('numaApp')
                   title       : 'We\'ve lost connection to our backend.',
                   content     : 'Please try logging back in. If the problem persists, try again later.',
                   duration    : 6,
-                  dismissable : true
+                  dismissable : true,
+                  animation   : 'fadeZoomFadeDown'
                 });
               });
           } else {
@@ -205,7 +210,8 @@ angular.module('numaApp')
               dismissable : true,
               title       : 'Oops! ',
               content     : res.data.message,
-              duration    : 5
+              duration    : 5,
+              animation   : 'fadeZoomFadeDown'
             });
           }
           storageFactory.deleteId();
