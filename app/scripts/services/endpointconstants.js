@@ -20,36 +20,39 @@ angular.module('numaApp')
   .constant('endpointConstants', {
 
     // GET
-    allUsers        : serverDomain + apiVersion + '/user',
+    allUsers         : serverDomain + apiVersion + '/user',
 
     // GET, DELETE, PUT
-    user            : serverDomain + apiVersion + '/user/:id',
+    user             : serverDomain + apiVersion + '/user/:id',
 
     // POST
-    userAvatar      : serverDomain + apiVersion + '/user/:id/avatar',
+    userAvatar       : serverDomain + apiVersion + '/user/:id/avatar',
 
     // POST
-    userPoem        : serverDomain + apiVersion + '/user/:id/poem',
+    userPoem         : serverDomain + apiVersion + '/user/:id/poem',
 
     // POST
-    userPoemComment : serverDomain + apiVersion + '/user/:userId/poem/:poemId/comment',
+    userPoemComment  : serverDomain + apiVersion + '/user/:userId/poem/:poemId/comment',
 
     // POST
-    userSignup      : serverDomain + apiVersion + '/signup',
+    userPoemVote   : serverDomain + apiVersion + '/user/:userId/poem/:poemId/vote',
 
     // POST
-    userLogin       : serverDomain + apiVersion + '/login',
+    userSignup       : serverDomain + apiVersion + '/signup',
 
     // POST
-    forgotPassword  : serverDomain + apiVersion + '/forgot',
+    userLogin        : serverDomain + apiVersion + '/login',
+
+    // POST
+    forgotPassword   : serverDomain + apiVersion + '/forgot',
 
     // GET, POST
-    resetPassword   : serverDomain + apiVersion + '/reset/:token',
+    resetPassword    : serverDomain + apiVersion + '/reset/:token',
 
     // GET
-    allPoems        : serverDomain + apiVersion + '/poem',
+    allPoems         : serverDomain + apiVersion + '/poem',
 
     // GET, PUT
-    poem            : serverDomain + apiVersion + '/poem/:id'
+    poem             : serverDomain + apiVersion + '/poem/:id'
 
   });

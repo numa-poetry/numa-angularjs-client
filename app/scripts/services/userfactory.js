@@ -45,18 +45,18 @@ angular.module('numaApp')
           }).save(req);
 
           resource.$promise.then(function(res) {
-            console.log(res);
+            // console.log(res);
 
             // Store basic user info
             userFactory.setInfo(res.id, res.displayName, res.joinedDate.split('T')[0],
               res.email, res.avatarUrl);
 
             if (_sId === paramsId) {
-              console.log('Viewing own profile');
+              // console.log('Viewing own profile');
               $rootScope.displayName     = res.displayName;
               $rootScope.isAuthenticated = true; // temp fix to work with satellizer
             } else {
-              console.log('Viewing other user profile');
+              // console.log('Viewing other user profile');
             }
 
             // If 'Full' profile was requested, store poem titles and comments
@@ -254,6 +254,22 @@ angular.module('numaApp')
           userId : _sId,
           poemId : poemId
         }).save([], info);
+      };
+
+      userFactory.rSaveVote = function(info, poemId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userPoemVote, {
+          userId : _sId,
+          poemId : poemId
+        }).save([], info);
+      };
+
+      userFactory.rGetVote = function(poemId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userPoemVote, {
+          userId : _sId,
+          poemId : poemId
+        }).get();
       };
 
 // $http calls -----------------------------------------------------------------

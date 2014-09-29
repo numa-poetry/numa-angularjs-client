@@ -4,25 +4,34 @@
 <div class="poem-body" style="padding: 0px 25px 25px 25px; white-space: pre-line;">
   {{ poem }}
 </div>
-<a ng-href="/#!/edit/{{ poemId }}" ng-show="userId === creatorId && isAuthenticated" type="button" class="btn btn-md btn-info pull-right">Edit</a>
-<i class="ion-pricetags pull-right" ng-show="tags.length > 0" data-placement="left" title="Tags" data-content="{{ tags }}" bs-popover
-  style="font-size: 30px; color: #333333; padding-right: 15px; padding-top: 5px;"></i>
 
-<div class='form-group' style='padding-top: 65px;'>
-  <textarea class='form-control poem-comment' ng-model='comment' rows='1' placeholder='Join the discussion...'></textarea>
-  <button type="button" class="btn btn-sm btn-success pull-right" ng-click="saveComment()">Save</button>
+<div class="pull-right">
+  <i class="ion-pricetags" ng-show="tags.length > 0" data-placement="left" title="Tags" data-content="{{ tags }}" bs-popover
+    style="font-size: 30px; padding-right: 15px;"></i>
+  <a ng-href="/#!/edit/{{ poemId }}" ng-show="userId === creatorId && isAuthenticated" type="button" class="btn btn-sm btn-info">Edit</a>
+</div>
+<div ng-if="userId !== creatorId" class="pull-left">
+  <i class="ion-arrow-up-a" style="font-size: 30px;"
+    ng-click="changeVote(vote, 'up')" ng-class="{true:'up', false:''}[vote=='up']"></i>
+  <i class="ion-arrow-down-a" style="font-size: 30px;"
+    ng-click="changeVote(vote, 'down')" ng-class="{true:'down', false:''}[vote=='down']"></i>
 </div>
 
-<div class="comment-item row" style="margin-left: 1px; margin-right: 1px;" ng-repeat="comment in comments">
+<div class='form-group' style='padding-top: 60px;'>
+  <textarea class='form-control poem-comment' ng-model='comment' rows='1' placeholder='Join the discussion...'></textarea>
+  <button type="button" class="btn btn-sm btn-primary pull-right" ng-click="saveComment()">Save</button>
+</div>
+
+<div class="comment-item row" ng-repeat="comment in comments">
   <div class="col-xs-1">
     <div>
-      <span class="vote up">
-        <i class="ion-arrow-up-a" style="font-size: 15px;"></i>
+      <span class="vote">
+        <a class="btn btn-sm btn-success"><i class="ion-arrow-up-a"></i></a>
       </span>
     </div>
     <div>
-      <span class="vote down">
-        <i class="ion-arrow-down-a" style="font-size: 15px;"></i>
+      <span class="vote">
+        <a class="btn btn-sm btn-success"><i class="ion-arrow-down-a"></i></a>
       </span>
     </div>
   </div>

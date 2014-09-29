@@ -20,15 +20,24 @@ angular.module('numaApp')
 
       $scope.poemId = $routeParams.id;
       if ($scope.poemId) {
-        var resource = poemFactory.rGet($scope.poemId);
+        var poemResource = poemFactory.rGet($scope.poemId);
+        var voteResource = userFactory.rGetVote($scope.poemId);
 
-        resource.$promise.then(function(res) {
-          console.log(res);
+        poemResource.$promise.then(function(res) {
+          // console.log(res);
           $scope.creatorId = res.poem.creator.id;
           $scope.title     = res.poem.title;
           $scope.poem      = res.poem.poem;
           $scope.tags      = res.poem.tags.join(', ');
           $scope.comments  = res.poem.comments;
+        }, function(res) {
+          console.log(res);
+        });
+
+        // Learn to chain promises
+        voteResource.$promise.then(function(res) {
+          $scope.vote = res.vote;
+          // console.log(res);
         }, function(res) {
           console.log(res);
         });
@@ -41,6 +50,16 @@ angular.module('numaApp')
 
         var req     = {};
         req.comment = $scope.comment;
+
+        if (req.comment === '' || req.comment === undefined) {
+          $alert({
+            type        : 'material-err',
+            dismissable : true,
+            duration    : 5,
+            content     : 'You haven\'t written anything!'
+          });
+          return;
+        }
 
         var resource = userFactory.rSaveComment(req, $scope.poemId);
 
@@ -61,6 +80,23 @@ angular.module('numaApp')
             duration    : 5
           });
         });
+      };
+
+      $scope.changeVote = function(vote, flag) {
+        $scope.vote = vote === flag ? 'None' : flag;
+        console.log($scope.vote);
+
+        var req  = {};
+        req.vote = $scope.vote;
+
+        var resource = userFactory.rSaveVote(req, $scope.poemId);
+
+        resource.$promise.then(function(res) {
+          console.log(res);
+        }, function(res) {
+          console.log(res);
+        });
+
       };
 
     }

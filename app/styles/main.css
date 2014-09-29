@@ -328,11 +328,11 @@ a:not([name]) {
 }
 
 .up {
-
+  color: green;
 }
 
 .down {
-
+  color: #990000;
 }
 
 .feed-poem-title {
