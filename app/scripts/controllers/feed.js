@@ -9,8 +9,9 @@
  */
 angular.module('numaApp')
   .controller('FeedCtrl', ['$scope', 'poemFactory', 'storageFactory',
-    'userFactory',
-    function ($scope, poemFactory, storageFactory, userFactory) {
+    'userFactory', 'helperFactory',
+    function ($scope, poemFactory, storageFactory, userFactory,
+      helperFactory) {
 
       $scope.poems = [];
       var id       = storageFactory.getId();
@@ -22,10 +23,11 @@ angular.module('numaApp')
         // console.log(res);
         $scope.poems = res;
       }, function(res) {
-        // console.log(res);
+        console.log(res);
       });
 
 // functions -------------------------------------------------------------------
 
+      $scope.timeSince = helperFactory.timeSince;
     }
   ]);

@@ -8,8 +8,9 @@
           <h2>{{ displayName }}</h2>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <img ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive" ng-click="enableEditor()" style="margin-bottom: 10px;"
-            data-placement="bottom" bs-tooltip="tooltip">
+          <img ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive"
+            ng-click="enableEditor()" style="margin-bottom: 10px;"
+            data-placement="left" bs-tooltip="tooltip">
         </div>
       </div>
 
@@ -55,7 +56,8 @@
       <div class="row">
         <div class="col-xs-4 col-sm-3">
           <div ng-if="uploading"><i class="ion-ios7-reloading" style="font-size: 80px;"></i></div>
-          <img ng-if="!uploading" ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
+          <img ng-if="!uploading" ng-src="{{ avatarUrl }}" alt=""
+            class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
         </div>
         <div class="col-xs-8 col-sm-9">
           <h4>Upload new avatar</h4>
@@ -98,7 +100,8 @@
 
       <hr>
 
-      <button type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top" data-template="views/deleteaccountmodal.html" bs-modal="modal">
+      <button type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top"
+        data-template="views/deleteaccountmodal.html" bs-modal="modal">
         Delete/Unlink Account
       </button>
     </div>

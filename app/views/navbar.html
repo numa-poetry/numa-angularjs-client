@@ -34,17 +34,28 @@
     <ul class="nav navbar-nav pull-right">
       <li data-match-route="/$"><a ng-href="/#!/"><i class="ion-home" style="font-size: 20px;"></i></a></li>
 
-      <li ng-show="isPhone" data-match-route="/feed" data-placement="left" bs-tooltip="tooltipFeed"><a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a></li>
-      <li ng-show="!isPhone" data-match-route="/feed" data-placement="bottom" bs-tooltip="tooltipFeed"><a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a></li>
+      <li ng-show="isPhone" data-match-route="/feed" data-placement="left" bs-tooltip="tooltipFeed">
+        <a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
+      </li>
+      <li ng-show="!isPhone" data-match-route="/feed" data-placement="bottom" bs-tooltip="tooltipFeed">
+        <a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
+      </li>
 
-      <li ng-show="isPhone && isAuthenticated" data-match-route="/create" data-placement="left" bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a></li>
-      <li ng-show="!isPhone && isAuthenticated" data-match-route="/create" data-placement="bottom" bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a></li>
+      <li ng-show="isPhone && isAuthenticated" data-match-route="/create" data-placement="left"
+        bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a>
+      </li>
+      <li ng-show="!isPhone && isAuthenticated" data-match-route="/create" data-placement="bottom"
+        bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a>
+      </li>
 
-      <li data-match-route="/login" ng-show="!isAuthenticated"><a ng-href="/#!/login"><i class="ion-log-in" style="font-size: 20px;"></i>&nbsp; Login</a></li>
+      <li data-match-route="/login" ng-show="!isAuthenticated"><a ng-href="/#!/login">
+        <i class="ion-log-in" style="font-size: 20px;"></i>&nbsp; Login</a>
+      </li>
       <li ng-if="isAuthenticated" class="nav-divider"></li>
       <li ng-if="isAuthenticated" class="dropdown pull-right">
         <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
-          <img class="img-circle" ng-src="{{ avatarUrl }}" style="min-height: 30px; height: 30px;">&nbsp; {{ displayName }} <i class="ion-arrow-down-b"></i>
+          <img class="img-circle" ng-src="{{ avatarUrl }}" style="min-height: 30px; height: 30px;">
+            &nbsp; {{ displayName }} <i class="ion-arrow-down-b"></i>
         </a>
         <ul class="dropdown-menu" role="menu">
           <li><a ng-href="/#!/user/{{ id }}"><i class="ion-person" style="font-size: 20px;"></i>&nbsp; Profile</a></li>

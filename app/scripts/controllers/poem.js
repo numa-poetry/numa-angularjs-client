@@ -9,11 +9,12 @@
  */
 angular.module('numaApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
-    'userFactory', '$alert',
+    'userFactory', '$alert', 'helperFactory',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
-      $alert) {
+      $alert, helperFactory) {
 
       $scope.tags = {}; // This way $watch can update tags after the resource call
+      var previousVote;
 
       $scope.userId = storageFactory.getId();
       userFactory.init($scope.userId, 'Basic');
@@ -24,12 +25,14 @@ angular.module('numaApp')
         var voteResource = userFactory.rGetVote($scope.poemId);
 
         poemResource.$promise.then(function(res) {
-          // console.log(res);
-          $scope.creatorId = res.poem.creator.id;
-          $scope.title     = res.poem.title;
-          $scope.poem      = res.poem.poem;
-          $scope.tags      = res.poem.tags.join(', ');
-          $scope.comments  = res.poem.comments;
+          console.log(res);
+          $scope.creatorId          = res.poem.creator.id;
+          $scope.creatorDisplayName = res.poem.creator.displayName;
+          $scope.title              = res.poem.title;
+          $scope.poem               = res.poem.poem;
+          $scope.tags               = res.poem.tags.join(', ');
+          $scope.comments           = res.poem.comments;
+          $scope.totalVotes         = res.poem.positiveVotes - res.poem.negativeVotes;
         }, function(res) {
           console.log(res);
         });
@@ -73,6 +76,18 @@ angular.module('numaApp')
             content     : 'Comment saved.',
             animation   : 'fadeZoomFadeDown'
           });
+          var creator         = {};
+          creator.id          = storageFactory.getId();
+          creator.displayName = userFactory.getDisplayName();
+          creator.avatarUrl   = userFactory.getAvatarUrl();
+
+          var comment         = {};
+          comment.id          = res.commentId;
+          comment.comment     = req.comment;
+          comment.creator     = creator;
+
+          console.log(res);
+          $scope.comments.push(comment);
         }, function(res) {
           $alert({
             type        : 'material-err',
@@ -86,7 +101,8 @@ angular.module('numaApp')
       };
 
       $scope.changeVote = function(vote, flag) {
-        $scope.vote = vote === flag ? 'None' : flag;
+        previousVote = $scope.vote;
+        $scope.vote  = vote === flag ? 'None' : flag;
         console.log($scope.vote);
 
         var req  = {};
@@ -96,11 +112,23 @@ angular.module('numaApp')
 
         resource.$promise.then(function(res) {
           console.log(res);
+          if ((req.vote === 'up' && previousVote === 'None') ||
+            (req.vote === 'None' && previousVote === 'down')) {
+            $scope.totalVotes += 1;
+          } else if (req.vote === 'up' && previousVote === 'down') {
+            $scope.totalVotes += 2;
+          } else if ((req.vote === 'down' && previousVote === 'None') ||
+            (req.vote === 'None' && previousVote === 'up')) {
+            $scope.totalVotes -= 1;
+          } else if (req.vote === 'down' && previousVote === 'up') {
+            $scope.totalVotes -= 2;
+          }
         }, function(res) {
           console.log(res);
         });
-
       };
+
+      $scope.timeSince = helperFactory.timeSince;
 
     }
   ]);

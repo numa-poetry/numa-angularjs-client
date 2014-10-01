@@ -4,12 +4,17 @@
   </div>
   <div class="col-md-9 col-xs-11">
     <div class="feed-poem-title">
-      <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
+      <a ng-href="/#!/poem/{{ poem.id }}">
+        {{ poem.title }}
+      </a>
     </div>
     <div class="feed-poem-info">
-      <span>created by <a ng-href="/#!/user/{{ poem.creator.id }}">{{ poem.creator.displayName }}</a></span>
-      <span>| {{ poem.upvotes - poem.downvotes }} points</span>
-      <span>| {{ poem.numberOfComments }} comments</span>
+      <span>{{ poem.positiveVotes - poem.negativeVotes }}</span>
+      <span ng-show="(poem.positiveVotes - poem.negativeVotes) == 1 || (poem.positiveVotes - poem.negativeVotes) == -1">point</span>
+      <span ng-show="(poem.positiveVotes - poem.negativeVotes) != 1 && (poem.positiveVotes - poem.negativeVotes) != -1">points</span>
+      <span> ⋅ by <a ng-href="/#!/user/{{ poem.creator.id }}">{{ poem.creator.displayName }}</a></span>
+      <span> ⋅ {{ timeSince(poem.createdAt)}} ago</span>
+      <span> ⋅ {{ poem.numberOfComments }} comments</span>
     </div>
   </div>
   <div class="col-md-2">
