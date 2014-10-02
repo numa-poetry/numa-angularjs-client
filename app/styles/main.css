@@ -330,7 +330,7 @@ a:not([name]) {
 }
 
 .up {
-  color: green;
+  color: #3B965D;
 }
 
 .down {
@@ -394,8 +394,8 @@ a:not([name]) {
   animation: fadeOutDown 0.8s;
 }
 
-.fadeZoom.ng-enter {
-  -webkit-animation-duration: 0.6s, 0.2s;
+.fadeInAndOutAnimation.ng-enter {
+  -webkit-animation-duration: 0.2s, 0.2s;
   -moz-animation-duration: 0.2s, 0.2s;
   -ms-animation-duration: 0.2s, 0.2s;
   animation-duration: 0.2s, 0.2s;
@@ -405,7 +405,7 @@ a:not([name]) {
   animation-name: fadeIn;
 }
 
-.fadeZoom.ng-leave {
+.fadeInAndOutAnimation.ng-leave {
   -webkit-animation-duration: 0.2s, 0.2s;
   -moz-animation-duration: 0.2s, 0.2s;
   -ms-animation-duration: 0.2s, 0.2s;
@@ -414,4 +414,26 @@ a:not([name]) {
   -moz-animation-name: fadeOut;
   -ms-animation-name: fadeOut;
   animation-name: fadeOut;
+}
+
+.fadeOutAnimation.ng-leave {
+  -webkit-animation-duration: 0.2s, 0.2s;
+  -moz-animation-duration: 0.2s, 0.2s;
+  -ms-animation-duration: 0.2s, 0.2s;
+  animation-duration: 0.2s, 0.2s;
+  -webkit-animation-name: fadeOut;
+  -moz-animation-name: fadeOut;
+  -ms-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+.has-feedback .form-control-feedback {
+  position: absolute;
+  top: 3px;
+  right: 15px;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
 }

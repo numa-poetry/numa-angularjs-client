@@ -15,8 +15,8 @@ angular.module('numaApp')
 
       // console.log('params=>', $routeParams.id);
 
-      $scope.currentUser = storageFactory.getId();
-      $scope.userToView  = $routeParams.id;
+      $scope.currentUserId = storageFactory.getId();
+      $scope.userViewId    = $routeParams.id;
 
       userFactory.init($routeParams.id, 'Full');
 

@@ -8,9 +8,13 @@
           <h2>{{ displayName }}</h2>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <img ng-src="{{ avatarUrl }}" alt="" class="center-block img-rounded img-responsive"
+          <img ng-show="currentUserId !== userViewId || !isAuthenticated" ng-src="{{ avatarUrl }}"
+            alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
+
+          <img ng-show="currentUserId === userViewId && isAuthenticated" ng-src="{{ avatarUrl }}"
+            alt="" class="center-block img-rounded img-responsive"
             ng-click="enableEditor()" style="margin-bottom: 10px;"
-            data-placement="left" bs-tooltip="tooltip">
+            data-placement="bottom" bs-tooltip="tooltip">
         </div>
       </div>
 
@@ -23,7 +27,7 @@
         </li>
         <!-- <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span> ___</li> -->
       </ul>
-      <button ng-show="currentUser == userToView" type="button" class="btn btn-md btn-primary pull-right"
+      <button ng-show="currentUserId == userViewId" type="button" class="btn btn-md btn-primary pull-right"
         ng-click="enableEditor()" style="margin-bottom: 10px;">Edit Profile</button>
 
       <tabset>

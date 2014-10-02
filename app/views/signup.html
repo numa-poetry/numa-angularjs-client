@@ -7,7 +7,7 @@
     <form method="post" ng-submit="signUp()" name="signupForm">
       <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.displayName.$invalid && signupForm.displayName.$dirty }">
         <input class="form-control input-lg" type="text" name="displayName" ng-model="displayName" placeholder="Username" required autofocus>
-        <i class="ion-person form-control-feedback" style="font-size: 20px;"></i>
+        <i class="ion-person form-control-feedback" style="padding: 10px; font-size: 20px;"></i>
         <div class="help-block text-danger" ng-if="signupForm.displayName.$dirty" ng-messages="signupForm.displayName.$error">
           <div ng-message="required">You must enter a username.</div>
         </div>
@@ -17,7 +17,7 @@
       <!-- <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$dirty }">
         <input class="form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="Email" required
         ng-pattern="/^[A-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">
-        <i class="ion-email form-control-feedback" style="font-size: 20px;"></i>
+        <i class="ion-email form-control-feedback" style="padding: 10px; font-size: 20px;"></i>
         <div class="help-block text-danger" ng-if="signupForm.email.$dirty" ng-messages="signupForm.email.$error">
           <div ng-message="required">Your email address is required.</div>
           <div ng-message="pattern">Your email address is invalid.</div>
@@ -26,7 +26,7 @@
 
       <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.password.$invalid && signupForm.password.$dirty }">
         <input password-strength class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="Password" required>
-        <i class="ion-key form-control-feedback" style="font-size: 20px;"></i>
+        <i class="ion-key form-control-feedback" style="padding: 10px; font-size: 20px;"></i>
         <div class="help-block text-danger" ng-if="signupForm.password.$dirty" ng-messages="signupForm.password.$error">
           <div ng-message="required">Password is required.</div>
         </div>
@@ -35,10 +35,10 @@
       <div class="form-group has-feedback" ng-class="{ 'has-success' : signupForm.confirmPassword.$valid && signupForm.confirmPassword.$dirty, 'has-error' : signupForm.confirmPassword.$invalid && signupForm.confirmPassword.$dirty }">
         <input class="form-control input-lg" type="password" name="confirmPassword" ng-model="confirmPassword" repeat-password="password" placeholder="Confirm Password" required>
         <div class="form-control-feedback" ng-if="signupForm.confirmPassword.$valid">
-          <i class="ion-locked form-control-feedback" style="font-size: 20px;"></i>
+          <i class="ion-locked form-control-feedback" style="padding: 5px; font-size: 20px;"></i>
         </div>
         <div class="form-control-feedback" ng-if="signupForm.confirmPassword.$invalid">
-          <i class="ion-unlocked form-control-feedback" style="font-size: 20px;"></i>
+          <i class="ion-unlocked form-control-feedback" style="padding: 5px; font-size: 20px;"></i>
         </div>
         <div class="help-block text-danger my-special-animation"
              ng-if="signupForm.confirmPassword.$dirty"

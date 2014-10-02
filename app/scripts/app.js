@@ -75,6 +75,8 @@ angular
         .when('/', {
           templateUrl : 'views/main.html',
           controller  : 'MainCtrl'
+          // templateUrl : 'views/feed.html',
+          // controller  : 'FeedCtrl'
         })
         .when('/about', {
           templateUrl : 'views/about.html',
@@ -109,25 +111,25 @@ angular
           controller  : 'ResetCtrl'
         })
         .when('/poem/:id', {
-          templateUrl: 'views/poem.html',
-          controller: 'PoemCtrl'
+          templateUrl : 'views/poem.html',
+          controller  : 'PoemCtrl'
         })
         .when('/poem/:id/comments', {
-          templateUrl: 'views/comments.html',
-          controller: 'CommentsCtrl'
+          templateUrl : 'views/comments.html',
+          controller  : 'CommentsCtrl'
         })
         .when('/feed', {
-          templateUrl: 'views/feed.html',
-          controller: 'FeedCtrl'
+          templateUrl : 'views/feed.html',
+          controller  : 'FeedCtrl'
         })
         .when('/create', {
-          templateUrl: 'views/create.html',
-          controller: 'CreateCtrl'
+          templateUrl : 'views/create.html',
+          controller  : 'CreateCtrl'
         })
         // maybe change this to include userid?
         .when('/edit/:id', {
-          templateUrl: 'views/edit.html',
-          controller: 'EditCtrl'
+          templateUrl : 'views/edit.html',
+          controller  : 'EditCtrl'
         })
         .otherwise({
           redirectTo  : '/'

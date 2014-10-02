@@ -8,6 +8,9 @@
 </div>
 
 <div class="row">
+  <div class="pull-right" style="padding: 10px;" ng-show="userId !== creatorId">
+    <span>by <a ng-href="/#!/user/{{ creatorId }}">{{ creatorDisplayName }}</a></span>
+  </div>
   <div class="pull-right">
     <a ng-href="/#!/edit/{{ poemId }}" ng-show="userId === creatorId && isAuthenticated" type="button" class="btn btn-sm btn-info">Edit</a>
   </div>

@@ -85,6 +85,7 @@ angular.module('numaApp')
           comment.id          = res.commentId;
           comment.comment     = req.comment;
           comment.creator     = creator;
+          comment.createdAt   = new Date();
 
           console.log(res);
           $scope.comments.push(comment);
