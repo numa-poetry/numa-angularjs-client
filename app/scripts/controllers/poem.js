@@ -9,9 +9,9 @@
  */
 angular.module('numaApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
-    'userFactory', '$alert', 'helperFactory',
+    'userFactory', '$alert', 'helperFactory', '$rootScope',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
-      $alert, helperFactory) {
+      $alert, helperFactory, $rootScope) {
 
       $scope.tags = {}; // This way $watch can update tags after the resource call
       var previousVote;
@@ -22,7 +22,6 @@ angular.module('numaApp')
       $scope.poemId = $routeParams.id;
       if ($scope.poemId) {
         var poemResource = poemFactory.rGet($scope.poemId);
-        var voteResource = userFactory.rGetVote($scope.poemId);
 
         poemResource.$promise.then(function(res) {
           console.log(res);
@@ -37,13 +36,15 @@ angular.module('numaApp')
           console.log(res);
         });
 
-        // Learn to chain promises
-        voteResource.$promise.then(function(res) {
-          $scope.vote = res.vote;
-          // console.log(res);
-        }, function(res) {
-          console.log(res);
-        });
+        if ($rootScope.isAuthenticated) {
+          var voteResource = userFactory.rGetVote($scope.poemId);
+
+          voteResource.$promise.then(function(res) {
+            $scope.vote = res.vote;
+          }, function(res) {
+            console.log(res);
+          });
+        }
       }
 
 // functions -------------------------------------------------------------------

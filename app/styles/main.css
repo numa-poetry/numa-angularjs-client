@@ -307,7 +307,19 @@ a:not([name]) {
   /*line-height: 100px;*/
   padding-bottom: 15px;
   text-align: center;
-  font-family: 'IM Fell Double Pica SC', serif;
+  /*font-family: 'IM Fell Double Pica SC', serif;*/
+  font-family: 'Indie Flower', cursive;
+  /*font-family: 'Tangerine', cursive;*/
+}
+
+.welcome-title {
+  font-size: 60px;
+  /*line-height: 100px;*/
+  padding-bottom: 15px;
+  text-align: center;
+  /*font-family: 'Tangerine', cursive;*/
+  font-family: 'Indie Flower', cursive;
+  /*font-family: 'Delius Swash Caps', cursive;*/
 }
 
 .poem-comment {

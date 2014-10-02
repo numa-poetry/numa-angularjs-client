@@ -13,10 +13,10 @@ angular.module('numaApp')
     function ($scope, poemFactory, storageFactory, userFactory,
       helperFactory) {
 
-$scope.names=['Igor Minar', 'Brad Green', 'Dave Geddes', 'Naomi Black', 'Greg Weber', 'Dean Sofer', 'Wes Alvaro', 'John Scott', 'Daniel Nadasi'];
-      var previousVote;
-      $scope.poems = [];
-      var id       = storageFactory.getId();
+      $scope.poems         = [];
+      $scope.searchByTitle = false;
+      $scope.searchByTag   = false;
+      var id               = storageFactory.getId();
       userFactory.init(id, 'Basic');
 
       var resource = poemFactory.rGetAll();
@@ -32,32 +32,46 @@ $scope.names=['Igor Minar', 'Brad Green', 'Dave Geddes', 'Naomi Black', 'Greg We
 
       $scope.timeSince = helperFactory.timeSince;
 
-      $scope.changeVote = function(vote, flag) {
-        previousVote = $scope.vote;
-        $scope.vote  = vote === flag ? 'None' : flag;
-        console.log($scope.vote);
-
-        var req  = {};
-        req.vote = $scope.vote;
-
-        var resource = userFactory.rSaveVote(req, $scope.poemId);
-
-        resource.$promise.then(function(res) {
-          console.log(res);
-          if ((req.vote === 'up' && previousVote === 'None') ||
-            (req.vote === 'None' && previousVote === 'down')) {
-            $scope.totalVotes += 1;
-          } else if (req.vote === 'up' && previousVote === 'down') {
-            $scope.totalVotes += 2;
-          } else if ((req.vote === 'down' && previousVote === 'None') ||
-            (req.vote === 'None' && previousVote === 'up')) {
-            $scope.totalVotes -= 1;
-          } else if (req.vote === 'down' && previousVote === 'up') {
-            $scope.totalVotes -= 2;
+      function aContainsB (a, b) {
+        if (typeof a === 'string') {
+          return a.toLocaleLowerCase().indexOf(b) >= 0;
+        } else if (a instanceof Array) {
+          for (var i = a.length - 1; i >= 0; i--) {
+            if (a[i].toLocaleLowerCase().indexOf(b) >= 0) {
+              return true;
+            }
           }
-        }, function(res) {
-          console.log(res);
-        });
+        }
+      }
+
+      $scope.poemSearch = function(poem) {
+        if ($scope.searchByTitle === true && $scope.searchByTag === true)
+        {
+          return aContainsB(poem.title, $scope.query) || aContainsB(poem.tags, $scope.query);
+        }
+        else if ($scope.searchByTitle === true && $scope.searchByTag !== true)
+        {
+          return aContainsB(poem.title, $scope.query);
+        }
+        else if ($scope.searchByTitle !== true && $scope.searchByTag === true)
+        {
+          return aContainsB(poem.tags, $scope.query);
+        }
+        else if ($scope.searchByTitle !== true && $scope.searchByTag !== true)
+        {
+          if ($scope.query)
+          {
+            return aContainsB(poem.title, $scope.query) || aContainsB(poem.tags, $scope.query);
+          }
+          else
+          {
+            return poem;
+          }
+        }
+        else
+        {
+          return poem;
+        }
       };
 
     }
