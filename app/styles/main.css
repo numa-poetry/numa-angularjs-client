@@ -6,7 +6,7 @@
 
 /* Space out content a bit */
 body {
-  /*padding-top: 20px;*/
+  padding-top: 45px;
   /*padding-bottom: 20px;*/
   /* http://qrohlf.com/trianglify/ */
   /*background-image: url(../images/trianglify-background.svg), none;*/
@@ -307,14 +307,19 @@ a:not([name]) {
   padding-bottom: 7px;
 }
 
-.poem-body {
-  /*background-color: rgba(255, 255, 255, 0.95);*/
+.poem-body-view {
   font-size: 20px;
   font-family: 'Lusitana', cursive;
   color: #000000;
   border: none!important;
-  /*box-shadow: 0 8px 17px rgba(0, 0, 0, .2);*/
-  /*background-color: #FFFAFA;*/
+}
+
+.poem-body {
+  background-color: rgba(255, 255, 255, 0.95);
+  font-size: 20px;
+  font-family: 'Lusitana', cursive;
+  color: #000000;
+  border: none!important;
 }
 
 .poem-title {
@@ -405,12 +410,13 @@ a:not([name]) {
 }
 
 .feed-container {
-  padding: 30px;
+  padding: 15px 30px 30px 30px;
   /*background-color: #F6F6EF;*/
   background-color: rgba(246, 246, 239, 0.90);
   border: 2px solid;
   /*border-color: #5BC0DE;*/ /* info */
   border-color: #008CBA; /* primary */
+  border-bottom: none;
 }
 
 .search-container {
