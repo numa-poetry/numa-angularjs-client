@@ -73,10 +73,10 @@ angular
 
       $routeProvider
         .when('/', {
-          templateUrl : 'views/main.html',
-          controller  : 'MainCtrl'
-          // templateUrl : 'views/feed.html',
-          // controller  : 'FeedCtrl'
+          // templateUrl : 'views/main.html',
+          // controller  : 'MainCtrl'
+          templateUrl : 'views/feed.html',
+          controller  : 'FeedCtrl'
         })
         .when('/about', {
           templateUrl : 'views/about.html',

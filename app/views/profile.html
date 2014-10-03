@@ -1,11 +1,11 @@
 <!-- PROFILE VIEW -->
 <div ng-hide="editorEnabled">
-  <div class="panel panel-default">
+  <div class="panel panel-default" style="margin-top: 30px;">
     <div class="panel-heading">Profile</div>
     <div class="panel-body">
       <div class="row">
         <div class="col-xs-12 col-sm-8">
-          <h2>{{ displayName }}</h2>
+          <h2 style="font-family: 'Gloria Hallelujah', cursive; font-size: 40px;">{{ displayName }}</h2>
         </div>
         <div class="col-xs-12 col-sm-4">
           <img ng-show="currentUserId !== userViewId || !isAuthenticated" ng-src="{{ avatarUrl }}"
@@ -84,7 +84,7 @@
       <form method="put" name="editForm">
         <div class="form-group" ng-class="{ 'has-error' : editForm.email.$invalid && editForm.email.$dirty }">
           <h4><i class="ion-at"></i> Email Address</h4>
-          <input class="form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="Email" required
+          <input class="form-control input-md" type="email" id="email" name="email" ng-model="email" placeholder="Email" required
           ng-pattern="/^[A-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">
           <div class="help-block text-danger" ng-if="editForm.email.$dirty" ng-messages="editForm.email.$error">
             <div ng-message="required">Your email address is required.</div>

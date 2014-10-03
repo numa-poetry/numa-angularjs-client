@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Include Google Fonts here -->
-    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Lusitana|Lovers+Quarrel|Roboto|Enriqueta|IM+Fell+Double+Pica+SC|Open+Sans|Indie+Flower|Tangerine'>
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Shadows+Into+Light|Gloria+Hallelujah|Lusitana|Lovers+Quarrel|Roboto|Enriqueta|IM+Fell+Double+Pica+SC|Open+Sans|Indie+Flower|Tangerine'>
 
     <!-- Include Bootstrap CSS here, specify theme from bower_components -->
     <link rel="stylesheet" type="text/css" href="bower_components/bootswatch/yeti/bootstrap.min.css">
@@ -42,15 +42,14 @@
     <!-- Add your site or application content here -->
     <div ng-include="'views/navbar.html'"></div>
     <div class="container fadeInAndOutAnimation" ng-view></div>
-    <!-- <footer style="background-color: #333333; border: 0;">
-      <div class="container">
-        <p>
-          <ul>
-            <li><a ng-href="/#!/about">About</a></li>
-          </ul>
-        </p>
+    <footer style="background-color: #333333; border: 0;">
+      <div class="container" style="color: white; padding: 10px;">
+        <a ng-href="/#!/about" style="color: white">About</a>
+        ⋅ <a ng-href="/#!/about" style="color: white">Privacy Policy</a>
+        ⋅ <a ng-href="/#!/about" style="color: white">Terms of Use</a>
+        | numa.com 2014 | All poems are property of their authors
       </div>
-    </footer> -->
+    </footer>
 
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
