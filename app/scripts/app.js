@@ -131,6 +131,14 @@ angular
           templateUrl : 'views/edit.html',
           controller  : 'EditCtrl'
         })
+        .when('/privacy', {
+          templateUrl : 'views/privacy.html',
+          controller  : 'PrivacyCtrl'
+        })
+        .when('/terms', {
+          templateUrl : 'views/terms.html',
+          controller  : 'TermsCtrl'
+        })
         .otherwise({
           redirectTo  : '/'
         });

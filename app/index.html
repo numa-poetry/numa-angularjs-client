@@ -42,11 +42,11 @@
     <!-- Add your site or application content here -->
     <div ng-include="'views/navbar.html'"></div>
     <div class="container fadeInAndOutAnimation" ng-view></div>
-    <footer style="background-color: #333333; border: 0;">
-      <div class="container" style="color: white; padding: 10px;">
-        <a ng-href="/#!/about" style="color: white">About</a>
-        ⋅ <a ng-href="/#!/about" style="color: white">Privacy Policy</a>
-        ⋅ <a ng-href="/#!/about" style="color: white">Terms of Use</a>
+    <footer style="border: 0;">
+      <div class="container" style="text-align: center; color: black; padding-bottom: 40px; padding-top: 20px;">
+        <a ng-href="/#!/about" style="color: black">About</a>
+        ⋅ <a ng-href="/#!/privacy" style="color: black">Privacy Policy</a>
+        ⋅ <a ng-href="/#!/terms" style="color: black">Terms</a>
         | numa.com 2014 | All poems are property of their authors
       </div>
     </footer>
@@ -141,6 +141,8 @@
     <script src="scripts/directives/passwordstrength.js"></script>
     <script src="scripts/directives/repeatpassword.js"></script>
     <script src="scripts/directives/file.js"></script>
+    <script src="scripts/controllers/privacy.js"></script>
+    <script src="scripts/controllers/terms.js"></script>
     <!-- endbuild -->
   </body>
 </html>
