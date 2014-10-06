@@ -16,8 +16,8 @@ angular.module('numaApp')
         .then(function() {
           $alert({
             type        : 'material',
-            title       : 'You have been logged out!',
-            content     : 'Now fuck off, mate.',
+            // title       : 'You have been logged out!',
+            content     : 'You\'ve been logged out.',
             duration    : 4,
             dismissable : false,
             animation   : 'fadeZoomFadeDown'

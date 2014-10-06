@@ -15,13 +15,15 @@ angular.module('numaApp')
 
 // $resource calls -------------------------------------------------------------
 
-      poemFactory.rGetAll = function() {
-        return $resource(endpointConstants.allPoems).query();
-      };
-
       poemFactory.rGet = function(id) {
         return $resource(endpointConstants.poem, {
           id : id
+        }).get();
+      };
+
+      poemFactory.rGetPage = function(number) {
+        return $resource(endpointConstants.poemPage, {
+          number : number
         }).get();
       };
 

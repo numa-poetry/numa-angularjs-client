@@ -30,7 +30,8 @@ angular
     'angularFileUpload',
     'wu.masonry',
     'matchmedia-ng',
-    'selectize'
+    'selectize',
+    'angularUtils.directives.dirPagination'
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
     '$popoverProvider', '$tooltipProvider', '$modalProvider',

@@ -49,10 +49,10 @@ angular.module('numaApp')
     // GET, POST
     resetPassword   : serverDomain + apiVersion + '/reset/:token',
 
-    // GET
-    allPoems        : serverDomain + apiVersion + '/poem',
-
     // GET, PUT
-    poem            : serverDomain + apiVersion + '/poem/:id'
+    poem            : serverDomain + apiVersion + '/poem/:id',
+
+    // GET
+    poemPage        : serverDomain + apiVersion + '/poem/page/:number'
 
   });

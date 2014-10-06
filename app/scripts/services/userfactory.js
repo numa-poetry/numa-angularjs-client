@@ -45,7 +45,7 @@ angular.module('numaApp')
           }).save(req);
 
           resource.$promise.then(function(res) {
-            // console.log(res);
+            console.log(res);
 
             // Store basic user info
             userFactory.setInfo(res.id, res.displayName, res.joinedDate.split('T')[0],

@@ -17,24 +17,10 @@
   </div>
 
   <div style="padding-top: 15px;">
-    <div class="post row fadeInAndOutAnimation" ng-repeat="poem in poems | filter:poemSearch">
+    <div class="post row fadeInAndOutAnimation" dir-paginate="poem in poems | filter:poemSearch | itemsPerPage: poemsPerPage" total-items="totalPoems">
       <div class="col-xs-1">
         {{ $index+1 }}
       </div>
-
-      <!-- <div class="col-xs-1">
-        <div>
-          <span class="vote">
-            <i class="ion-arrow-up-a" ng-click="changeVote(vote, 'up')" ng-class="{true:'up', false:''}[vote=='up']"></i>
-          </span>
-        </div>
-        <div>
-          <span class="vote">
-            <i class="ion-arrow-down-a" ng-click="changeVote(vote, 'down')" ng-class="{true:'down', false:''}[vote=='down']"></i>
-          </span>
-        </div>
-      </div> -->
-
       <div class="col-xs-10">
         <div class="feed-poem-title">
           <a ng-href="/#!/poem/{{ poem.id }}" style="color: black; text-decoration: none;">
@@ -50,8 +36,8 @@
           <span> ⋅ {{ poem.numberOfComments }} comments</span>
         </div>
       </div>
-      <div class="col-md-2">
-      </div>
     </div>
+
+    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
   </div>
 </div>
