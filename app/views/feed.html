@@ -16,7 +16,7 @@
     </form>
   </div>
 
-  <div style="padding-top: 15px;">
+  <!-- <div style="padding-top: 15px;"> -->
     <div class="post row fadeInAndOutAnimation" dir-paginate="poem in poems | filter:poemSearch | itemsPerPage: poemsPerPage" total-items="totalPoems">
       <div class="col-xs-1">
         {{ $index+1 }}
@@ -40,4 +40,4 @@
 
     <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
   </div>
-</div>
+<!-- </div> -->

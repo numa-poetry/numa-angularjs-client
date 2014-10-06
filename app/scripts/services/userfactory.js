@@ -233,8 +233,7 @@ angular.module('numaApp')
       };
 
       userFactory.rSaveAvatarUrl = function(info) {
-        var _sId = storageFactory.getId();
-        console.log(_sId);
+        _sId = storageFactory.getId();
         return $resource(endpointConstants.userAvatar, {
           id : _sId
         }).save([], info);
@@ -242,10 +241,17 @@ angular.module('numaApp')
 
       userFactory.rSavePoem = function(info) {
         _sId = storageFactory.getId();
-        console.log(_sId);
-        return $resource(endpointConstants.userPoem, {
+        return $resource(endpointConstants.userPoemSave, {
           id : _sId
         }).save([], info);
+      };
+
+      userFactory.rDeletePoem = function(poemId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userPoem, {
+          userId : _sId,
+          poemId : poemId
+        }).delete();
       };
 
       userFactory.rSaveComment = function(info, poemId) {
@@ -275,7 +281,7 @@ angular.module('numaApp')
 // $http calls -----------------------------------------------------------------
 
       userFactory.hUpdateUser = function(info) {
-        var _sId = storageFactory.getId();
+        _sId = storageFactory.getId();
         console.log(_sId);
         return $http({
           method : 'PUT',
@@ -287,7 +293,7 @@ angular.module('numaApp')
       };
 
       userFactory.hUpdatePoem = function(info) {
-        var _sId = storageFactory.getId();
+        _sId = storageFactory.getId();
         return $http({
           method : 'PUT',
           url    : serverDomain + apiVersion + '/user/' + _sId + '/poem/' + info.id,

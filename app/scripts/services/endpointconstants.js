@@ -29,7 +29,10 @@ angular.module('numaApp')
     userAvatar      : serverDomain + apiVersion + '/user/:id/avatar',
 
     // POST
-    userPoem        : serverDomain + apiVersion + '/user/:id/poem',
+    userPoemSave    : serverDomain + apiVersion + '/user/:id/poem',
+
+    // DELETE
+    userPoem        : serverDomain + apiVersion + '/user/:userId/poem/:poemId',
 
     // POST
     userPoemComment : serverDomain + apiVersion + '/user/:userId/poem/:poemId/comment',

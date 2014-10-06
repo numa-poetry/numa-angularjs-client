@@ -9,12 +9,16 @@
  */
 angular.module('numaApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
-    'userFactory', '$alert', 'helperFactory', '$rootScope',
+    'userFactory', '$alert', 'helperFactory', '$rootScope', '$location',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
-      $alert, helperFactory, $rootScope) {
+      $alert, helperFactory, $rootScope, $location) {
 
       $scope.tags = {}; // This way $watch can update tags after the resource call
       var previousVote;
+
+      $scope.modal = {
+        'title': 'Are you sure?'
+      };
 
       $scope.userId = storageFactory.getId();
       userFactory.init($scope.userId, 'Basic');
@@ -48,6 +52,33 @@ angular.module('numaApp')
       }
 
 // functions -------------------------------------------------------------------
+
+      $scope.deletePoem = function() {
+        var resource = userFactory.rDeletePoem($scope.poemId);
+
+        resource.$promise.then(function(res) {
+          $alert({
+            type        : 'material',
+            dismissable : false,
+            duration    : 5,
+            placement   : top,
+            // title       : 'Hello, ' + req.displayName + '!',
+            content     : 'You have successfully deleted your poem.',
+            animation   : 'fadeZoomFadeDown'
+          });
+
+          $location.path('/feed');
+        }, function(res) {
+          $alert({
+            type        : 'material-err',
+            dismissable : true,
+            title       : 'Oops! ',
+            content     : res.data.message,
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
+          });
+        });
+      };
 
       $scope.saveComment = function() {
         console.log($scope.comment);
