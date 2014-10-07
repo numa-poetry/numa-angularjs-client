@@ -52,10 +52,10 @@ angular.module('numaApp')
     // GET, POST
     resetPassword   : serverDomain + apiVersion + '/reset/:token',
 
-    // GET, PUT
-    poem            : serverDomain + apiVersion + '/poem/:id',
-
     // GET
-    poemPage        : serverDomain + apiVersion + '/poem/page/:number'
+    allPoems        : serverDomain + apiVersion + '/poem',
+
+    // GET, PUT
+    poem            : serverDomain + apiVersion + '/poem/:id'
 
   });

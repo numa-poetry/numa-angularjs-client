@@ -24,8 +24,8 @@ angular.module('numaApp')
 
 // functions -------------------------------------------------------------------
 
-      function getPoemsPage(pageNumber) {
-        var resource = poemFactory.rGetPage(pageNumber);
+      function getPoemsPage(page) {
+        var resource = poemFactory.rGetQuery(page);
 
         resource.$promise.then(function(res) {
           console.log(res);
@@ -40,9 +40,9 @@ angular.module('numaApp')
         current: 1
       };
 
-      $scope.pageChangeHandler = function(newPageNumber) {
-        console.log('poems page changed to ' + newPageNumber);
-        getPoemsPage(newPageNumber);
+      $scope.pageChangeHandler = function(newPage) {
+        console.log('poems page changed to ' + newPage);
+        getPoemsPage(newPage);
       };
 
       $scope.timeSince = helperFactory.timeSince;
