@@ -28,7 +28,6 @@ angular
     'plangular',
     'contenteditable',
     'angularFileUpload',
-    'wu.masonry',
     'matchmedia-ng',
     'selectize',
     'angularUtils.directives.dirPagination'

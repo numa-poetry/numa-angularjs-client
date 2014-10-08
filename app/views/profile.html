@@ -35,10 +35,8 @@
           <tab-heading>
             <i class="ion-document-text"></i>&nbsp; Poems <span class="badge">{{ poems.length }}</span>
           </tab-heading>
-          <div masonry>
-            <div class="masonry-brick" ng-repeat="poem in poems">
-              <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
-            </div>
+          <div ng-repeat="poem in poems">
+            <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
           </div>
         </tab>
         <tab>

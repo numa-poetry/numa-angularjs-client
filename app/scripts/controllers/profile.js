@@ -18,7 +18,7 @@ angular.module('numaApp')
       $scope.currentUserId = storageFactory.getId();
       $scope.userViewId    = $routeParams.id;
 
-      userFactory.init($routeParams.id, 'Full');
+      userFactory.init($routeParams.id, 'full');
 
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
         $scope.displayName = userFactory.getDisplayName();

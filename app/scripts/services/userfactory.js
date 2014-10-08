@@ -37,18 +37,19 @@ angular.module('numaApp')
         // console.log(_sId);
 
         if (paramsId) {
-          var req  = {};
-          req.type = type;
 
-          var resource = $resource(endpointConstants.user, {
+          var queryType;
+          type === 'full' ? queryType = ('type=full') : queryType = '';
+
+          var resource = $resource(endpointConstants.user + '/?' + queryType, {
             id : paramsId
-          }).save(req);
+          }).get();
 
           resource.$promise.then(function(res) {
             console.log(res);
 
             // Store basic user info
-            userFactory.setInfo(res.id, res.displayName, res.joinedDate.split('T')[0],
+            userFactory.setInfo(res.id, res.displayName, res.createdAt.split('T')[0],
               res.email, res.avatarUrl);
 
             if (_sId === paramsId) {
@@ -59,8 +60,8 @@ angular.module('numaApp')
               // console.log('Viewing other user profile');
             }
 
-            // If 'Full' profile was requested, store poem titles and comments
-            if (type === 'Full') {
+            // If 'full' profile was requested, store poem titles and comments
+            if (type === 'full') {
               userFactory.setPoems(res.poems);
               userFactory.setComments(res.comments);
             }
