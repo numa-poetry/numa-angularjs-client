@@ -16,4 +16,4 @@ I'm developing Numa because I care about connecting with people; sharing express
 * Install dependencies: `bower install`
 * Launch: `grunt serve --no-color` or just `grunt serve`
 * Visit: `http://localhost:9000`
-* And now you'll want to get the [server](https://github.com/trance-with-me/numa-restful-api) running.
+* And now you'll want to get the [server](https://github.com/boyz-2-men/numa-restful-api) running.
