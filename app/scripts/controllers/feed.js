@@ -15,7 +15,7 @@ angular.module('numaApp')
 
       $scope.poems         = [];
       $scope.totalPoems    = 0;
-      $scope.poemsPerPage  = 25; // this should match however many results your API puts on one page
+      $scope.poemsPerPage  = 8; // this should match however many results your API puts on one page
       $scope.searchByTitle = false;
       $scope.searchByTag   = false;
       var id               = storageFactory.getId();
@@ -36,13 +36,13 @@ angular.module('numaApp')
         });
       };
 
-      $scope.pagination = {
-        current: 1
+      $scope.pageChanged = function(newPageNumber) {
+        console.log('poems page changed to ' + newPageNumber);
+        getPoemsPage(newPageNumber);
       };
 
-      $scope.pageChangeHandler = function(newPage) {
-        console.log('poems page changed to ' + newPage);
-        getPoemsPage(newPage);
+      $scope.pagination = {
+        current: 1
       };
 
       $scope.timeSince = helperFactory.timeSince;

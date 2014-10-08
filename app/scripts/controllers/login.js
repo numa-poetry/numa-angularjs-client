@@ -8,10 +8,10 @@
  * Controller of the numaApp
  */
 angular.module('numaApp')
-  .controller('LoginCtrl', ['$location', '$scope', 'helperFactory',
+  .controller('LoginCtrl', ['$location', '$scope',
     'userFactory', 'storageFactory', '$auth', '$alert', '$resource', '$http',
     '$rootScope', 'usSpinnerService',
-    function ($location, $scope, helperFactory, userFactory, storageFactory,
+    function ($location, $scope, userFactory, storageFactory,
       $auth, $alert, $resource, $http, $rootScope, usSpinnerService) {
 
       $scope.popover = {
@@ -29,8 +29,6 @@ angular.module('numaApp')
       }
 
 // functions -------------------------------------------------------------------
-
-      $scope.go = helperFactory.go;
 
       // $scope.redditOauth = function() {
 

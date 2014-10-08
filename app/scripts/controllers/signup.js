@@ -8,9 +8,9 @@
  * Controller of the numaApp
  */
 angular.module('numaApp')
-  .controller('SignupCtrl', ['$location', '$scope', 'helperFactory',
+  .controller('SignupCtrl', ['$location', '$scope',
     'userFactory', 'storageFactory', '$alert', '$rootScope', 'usSpinnerService',
-    function ($location, $scope, helperFactory, userFactory, storageFactory,
+    function ($location, $scope, userFactory, storageFactory,
       $alert, $rootScope, usSpinnerService) {
 
       $scope.popover = {
@@ -22,14 +22,12 @@ angular.module('numaApp')
 
 // functions -------------------------------------------------------------------
 
-      $scope.go = helperFactory.go;
-
       $scope.signUp = function() {
         usSpinnerService.spin('signup-spinner');
 
         var req          = {};
         req.displayName  = $scope.displayName;
-        // req.email        = $scope.email;
+        req.email        = $scope.email;
         req.password     = $scope.password;
         req.stayLoggedIn = $scope.stayLoggedIn;
 
