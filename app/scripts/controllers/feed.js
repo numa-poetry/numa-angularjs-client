@@ -19,6 +19,7 @@ angular.module('numaApp')
       $scope.searchByTitle   = false;
       $scope.searchByTag     = false;
       $scope.searchByContent = false;
+      $scope.strictSearch    = false;
       var id                 = storageFactory.getId();
       userFactory.init(id, 'Basic');
       getPoemsPage(1);
@@ -30,7 +31,8 @@ angular.module('numaApp')
       };
 
       function getPoemsPage(page) {
-        var resource = poemFactory.rGetQuery(page, $scope.query, $scope.searchByTitle, $scope.searchByTag, $scope.searchByContent);
+        var resource = poemFactory.rGetQuery(page, $scope.query, $scope.searchByTitle,
+          $scope.searchByTag, $scope.searchByContent, $scope.strictSearch);
 
         resource.$promise.then(function(res) {
           // console.log(res);

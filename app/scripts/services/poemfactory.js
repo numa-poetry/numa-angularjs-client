@@ -21,15 +21,15 @@ angular.module('numaApp')
         }).get();
       };
 
-      poemFactory.rGetQuery = function(page, query, searchByTitle, searchByTag, searchByContent) {
+      poemFactory.rGetQuery = function(page, query, searchByTitle, searchByTag, searchByContent, strictSearch) {
         if (typeof page !== 'undefined') {
-          page = ('page=' + page + '&');
+          page = 'page=' + page + '&';
         } else {
           page = '';
         }
 
         if (typeof query !== 'undefined') {
-          query = ('query=' + query + '&');
+          query = 'query=' + query + '&';
         } else {
           query = '';
         }
@@ -48,8 +48,13 @@ angular.module('numaApp')
         if (searchByContent === true) {
           searchBy += 'content,';
         }
-        console.log('req:', endpointConstants.allPoems + '/?' + query + page + searchBy);
-        return $resource(endpointConstants.allPoems + '/?' + query + page + searchBy).get();
+        if (strictSearch === true) {
+          strictSearch = '&strict=true';
+        } else {
+          strictSearch = '';
+        }
+        console.log('req:', endpointConstants.allPoems + '/?' + query + page + searchBy + strictSearch);
+        return $resource(endpointConstants.allPoems + '/?' + query + page + searchBy + strictSearch).get();
       };
 
       return poemFactory;

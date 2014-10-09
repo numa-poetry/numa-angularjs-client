@@ -16,7 +16,14 @@
       </div>
       <input type="checkbox" ng-model="searchByTag">&nbsp; Search by tag &nbsp;
       <input type="checkbox" ng-model="searchByTitle">&nbsp; Search by title &nbsp;
-      <input type="checkbox" ng-model="searchByContent">&nbsp; Search by content
+      <input type="checkbox" ng-model="searchByContent">&nbsp; Search by content &nbsp;
+
+      <!-- if 2>= checkboxes selected, show -->
+      <div ng-show="(searchByTag === true && searchByTitle === true) ||
+                    (searchByTag === true && searchByContent === true) ||
+                    (searchByTitle === true && searchByContent === true)">
+        <input type="checkbox" ng-model="strictSearch">&nbsp; Strict search
+      </div>
     </form>
   </div>
 
