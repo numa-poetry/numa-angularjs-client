@@ -7,20 +7,24 @@
   </div>
 
   <div class="row search-container">
-    <form class="form-search">
-      <div class="form-group has-feedback">
-        <input class="form-control input-sm" type="text" ng-model="query" placeholder="Search" autofocus required>
-        <i class="ion-search form-control-feedback" style="font-size: 20px; top: 1px;"></i>
-        <input type="checkbox" ng-model="searchByTag">&nbsp; Search by tag &nbsp;
-        <input type="checkbox" ng-model="searchByTitle">&nbsp; Search by title
+    <form class="form-search" ng-submit="searchPoems()" novalidate>
+      <div class="input-group has-feedback">
+        <input class="input-sm input-block-level" type="text" ng-model="query" placeholder="Search" autofocus required>
+        <div class="input-group-btn">
+          <a ng-href="" type="button submit" class="btn btn-sm btn-info" ng-click="searchPoems()"><i class="ion-search"></i></a>
+        </div>
       </div>
+      <input type="checkbox" ng-model="searchByTag">&nbsp; Search by tag &nbsp;
+      <input type="checkbox" ng-model="searchByTitle">&nbsp; Search by title &nbsp;
+      <input type="checkbox" ng-model="searchByContent">&nbsp; Search by content
     </form>
   </div>
 
   <!-- <div style="padding-top: 15px;"> -->
-    <div class="post row fadeInAndOutAnimation" dir-paginate="poem in poems | filter:poemSearch | itemsPerPage: poemsPerPage" total-items="totalPoems">
+  <!-- | filter:poemSearch -->
+    <div class="post row fadeInAndOutAnimation" dir-paginate="poem in poems | itemsPerPage: poemsPerPage" total-items="totalPoems">
       <div class="col-xs-1">
-        {{ $index+1 }}
+        {{ $index+1 }}.
       </div>
       <div class="col-xs-10">
         <div class="feed-poem-title">
@@ -29,12 +33,14 @@
           </a>
         </div>
         <div class="feed-poem-info">
-          <span>{{ poem.positiveVotes - poem.negativeVotes }}</span>
-          <span ng-show="(poem.positiveVotes - poem.negativeVotes) == 1 || (poem.positiveVotes - poem.negativeVotes) == -1">point</span>
-          <span ng-show="(poem.positiveVotes - poem.negativeVotes) != 1 && (poem.positiveVotes - poem.negativeVotes) != -1">points</span>
+          <span style="color: #ED6307;">
+            <span>{{ poem.positiveVotes - poem.negativeVotes }}</span>
+            <span ng-show="(poem.positiveVotes - poem.negativeVotes) == 1 || (poem.positiveVotes - poem.negativeVotes) == -1">point</span>
+            <span ng-show="(poem.positiveVotes - poem.negativeVotes) != 1 && (poem.positiveVotes - poem.negativeVotes) != -1">points</span>
+          </span>
           <span> ⋅ by <a ng-href="/#!/user/{{ poem.creator.id }}">{{ poem.creator.displayName }}</a></span>
           <span> ⋅ {{ timeSince(poem.createdAt)}} ago</span>
-          <span> ⋅ {{ poem.numberOfComments }} comments</span>
+          <span style="color: #367800;"> ⋅ {{ poem.numberOfComments }} comments</span>
         </div>
       </div>
     </div>

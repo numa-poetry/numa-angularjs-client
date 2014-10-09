@@ -5,12 +5,11 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-xs-12 col-sm-8">
-          <h2 style="font-family: 'Gloria Hallelujah', cursive; font-size: 40px;">{{ displayName }}</h2>
+          <h2 class="profile-display-name">{{ displayName }}</h2>
         </div>
         <div class="col-xs-12 col-sm-4">
           <img ng-show="currentUserId !== userViewId || !isAuthenticated" ng-src="{{ avatarUrl }}"
             alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
-
           <img ng-show="currentUserId === userViewId && isAuthenticated" ng-src="{{ avatarUrl }}"
             alt="" class="center-block img-rounded img-responsive"
             ng-click="enableEditor()" style="margin-bottom: 10px;"

@@ -4,7 +4,7 @@
 
     <span spinner-key="signup-spinner" us-spinner="{lines: 17, length: 0, width: 6, radius: 17, corners: 0.7, rotate: 0, trail: 50, speed: 1.0, direction: 1, shadow: on, hwaccel: on}"></span>
 
-    <form method="post" ng-submit="signUp()" name="signupForm">
+    <form method="post" ng-submit="signUp()" name="signupForm" novalidate>
       <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.displayName.$invalid && signupForm.displayName.$dirty }">
         <input class="form-control input-lg" type="text" name="displayName" ng-model="displayName" placeholder="Username" required autofocus>
         <i class="ion-person form-control-feedback" style="padding: 10px; font-size: 20px;"></i>

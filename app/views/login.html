@@ -4,7 +4,7 @@
 
     <span spinner-key="login-spinner" us-spinner="{lines: 17, length: 0, width: 6, radius: 17, corners: 0.7, rotate: 0, trail: 50, speed: 1.0, direction: 1, shadow: on, hwaccel: on}"></span>
 
-    <form method="post" ng-submit="login()" name="loginForm">
+    <form method="post" ng-submit="login()" name="loginForm" novalidate>
 
       <div class="form-group has-feedback">
         <input class="form-control input-lg" type="text" name="displayName" ng-model="displayName" placeholder="Username" autofocus required>

@@ -13,22 +13,27 @@ angular.module('numaApp')
     function ($scope, poemFactory, storageFactory, userFactory,
       helperFactory) {
 
-      $scope.poems         = [];
-      $scope.totalPoems    = 0;
-      $scope.poemsPerPage  = 8; // this should match however many results your API puts on one page
-      $scope.searchByTitle = false;
-      $scope.searchByTag   = false;
-      var id               = storageFactory.getId();
+      $scope.poems           = [];
+      $scope.totalPoems      = 0;
+      $scope.poemsPerPage    = 8; // this should match however many results your API puts on one page
+      $scope.searchByTitle   = false;
+      $scope.searchByTag     = false;
+      $scope.searchByContent = false;
+      var id                 = storageFactory.getId();
       userFactory.init(id, 'Basic');
       getPoemsPage(1);
 
 // functions -------------------------------------------------------------------
 
+      $scope.searchPoems = function() {
+        getPoemsPage(1);
+      };
+
       function getPoemsPage(page) {
-        var resource = poemFactory.rGetQuery(page);
+        var resource = poemFactory.rGetQuery(page, $scope.query, $scope.searchByTitle, $scope.searchByTag, $scope.searchByContent);
 
         resource.$promise.then(function(res) {
-          console.log(res);
+          // console.log(res);
           $scope.poems      = res.poems;
           $scope.totalPoems = res.poemCount;
         }, function(res) {
