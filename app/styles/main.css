@@ -416,7 +416,7 @@ a:not([name]) {
 }
 
 .feed-container {
-  padding: 15px 30px 30px 30px;
+  padding: 15px 30px 0 30px;
   /*background-color: #F6F6EF;*/
   background-color: rgba(246, 246, 239, 0.90);
   border: 2px solid;
@@ -430,6 +430,15 @@ a:not([name]) {
   margin-left: -30px;
   margin-right: -30px;
   padding: 15px 15px 5px 15px;
+}
+
+.comments-border {
+  border: 2px solid;
+  margin-left: -32px;
+  margin-right: -32px;
+  margin-bottom: -2px;
+  padding: 20px;
+  border-color: #008CBA; /* primary */
 }
 
 .input-block-level {

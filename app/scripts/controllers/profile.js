@@ -37,10 +37,16 @@ angular.module('numaApp')
         'title': 'Are you sure?'
       };
 
-      $scope.tooltip = {
+      $scope.tooltipChangeAvatar = {
         title   : 'Change your avatar',
         checked : false
       };
+
+      $scope.tooltipEditProfile = {
+        title   : 'Edit profile.',
+        checked : false
+      };
+
 
       $scope.tabs = [
         { title:'Poems' },

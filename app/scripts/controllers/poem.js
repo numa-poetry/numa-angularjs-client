@@ -16,7 +16,11 @@ angular.module('numaApp')
       $scope.tags = {}; // This way $watch can update tags after the resource call
       var previousVote;
 
-      $scope.modal = {
+      $scope.modalDeletePoem = {
+        'title': 'Are you sure?'
+      };
+
+      $scope.modalDeleteComment = {
         'title': 'Are you sure?'
       };
 
@@ -75,6 +79,40 @@ angular.module('numaApp')
             title       : 'Oops! ',
             content     : res.data.message,
             duration    : 5,
+            animation   : 'fadeZoomFadeDown'
+          });
+        });
+      };
+
+      $scope.deleteComment = function(commentId) {
+        console.log('here');
+
+        var resource = userFactory.rDeleteCommentAsCreator($scope.poemId, commentId);
+
+        resource.$promise.then(function(res) {
+          $alert({
+            type        : 'material',
+            dismissable : false,
+            duration    : 5,
+            placement   : top,
+            content     : 'Comment deleted.',
+            animation   : 'fadeZoomFadeDown'
+          });
+
+          // find and remove comment from DOM
+          for (var i = $scope.comments.length - 1; i >= 0; i--) {
+            if ($scope.comments[i].id === commentId) {
+              $scope.comments.splice(i,1);
+            }
+          };
+          console.log($scope.comments);
+        }, function(res) {
+          $alert({
+            type        : 'material-err',
+            dismissable : true,
+            duration    : 5,
+            placement   : top,
+            content     : res.data.message,
             animation   : 'fadeZoomFadeDown'
           });
         });

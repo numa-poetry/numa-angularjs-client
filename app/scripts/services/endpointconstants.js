@@ -20,42 +20,45 @@ angular.module('numaApp')
   .constant('endpointConstants', {
 
     // GET
-    allUsers        : serverDomain + apiVersion + '/user',
+    allUsers            : serverDomain + apiVersion + '/user',
 
     // GET, DELETE, PUT
-    user            : serverDomain + apiVersion + '/user/:id',
+    user                : serverDomain + apiVersion + '/user/:id',
 
     // POST
-    userAvatar      : serverDomain + apiVersion + '/user/:id/avatar',
+    userAvatar          : serverDomain + apiVersion + '/user/:id/avatar',
 
     // POST
-    userPoemSave    : serverDomain + apiVersion + '/user/:id/poem',
+    userPoemSave        : serverDomain + apiVersion + '/user/:id/poem',
 
     // DELETE
-    userPoem        : serverDomain + apiVersion + '/user/:userId/poem/:poemId',
+    userPoem            : serverDomain + apiVersion + '/user/:userId/poem/:poemId',
 
     // POST
-    userPoemComment : serverDomain + apiVersion + '/user/:userId/poem/:poemId/comment',
+    userPoemCommentSave : serverDomain + apiVersion + '/user/:userId/poem/:poemId/comment',
+
+    // DELETE
+    userPoemComment     : serverDomain + apiVersion + '/user/:userId/poem/:poemId/comment/:commentId',
 
     // GET, POST
-    userPoemVote    : serverDomain + apiVersion + '/user/:userId/poem/:poemId/vote',
+    userPoemVote        : serverDomain + apiVersion + '/user/:userId/poem/:poemId/vote',
 
     // POST
-    userSignup      : serverDomain + apiVersion + '/signup',
+    userSignup          : serverDomain + apiVersion + '/signup',
 
     // POST
-    userLogin       : serverDomain + apiVersion + '/login',
+    userLogin           : serverDomain + apiVersion + '/login',
 
     // POST
-    forgotPassword  : serverDomain + apiVersion + '/forgot',
+    forgotPassword      : serverDomain + apiVersion + '/forgot',
 
     // GET, POST
-    resetPassword   : serverDomain + apiVersion + '/reset/:token',
+    resetPassword       : serverDomain + apiVersion + '/reset/:token',
 
     // GET
-    allPoems        : serverDomain + apiVersion + '/poem',
+    allPoems            : serverDomain + apiVersion + '/poem',
 
     // GET, PUT
-    poem            : serverDomain + apiVersion + '/poem/:id'
+    poem                : serverDomain + apiVersion + '/poem/:id'
 
   });

@@ -25,7 +25,7 @@
     <div class="pull-right" style="padding-right: 10px;" ng-show="userId === creatorId && isAuthenticated">
       <a ng-href="/#!/edit/{{ poemId }}" type="button" class="btn btn-sm btn-info">Edit</a>
       <a type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top"
-        data-template="views/deletepoemmodal.html" bs-modal="modal"><i class="ion-close-round"></i></a>
+        data-template="views/deletepoemmodal.html" bs-modal="modalDeletePoem"><i class="ion-close-round"></i></a>
     </div>
     <div class="pull-left" style="padding-left: 10px;">
       <div ng-if="userId !== creatorId && isAuthenticated">
@@ -48,10 +48,10 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" style="padding-bottom: 25px;">
     <div class='form-group' ng-show="isAuthenticated">
       <textarea class='form-control poem-comment' ng-model='comment' rows='1' placeholder='Give {{ creatorDisplayName }} your feedback...'></textarea>
-      <div class="pull-right" style="padding-top: 20px;">
+      <div class="pull-right" style="padding-top: 10px;">
         <button type="button" class="btn btn-sm btn-primary pull-right" ng-click="saveComment()" >Save</button>
       </div>
     </div>
@@ -62,31 +62,40 @@
     </div>
   </div>
 
-  <div class="comment-item row" ng-repeat="comment in comments">
-    <!-- <div class="col-xs-1">
-      <div>
-        <span class="vote">
-          <i class="ion-arrow-up-a"></i>
-        </span>
+  <div class="comments-border" ng-show="comments.length > 0">
+    <div class="comment-item row" ng-repeat="comment in comments">
+      <!-- <div class="col-xs-1">
+        <div>
+          <span class="vote">
+            <i class="ion-arrow-up-a"></i>
+          </span>
+        </div>
+        <div>
+          <span class="vote">
+            <i class="ion-arrow-down-a"></i>
+          </span>
+        </div>
+      </div> -->
+      <!-- color: #A9C9A6; background-color: #A9C9A6; height: 1px; border: none;  -->
+      <hr ng-if="!$first" style="width: 95%;" />
+      <div class="col-xs-1">
+        <img class="img-rounded" ng-src="{{ comment.creator.avatarUrl }}" style="min-height: 30px; height: 30px; margin-top: 10px;">
       </div>
-      <div>
-        <span class="vote">
-          <i class="ion-arrow-down-a"></i>
-        </span>
+      <div class="col-xs-10">
+        <div class="comment-info">
+          by <span><a ng-href="/#!/user/{{ comment.creator.id }}">{{ comment.creator.displayName }}</a></span>
+          <span> ⋅ {{ timeSince(comment.createdAt)}} ago</span>
+        </div>
+        <div class="comment">
+          <span>{{ comment.comment }}</span> <i><small>{{ comment.id }}</small></i>
+        </div>
       </div>
-    </div> -->
-    <!-- color: #A9C9A6; background-color: #A9C9A6; height: 1px; border: none;  -->
-    <hr ng-if="!$first" style="width: 95%;" />
-    <div class="col-xs-1">
-      <img class="img-rounded" ng-src="{{ comment.creator.avatarUrl }}" style="min-height: 30px; height: 30px; margin-top: 10px;">
-    </div>
-    <div class="col-xs-11">
-      <div class="comment-info">
-        by <span><a ng-href="/#!/user/{{ comment.creator.id }}">{{ comment.creator.displayName }}</a></span>
-        <span> ⋅ {{ timeSince(comment.createdAt)}} ago</span>
-      </div>
-      <div class="comment">
-        <span>{{ comment.comment }}</span>
+      <div class="col-xs-1">
+        <div style="padding-top: 5px;" ng-show="userId === creatorId && isAuthenticated">
+          <a type="button" class="btn btn-sm btn-danger" ng-click="deleteComment(comment.id)"><i class="ion-close-round"></i></a>
+          <!-- data-animation="am-fade-and-slide-top"
+            data-template="views/deletecommentmodal.html" bs-modal="modalDeleteComment" -->
+        </div>
       </div>
     </div>
   </div>

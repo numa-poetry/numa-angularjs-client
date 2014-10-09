@@ -1,7 +1,11 @@
 <!-- PROFILE VIEW -->
 <div ng-hide="editorEnabled">
   <div class="panel panel-default" style="margin-top: 30px;">
-    <div class="panel-heading">Profile</div>
+    <div class="panel-heading">Profile
+      <div ng-show="currentUserId == userViewId" class="pull-right" style="line-height: 1px;">
+        <i class="ion-gear-a" style="font-size: 20px;" ng-click="enableEditor()" data-placement="bottom" bs-tooltip="tooltipEditProfile"></i>
+      </div>
+    </div>
     <div class="panel-body">
       <div class="row">
         <div class="col-xs-12 col-sm-8">
@@ -13,7 +17,7 @@
           <img ng-show="currentUserId === userViewId && isAuthenticated" ng-src="{{ avatarUrl }}"
             alt="" class="center-block img-rounded img-responsive"
             ng-click="enableEditor()" style="margin-bottom: 10px;"
-            data-placement="bottom" bs-tooltip="tooltip">
+            data-placement="bottom" bs-tooltip="tooltipChangeAvatar">
         </div>
       </div>
 
@@ -21,15 +25,15 @@
         <li class="list-group-item dropdown-toggle text-right" ng-if="joinedDate">
           <span class="pull-left"><strong>Joined</strong></span>{{ joinedDate }}
         </li>
-        <li class="list-group-item dropdown-toggle text-right" ng-if="email">
-          <span class="pull-left"><strong>Email</strong></span>{{ workingEmail }}
+        <li ng-show="currentUserId == userViewId" class="list-group-item dropdown-toggle text-right" ng-if="email">
+          <span class="pull-left"><strong>Email <i>(private)</i></strong></span>{{ workingEmail }}
         </li>
         <!-- <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span> ___</li> -->
       </ul>
-      <button ng-show="currentUserId == userViewId" type="button" class="btn btn-md btn-primary pull-right"
-        ng-click="enableEditor()" style="margin-bottom: 10px;">Edit Profile</button>
+      <!-- <button ng-show="currentUserId == userViewId" type="button" class="btn btn-md btn-primary pull-right"
+        ng-click="enableEditor()" style="margin-bottom: 10px;">Edit Profile</button> -->
 
-      <tabset>
+      <tabset justified="true">
         <tab>
           <tab-heading>
             <i class="ion-document-text"></i>&nbsp; Poems <span class="badge">{{ poems.length }}</span>
@@ -42,7 +46,17 @@
           <tab-heading>
             <i class="ion-chatbubble"></i>&nbsp; Comments <span class="badge">{{ comments.length }}</span>
           </tab-heading>
-          TEST
+          <div ng-repeat="comment in comments">
+            <a ng-href="/#!/poem/{{ comment.poemId }}">"{{ comment.comment }}" <i><small>({{ comment.poemTitle }})</small></i></a>
+          </div>
+        </tab>
+        <tab ng-show="currentUserId == userViewId">
+          <tab-heading>
+            <i class="ion-heart"></i>&nbsp; Favorite poems <span class="badge">{{ comments.length }}</span>
+          </tab-heading>
+          <div ng-repeat="comment in comments">
+            <a ng-href="/#!/poem/{{ comment.poemId }}">"{{ comment.comment }}" <i><small>({{ comment.poemTitle }})</small></i></a>
+          </div>
         </tab>
       </tabset>
     </div>

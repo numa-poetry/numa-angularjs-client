@@ -29,7 +29,7 @@ angular.module('numaApp')
 
 // helper functions ------------------------------------------------------------
 
-      userFactory.init = function(paramsId, type) {
+      userFactory.init = function(paramsId, profile) {
         var _sId = storageFactory.getId();
         // console.log('fetching and initializing user data');
 
@@ -38,10 +38,9 @@ angular.module('numaApp')
 
         if (paramsId) {
 
-          var queryType;
-          type === 'full' ? queryType = ('type=full') : queryType = '';
+          profile === 'full' ? profile = ('profile=full') : profile = '';
 
-          var resource = $resource(endpointConstants.user + '/?' + queryType, {
+          var resource = $resource(endpointConstants.user + '/?' + profile, {
             id : paramsId
           }).get();
 
@@ -61,7 +60,7 @@ angular.module('numaApp')
             }
 
             // If 'full' profile was requested, store poem titles and comments
-            if (type === 'full') {
+            if (profile === 'profile=full') {
               userFactory.setPoems(res.poems);
               userFactory.setComments(res.comments);
             }
@@ -257,10 +256,19 @@ angular.module('numaApp')
 
       userFactory.rSaveComment = function(info, poemId) {
         _sId = storageFactory.getId();
-        return $resource(endpointConstants.userPoemComment, {
+        return $resource(endpointConstants.userPoemCommentSave, {
           userId : _sId,
           poemId : poemId
         }).save([], info);
+      };
+
+      userFactory.rDeleteCommentAsCreator = function(poemId, commentId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userPoemComment, {
+          userId    : _sId,
+          poemId    : poemId,
+          commentId : commentId
+        }).delete();
       };
 
       userFactory.rSaveVote = function(info, poemId) {
