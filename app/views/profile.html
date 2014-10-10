@@ -3,7 +3,7 @@
   <div class="panel panel-default" style="margin-top: 30px;">
     <div class="panel-heading">Profile
       <div ng-show="currentUserId == userViewId" class="pull-right" style="line-height: 1px;">
-        <i class="ion-gear-a" style="font-size: 20px;" ng-click="enableEditor()" data-placement="bottom" bs-tooltip="tooltipEditProfile"></i>
+        <i class="ion-ios7-gear" style="font-size: 20px;" ng-click="enableEditor()" data-placement="bottom" bs-tooltip="tooltipEditProfile"></i>
       </div>
     </div>
     <div class="panel-body">
@@ -36,26 +36,29 @@
       <tabset justified="true">
         <tab>
           <tab-heading>
-            <i class="ion-document-text"></i>&nbsp; Poems <span class="badge">{{ poems.length }}</span>
+            <i class="ion-edit"></i>&nbsp; Poems <span class="badge">{{ poems.length }}</span>
           </tab-heading>
           <div ng-repeat="poem in poems">
             <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
           </div>
         </tab>
-        <tab>
+        <tab ng-show="currentUserId == userViewId">
           <tab-heading>
-            <i class="ion-chatbubble"></i>&nbsp; Comments <span class="badge">{{ comments.length }}</span>
+            <i class="ion-android-forums"></i>&nbsp; Comments <span class="badge">{{ comments.length }}</span>
           </tab-heading>
           <div ng-repeat="comment in comments">
             <a ng-href="/#!/poem/{{ comment.poemId }}">"{{ comment.comment }}" <i><small>({{ comment.poemTitle }})</small></i></a>
+            <span ng-if="currentUserId == userViewId">
+              ⋅ <i class="ion-close-round" style="font-size: 15px; line-height: 0px;" ng-click="deleteComment(comment.poemId, comment.id)"></i>
+            </span>
           </div>
         </tab>
         <tab ng-show="currentUserId == userViewId">
           <tab-heading>
-            <i class="ion-heart"></i>&nbsp; Favorite poems <span class="badge">{{ comments.length }}</span>
+            <i class="ion-heart"></i>&nbsp; Favorite poems <span class="badge">{{ favoritePoems.length }}</span>
           </tab-heading>
-          <div ng-repeat="comment in comments">
-            <a ng-href="/#!/poem/{{ comment.poemId }}">"{{ comment.comment }}" <i><small>({{ comment.poemTitle }})</small></i></a>
+          <div ng-repeat="favoritePoem in favoritePoems">
+            <a ng-href="/#!/poem/{{ favoritePoem.id }}">"{{ favoritePoem.title }}"</a>
           </div>
         </tab>
       </tabset>
@@ -117,7 +120,7 @@
 
       <button type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top"
         data-template="views/deleteaccountmodal.html" bs-modal="modal">
-        Delete/Unlink Account
+        <i class="ion-close-round"></i>&nbsp; Delete/Unlink Account
       </button>
     </div>
   </div>

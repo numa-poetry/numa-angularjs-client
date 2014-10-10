@@ -18,19 +18,23 @@ angular.module('numaApp')
       var _joinedDate;
       var _email;
       var _avatarUrl;
-      var _poems       = [];
-      var _comments    = [];
-      var _sId         = storageFactory.getId();
-      var _sToken      = storageFactory.getToken();
-      var _isLoggedIn  = false;
-      var userFactory  = {};
-      var serverDomain = 'http://localhost:3000';
-      var apiVersion   = '/api/v1';
+      var _poems         = [];
+      var _comments      = [];
+      var _favoritePoems = [];
+      var _sId           = storageFactory.getId();
+      var _sToken        = storageFactory.getToken();
+      var _isLoggedIn    = false;
+      var userFactory    = {};
+      var serverDomain   = 'http://localhost:3000';
+      var apiVersion     = '/api/v1';
 
 // helper functions ------------------------------------------------------------
 
       userFactory.init = function(paramsId, profile) {
         var _sId = storageFactory.getId();
+
+        console.log('id:',_sId);
+        console.log('params id:',paramsId);
         // console.log('fetching and initializing user data');
 
         // If no cookie found, logout
@@ -63,6 +67,7 @@ angular.module('numaApp')
             if (profile === 'profile=full') {
               userFactory.setPoems(res.poems);
               userFactory.setComments(res.comments);
+              userFactory.setFavoritePoems(res.favoritePoems);
             }
 
             $rootScope.$emit('finishedSettingUserDataOnPageRefresh');
@@ -109,8 +114,22 @@ angular.module('numaApp')
             // $location.path('/login').search('session', 'expired').search('previousView', previousView);
             // helperFactory.deleteDataAndRedirectToLogin($location.url());
           });
+        } else if ($rootScope.isAuthenticated === true) {
+          $auth.logout()
+            .then(function() {
+              // $alert({
+              //   type        : 'material-err',
+              //   title       : 'Your browser\'s session cookie has been removed.',
+              //   content     : 'Please try logging back in',
+              //   duration    : 4,
+              //   dismissable : true
+              // });
+              storageFactory.deleteId();
+              storageFactory.deleteToken();
+              userFactory.deleteInfo();
+            });
         } else {
-          // if (!paramsId) { console.log('no params specified'); }
+          console.log('no cookie or token found')
         }
       };
 
@@ -157,6 +176,10 @@ angular.module('numaApp')
         _comments = comments;
       };
 
+      userFactory.setFavoritePoems = function(favoritePoems) {
+        _favoritePoems = favoritePoems;
+      };
+
 // getters ---------------------------------------------------------------------
 
       userFactory.getIsLoggedIn = function() {
@@ -191,19 +214,24 @@ angular.module('numaApp')
         return _comments;
       };
 
+      userFactory.getFavoritePoems = function() {
+        return _favoritePoems;
+      };
+
 // deletes ---------------------------------------------------------------------
 
       userFactory.deleteInfo = function() {
-        _sId         = undefined;
-        _sToken      = undefined;
-        _id          = undefined;
-        _displayName = undefined;
-        _joinedDate  = undefined;
-        _email       = undefined;
-        _avatarUrl   = undefined;
-        _poems       = undefined;
-        _comments    = undefined;
-        _isLoggedIn  = false;
+        _sId            = undefined;
+        _sToken         = undefined;
+        _id             = undefined;
+        _displayName    = undefined;
+        _joinedDate     = undefined;
+        _email          = undefined;
+        _avatarUrl      = undefined;
+        _poems          = undefined;
+        _comments       = undefined;
+        _favoritePoems = undefined;
+        _isLoggedIn     = false;
       };
 
 // $resource calls -------------------------------------------------------------
@@ -262,7 +290,7 @@ angular.module('numaApp')
         }).save([], info);
       };
 
-      userFactory.rDeleteCommentAsCreator = function(poemId, commentId) {
+      userFactory.rDeleteComment = function(poemId, commentId) {
         _sId = storageFactory.getId();
         return $resource(endpointConstants.userPoemComment, {
           userId    : _sId,
@@ -282,6 +310,22 @@ angular.module('numaApp')
       userFactory.rGetVote = function(poemId) {
         _sId = storageFactory.getId();
         return $resource(endpointConstants.userPoemVote, {
+          userId : _sId,
+          poemId : poemId
+        }).get();
+      };
+
+      userFactory.rSavePoemAsFavorite = function(poemId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userPoemFavorite, {
+          userId : _sId,
+          poemId : poemId
+        }).save();
+      };
+
+      userFactory.rGetPoemAsFavoriteStatus = function(poemId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userPoemFavorite, {
           userId : _sId,
           poemId : poemId
         }).get();

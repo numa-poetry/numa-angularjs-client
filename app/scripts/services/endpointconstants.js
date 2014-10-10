@@ -34,6 +34,9 @@ angular.module('numaApp')
     // DELETE
     userPoem            : serverDomain + apiVersion + '/user/:userId/poem/:poemId',
 
+    // POST, GET
+    userPoemFavorite    : serverDomain + apiVersion + '/user/:userId/poem/:poemId/favorite',
+
     // POST
     userPoemCommentSave : serverDomain + apiVersion + '/user/:userId/poem/:poemId/comment',
 

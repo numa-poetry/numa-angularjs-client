@@ -29,9 +29,9 @@
     </div>
     <div class="pull-left" style="padding-left: 10px;">
       <div ng-if="userId !== creatorId && isAuthenticated">
-        <i class="ion-arrow-up-a" style="font-size: 30px;"
+        <i class="ion-thumbsup" style="font-size: 30px;"
           ng-click="changeVote(vote, 'up')" ng-class="{true:'up', false:''}[vote=='up']"></i>
-        <i class="ion-arrow-down-a" style="font-size: 30px;"
+        <i class="ion-thumbsdown" style="font-size: 30px;"
           ng-click="changeVote(vote, 'down')" ng-class="{true:'down', false:''}[vote=='down']"></i>
       </div>
     </div>
@@ -45,6 +45,7 @@
     <div class="pull-left">
       <i class="ion-pricetags" ng-show="tags.length > 0" data-placement="right" title="Tags" data-content="{{ tags }}" bs-popover
         style="font-size: 30px; padding-right: 15px;"></i>
+      <i class="ion-heart" ng-show="isAuthenticated" ng-click="saveFavoritedPoem()" ng-class="{'favorite-poem': favoritePoem}" style="font-size: 30px; padding-right: 15px;"></i>
     </div>
   </div>
 
@@ -79,24 +80,26 @@
       <!-- color: #A9C9A6; background-color: #A9C9A6; height: 1px; border: none;  -->
       <hr ng-if="!$first" style="width: 95%;" />
       <div class="col-xs-1">
-        <img class="img-rounded" ng-src="{{ comment.creator.avatarUrl }}" style="min-height: 30px; height: 30px; margin-top: 10px;">
+        <img class="img-rounded" ng-src="{{ comment.creator.avatarUrl }}" style="min-height: 40px; height: 40px;">
       </div>
       <div class="col-xs-10">
         <div class="comment-info">
           by <span><a ng-href="/#!/user/{{ comment.creator.id }}">{{ comment.creator.displayName }}</a></span>
           <span> ⋅ {{ timeSince(comment.createdAt)}} ago</span>
+          <span ng-if="isAuthenticated && (userId === creatorId || userId === comment.creator.id)">
+            ⋅ <i class="ion-close-round" style="font-size: 15px; line-height: 0px;" ng-click="deleteComment(comment.id)"></i></span>
         </div>
         <div class="comment">
           <span>{{ comment.comment }}</span> <i><small>{{ comment.id }}</small></i>
         </div>
       </div>
-      <div class="col-xs-1">
+<!--       <div class="col-xs-1">
         <div style="padding-top: 5px;" ng-show="userId === creatorId && isAuthenticated">
-          <a type="button" class="btn btn-sm btn-danger" ng-click="deleteComment(comment.id)"><i class="ion-close-round"></i></a>
+          <a type="button" class="btn btn-sm btn-danger" ng-click="deleteComment(comment.id)"><i class="ion-close-round"></i></a> -->
           <!-- data-animation="am-fade-and-slide-top"
             data-template="views/deletecommentmodal.html" bs-modal="modalDeleteComment" -->
-        </div>
-      </div>
+<!--         </div>
+      </div> -->
     </div>
   </div>
 </div>

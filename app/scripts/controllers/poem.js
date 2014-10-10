@@ -52,6 +52,18 @@ angular.module('numaApp')
           }, function(res) {
             console.log(res);
           });
+
+          var favoritedPoemResource = userFactory.rGetPoemAsFavoriteStatus($scope.poemId);
+
+          favoritedPoemResource.$promise.then(function(res) {
+            if (res.status === 'favorited') {
+              $scope.favoritePoem = true;
+            } else if (res.status === 'not_favorited') {
+              $scope.favoritePoem = false;
+            }
+          }, function(res) {
+            console.log(res);
+          });
         }
       }
 
@@ -87,7 +99,7 @@ angular.module('numaApp')
       $scope.deleteComment = function(commentId) {
         console.log('here');
 
-        var resource = userFactory.rDeleteCommentAsCreator($scope.poemId, commentId);
+        var resource = userFactory.rDeleteComment($scope.poemId, commentId);
 
         resource.$promise.then(function(res) {
           $alert({
@@ -168,6 +180,22 @@ angular.module('numaApp')
             duration    : 5,
             animation   : 'fadeZoomFadeDown'
           });
+        });
+      };
+
+      $scope.saveFavoritedPoem = function() {
+
+        var resource = userFactory.rSavePoemAsFavorite($scope.poemId);
+
+        resource.$promise.then(function(res) {
+          console.log(res);
+          if (res.status === 'favorited') {
+            $scope.favoritePoem = true;
+          } else if (res.status === 'removed') {
+            $scope.favoritePoem = false;
+          }
+        }, function(res) {
+          console.log(res);
         });
       };
 

@@ -21,11 +21,12 @@ angular.module('numaApp')
       userFactory.init($routeParams.id, 'full');
 
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
-        $scope.displayName = userFactory.getDisplayName();
-        $scope.joinedDate  = userFactory.getJoinedDate();
-        $scope.avatarUrl   = userFactory.getAvatarUrl();
-        $scope.poems       = userFactory.getPoems();
-        $scope.comments    = userFactory.getComments();
+        $scope.displayName   = userFactory.getDisplayName();
+        $scope.joinedDate    = userFactory.getJoinedDate();
+        $scope.avatarUrl     = userFactory.getAvatarUrl();
+        $scope.poems         = userFactory.getPoems();
+        $scope.comments      = userFactory.getComments();
+        $scope.favoritePoems = userFactory.getFavoritePoems();
         $scope.email = $scope.workingEmail = userFactory.getEmail();
       });
 
@@ -309,7 +310,40 @@ angular.module('numaApp')
             animation   : 'fadeZoomFadeDown'
           });
         });
+      };
 
+      $scope.deleteComment = function(poemId, commentId) {
+        console.log('here');
+
+        var resource = userFactory.rDeleteComment(poemId, commentId);
+
+        resource.$promise.then(function(res) {
+          $alert({
+            type        : 'material',
+            dismissable : false,
+            duration    : 5,
+            placement   : top,
+            content     : 'Comment deleted.',
+            animation   : 'fadeZoomFadeDown'
+          });
+
+          // find and remove comment from DOM
+          for (var i = $scope.comments.length - 1; i >= 0; i--) {
+            if ($scope.comments[i].id === commentId) {
+              $scope.comments.splice(i,1);
+            }
+          };
+          console.log($scope.comments);
+        }, function(res) {
+          $alert({
+            type        : 'material-err',
+            dismissable : true,
+            duration    : 5,
+            placement   : top,
+            content     : res.data.message,
+            animation   : 'fadeZoomFadeDown'
+          });
+        });
       };
 
     }

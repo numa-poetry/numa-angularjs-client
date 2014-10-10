@@ -384,6 +384,7 @@ a:not([name]) {
   /*font-family: 'Open Sans', sans-serif;*/
   font-family: 'Lusitana';
   font-size: 25px;
+  line-height: 20px;
 }
 
 .feed-poem-info {
@@ -418,7 +419,7 @@ a:not([name]) {
 .feed-container {
   padding: 15px 30px 0 30px;
   /*background-color: #F6F6EF;*/
-  background-color: rgba(246, 246, 239, 0.90);
+  background-color: rgba(246, 246, 239, 1);
   border: 2px solid;
   /*border-color: #5BC0DE;*/ /* info */
   border-color: #008CBA; /* primary */
@@ -554,4 +555,8 @@ a:not([name]) {
 .profile-display-name {
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 40px;
+}
+
+.favorite-poem {
+  color: #f04124;
 }
