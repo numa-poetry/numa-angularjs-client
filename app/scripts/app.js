@@ -30,7 +30,8 @@ angular
     'angularFileUpload',
     'matchmedia-ng',
     'selectize',
-    'angularUtils.directives.dirPagination'
+    'angularUtils.directives.dirPagination',
+    'btford.socket-io'
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
     '$popoverProvider', '$tooltipProvider', '$modalProvider',
@@ -159,4 +160,8 @@ angular
 
       $locationProvider.hashPrefix('!');
     }
-  ]);
+  ]).
+  factory('socketIO', function(socketFactory) {
+    var apiSocket = io.connect('http://localhost:3000');
+    return socketFactory({ ioSocket: apiSocket });
+  });

@@ -20,7 +20,8 @@
 
   <div class="row" style="padding-bottom: 30px;">
     <div class="pull-right" style="padding: 10px;" ng-show="userId !== creatorId">
-      <span>by <a ng-href="/#!/user/{{ creatorId }}">{{ creatorDisplayName }}</a></span>
+      <span>by <a ng-href="/#!/user/{{ creatorId }}">{{ creatorDisplayName }}</a></span>&nbsp;
+      <img class="img-circle" ng-src="{{ creatorAvatarUrl }}" style="min-height: 40px; height: 40px;">
     </div>
     <div class="pull-right" style="padding-right: 10px;" ng-show="userId === creatorId && isAuthenticated">
       <a ng-href="/#!/edit/{{ poemId }}" type="button" class="btn btn-sm btn-info">Edit</a>

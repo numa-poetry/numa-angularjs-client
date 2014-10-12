@@ -38,27 +38,26 @@
           <tab-heading>
             <i class="ion-edit"></i>&nbsp; Poems <span class="badge">{{ poems.length }}</span>
           </tab-heading>
-          <div ng-repeat="poem in poems">
-            <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
+          <div ng-repeat="poem in poems" style="font-size: 20px; padding-top: 5px;">
+            {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
           </div>
         </tab>
         <tab ng-show="currentUserId == userViewId">
           <tab-heading>
             <i class="ion-android-forums"></i>&nbsp; Comments <span class="badge">{{ comments.length }}</span>
           </tab-heading>
-          <div ng-repeat="comment in comments">
-            <a ng-href="/#!/poem/{{ comment.poemId }}">"{{ comment.comment }}" <i><small>({{ comment.poemTitle }})</small></i></a>
-            <span ng-if="currentUserId == userViewId">
-              ⋅ <i class="ion-close-round" style="font-size: 15px; line-height: 0px;" ng-click="deleteComment(comment.poemId, comment.id)"></i>
-            </span>
+          <div ng-repeat="comment in comments" style="font-size: 20px; padding-top: 5px;">
+            {{ $index+1 }}.&nbsp;
+            <a ng-href="/#!/poem/{{ comment.poemId }}">"{{ comment.comment }}" <i><small>({{ comment.poemTitle }})</small></i></a>&nbsp;
+            <i class="ion-close-round" style="font-size: 20px; line-height: 0px;" ng-click="deleteComment(comment.poemId, comment.id)"></i>
           </div>
         </tab>
         <tab ng-show="currentUserId == userViewId">
           <tab-heading>
             <i class="ion-heart"></i>&nbsp; Favorite poems <span class="badge">{{ favoritePoems.length }}</span>
           </tab-heading>
-          <div ng-repeat="favoritePoem in favoritePoems">
-            <a ng-href="/#!/poem/{{ favoritePoem.id }}">"{{ favoritePoem.title }}"</a>
+          <div ng-repeat="favoritePoem in favoritePoems" style="font-size: 20px; padding-top: 5px;">
+            {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ favoritePoem.id }}">{{ favoritePoem.title }}</a>
           </div>
         </tab>
       </tabset>
@@ -68,7 +67,7 @@
 
 <!-- EDIT PROFILE VIEW -->
 <div ng-show="editorEnabled">
-  <div class="panel panel-default">
+  <div class="panel panel-default" style="margin-top: 30px;">
     <div class="panel-heading">Edit Profile</div>
     <div class="panel-body">
       <div class="row">
@@ -109,7 +108,7 @@
 
       <div class="row">
         <div class="col-xs-6 col-sm-6">
-          <button type="button" class="btn btn-md btn-block btn-failure" ng-click="disableEditor()">Back</button>
+          <button type="button" class="btn btn-md btn-block btn-default" ng-click="disableEditor()">Back</button>
         </div>
         <div class="col-xs-6 col-sm-6">
           <button type="button" class="btn btn-md btn-block btn-success" ng-click="save()">Update profile</button>

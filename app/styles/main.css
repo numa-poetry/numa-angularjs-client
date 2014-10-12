@@ -414,6 +414,10 @@ a:not([name]) {
     text-align: center;
     padding-bottom: 15px;
   }
+
+  .player-controls {
+    padding: 10px;
+  }
 }
 
 .feed-container {
@@ -495,7 +499,7 @@ a:not([name]) {
   animation-name: fadeIn;
 }
 
-.fadeInAndOutAnimation.ng-leave {
+/*.fadeInAndOutAnimation.ng-leave {
   -webkit-animation-duration: 0.2s, 0.2s;
   -moz-animation-duration: 0.2s, 0.2s;
   -ms-animation-duration: 0.2s, 0.2s;
@@ -504,7 +508,7 @@ a:not([name]) {
   -moz-animation-name: fadeOut;
   -ms-animation-name: fadeOut;
   animation-name: fadeOut;
-}
+}*/
 
 .fadeOutAnimation.ng-leave {
   -webkit-animation-duration: 0.2s, 0.2s;

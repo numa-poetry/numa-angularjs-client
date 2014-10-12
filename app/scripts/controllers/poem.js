@@ -33,6 +33,7 @@ angular.module('numaApp')
 
         poemResource.$promise.then(function(res) {
           console.log(res);
+          $scope.creatorAvatarUrl   = res.poem.creator.avatarUrl;
           $scope.creatorId          = res.poem.creator.id;
           $scope.creatorDisplayName = res.poem.creator.displayName;
           $scope.title              = res.poem.title;

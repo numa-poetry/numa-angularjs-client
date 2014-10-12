@@ -10,14 +10,14 @@
       <span style="font-family: 'Gloria Hallelujah', cursive; font-size: 40px; line-height: 25px;">Numa</span>
     </a>
     <div class="navbar-left" plangular="https://soundcloud.com/numa-wp/sets/numa" style="color: #FFFFFF; padding: 3px;">
-      <button class="btn btn-md btn-primary" ng-click="previous()">
+      <button class="btn btn-md btn-primary player-controls" ng-click="previous()">
         <i class="ion-skip-backward" style="font-size: 20px;" ></i>
       </button>
-      <button class="btn btn-md btn-primary" ng-click="player.playPause(player.i, player.playlistIndex)">
+      <button class="btn btn-md btn-primary player-controls" ng-click="player.playPause(player.i, player.playlistIndex)">
         <i class="ion-play" ng-if="!player.playing" style="font-size: 20px;"></i>
         <i class="ion-pause" ng-if="player.playing" style="font-size: 20px;"></i>
       </button>
-      <button class="btn btn-md btn-primary" ng-click="next()">
+      <button class="btn btn-md btn-primary player-controls" ng-click="next()">
         <i class="ion-skip-forward" style="font-size: 20px;"></i>
       </button>
       &nbsp;

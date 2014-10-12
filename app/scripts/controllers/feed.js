@@ -9,9 +9,9 @@
  */
 angular.module('numaApp')
   .controller('FeedCtrl', ['$scope', 'poemFactory', 'storageFactory',
-    'userFactory', 'helperFactory',
+    'userFactory', 'helperFactory', 'socketIO', '$rootScope',
     function ($scope, poemFactory, storageFactory, userFactory,
-      helperFactory) {
+      helperFactory, socketIO, $rootScope) {
 
       $scope.poems           = [];
       $scope.totalPoems      = 0;
@@ -23,6 +23,17 @@ angular.module('numaApp')
       var id                 = storageFactory.getId();
       userFactory.init(id, 'Basic');
       getPoemsPage(1);
+
+      socketIO.forward('news',$scope);
+      $scope.$on('socket:news', function(ev, data) {
+        console.log(data);
+        socketIO.emit('my other event', {my: 'data'});
+      });
+
+      socketIO.on('news', function(data) {
+        console.log(data);
+        socketIO.emit('my other event', {my: 'data'});
+      });
 
 // functions -------------------------------------------------------------------
 
