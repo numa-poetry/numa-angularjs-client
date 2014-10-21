@@ -20,7 +20,7 @@ angular
     'Satellizer',
     'mgcrea.ngStrap',
     'angularSpinner',
-    // include specific directives from Angular UI (conflicts with AngularStrap)
+    // include specific directives from Angular UI because of conflicts with AngularStrap
     'ui.bootstrap.tpls',
     'ui.bootstrap.collapse',
     'ui.bootstrap.dropdown',
@@ -31,7 +31,8 @@ angular
     'matchmedia-ng',
     'selectize',
     'angularUtils.directives.dirPagination',
-    'btford.socket-io'
+    'btford.socket-io',
+    'flow'
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
     '$popoverProvider', '$tooltipProvider', '$modalProvider',
@@ -161,7 +162,13 @@ angular
       $locationProvider.hashPrefix('!');
     }
   ]).
-  factory('socketIO', function(socketFactory) {
-    var apiSocket = io.connect('http://localhost:3000');
-    return socketFactory({ ioSocket: apiSocket });
+  factory('socketIO', function(socketFactory, storageFactory) {
+    var socket = io.connect('http://localhost:3000');
+
+    // Store client's socket id as browser cookie
+    socket.on('socketId', function(data) {
+      storageFactory.setSocketId(data.id);
+    });
+
+    return socketFactory({ ioSocket: socket });
   });

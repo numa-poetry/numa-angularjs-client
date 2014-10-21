@@ -9,9 +9,9 @@
  */
 angular.module('numaApp')
   .controller('FeedCtrl', ['$scope', 'poemFactory', 'storageFactory',
-    'userFactory', 'helperFactory', 'socketIO', '$rootScope',
+    'userFactory', 'helperFactory', 'socketIO', '$rootScope', '$cookieStore',
     function ($scope, poemFactory, storageFactory, userFactory,
-      helperFactory, socketIO, $rootScope) {
+      helperFactory, socketIO, $rootScope, $cookieStore) {
 
       $scope.poems           = [];
       $scope.totalPoems      = 0;
@@ -24,16 +24,23 @@ angular.module('numaApp')
       userFactory.init(id, 'Basic');
       getPoemsPage(1);
 
-      socketIO.forward('news',$scope);
-      $scope.$on('socket:news', function(ev, data) {
+      socketIO.on('newComment', function(data) {
         console.log(data);
-        socketIO.emit('my other event', {my: 'data'});
       });
 
-      socketIO.on('news', function(data) {
-        console.log(data);
-        socketIO.emit('my other event', {my: 'data'});
-      });
+      // socketIO.forward('news',$scope);
+      // var unregister = $scope.$on('socket:news', function(ev, data) {
+      //   console.log(data);
+      //   socketIO.emit('my other event', {my: 'data'});
+      // });
+      // $scope.$on('$destroy', function() {
+      //   unregister();
+      // });
+
+      // socketIO.on('news', function(data) {
+      //   console.log(data);
+      //   socketIO.emit('my other event', {my: 'data'});
+      // });
 
 // functions -------------------------------------------------------------------
 

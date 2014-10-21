@@ -10,7 +10,8 @@
 angular.module('numaApp')
   .constant('storageConstants', {
 
-    id : 'id'
+    id       : 'id',
+    socketId : 'socketId'
 
   }
 );

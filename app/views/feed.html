@@ -27,31 +27,28 @@
     </form>
   </div>
 
-  <div style="padding: 15px 0 15px 0;">
-  <!-- | filter:poemSearch -->
-    <div class="post row fadeInAndOutAnimation" dir-paginate="poem in poems | itemsPerPage: poemsPerPage" total-items="totalPoems">
-      <div class="col-xs-1">
-        {{ $index+1 }}.
+  <div class="post row fadeInAndOutAnimation" dir-paginate="poem in poems | itemsPerPage: poemsPerPage" total-items="totalPoems">
+    <div class="col-xs-1">
+      {{ $index+1 }}.
+    </div>
+    <div class="col-xs-10">
+      <div class="feed-poem-title">
+        <a ng-href="/#!/poem/{{ poem.id }}" style="color: black; text-decoration: none;">
+          {{ poem.title }}
+        </a>
       </div>
-      <div class="col-xs-10">
-        <div class="feed-poem-title">
-          <a ng-href="/#!/poem/{{ poem.id }}" style="color: black; text-decoration: none;">
-            {{ poem.title }}
-          </a>
-        </div>
-        <div class="feed-poem-info">
-          <span style="color: #ED6307;">
-            <span>{{ poem.positiveVotes - poem.negativeVotes }}</span>
-            <span ng-show="(poem.positiveVotes - poem.negativeVotes) == 1 || (poem.positiveVotes - poem.negativeVotes) == -1">point</span>
-            <span ng-show="(poem.positiveVotes - poem.negativeVotes) != 1 && (poem.positiveVotes - poem.negativeVotes) != -1">points</span>
-          </span>
-          <span> ⋅ by <a ng-href="/#!/user/{{ poem.creator.id }}">{{ poem.creator.displayName }}</a></span>
-          <span> ⋅ {{ timeSince(poem.createdAt)}} ago</span>
-          <span style="color: #367800;"> ⋅ {{ poem.numberOfComments }} comments</span>
-        </div>
+      <div class="feed-poem-info">
+        <span style="color: #ED6307;">
+          <span>{{ poem.positiveVotes - poem.negativeVotes }}</span>
+          <span ng-show="(poem.positiveVotes - poem.negativeVotes) == 1 || (poem.positiveVotes - poem.negativeVotes) == -1">point</span>
+          <span ng-show="(poem.positiveVotes - poem.negativeVotes) != 1 && (poem.positiveVotes - poem.negativeVotes) != -1">points</span>
+        </span>
+        <span> ⋅ by <a ng-href="/#!/user/{{ poem.creator.id }}">{{ poem.creator.displayName }}</a></span>
+        <span> ⋅ {{ timeSince(poem.createdAt)}} ago</span>
+        <span style="color: #367800;"> ⋅ {{ poem.numberOfComments }} comments</span>
       </div>
     </div>
-
-    <dir-pagination-controls boundary-links="true" on-page-change="pageChanged(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
   </div>
+
+  <dir-pagination-controls boundary-links="true" on-page-change="pageChanged(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
 </div>

@@ -78,7 +78,10 @@
         </div>
         <div class="col-xs-8 col-sm-9">
           <h4>Upload new avatar</h4>
-          <input type="file" ng-file-select="onFileSelect($files)" accept="image/png, image/jpeg">
+          <span class="btn btn-sm btn-info btn-file">
+            Browse... <input type="file" ng-file-select="onFileSelect($files)" accept="image/png, image/jpeg, image/jpg, image/gif">
+          </span>
+          &nbsp;<small>Only PNG, GIF, JPG, and JPEG are allowed.</small>
         </div>
       </div>
 

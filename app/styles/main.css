@@ -564,3 +564,37 @@ a:not([name]) {
 .favorite-poem {
   color: #f04124;
 }
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+.drop {
+  padding: 15px;
+  border: 2px black dashed;
+  border-radius: 5px;
+  line-height: 34px;
+}
+
+.drop.drag-over {
+  background-color: #358753;
+  color: white;
+  border: 2px white dashed;
+}

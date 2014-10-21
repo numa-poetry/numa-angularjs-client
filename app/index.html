@@ -29,7 +29,8 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="numaApp" style="cursor: url(images/quill_icon_orange.png) 0 15, auto;">
+  <body ng-app="numaApp" style="cursor: url(images/quill_icon_orange.png) 0 15, auto;"
+    flow-prevent-drop flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
 
     <!-- This tag is necessary to enable HTML5 History API in AngularJS.
          This will allow us to have clean URLs without the # symbol. -->
@@ -85,6 +86,8 @@
     <script src="bower_components/matchmedia/matchMedia.js"></script>
     <script src="bower_components/matchmedia-ng/matchmedia-ng.js"></script>
     <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+    <script src="bower_components/flow.js/dist/flow.js"></script>
+    <script src="bower_components/ng-flow/dist/ng-flow.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -104,6 +107,7 @@
     <!-- ui-bootstrap-tpls.min.js == (ui-bootstrap.min.js + html templates) -->
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
+    <!-- Include angular-socket-io here -->
     <script type="text/javascript" src="bower_components/angular-socket-io/socket.js"></script>
 
     <!-- Include Socket.IO here -->

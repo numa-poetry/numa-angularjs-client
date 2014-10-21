@@ -230,7 +230,7 @@ angular.module('numaApp')
         _avatarUrl      = undefined;
         _poems          = undefined;
         _comments       = undefined;
-        _favoritePoems = undefined;
+        _favoritePoems  = undefined;
         _isLoggedIn     = false;
       };
 
@@ -245,16 +245,21 @@ angular.module('numaApp')
       };
 
       userFactory.rLogout = function() {
-        return $resource(endpointConstants.userLogout).get();
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userLogout, {
+          id : _sId
+        }).get();
       };
 
       userFactory.rDeleteAccount = function() {
+        _sId = storageFactory.getId();
         return $resource(endpointConstants.user, {
           id : _sId
         }).delete();
       };
 
       userFactory.rGetUser = function() {
+        _sId = storageFactory.getId();
         return $resource(endpointConstants.user, {
           id : _sId
         }).get();

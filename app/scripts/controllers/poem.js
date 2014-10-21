@@ -9,9 +9,15 @@
  */
 angular.module('numaApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
-    'userFactory', '$alert', 'helperFactory', '$rootScope', '$location',
+    'userFactory', '$alert', 'helperFactory', '$rootScope', '$location', 'socketIO',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
-      $alert, helperFactory, $rootScope, $location) {
+      $alert, helperFactory, $rootScope, $location, socketIO) {
+
+      socketIO.on('newComment', function(data) {
+        console.log('HAHAHAHAHA',data);
+      });
+
+
 
       $scope.tags = {}; // This way $watch can update tags after the resource call
       var previousVote;

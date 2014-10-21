@@ -85,118 +85,118 @@ angular.module('numaApp')
         return text;
       };
 
-      $scope.upload = function() {
-        $scope.uploading      = true;
-        $scope.uploadProgress = 0;
+      // $scope.upload = function() {
+      //   $scope.uploading      = true;
+      //   $scope.uploadProgress = 0;
 
-        // configure the S3 object
-        AWS.config.update({
-          accessKeyId     : $scope.creds.accessKeyId,
-          secretAccessKey : $scope.creds.secretAccessKey
-        });
-        AWS.config.region = 'us-west-1';
-        var s3Bucket = new AWS.S3({
-          params: {
-            Bucket: $scope.creds.bucketName
-          }
-        });
+      //   // configure the S3 object
+      //   AWS.config.update({
+      //     accessKeyId     : $scope.creds.accessKeyId,
+      //     secretAccessKey : $scope.creds.secretAccessKey
+      //   });
+      //   AWS.config.region = 'us-west-1';
+      //   var s3Bucket = new AWS.S3({
+      //     params: {
+      //       Bucket: $scope.creds.bucketName
+      //     }
+      //   });
 
-        if ($scope.file) {
+      //   if ($scope.file) {
 
-          // Check file extension
-          if ($scope.file.type !== 'image/png' && $scope.file.type !== 'image/jpeg') {
-            $alert({
-              type        : 'material-err',
-              dismissable : true,
-              title       : 'Oops! ',
-              content     : 'Only PNG and JPEG types are accepted.',
-              duration    : 5,
-              animation   : 'fadeZoomFadeDown'
-            });
-            $scope.uploading = false;
-            return;
-          }
+      //     // Check file extension
+      //     if ($scope.file.type !== 'image/png' && $scope.file.type !== 'image/jpeg') {
+      //       $alert({
+      //         type        : 'material-err',
+      //         dismissable : true,
+      //         title       : 'Oops! ',
+      //         content     : 'Only PNG and JPEG types are accepted.',
+      //         duration    : 5,
+      //         animation   : 'fadeZoomFadeDown'
+      //       });
+      //       $scope.uploading = false;
+      //       return;
+      //     }
 
-          // Perform File Size Check First
-          var fileSize = Math.round(parseInt($scope.file.size));
-          if (fileSize > $scope.sizeLimit) {
-            $alert({
-              type        : 'material-err',
-              dismissable : true,
-              title       : 'Oops! ',
-              content     : 'Maximum file size is 5 MB. Your image is ' +
-                $scope.fileSizeLabel() + '. Please upload a smaller image.',
-              duration    : 5,
-              animation   : 'fadeZoomFadeDown'
-            });
-            $scope.uploading = false;
-            return;
-          }
+      //     // Perform File Size Check First
+      //     var fileSize = Math.round(parseInt($scope.file.size));
+      //     if (fileSize > $scope.sizeLimit) {
+      //       $alert({
+      //         type        : 'material-err',
+      //         dismissable : true,
+      //         title       : 'Oops! ',
+      //         content     : 'Maximum file size is 5 MB. Your image is ' +
+      //           $scope.fileSizeLabel() + '. Please upload a smaller image.',
+      //         duration    : 5,
+      //         animation   : 'fadeZoomFadeDown'
+      //       });
+      //       $scope.uploading = false;
+      //       return;
+      //     }
 
-          // Prepend unique string to prevent overwrites
-          var uniqueFileName = $scope.uniqueString() + '-' + $scope.file.name;
+      //     // Prepend unique string to prevent overwrites
+      //     var uniqueFileName = $scope.uniqueString() + '-' + $scope.file.name;
 
-          var params = {
-            Key                  : uniqueFileName,
-            ContentType          : $scope.file.type,
-            Body                 : $scope.file,
-            ServerSideEncryption : 'AES256'
-          };
+      //     var params = {
+      //       Key                  : uniqueFileName,
+      //       ContentType          : $scope.file.type,
+      //       Body                 : $scope.file,
+      //       ServerSideEncryption : 'AES256'
+      //     };
 
-          s3Bucket.putObject(params, function(err, data) {
-            if (err) {
-              $alert({
-                type        : 'material-err',
-                dismissable : true,
-                title       : 'Oops! ',
-                content     : 'Please try again.',
-                duration    : 5,
-                animation   : 'fadeZoomFadeDown'
-              });
-              console.log(err.code, err.message);
-              $scope.uploading = false;
-              return;
-            } else {
-              // Call backend for image processing
-              var req        = {};
-              req.fileName   = uniqueFileName;
+      //     s3Bucket.putObject(params, function(err, data) {
+      //       if (err) {
+      //         $alert({
+      //           type        : 'material-err',
+      //           dismissable : true,
+      //           title       : 'Oops! ',
+      //           content     : 'Please try again.',
+      //           duration    : 5,
+      //           animation   : 'fadeZoomFadeDown'
+      //         });
+      //         console.log(err.code, err.message);
+      //         $scope.uploading = false;
+      //         return;
+      //       } else {
+      //         // Call backend for image processing
+      //         var req        = {};
+      //         req.fileName   = uniqueFileName;
 
-              var resource = userFactory.rSaveAvatarUrl(req);
+      //         var resource = userFactory.rSaveAvatarUrl(req);
 
-              resource.$promise.then(function(res) {
-                // display it to user / store to userFactory
-                $alert({
-                  type        : 'material',
-                  dismissable : true,
-                  title       : 'Success! ',
-                  content     : 'Profile pic updated.',
-                  duration    : 5,
-                  animation   : 'fadeZoomFadeDown'
-                });
-                $scope.avatarUrl = res.avatarUrl;
-                console.log(res);
-                $scope.uploading = false;
-              }, function(res) {
-                console.log(res);
-                $scope.uploading = false;
-              });
+      //         resource.$promise.then(function(res) {
+      //           // display it to user / store to userFactory
+      //           $alert({
+      //             type        : 'material',
+      //             dismissable : true,
+      //             title       : 'Success! ',
+      //             content     : 'Profile pic updated.',
+      //             duration    : 5,
+      //             animation   : 'fadeZoomFadeDown'
+      //           });
+      //           $scope.avatarUrl = res.avatarUrl;
+      //           console.log(res);
+      //           $scope.uploading = false;
+      //         }, function(res) {
+      //           console.log(res);
+      //           $scope.uploading = false;
+      //         });
 
-            }
-          }).on('httpUploadProgress', function(progress) {
-            console.log('percent completed:', Math.round(progress.loaded / progress.total * 100));
-          });
-        } else {
-          $alert({
-            type        : 'material-err',
-            dismissable : true,
-            title       : 'Oops! ',
-            content     : 'Please select an image to upload.',
-            duration    : 5,
-            animation   : 'fadeZoomFadeDown'
-          });
-          $scope.uploading = false;
-        }
-      };
+      //       }
+      //     }).on('httpUploadProgress', function(progress) {
+      //       console.log('percent completed:', Math.round(progress.loaded / progress.total * 100));
+      //     });
+      //   } else {
+      //     $alert({
+      //       type        : 'material-err',
+      //       dismissable : true,
+      //       title       : 'Oops! ',
+      //       content     : 'Please select an image to upload.',
+      //       duration    : 5,
+      //       animation   : 'fadeZoomFadeDown'
+      //     });
+      //     $scope.uploading = false;
+      //   }
+      // };
 
       $scope.onFileSelect = function(image) {
         $scope.uploading = true;
@@ -204,12 +204,13 @@ angular.module('numaApp')
           image = image[0];
         }
 
-        if (image.type !== 'image/png' && image.type !== 'image/jpeg') {
+        if (image.type !== 'image/png' && image.type !== 'image/jpeg' && image.type !== 'image/jpg' &&
+            image.type !== 'image/gif') {
           $alert({
             type        : 'material-err',
             dismissable : true,
             title       : 'Oops! ',
-            content     : 'Only PNG and JPEG types are accepted.',
+            content     : 'Only PNG, GIF, JPG, and JPEG are allowed.',
             duration    : 5,
             animation   : 'fadeZoomFadeDown'
           });
