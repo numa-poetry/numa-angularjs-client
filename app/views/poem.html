@@ -16,6 +16,10 @@
     <!-- <div style="padding-left: 30px; padding-right: 30px;"> -->
       <hr style="width: 95%;">
     <!-- </div> -->
+
+      <img ng-src="{{ imageUrl }}"/>
+
+      <hr style="width: 95%;">
   </div>
 
   <div class="row" style="padding-bottom: 30px;">
@@ -44,9 +48,10 @@
       </span>
     </div>
     <div class="pull-left">
+      <i class="ion-heart" ng-show="userId !== creatorId && isAuthenticated" ng-click="saveFavoritedPoem()" ng-class="{'favorite-poem': favoritePoem}"
+        style="font-size: 30px; padding-right: 15px;"></i>
       <i class="ion-pricetags" ng-show="tags.length > 0" data-placement="right" title="Tags" data-content="{{ tags }}" bs-popover
         style="font-size: 30px; padding-right: 15px;"></i>
-      <i class="ion-heart" ng-show="isAuthenticated" ng-click="saveFavoritedPoem()" ng-class="{'favorite-poem': favoritePoem}" style="font-size: 30px; padding-right: 15px;"></i>
     </div>
   </div>
 
@@ -54,7 +59,7 @@
     <div class='form-group' ng-show="isAuthenticated">
       <textarea class='form-control poem-comment' ng-model='comment' rows='1' placeholder='Give {{ creatorDisplayName }} your feedback...'></textarea>
       <div class="pull-right" style="padding-top: 10px;">
-        <button type="button" class="btn btn-sm btn-primary pull-right" ng-click="saveComment()" >Save</button>
+        <button type="button" class="btn btn-sm btn-primary pull-right" ng-click="saveComment()">Save</button>
       </div>
     </div>
     <div ng-show="!isAuthenticated">

@@ -2,34 +2,36 @@
   <div class='poem-title' contenteditable='true' ng-model='title' strip-br='true' select-non-editable='true'></div>
   <textarea class='form-control poem-body' ng-model='poem' rows='20' cols='20'></textarea>
 
-  <h3>Add an inspirational image</h3>
-  <div flow-init="{singleFile:true}"
-       flow-files-submitted="onFileSelect($flow.files)">
-    <div class="drop" flow-drop ng-class="dropClass">
-      <div ng-show="!$flow.files.length">
-        <span class="btn btn-default" flow-btn>Select an image</span>
-        <b>OR</b>
-        Drag And Drop your image here
+  <div class="poem-image-widget">
+    <h3>Add an inspirational image</h3>
+    <div flow-init="{singleFile:true}"
+         flow-files-submitted="onFileSelect($flow.files)">
+      <div class="drop" flow-drop ng-class="dropClass">
+        <div ng-show="!$flow.files.length">
+          <span class="btn btn-default" flow-btn>Select an image</span>
+          <b>OR</b>
+          Drag And Drop your image here
+        </div>
+        <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>
+          Change
+        </span>
+        <span class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel(); removeImageFromS3()">
+          Remove
+        </span>
       </div>
-      <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>
-        Change
-      </span>
-      <span class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel()">
-        Remove
-      </span>
-    </div>
-    <small>Only PNG, GIF, JPG, and JPEG are allowed.</small>
+      <small>Only PNG, GIF, JPG, and JPEG are allowed.</small>
 
-    <div ng-show="uploading">
-      <center>
-        <i class="ion-ios7-reloading" style="font-size: 80px;"></i>
-      </center>
-    </div>
+      <div ng-show="uploading">
+        <center>
+          <i class="ion-ios7-reloading" style="font-size: 80px;"></i>
+        </center>
+      </div>
 
-    <div ng-show="$flow.files.length && !uploading">
-      <span class="title">{{$flow.file.name}}</span>
-      <div class="thumbnail" style="background-color: rgba(246, 246, 239, 0.95); margin-bottom: 0; margin-top: 15px;">
-        <img flow-img="$flow.files[0]" />
+      <div ng-show="$flow.files.length && !uploading">
+        <span class="title">{{$flow.file.name}}</span>
+        <div class="thumbnail poem-image-thumbnail">
+          <img flow-img="$flow.files[0]" />
+        </div>
       </div>
     </div>
   </div>

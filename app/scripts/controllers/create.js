@@ -27,6 +27,21 @@ angular.module('numaApp')
 
 // functions -------------------------------------------------------------------
 
+      $scope.removeImageFromS3 = function() {
+        if ($scope.imageUrl) {
+          var req      = {};
+          req.imageUrl = $scope.imageUrl;
+
+          var http = userFactory.hDeletePoemImage(req);
+
+          http.then(function(res) {
+            console.log(res);
+          }, function(res) {
+            console.log(res);
+          });
+        }
+      }
+
       $scope.onFileSelect = function(image) {
         // remove previously uploaded image
 

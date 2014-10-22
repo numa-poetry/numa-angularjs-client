@@ -17,8 +17,6 @@ angular.module('numaApp')
         console.log('HAHAHAHAHA',data);
       });
 
-
-
       $scope.tags = {}; // This way $watch can update tags after the resource call
       var previousVote;
 
@@ -44,6 +42,7 @@ angular.module('numaApp')
           $scope.creatorDisplayName = res.poem.creator.displayName;
           $scope.title              = res.poem.title;
           $scope.poem               = res.poem.poem;
+          $scope.imageUrl           = res.poem.imageUrl;
           $scope.tags               = res.poem.tags.join(', ');
           $scope.comments           = res.poem.comments;
           $scope.totalVotes         = res.poem.positiveVotes - res.poem.negativeVotes;
@@ -104,8 +103,6 @@ angular.module('numaApp')
       };
 
       $scope.deleteComment = function(commentId) {
-        console.log('here');
-
         var resource = userFactory.rDeleteComment($scope.poemId, commentId);
 
         resource.$promise.then(function(res) {

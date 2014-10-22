@@ -11,7 +11,9 @@ body {
   /* http://qrohlf.com/trianglify/ */
   /*background-image: url(../images/trianglify-background.svg), none;*/
   /*background-image: url(../images/trianglify-background-gb.jpg), none;*/
-  background-image: url(../images/landscape-md.jpg), none;
+  /*background-image: url(../images/landscape-md.jpg), none;*/
+    background-image: url(../images/beach-sm.jpg), none;
+
   /*background-image: url(../images/sea-md.jpg), none;*/
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -597,4 +599,21 @@ a:not([name]) {
   background-color: #358753;
   color: white;
   border: 2px white dashed;
+}
+
+.poem-image-widget {
+  margin-top: 15px;
+  padding-top: 1px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: rgba(246, 246, 239, 0.95);
+}
+
+.poem-image-thumbnail {
+  background-color: rgba(246, 246, 239, 0);
+  margin-bottom: 0;
+  margin-top: 15px;
+  padding: 0;
+  border: 0;
 }

@@ -163,12 +163,14 @@ angular
     }
   ]).
   factory('socketIO', function(socketFactory, storageFactory) {
-    var socket = io.connect('http://localhost:3000');
+    if (io) {
+      var socket = io.connect('http://localhost:3000');
 
-    // Store client's socket id as browser cookie
-    socket.on('socketId', function(data) {
-      storageFactory.setSocketId(data.id);
-    });
+      // Store client's socket id as browser cookie
+      socket.on('socketId', function(data) {
+        storageFactory.setSocketId(data.id);
+      });
 
-    return socketFactory({ ioSocket: socket });
+      return socketFactory({ ioSocket: socket });
+    }
   });

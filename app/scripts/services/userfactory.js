@@ -359,6 +359,18 @@ angular.module('numaApp')
         });
       };
 
+      userFactory.hDeletePoemImage = function(info) {
+        _sId = storageFactory.getId();
+        return $http({
+          method   : 'DELETE',
+          url      : serverDomain + apiVersion + '/user/' + _sId + '/poem/image',
+          headers  : {'Content-Type': 'application/json;charset=utf-8'},
+          data     : {
+            imageUrl : info.imageUrl
+          }
+        });
+      }
+
       return userFactory;
 
     }
