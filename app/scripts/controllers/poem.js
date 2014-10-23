@@ -28,6 +28,10 @@ angular.module('numaApp')
         'title': 'Are you sure?'
       };
 
+      $scope.playPauseButton = function() {
+        $scope.audio1.playPause();
+      };
+
       $scope.userId = storageFactory.getId();
       userFactory.init($scope.userId, 'Basic');
 

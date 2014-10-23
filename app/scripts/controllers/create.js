@@ -28,6 +28,7 @@ angular.module('numaApp')
 // functions -------------------------------------------------------------------
 
       $scope.savePoemAndImage = function(image) {
+
         if ($scope.poem === '' || $scope.poem === undefined) {
           $alert({
             type        : 'material-err',
@@ -72,11 +73,15 @@ angular.module('numaApp')
           method : 'POST',
           file   : image.file
         }).success(function(data) {
-          var req      = {};
-          req.poem     = $scope.poem;
-          req.title    = $scope.title;
-          req.tags     = $scope.tags;
-          req.imageUrl = data.imageUrl;
+          var req        = {};
+          req.poem       = $scope.poem;
+          req.title      = $scope.title;
+          req.tags       = $scope.tags;
+          req.songTitle  = $scope.songTitle;
+          req.songArtist = $scope.songArtist;
+          req.songLink   = $scope.songLink;
+          req.imageUrl   = data.imageUrl;
+          console.log(req);
 
           var resource = userFactory.rSavePoem(req);
 
