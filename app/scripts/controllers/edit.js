@@ -9,9 +9,9 @@
  */
 angular.module('numaApp')
   .controller('EditCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
-    'userFactory', '$alert', '$location',
+    'userFactory', '$alert', '$location', '$upload',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
-      $alert, $location) {
+      $alert, $location, $upload) {
 
       $scope.tagOptions = ['love', 'life', 'happiness'];
 
@@ -25,51 +25,148 @@ angular.module('numaApp')
 
       var poemId = $routeParams.id;
       if (poemId) {
-        console.log($routeParams);
+        // console.log($routeParams);
         var resource = poemFactory.rGet(poemId);
 
         resource.$promise.then(function(res) {
           $scope.title     = res.poem.title;
           $scope.poem      = res.poem.poem;
           $scope.tags      = res.poem.tags;
+          $scope.imageUrl  = res.poem.imageUrl;
         }, function(res) {
-          console.log(res);
+          // console.log(res);
         });
       }
 
 // functions -------------------------------------------------------------------
 
-      $scope.updatePoem = function() {
-        var req   = {};
-        req.id    = $routeParams.id;
-        req.poem  = $scope.poem;
-        req.title = $scope.title;
-        req.tags  = $scope.tags;
-        console.log('req:', req);
+      $scope.removeImage = function() {
+        if ($scope.imageUrl) {
+          var req      = {};
+          req.imageUrl = $scope.imageUrl;
+          req.id       = poemId
 
-        var http = userFactory.hUpdatePoem(req);
+          var http = userFactory.hDeletePoemImage(req);
 
-        http.then(function(res) {
-          console.log('good res:', res);
-          $alert({
-            type        : 'material',
-            dismissable : false,
-            duration    : 5,
-            title       : 'Poem saved.',
-            animation   : 'fadeZoomFadeDown'
+          http.then(function(res) {
+            console.log(res);
+            $scope.imageUrl = undefined;
+          }, function(res) {
+            console.log(res);
           });
+        }
+      }
 
-          $location.path('/poem/' + req.id);
-        }, function(res) {
+      $scope.updatePoemAndImage = function(image) {
+        if ($scope.poem === '' || $scope.poem === undefined) {
           $alert({
             type        : 'material-err',
             dismissable : true,
-            title       : 'Oops! ',
-            content     : res.data.message,
             duration    : 5,
+            content     : 'You haven\'t written anything yet!',
             animation   : 'fadeZoomFadeDown'
           });
-        });
+          return;
+        }
+
+        if ($scope.title === '' || $scope.poem === undefined || $scope.title === 'Untitled') {
+          $alert({
+            type        : 'material-err',
+            dismissable : true,
+            duration    : 5,
+            content     : 'You haven\'t spiced up your title!',
+            animation   : 'fadeZoomFadeDown'
+          });
+          return;
+        }
+
+        var req      = {};
+        req.id       = $routeParams.id;
+        req.poem     = $scope.poem;
+        req.title    = $scope.title;
+        req.tags     = $scope.tags;
+
+        // If an image has been added, update the scope property before the request
+        if (image.length > 0 && image !== undefined) {
+
+          console.log('about to')
+          if (angular.isArray(image)) {
+            image = image[0];
+          }
+
+          if (image.file.type !== 'image/png' && image.file.type !== 'image/jpeg' && image.file.type !== 'image/jpg' &&
+              image.file.type !== 'image/gif') {
+            $alert({
+              type        : 'material-err',
+              dismissable : true,
+              duration    : 5,
+              content     : 'Only PNG, GIF, JPG, and JPEG are allowed.',
+              animation   : 'fadeZoomFadeDown'
+            });
+            image.cancel();
+            return;
+          }
+
+          $scope.upload = $upload.upload({
+            url    : 'http://localhost:3000/api/v1/user/' + storageFactory.getId() + '/poem/image',
+            method : 'POST',
+            file   : image.file
+          }).success(function(data) {
+            console.log('Successful image upload.');
+            console.log(data.imageUrl);
+
+            $scope.imageUrl = data.imageUrl;
+            req.imageUrl = data.imageUrl;
+            var http = userFactory.hUpdatePoem(req);
+
+            http.then(function(res) {
+              $alert({
+                type        : 'material',
+                dismissable : false,
+                duration    : 5,
+                title       : 'Your poem has been updated.',
+                animation   : 'fadeZoomFadeDown'
+              });
+
+              $location.path('/poem/' + req.id);
+            }, function(res) {
+              $alert({
+                type        : 'material-err',
+                dismissable : true,
+                title       : 'Oops! ',
+                content     : res.data.message,
+                duration    : 5,
+                animation   : 'fadeZoomFadeDown'
+              });
+            });
+          }).error(function(err) {
+            console.log('Error uploading file: ' + err.message || err);
+          });
+        } else {
+          req.imageUrl = $scope.imageUrl;
+          var http = userFactory.hUpdatePoem(req);
+
+          http.then(function(res) {
+            $alert({
+              type        : 'material',
+              dismissable : false,
+              duration    : 5,
+              title       : 'Your poem has been updated.',
+              animation   : 'fadeZoomFadeDown'
+            });
+
+            $location.path('/poem/' + req.id);
+          }, function(res) {
+            $alert({
+              type        : 'material-err',
+              dismissable : true,
+              title       : 'Oops! ',
+              content     : res.data.message,
+              duration    : 5,
+              animation   : 'fadeZoomFadeDown'
+            });
+          });
+        }
       };
 
     }

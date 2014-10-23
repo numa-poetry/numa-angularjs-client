@@ -4,8 +4,7 @@
 
   <div class="poem-image-widget">
     <h3>Add an inspirational image</h3>
-    <div flow-init="{singleFile:true}"
-         flow-files-submitted="onFileSelect($flow.files)">
+    <div flow-init="{singleFile:true}">
       <div class="drop" flow-drop ng-class="dropClass">
         <div ng-show="!$flow.files.length">
           <span class="btn btn-default" flow-btn>Select an image</span>
@@ -15,31 +14,30 @@
         <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>
           Change
         </span>
-        <span class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel(); removeImageFromS3()">
+        <span class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel();">
           Remove
         </span>
       </div>
       <small>Only PNG, GIF, JPG, and JPEG are allowed.</small>
 
-      <div ng-show="uploading">
+      <!-- <div ng-show="uploading">
         <center>
           <i class="ion-ios7-reloading" style="font-size: 80px;"></i>
         </center>
-      </div>
+      </div> -->
 
-      <div ng-show="$flow.files.length && !uploading">
+      <div ng-show="$flow.files.length">
         <span class="title">{{$flow.file.name}}</span>
         <div class="thumbnail poem-image-thumbnail">
           <img flow-img="$flow.files[0]" />
         </div>
       </div>
+      <div style='padding-top: 15px;'>
+        <div selectize='tagConfig' options='tagOptions' ng-model='tags' required></div>
+      </div>
+      <div style='padding-top: 10px;'>
+        <button type='button' class='btn btn-lg btn-block btn-primary' ng-click='savePoemAndImage($flow.files)'>Save</button>
+      </div>
     </div>
-  </div>
-
-  <div style='padding-top: 15px;'>
-    <div selectize='tagConfig' options='tagOptions' ng-model='tags' required></div>
-  </div>
-  <div style='padding-top: 10px;'>
-    <button type='button' class='btn btn-lg btn-block btn-primary' ng-click='savePoem()'>Save</button>
   </div>
 </div>

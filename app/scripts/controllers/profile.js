@@ -18,7 +18,19 @@ angular.module('numaApp')
       $scope.currentUserId = storageFactory.getId();
       $scope.userViewId    = $routeParams.id;
 
+      console.log('$scope.currentUserId',$scope.currentUserId);
+      console.log('$scope.userViewId', $scope.userViewId);
+      console.log('is isAuthenticated:', $rootScope.isAuthenticated)
+
       userFactory.init($routeParams.id, 'full');
+
+        // $scope.displayName   = userFactory.getDisplayName();
+        // $scope.joinedDate    = userFactory.getJoinedDate();
+        // $scope.avatarUrl     = userFactory.getAvatarUrl();
+        // $scope.poems         = userFactory.getPoems();
+        // $scope.comments      = userFactory.getComments();
+        // $scope.favoritePoems = userFactory.getFavoritePoems();
+        // $scope.email = $scope.workingEmail = userFactory.getEmail();
 
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
         $scope.displayName   = userFactory.getDisplayName();

@@ -34,8 +34,11 @@ angular.module('numaApp')
     // GET
     userLogout          : serverDomain + apiVersion + '/user/:id/logout',
 
-    // POST, DELETE
+    // POST
     userPoemImage       : serverDomain + apiVersion + '/user/:id/poem/image',
+
+    // DELETE
+    userPoemImageDelete : serverDomain + apiVersion + '/user/:userId/poem/:poemId/image',
 
     // DELETE
     userPoem            : serverDomain + apiVersion + '/user/:userId/poem/:poemId',

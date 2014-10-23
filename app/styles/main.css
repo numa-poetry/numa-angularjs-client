@@ -315,6 +315,7 @@ a:not([name]) {
   color: #000000;
   background-color: rgba(246, 246, 239, -0.1);
   border: none!important;
+  padding: 100px 25px 70px 25px;
 }
 
 .poem-body {
@@ -607,13 +608,13 @@ a:not([name]) {
   padding-bottom: 30px;
   padding-left: 30px;
   padding-right: 30px;
-  background-color: rgba(246, 246, 239, 0.95);
+  background-color: white;
+  border: 2px #008CBA solid;
 }
 
 .poem-image-thumbnail {
   background-color: rgba(246, 246, 239, 0);
   margin-bottom: 0;
   margin-top: 15px;
-  padding: 0;
-  border: 0;
+  /*border: 0;*/
 }

@@ -6,20 +6,15 @@
       <hr>
     </div>
 
-  <!--   <div class="poem-title">
-      {{ title }}
-    </div> -->
-    <pre class="poem-body-view" style="padding: 50px 25px 70px 25px;">
+    <div class="poem-image-thumbnail" >
+      <img class="img-responsive" ng-src="{{ imageUrl }}" style="border-radius: 10px;"/>
+    </div>
+
+    <pre class="poem-body-view">
       {{ poem }}
     </pre>
 
-    <!-- <div style="padding-left: 30px; padding-right: 30px;"> -->
-      <hr style="width: 95%;">
-    <!-- </div> -->
-
-      <img ng-src="{{ imageUrl }}"/>
-
-      <hr style="width: 95%;">
+    <hr style="width: 95%;">
   </div>
 
   <div class="row" style="padding-bottom: 30px;">

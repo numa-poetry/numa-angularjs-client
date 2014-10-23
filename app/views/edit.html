@@ -1,10 +1,56 @@
 <div class="form-group"style="height: 100%;">
   <div class="poem-title" contenteditable="true" ng-model="title" strip-br="true" select-non-editable="true"></div>
   <textarea class="form-control poem-body" ng-model="poem" rows="20" cols="20" style="white-space: pre-line;"></textarea>
-  <div style='padding-top: 15px;'>
-    <div selectize='tagConfig' options='tagOptions' ng-model='tags' required></div>
-  </div>
-  <div style="padding-top: 10px;">
-    <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="updatePoem()">Update</button>
+
+  <div class="poem-image-widget">
+    <h3>
+      <span ng-if="imageUrl">Change or remove your inspirational image</span>
+      <span ng-if="!imageUrl">Add an inspirational image</span>
+    </h3>
+    <div flow-init="{singleFile:true}">
+      <div class="drop" flow-drop ng-class="dropClass">
+        <div ng-show="!$flow.files.length">
+          <span class="btn btn-default" flow-btn>Select an image</span>
+          <b>OR</b>
+          Drag And Drop your image here
+        </div>
+        <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>
+          Change
+        </span>
+        <span class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel();">
+          Cancel
+        </span>
+      </div>
+      <small>Only PNG, GIF, JPG, and JPEG are allowed.</small>
+
+      <div ng-if="imageUrl" ng-hide="$flow.files.length" style="padding-top: 10px;">
+        <span class="btn btn-sm btn-danger" ng-click="removeImage()">
+          Remove
+        </span>
+      </div>
+
+      <!-- <div ng-show="uploading">
+        <center>
+          <i class="ion-ios7-reloading" style="font-size: 80px;"></i>
+        </center>
+      </div> -->
+
+      <div ng-show="!$flow.files.length && imageUrl" class="thumbnail poem-image-thumbnail">
+        <img ng-src="{{ imageUrl }}"/>
+      </div>
+
+      <div ng-show="$flow.files.length">
+        <!-- <span class="title">{{$flow.files[0].name}}</span> -->
+        <div class="thumbnail poem-image-thumbnail">
+          <img flow-img="$flow.files[0]" />
+        </div>
+      </div>
+      <div style='padding-top: 15px;'>
+        <div selectize='tagConfig' options='tagOptions' ng-model='tags' required></div>
+      </div>
+      <div style='padding-top: 10px;'>
+        <button type='button' class='btn btn-lg btn-block btn-primary' ng-click='updatePoemAndImage($flow.files)'>Update</button>
+      </div>
+    </div>
   </div>
 </div>

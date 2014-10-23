@@ -41,7 +41,7 @@ angular.module('numaApp')
         // console.log(_sId);
 
         if (paramsId) {
-
+          console.log('yes here');
           profile === 'full' ? profile = ('profile=full') : profile = '';
 
           var resource = $resource(endpointConstants.user + '/?' + profile, {
@@ -49,6 +49,7 @@ angular.module('numaApp')
           }).get();
 
           resource.$promise.then(function(res) {
+            console.log('success!');
             console.log(res);
 
             // Store basic user info
@@ -115,6 +116,7 @@ angular.module('numaApp')
             // helperFactory.deleteDataAndRedirectToLogin($location.url());
           });
         } else if ($rootScope.isAuthenticated === true) {
+          console.log('auth logout');
           $auth.logout()
             .then(function() {
               // $alert({
@@ -340,7 +342,6 @@ angular.module('numaApp')
 
       userFactory.hUpdateUser = function(info) {
         _sId = storageFactory.getId();
-        console.log(_sId);
         return $http({
           method : 'PUT',
           url    : serverDomain + apiVersion + '/user/' + _sId,
@@ -363,7 +364,7 @@ angular.module('numaApp')
         _sId = storageFactory.getId();
         return $http({
           method   : 'DELETE',
-          url      : serverDomain + apiVersion + '/user/' + _sId + '/poem/image',
+          url      : serverDomain + apiVersion + '/user/' + _sId + '/poem/' + info.id + '/image',
           headers  : {'Content-Type': 'application/json;charset=utf-8'},
           data     : {
             imageUrl : info.imageUrl
