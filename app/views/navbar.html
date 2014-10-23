@@ -32,13 +32,13 @@
   </div>
   <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
     <ul class="nav navbar-nav pull-right">
-      <!-- <li data-match-route="/$"><a ng-href="/#!/"><i class="ion-home" style="font-size: 20px;"></i></a></li> -->
+      <li data-match-route="/#!/"><a ng-href="/#!/"><i class="ion-home" style="font-size: 20px;"></i></a></li>
 
-      <li ng-show="isPhone" data-match-route="/feed" data-placement="left" bs-tooltip="tooltipFeed">
-        <a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
+      <li ng-show="isPhone" data-match-route="/feed/" data-placement="left" bs-tooltip="tooltipFeed">
+        <a ng-href="/#!/feed/?page=1"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
       </li>
-      <li ng-show="!isPhone" data-match-route="/feed" data-placement="bottom" bs-tooltip="tooltipFeed">
-        <a ng-href="/#!/feed"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
+      <li ng-show="!isPhone" data-match-route="/feed/" data-placement="bottom" bs-tooltip="tooltipFeed">
+        <a ng-href="/#!/feed/?page=1"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
       </li>
 
       <li ng-show="isPhone && isAuthenticated" data-match-route="/create" data-placement="left"

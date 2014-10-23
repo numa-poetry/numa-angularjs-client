@@ -51,36 +51,78 @@ angular.module('numaApp')
           return;
         }
 
-        if (angular.isArray(image)) {
-          image = image[0];
-        }
+        console.log(image);
 
-        if (image.file.type !== 'image/png' && image.file.type !== 'image/jpeg' && image.file.type !== 'image/jpg' &&
-            image.file.type !== 'image/gif') {
-          $alert({
-            type        : 'material-err',
-            dismissable : true,
-            duration    : 5,
-            content     : 'Only PNG, GIF, JPG, and JPEG are allowed.',
-            animation   : 'fadeZoomFadeDown'
+        if (image !== 'undefined' && image.length > 0) {
+          console.log('here');
+          if (angular.isArray(image)) {
+            image = image[0];
+          }
+
+          if (image.file.type !== 'image/png' && image.file.type !== 'image/jpeg' && image.file.type !== 'image/jpg' &&
+              image.file.type !== 'image/gif') {
+            $alert({
+              type        : 'material-err',
+              dismissable : true,
+              duration    : 5,
+              content     : 'Only PNG, GIF, JPG, and JPEG are allowed.',
+              animation   : 'fadeZoomFadeDown'
+            });
+            image.cancel();
+            return;
+          }
+
+          $scope.upload = $upload.upload({
+            url    : 'http://localhost:3000/api/v1/user/' + storageFactory.getId() + '/poem/image',
+            method : 'POST',
+            file   : image.file
+          }).success(function(data) {
+            var req        = {};
+            req.poem       = $scope.poem;
+            req.title      = $scope.title;
+            req.tags       = $scope.tags;
+            req.songTitle  = $scope.songTitle;
+            req.songArtist = $scope.songArtist;
+            req.songUrl    = $scope.songUrl;
+            req.videoUrl   = $scope.videoUrl;
+            req.imageUrl   = data.imageUrl;
+            console.log(req);
+
+            var resource = userFactory.rSavePoem(req);
+
+            resource.$promise.then(function(res) {
+              $alert({
+                type        : 'material',
+                dismissable : false,
+                duration    : 5,
+                title       : 'Your poem has been saved.',
+                animation   : 'fadeZoomFadeDown'
+              });
+              $location.path('/feed');
+            }, function(res) {
+              $alert({
+                type        : 'material-err',
+                dismissable : true,
+                title       : 'Oops! ',
+                content     : res.data.message,
+                duration    : 5,
+                animation   : 'fadeZoomFadeDown'
+              });
+            });
+
+          }).error(function(err) {
+            console.log('Error uploading file: ' + err.message || err);
           });
-          image.cancel();
-          return;
-        }
-
-        $scope.upload = $upload.upload({
-          url    : 'http://localhost:3000/api/v1/user/' + storageFactory.getId() + '/poem/image',
-          method : 'POST',
-          file   : image.file
-        }).success(function(data) {
+        } else {
           var req        = {};
           req.poem       = $scope.poem;
           req.title      = $scope.title;
           req.tags       = $scope.tags;
           req.songTitle  = $scope.songTitle;
           req.songArtist = $scope.songArtist;
-          req.songLink   = $scope.songLink;
-          req.imageUrl   = data.imageUrl;
+          req.songUrl    = $scope.songUrl;
+          req.videoUrl   = $scope.videoUrl;
+          // req.imageUrl   = data.imageUrl;
           console.log(req);
 
           var resource = userFactory.rSavePoem(req);
@@ -104,10 +146,7 @@ angular.module('numaApp')
               animation   : 'fadeZoomFadeDown'
             });
           });
-
-        }).error(function(err) {
-          console.log('Error uploading file: ' + err.message || err);
-        });
+        }
       };
 
     }

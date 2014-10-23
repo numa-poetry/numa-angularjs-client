@@ -4,6 +4,7 @@
       Welcome to Numa
       <img src="../images/quill_orange.png" align="top">
     </div>
+    {{ totalPoems }} beautiful poems written since October 23rd, 2014
   </div>
 
   <div class="row search-container">
@@ -26,6 +27,8 @@
       </div>
     </form>
   </div>
+
+  <div ng-if="poems.length" style="padding-top: 20px"></div>
 
   <div class="post row fadeInAndOutAnimation" dir-paginate="poem in poems | itemsPerPage: poemsPerPage" total-items="totalPoems">
     <div class="col-xs-1">
@@ -50,5 +53,17 @@
     </div>
   </div>
 
-  <dir-pagination-controls boundary-links="true" on-page-change="pageChanged(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+  <hr>
+
+  <div style="padding-bottom: 25px;">
+    <button type="button" ng-class="{ 'btn btn-default btn-sm' : true, 'disabled' : currentPage <= 1}" ng-click="previousPage()">
+      <i class="ion-chevron-left" style="font-size: 15px"></i>
+    </button>
+    <button type="button" ng-class="{ 'btn btn-default btn-sm' : true, 'disabled' : currentPage >= pageCount }" ng-click="nextPage()">
+      <i class="ion-chevron-right" style="font-size: 15px"></i>
+    </button>
+    &nbsp; Page {{ currentPage }} of {{ pageCount }}
+  </div>
+
+  <!-- <dir-pagination-controls boundary-links="true" on-page-change="pageChanged(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls> -->
 </div>

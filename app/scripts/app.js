@@ -76,10 +76,8 @@ angular
 
       $routeProvider
         .when('/', {
-          // templateUrl : 'views/main.html',
-          // controller  : 'MainCtrl'
-          templateUrl : 'views/feed.html',
-          controller  : 'FeedCtrl'
+          templateUrl : 'views/main.html',
+          controller  : 'MainCtrl'
         })
         .when('/about', {
           templateUrl : 'views/about.html',
@@ -87,10 +85,7 @@ angular
         })
         .when('/login', {
           templateUrl : 'views/login.html',
-          controller  : 'LoginCtrl'/*,*/
-          // need this for query parameters to be correctly set in the URL on
-          // session expiration redirection to login page from userFactory
-          // reloadOnSearch : false
+          controller  : 'LoginCtrl'
         })
         .when('/logout', {
           template    : null,
@@ -117,13 +112,10 @@ angular
           templateUrl : 'views/poem.html',
           controller  : 'PoemCtrl'
         })
-        .when('/poem/:id/comments', {
-          templateUrl : 'views/comments.html',
-          controller  : 'CommentsCtrl'
-        })
-        .when('/feed', {
+        .when('/feed/', {
           templateUrl : 'views/feed.html',
-          controller  : 'FeedCtrl'
+          controller  : 'FeedCtrl',
+          reloadOnSearch : false
         })
         .when('/create', {
           templateUrl : 'views/create.html',

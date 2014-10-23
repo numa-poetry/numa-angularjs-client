@@ -158,6 +158,8 @@ angular.module('numaApp')
         var resource = userFactory.rSaveComment(req, $scope.poemId);
 
         resource.$promise.then(function(res) {
+          $scope.comment = "";
+
           $alert({
             type        : 'material',
             dismissable : false,
