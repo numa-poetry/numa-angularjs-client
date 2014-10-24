@@ -9,9 +9,9 @@
  */
 angular.module('numaApp')
   .controller('CreateCtrl', ['$scope', '$resource', '$alert', 'userFactory',
-    '$location', 'storageFactory', '$upload',
+    '$location', 'storageFactory', '$upload', '$sce',
     function ($scope, $resource, $alert, userFactory, $location, storageFactory,
-      $upload) {
+      $upload, $sce) {
 
       $scope.tagOptions = ['love', 'life', 'happiness'];
 
@@ -77,15 +77,12 @@ angular.module('numaApp')
             method : 'POST',
             file   : image.file
           }).success(function(data) {
-            var req        = {};
-            req.poem       = $scope.poem;
-            req.title      = $scope.title;
-            req.tags       = $scope.tags;
-            req.songTitle  = $scope.songTitle;
-            req.songArtist = $scope.songArtist;
-            req.songUrl    = $scope.songUrl;
-            req.videoUrl   = $scope.videoUrl;
-            req.imageUrl   = data.imageUrl;
+            var req      = {};
+            req.poem     = $scope.poem;
+            req.title    = $scope.title;
+            req.tags     = $scope.tags;
+            req.videoUrl = $scope.videoUrl;
+            req.imageUrl = data.imageUrl;
             console.log(req);
 
             var resource = userFactory.rSavePoem(req);
@@ -114,15 +111,12 @@ angular.module('numaApp')
             console.log('Error uploading file: ' + err.message || err);
           });
         } else {
-          var req        = {};
-          req.poem       = $scope.poem;
-          req.title      = $scope.title;
-          req.tags       = $scope.tags;
-          req.songTitle  = $scope.songTitle;
-          req.songArtist = $scope.songArtist;
-          req.songUrl    = $scope.songUrl;
-          req.videoUrl   = $scope.videoUrl;
-          // req.imageUrl   = data.imageUrl;
+          var req      = {};
+          req.poem     = $scope.poem;
+          req.title    = $scope.title;
+          req.tags     = $scope.tags;
+          req.videoUrl = $scope.videoUrl;
+          req.imageUrl = '';
           console.log(req);
 
           var resource = userFactory.rSavePoem(req);

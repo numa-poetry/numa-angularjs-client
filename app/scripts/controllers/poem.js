@@ -10,8 +10,9 @@
 angular.module('numaApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
     'userFactory', '$alert', 'helperFactory', '$rootScope', '$location', 'socketIO',
+    '$sce',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
-      $alert, helperFactory, $rootScope, $location, socketIO) {
+      $alert, helperFactory, $rootScope, $location, socketIO, $sce) {
 
       socketIO.on('newComment', function(data) {
         console.log('HAHAHAHAHA',data);
@@ -28,10 +29,6 @@ angular.module('numaApp')
         'title': 'Are you sure?'
       };
 
-      $scope.playPauseButton = function() {
-        $scope.audio1.playPause();
-      };
-
       $scope.userId = storageFactory.getId();
       userFactory.init($scope.userId, 'Basic');
 
@@ -46,10 +43,19 @@ angular.module('numaApp')
           $scope.creatorDisplayName = res.poem.creator.displayName;
           $scope.title              = res.poem.title;
           $scope.poem               = res.poem.poem;
-          $scope.imageUrl           = res.poem.imageUrl;
           $scope.tags               = res.poem.tags.join(', ');
           $scope.comments           = res.poem.comments;
           $scope.totalVotes         = res.poem.positiveVotes - res.poem.negativeVotes;
+
+          if (res.poem.inspirations) {
+            $scope.imageUrl     = res.poem.inspirations.imageUrl;
+            $scope.videoUrl     = res.poem.inspirations.videoUrl;
+            if (res.poem.inspirations.song) {
+              $scope.songArtist = res.poem.inspirations.song.artist;
+              $scope.songTitle  = res.poem.inspirations.song.title;
+              $scope.songUrl    = res.poem.inspirations.song.url;
+            }
+          }
         }, function(res) {
           console.log(res);
         });
@@ -78,6 +84,14 @@ angular.module('numaApp')
       }
 
 // functions -------------------------------------------------------------------
+
+      $scope.trustSrc = function(src) {
+        return $sce.trustAsResourceUrl(src);
+      }
+
+      $scope.playPauseButton = function() {
+        $scope.audio1.playPause();
+      };
 
       $scope.deletePoem = function() {
         var resource = userFactory.rDeletePoem($scope.poemId);

@@ -11,6 +11,14 @@
     </h3>
     <div selectize='tagConfig' options='tagOptions' ng-model='tags' required></div>
 
+    <hr>
+
+    <h3>
+      <span ng-if="videoUrl">Change your video link</span>
+      <span ng-if="!videoUrl">Add a YouTube or Vimeo video<span>
+    </h3>
+    <input class="input-sm form-control" type="text" ng-model="videoUrl" placeholder="Add a YouTube or Vimeo URL."/>
+
     <h3>
       <span ng-if="imageUrl">Change or remove your image</span>
       <span ng-if="!imageUrl">Add an image</span>
@@ -31,24 +39,24 @@
       </div>
       <small>Only PNG, GIF, JPG, and JPEG are allowed.</small>
 
-      <div ng-if="imageUrl" ng-hide="$flow.files.length" style="padding-top: 10px;">
+      <div ng-if="imageUrl" ng-hide="$flow.files.length" style="padding-top: 15px; padding-bottom: 15px;">
         <span class="btn btn-sm btn-danger" ng-click="removeImage()">
           Remove
         </span>
       </div>
 
-      <div ng-show="!$flow.files.length && imageUrl" class="poem-image-thumbnail">
+      <div ng-show="!$flow.files.length && imageUrl" class="poem-image-thumbnail" style="padding-bottom: 15px;">
         <img class="img-responsive" ng-src="{{ imageUrl }}" style="border-radius: 10px;"/>
       </div>
 
-      <div ng-show="$flow.files.length">
+      <div ng-show="$flow.files.length" style="padding-bottom: 15px;">
         <div class="poem-image-thumbnail">
           <img class="img-responsive" flow-img="$flow.files[0]" style="border-radius: 10px;"/>
         </div>
       </div>
-      <div style='padding-top: 10px;'>
+      <!-- <div style='padding-top: 10px;'> -->
         <button type='button' class='btn btn-lg btn-block btn-primary' ng-click='updatePoemAndImage($flow.files)'>Update</button>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </div>

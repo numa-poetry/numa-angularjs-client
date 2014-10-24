@@ -4,27 +4,13 @@
 
   <div class="poem-image-widget">
 
-    <h3>Add a song URL</h3>
-    <div class="row" style="padding-bottom: 10px;">
-      <div class="col-md-5 col-xs-5">
-        <input class="input-sm form-control" type="text" ng-model="songArtist" placeholder="Song artist"/>
-      </div>
-      <div class="col-md-7 col-xs-7">
-        <input class="input-sm form-control" type="text" ng-model="songTitle" placeholder="Song title"/>
-      </div>
-    </div>
-    <input class="input-sm form-control" type="text" ng-model="songUrl" placeholder="Add a song for readers to listen to."/>
-    <small>Only MP3, OGG, and WAV are allowed please.</small>
-
-    <hr>
-
-    <h3>Add a YouTube URL</h3>
-    <input class="input-sm form-control" type="text" ng-model="videoUrl" placeholder="Add a YouTube video for readers to watch."/>
-
-    <hr>
-
     <h3>Tag your poem</h3>
     <div selectize='tagConfig' style="-webkit-border-radius: 0; border-radius: 0" options='tagOptions' ng-model='tags' required></div>
+
+    <hr>
+
+    <h3>Add a YouTube or Vimeo video</h3>
+    <input class="input-sm form-control" type="text" ng-model="videoUrl" placeholder="Add a YouTube or Vimeo URL."/>
 
     <hr>
 

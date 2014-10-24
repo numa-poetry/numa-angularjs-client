@@ -32,8 +32,7 @@ angular
     'selectize',
     'angularUtils.directives.dirPagination',
     'btford.socket-io',
-    'flow',
-    'mediaPlayer'
+    'flow'
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
     '$popoverProvider', '$tooltipProvider', '$modalProvider',

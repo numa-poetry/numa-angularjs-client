@@ -29,10 +29,12 @@ angular.module('numaApp')
         var resource = poemFactory.rGet(poemId);
 
         resource.$promise.then(function(res) {
-          $scope.title     = res.poem.title;
-          $scope.poem      = res.poem.poem;
-          $scope.tags      = res.poem.tags;
-          $scope.imageUrl  = res.poem.imageUrl;
+          console.log(res);
+          $scope.title      = res.poem.title;
+          $scope.poem       = res.poem.poem;
+          $scope.tags       = res.poem.tags;
+          $scope.imageUrl   = res.poem.inspirations.imageUrl;
+          $scope.videoUrl   = res.poem.inspirations.videoUrl;
         }, function(res) {
           // console.log(res);
         });
@@ -80,16 +82,17 @@ angular.module('numaApp')
           return;
         }
 
-        var req      = {};
-        req.id       = $routeParams.id;
-        req.poem     = $scope.poem;
-        req.title    = $scope.title;
-        req.tags     = $scope.tags;
+        var req        = {};
+        req.id         = $routeParams.id;
+        req.poem       = $scope.poem;
+        req.title      = $scope.title;
+        req.tags       = $scope.tags;
+        req.videoUrl   = $scope.videoUrl;
+        req.imageUrl   = '';
 
         // If an image has been added, update the scope property before the request
         if (image.length > 0 && image !== undefined) {
 
-          console.log('about to')
           if (angular.isArray(image)) {
             image = image[0];
           }
@@ -115,9 +118,9 @@ angular.module('numaApp')
             console.log('Successful image upload.');
             console.log(data.imageUrl);
 
-            $scope.imageUrl = data.imageUrl;
-            req.imageUrl = data.imageUrl;
-            var http = userFactory.hUpdatePoem(req);
+            // $scope.imageUrl = data.imageUrl;
+            req.imageUrl    = data.imageUrl;
+            var http        = userFactory.hUpdatePoem(req);
 
             http.then(function(res) {
               $alert({

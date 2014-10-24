@@ -6,22 +6,20 @@
       <hr>
     </div>
 
-    <!-- <audio media-player="audio1" data-playlist="playlist1">
-      <source src="http://upload.wikimedia.org/wikipedia/en/d/d0/Rick_Astley_-_Never_Gonna_Give_You_Up.ogg" type="audio/ogg">
-    </audio> -->
-    <!-- button type="button" class="btn btn-sm btn-primary" ng-click="playPauseButton()">
-      <i class="ion-play" ng-if="!audio1.playing" style="font-size: 15px;"></i>
-      <i class="ion-pause" ng-if="audio1.playing" style="font-size: 15px;"></i>
-    </button> -->
+    <div ng-if="videoUrl || imageUrl" style="padding-top: 60px;"></div>
 
-    <!-- https://img.youtube.com/vi/ikvsPRYtmfA/1.jpg -->
-    <!-- 16:9 aspect ratio -->
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe class="embed-responsive-item" src="https://www.youtube.com/v/ikvsPRYtmfA" allowfullscreen="" frameborder="0"></iframe>
+    <div ng-if="videoUrl">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="{{ trustSrc(videoUrl) }}" allowfullscreen="" frameborder="0"></iframe>
+      </div>
     </div>
 
-    <div class="poem-image-thumbnail" >
-      <img class="img-responsive" ng-src="{{ imageUrl }}" style="border-radius: 10px;"/>
+    <hr ng-if="videoUrl && imageUrl">
+
+    <div ng-if="imageUrl">
+      <div class="poem-image-thumbnail" >
+        <img class="img-responsive" ng-src="{{ imageUrl }}" style="border-radius: 10px;"/>
+      </div>
     </div>
 
     <pre class="poem-body-view">
