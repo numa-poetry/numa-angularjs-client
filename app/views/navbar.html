@@ -6,8 +6,8 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand visible-xs" ng-href="/#!/">
-      <span style="font-family: 'Gloria Hallelujah', cursive; font-size: 40px; line-height: 25px;">Numa</span>
+    <a class="navbar-brand" ng-if="!isHome" ng-href="/#!/" ng-click="goHome()">
+      <span class="brand">Numa</span>
     </a>
     <div class="navbar-left" plangular="https://soundcloud.com/numa-wp/sets/numa" style="color: #FFFFFF; padding: 3px;">
       <button class="btn btn-md btn-primary player-controls" ng-click="previous()">
@@ -32,19 +32,19 @@
   </div>
   <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
     <ul class="nav navbar-nav pull-right">
-      <li data-match-route="/#!/"><a ng-href="/#!/"><i class="ion-home" style="font-size: 20px;"></i></a></li>
+      <li data-match-route="/#!/"><a ng-href="/#!/" ng-click="goHome()"><i class="ion-home" style="font-size: 20px;"></i></a></li>
 
-      <li ng-show="isPhone" data-match-route="/feed/" data-placement="left" bs-tooltip="tooltipFeed">
-        <a ng-href="/#!/feed/?page=1"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
+      <li class="visible-xs" data-match-route="/feed/" data-placement="left" bs-tooltip="tooltipFeed">
+        <a ng-href="/#!/feed/?page=1" ng-click="dontGoHome()"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
       </li>
-      <li ng-show="!isPhone" data-match-route="/feed/" data-placement="bottom" bs-tooltip="tooltipFeed">
-        <a ng-href="/#!/feed/?page=1"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
+      <li class="hidden-xs" data-match-route="/feed/" data-placement="bottom" bs-tooltip="tooltipFeed">
+        <a ng-href="/#!/feed/?page=1" ng-click="dontGoHome()"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
       </li>
 
-      <li ng-show="isPhone && isAuthenticated" data-match-route="/create" data-placement="left"
+      <li ng-show="isAuthenticated" class="visible-xs" data-match-route="/create" data-placement="left"
         bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-edit" style="font-size: 20px;"></i></a>
       </li>
-      <li ng-show="!isPhone && isAuthenticated" data-match-route="/create" data-placement="bottom"
+      <li ng-show="isAuthenticated" class="hidden-xs" data-match-route="/create" data-placement="bottom"
         bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-edit" style="font-size: 20px;"></i></a>
       </li>
 
@@ -58,9 +58,9 @@
             &nbsp; {{ displayName }} <i class="ion-arrow-down-b"></i>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li><a ng-href="/#!/user/{{ id }}"><i class="ion-person" style="font-size: 20px;"></i>&nbsp; Profile</a></li>
+          <li><a ng-href="/#!/user/{{ id }}" ng-click="dontGoHome()"><i class="ion-person" style="font-size: 20px;"></i>&nbsp; Profile</a></li>
           <li class="divider"></li>
-          <li><a ng-href="/#!/logout"><i class="ion-log-out" style="font-size: 20px;"></i>&nbsp; Logout</a></li>
+          <li><a ng-href="/#!/logout" ng-click="dontGoHome()"><i class="ion-log-out" style="font-size: 20px;"></i>&nbsp; Logout</a></li>
         </ul>
       </li>
     </ul>

@@ -53,7 +53,7 @@ angular.module('numaApp')
 
         console.log(image);
 
-        if (image !== 'undefined' && image.length > 0) {
+        if (typeof image !== 'undefined' && image.length > 0) {
           console.log('here');
           if (angular.isArray(image)) {
             image = image[0];

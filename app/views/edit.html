@@ -2,10 +2,18 @@
   <div class="poem-title" contenteditable="true" ng-model="title" strip-br="true" select-non-editable="true"></div>
   <textarea class="form-control poem-body" ng-model="poem" rows="20" cols="20" style="white-space: pre-line;" autofocus></textarea>
 
+
   <div class="poem-image-widget">
+
     <h3>
-      <span ng-if="imageUrl">Change or remove your inspirational image</span>
-      <span ng-if="!imageUrl">Add an inspirational image</span>
+      <span ng-if="tags">Change your tags</span>
+      <span ng-if="!tags">Tag your poem</span>
+    </h3>
+    <div selectize='tagConfig' options='tagOptions' ng-model='tags' required></div>
+
+    <h3>
+      <span ng-if="imageUrl">Change or remove your image</span>
+      <span ng-if="!imageUrl">Add an image</span>
     </h3>
     <div flow-init="{singleFile:true}">
       <div class="drop" flow-drop ng-class="dropClass">
@@ -34,13 +42,9 @@
       </div>
 
       <div ng-show="$flow.files.length">
-        <!-- <span class="title">{{$flow.files[0].name}}</span> -->
         <div class="poem-image-thumbnail">
           <img class="img-responsive" flow-img="$flow.files[0]" style="border-radius: 10px;"/>
         </div>
-      </div>
-      <div style='padding-top: 15px;'>
-        <div selectize='tagConfig' options='tagOptions' ng-model='tags' required></div>
       </div>
       <div style='padding-top: 10px;'>
         <button type='button' class='btn btn-lg btn-block btn-primary' ng-click='updatePoemAndImage($flow.files)'>Update</button>

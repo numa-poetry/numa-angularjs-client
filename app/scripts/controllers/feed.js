@@ -14,18 +14,23 @@ angular.module('numaApp')
     function ($scope, poemFactory, storageFactory, userFactory,
       helperFactory, socketIO, $rootScope, $cookieStore, $location) {
 
-      $scope.poems           = [];
-      $scope.totalPoems      = 0;
-      $scope.poemsPerPage    = 8; // this should match however many results your API puts on one page
-      $scope.searchByTitle   = false;
-      $scope.searchByTag     = false;
-      $scope.searchByContent = false;
-      $scope.strictSearch    = false;
-      $scope.currentPage     = parseInt($location.search().page);
-      var id                 = storageFactory.getId();
-      userFactory.init(id, 'Basic');
+      $scope.poems             = [];
+      $scope.totalPoems        = 0;
+      $scope.poemsPerPage      = 8; // this should match however many results your API puts on one page
+      $scope.searchByTitle     = false;
+      $scope.searchByTag       = false;
+      $scope.searchByContent   = false;
+      $scope.strictSearch      = false;
 
-      getPoemsPage(1);
+      $scope.currentPage       = parseInt($location.search().page);
+      $scope.queryParam        = $location.search().query;
+      $scope.searchbyParam     = $location.search().searchby;
+      $scope.strictSearchParam = $location.search().strict;
+
+      getPoemsPage($scope.currentPage, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam);
+
+      var id                   = storageFactory.getId();
+      userFactory.init(id, 'Basic');
 
       socketIO.on('newComment', function(data) {
         console.log(data);
@@ -48,16 +53,48 @@ angular.module('numaApp')
 // functions -------------------------------------------------------------------
 
       $scope.searchPoems = function() {
-        getPoemsPage(1);
+        if (typeof $scope.query !== 'undefined') {
+          $location.search('query', $scope.query);
+        } else {
+          $location.search('query', null);
+        }
+        if ($scope.strictSearch === true) {
+          $location.search('strict', 'true');
+        } else {
+          $location.search('strict', null);
+        }
+        if ($scope.searchByTag === true && $scope.searchByTitle === false && $scope.searchByContent === false) {
+          $location.search('searchby', 'tag');
+          $location.search('strict', null);
+        } else if ($scope.searchByTag === false && $scope.searchByTitle === true && $scope.searchByContent === false) {
+          $location.search('searchby', 'title');
+          $location.search('strict', null);
+        } else if ($scope.searchByTag === false && $scope.searchByTitle === false && $scope.searchByContent === true) {
+          $location.search('searchby', 'content');
+          $location.search('strict', null);
+        } else if ($scope.searchByTag === true && $scope.searchByTitle === true && $scope.searchByContent === false) {
+          $location.search('searchby', 'tag,title');
+        } else if ($scope.searchByTag === true && $scope.searchByTitle === true && $scope.searchByContent === true) {
+          $location.search('searchby', 'tag,title,content');
+        } else if ($scope.searchByTag === false && $scope.searchByTitle === true && $scope.searchByContent === true) {
+          $location.search('searchby', 'title,content');
+        } else if ($scope.searchByTag === false && $scope.searchByTitle === false && $scope.searchByContent === false) {
+          $location.search('searchby', null);
+        }
+
+        $scope.queryParam        = $location.search().query;
+        $scope.searchbyParam     = $location.search().searchby;
+        $scope.strictSearchParam = $location.search().strict;
+
+        getPoemsPage($scope.currentPage, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam);
       };
 
-      function getPoemsPage(page) {
-        var resource = poemFactory.rGetQuery(page, $scope.query, $scope.searchByTitle,
-          $scope.searchByTag, $scope.searchByContent, $scope.strictSearch);
+      function getPoemsPage(page, query, searchby, strictSearch) {
+        var resource = poemFactory.rGetQuery(page, query, searchby, strictSearch);
 
         resource.$promise.then(function(res) {
-          $location.search('page', page);
           $scope.currentPage = page;
+          $location.search('page', $scope.currentPage);
           $scope.poems       = res.poems;
           $scope.totalPoems  = res.poemCount;
           $scope.pageCount   = res.pageCount;
@@ -67,11 +104,11 @@ angular.module('numaApp')
       };
 
       $scope.nextPage = function() {
-        getPoemsPage(parseInt($scope.currentPage) + 1);
+        getPoemsPage(parseInt($scope.currentPage) + 1, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam);
       };
 
       $scope.previousPage = function() {
-        getPoemsPage(parseInt($scope.currentPage) - 1);
+        getPoemsPage(parseInt($scope.currentPage) - 1, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam);
       };
 
       $scope.pageChanged = function(newPageNumber) {

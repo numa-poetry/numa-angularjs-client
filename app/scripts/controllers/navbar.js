@@ -9,11 +9,9 @@
  */
 angular.module('numaApp')
   .controller('NavbarCtrl', ['$scope', 'storageFactory', '$rootScope',
-    'userFactory', '$tooltip', 'matchmedia',
-    function ($scope, storageFactory, $rootScope, userFactory, $tooltip,
-      matchmedia) {
+    'userFactory', '$tooltip', '$location',
+    function ($scope, storageFactory, $rootScope, userFactory, $tooltip, $location) {
 
-      $scope.isPhone     = false;
       $scope.isCollapsed = true;
 
       $scope.tooltipCreate = {
@@ -41,23 +39,25 @@ angular.module('numaApp')
         $scope.avatarUrl = undefined;
       });
 
-      var unregisterMatchMediaOnPhone = matchmedia.onPhone(function() {
-        if (matchmedia.isPhone()) {
-          $scope.isPhone = true;
-        } else {
-          $scope.isPhone = false;
-        }
-      });
-
       $scope.$on('$destroy', function() {
         unregisterLogin();
         unregisterLogout();
         unregisterRefresh();
-        unregisterMatchMediaOnPhone();
       });
 
-
 // functions -------------------------------------------------------------------
+
+      if ($location.path() === '/') {
+        $scope.isHome = true;
+      }
+
+      $scope.goHome = function() {
+        $scope.isHome = true;
+      };
+
+      $scope.dontGoHome = function() {
+        $scope.isHome = false;
+      };
 
       $scope.collapse = function() {
         $scope.isCollapsed = !$scope.isCollapsed;
