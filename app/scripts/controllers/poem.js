@@ -9,14 +9,10 @@
  */
 angular.module('numaApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
-    'userFactory', '$alert', 'helperFactory', '$rootScope', '$location', 'socketIO',
+    'userFactory', '$alert', 'helperFactory', '$rootScope', '$location', 'socket',
     '$sce',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
-      $alert, helperFactory, $rootScope, $location, socketIO, $sce) {
-
-      socketIO.on('newComment', function(data) {
-        console.log('HAHAHAHAHA',data);
-      });
+      $alert, helperFactory, $rootScope, $location, socket, $sce) {
 
       $scope.tags = {}; // This way $watch can update tags after the resource call
       var previousVote;
@@ -84,6 +80,15 @@ angular.module('numaApp')
       }
 
 // functions -------------------------------------------------------------------
+
+      socket.forward('newComment', $scope);
+      var unregisterNewCommentEvent = $scope.$on('socket:newComment', function(ev, data) {
+        console.log('newComment data', data);
+      });
+
+      $scope.$on('$destroy', function() {
+        unregisterNewCommentEvent();
+      });
 
       $scope.trustSrc = function(src) {
         return $sce.trustAsResourceUrl(src);
@@ -172,6 +177,11 @@ angular.module('numaApp')
         var resource = userFactory.rSaveComment(req, $scope.poemId);
 
         resource.$promise.then(function(res) {
+
+          // notify server->notify creator of new comment
+          socket.emit('newComment', { creatorId : $scope.creatorId });
+
+          // clear the comment box
           $scope.comment = "";
 
           $alert({

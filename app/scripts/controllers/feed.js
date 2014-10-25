@@ -9,10 +9,10 @@
  */
 angular.module('numaApp')
   .controller('FeedCtrl', ['$scope', 'poemFactory', 'storageFactory',
-    'userFactory', 'helperFactory', 'socketIO', '$rootScope', '$cookieStore',
-    '$location',
+    'userFactory', 'helperFactory', 'socket', '$rootScope', '$cookieStore',
+    '$location', '$resource',
     function ($scope, poemFactory, storageFactory, userFactory,
-      helperFactory, socketIO, $rootScope, $cookieStore, $location) {
+      helperFactory, socket, $rootScope, $cookieStore, $location, $resource) {
 
       $scope.poems             = [];
       $scope.totalPoems        = 0;
@@ -26,29 +26,15 @@ angular.module('numaApp')
       $scope.queryParam        = $location.search().query;
       $scope.searchbyParam     = $location.search().searchby;
       $scope.strictSearchParam = $location.search().strict;
+      var id                   = storageFactory.getId();
 
       getPoemsPage($scope.currentPage, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam);
 
-      var id                   = storageFactory.getId();
+      $scope.pagination = {
+        current: 1
+      };
+
       userFactory.init(id, 'Basic');
-
-      socketIO.on('newComment', function(data) {
-        console.log(data);
-      });
-
-      // socketIO.forward('news',$scope);
-      // var unregister = $scope.$on('socket:news', function(ev, data) {
-      //   console.log(data);
-      //   socketIO.emit('my other event', {my: 'data'});
-      // });
-      // $scope.$on('$destroy', function() {
-      //   unregister();
-      // });
-
-      // socketIO.on('news', function(data) {
-      //   console.log(data);
-      //   socketIO.emit('my other event', {my: 'data'});
-      // });
 
 // functions -------------------------------------------------------------------
 
@@ -115,53 +101,49 @@ angular.module('numaApp')
         getPoemsPage(newPageNumber);
       };
 
-      $scope.pagination = {
-        current: 1
-      };
-
       $scope.timeSince = helperFactory.timeSince;
 
-      function aContainsB (a, b) {
-        if (typeof a === 'string') {
-          return a.toLocaleLowerCase().indexOf(b) >= 0;
-        } else if (a instanceof Array) {
-          for (var i = a.length - 1; i >= 0; i--) {
-            if (a[i].toLocaleLowerCase().indexOf(b) >= 0) {
-              return true;
-            }
-          }
-        }
-      }
+      // function aContainsB (a, b) {
+      //   if (typeof a === 'string') {
+      //     return a.toLocaleLowerCase().indexOf(b) >= 0;
+      //   } else if (a instanceof Array) {
+      //     for (var i = a.length - 1; i >= 0; i--) {
+      //       if (a[i].toLocaleLowerCase().indexOf(b) >= 0) {
+      //         return true;
+      //       }
+      //     }
+      //   }
+      // }
 
-      $scope.poemSearch = function(poem) {
-        if ($scope.searchByTitle === true && $scope.searchByTag === true)
-        {
-          return aContainsB(poem.title, $scope.query) || aContainsB(poem.tags, $scope.query);
-        }
-        else if ($scope.searchByTitle === true && $scope.searchByTag !== true)
-        {
-          return aContainsB(poem.title, $scope.query);
-        }
-        else if ($scope.searchByTitle !== true && $scope.searchByTag === true)
-        {
-          return aContainsB(poem.tags, $scope.query);
-        }
-        else if ($scope.searchByTitle !== true && $scope.searchByTag !== true)
-        {
-          if ($scope.query)
-          {
-            return aContainsB(poem.title, $scope.query) || aContainsB(poem.tags, $scope.query);
-          }
-          else
-          {
-            return poem;
-          }
-        }
-        else
-        {
-          return poem;
-        }
-      };
+      // $scope.poemSearch = function(poem) {
+      //   if ($scope.searchByTitle === true && $scope.searchByTag === true)
+      //   {
+      //     return aContainsB(poem.title, $scope.query) || aContainsB(poem.tags, $scope.query);
+      //   }
+      //   else if ($scope.searchByTitle === true && $scope.searchByTag !== true)
+      //   {
+      //     return aContainsB(poem.title, $scope.query);
+      //   }
+      //   else if ($scope.searchByTitle !== true && $scope.searchByTag === true)
+      //   {
+      //     return aContainsB(poem.tags, $scope.query);
+      //   }
+      //   else if ($scope.searchByTitle !== true && $scope.searchByTag !== true)
+      //   {
+      //     if ($scope.query)
+      //     {
+      //       return aContainsB(poem.title, $scope.query) || aContainsB(poem.tags, $scope.query);
+      //     }
+      //     else
+      //     {
+      //       return poem;
+      //     }
+      //   }
+      //   else
+      //   {
+      //     return poem;
+      //   }
+      // };
 
     }
   ]);

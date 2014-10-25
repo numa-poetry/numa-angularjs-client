@@ -154,15 +154,13 @@ angular
       $locationProvider.hashPrefix('!');
     }
   ]).
-  factory('socketIO', function(socketFactory, storageFactory) {
-    if (io) {
-      var socket = io.connect('http://localhost:3000');
+  factory('socket', function(socketFactory, storageFactory, $rootScope) {
+    var socket = io.connect('http://localhost:3000');
 
-      // Store client's socket id as browser cookie
-      socket.on('socketId', function(data) {
-        storageFactory.setSocketId(data.id);
-      });
+    // Store client's socket id as browser cookie
+    socket.on('newSocketId', function(data) {
+      storageFactory.setSocketId(data.id);
+    });
 
-      return socketFactory({ ioSocket: socket });
-    }
+    return socketFactory({ ioSocket: socket });
   });
