@@ -32,30 +32,40 @@
   </div>
   <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
     <ul class="nav navbar-nav pull-right">
-      <li data-match-route="/#!/"><a ng-href="/#!/" ng-click="goHome()"><i class="ion-home" style="font-size: 20px;"></i></a></li>
 
-      <li class="visible-xs" data-match-route="/feed/" data-placement="left" bs-tooltip="tooltipFeed">
-        <a ng-href="/#!/feed/?page=1" ng-click="dontGoHome()"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
+      <li class="visible-xs" data-match-route="/#!/">
+        <a ng-href="/#!/" ng-click="goHome()">
+          Home
+        </a>
+      </li>
+      <li class="hidden-xs" data-match-route="/#!/"><a ng-href="/#!/" ng-click="goHome()"><i class="ion-home" style="font-size: 20px;"></i></a></li>
+
+      <li class="visible-xs" data-match-route="/feed/">
+        <a ng-href="/#!/feed/?page=1" ng-click="dontGoHome()">
+          Feed
+        </a>
       </li>
       <li class="hidden-xs" data-match-route="/feed/" data-placement="bottom" bs-tooltip="tooltipFeed">
         <a ng-href="/#!/feed/?page=1" ng-click="dontGoHome()"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
       </li>
 
-      <li ng-show="isAuthenticated" class="visible-xs" data-match-route="/create" data-placement="left"
-        bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-edit" style="font-size: 20px;"></i></a>
-      </li>
-      <li ng-show="isAuthenticated" class="hidden-xs" data-match-route="/create" data-placement="bottom"
-        bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-edit" style="font-size: 20px;"></i></a>
-      </li>
-
-      <li ng-show="isAuthenticated && unreadCommentsCount > 0" class="visible-xs" data-match-route="/create" data-placement="left" bs-tooltip="tooltipUnreadComments">
+      <li ng-show="isAuthenticated" class="visible-xs" data-match-route="/create">
         <a ng-href="/#!/create">
-          <span class="badge commentNotification">{{ unreadCommentsCount }}</span>
+          Create
         </a>
       </li>
-      <li ng-show="isAuthenticated && unreadCommentsCount > 0" class="hidden-xs" data-match-route="/create" data-placement="bottom" bs-tooltip="tooltipUnreadComments">
-        <a ng-href="/#!/create">
-          <span class="badge commentNotification">{{ unreadCommentsCount }}</span>
+      <li ng-show="isAuthenticated" class="hidden-xs" data-match-route="/create" data-placement="bottom"
+        bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a>
+      </li>
+
+      <li ng-show="isAuthenticated && unreadCommentsCount > 0" class="visible-xs" data-match-route="/user" data-placement="left" bs-tooltip="tooltipUnreadComments">
+        <a ng-href="/#!/user/{{ id }}">
+          <span class="badge unread-comment-notification">{{ unreadCommentsCount }}</span>
+        </a>
+      </li>
+      <li ng-show="isAuthenticated && unreadCommentsCount > 0" class="hidden-xs" data-match-route="/user" data-placement="bottom" bs-tooltip="tooltipUnreadComments">
+        <a ng-href="/#!/user/{{ id }}">
+          <span class="badge unread-comment-notification">{{ unreadCommentsCount }}</span>
         </a>
       </li>
 

@@ -46,11 +46,6 @@ angular.module('numaApp')
           if (res.poem.inspirations) {
             $scope.imageUrl     = res.poem.inspirations.imageUrl;
             $scope.videoUrl     = res.poem.inspirations.videoUrl;
-            if (res.poem.inspirations.song) {
-              $scope.songArtist = res.poem.inspirations.song.artist;
-              $scope.songTitle  = res.poem.inspirations.song.title;
-              $scope.songUrl    = res.poem.inspirations.song.url;
-            }
           }
         }, function(res) {
           console.log(res);

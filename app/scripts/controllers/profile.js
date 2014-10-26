@@ -33,12 +33,13 @@ angular.module('numaApp')
         // $scope.email = $scope.workingEmail = userFactory.getEmail();
 
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
-        $scope.displayName   = userFactory.getDisplayName();
-        $scope.joinedDate    = userFactory.getJoinedDate();
-        $scope.avatarUrl     = userFactory.getAvatarUrl();
-        $scope.poems         = userFactory.getPoems();
-        $scope.comments      = userFactory.getComments();
-        $scope.favoritePoems = userFactory.getFavoritePoems();
+        $scope.displayName    = userFactory.getDisplayName();
+        $scope.joinedDate     = userFactory.getJoinedDate();
+        $scope.avatarUrl      = userFactory.getAvatarUrl();
+        $scope.poems          = userFactory.getPoems();
+        $scope.comments       = userFactory.getComments();
+        $scope.favoritePoems  = userFactory.getFavoritePoems();
+        $scope.unreadComments = userFactory.getUnreadComments();
         $scope.email = $scope.workingEmail = userFactory.getEmail();
       });
 
@@ -293,6 +294,10 @@ angular.module('numaApp')
         });
       };
 
+      $scope.markAsRead = function() {
+
+      };
+
       $scope.deleteAccount = function() {
         var resource = userFactory.rDeleteAccount();
 
@@ -325,9 +330,7 @@ angular.module('numaApp')
         });
       };
 
-      $scope.deleteComment = function(poemId, commentId) {
-        console.log('here');
-
+      $scope.deleteComment = function(poemId, commentId, unread) {
         var resource = userFactory.rDeleteComment(poemId, commentId);
 
         resource.$promise.then(function(res) {
@@ -340,13 +343,20 @@ angular.module('numaApp')
             animation   : 'fadeZoomFadeDown'
           });
 
-          // find and remove comment from DOM
-          for (var i = $scope.comments.length - 1; i >= 0; i--) {
-            if ($scope.comments[i].id === commentId) {
-              $scope.comments.splice(i,1);
-            }
-          };
-          console.log($scope.comments);
+          if (unread === true) {
+            for (var i = $scope.unreadComments.length - 1; i >= 0; --i) {
+              if ($scope.unreadComments[i].id === commentId) {
+                $scope.unreadComments.splice(i,1);
+              }
+            };
+          } else {
+            // find and remove comment from DOM
+            for (var i = $scope.comments.length - 1; i >= 0; --i) {
+              if ($scope.comments[i].id === commentId) {
+                $scope.comments.splice(i,1);
+              }
+            };
+          }
         }, function(res) {
           $alert({
             type        : 'material-err',

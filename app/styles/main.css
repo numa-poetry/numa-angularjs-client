@@ -50,7 +50,7 @@ body {
 /* Customize container */
 @media (min-width: 768px) {
   .container {
-    max-width: 730px;
+    max-width: 800px;
   }
 }
 .container-narrow > hr {
@@ -637,8 +637,32 @@ a:not([name]) {
   color: #FF9955;
 }
 
-.commentNotification {
+.unread-comment-notification {
   color: #fff;
   background-color: #dd4b39;
   font-size: 19px;
+}
+
+.profile-unread-comments-badge {
+  color: #fff;
+  background-color: #dd4b39;
+  font-size: 12px;
+}
+
+.profile-poem-badge {
+  color: #fff;
+  background-color: #7632C9;
+  font-size: 12px;
+}
+
+.profile-comments-badge {
+  color: #fff;
+  background-color: #189646;
+  font-size: 12px;
+}
+
+.profile-favorite-poems-badge {
+  color: #fff;
+  background-color: #D47324;
+  font-size: 12px;
 }

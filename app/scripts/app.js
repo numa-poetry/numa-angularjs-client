@@ -20,7 +20,8 @@ angular
     'Satellizer',
     'mgcrea.ngStrap',
     'angularSpinner',
-    // include specific directives from Angular UI because of conflicts with AngularStrap
+    // include specific directives from Angular UI Bootstrap because of conflicts
+    // with AngularStrap (mgcrea.ngStrap)
     'ui.bootstrap.tpls',
     'ui.bootstrap.collapse',
     'ui.bootstrap.dropdown',
@@ -75,62 +76,62 @@ angular
 
       $routeProvider
         .when('/', {
-          templateUrl : 'views/main.html',
-          controller  : 'MainCtrl'
+          templateUrl    : 'views/main.html',
+          controller     : 'MainCtrl'
         })
         .when('/about', {
-          templateUrl : 'views/about.html',
-          controller  : 'AboutCtrl'
+          templateUrl    : 'views/about.html',
+          controller     : 'AboutCtrl'
         })
         .when('/login', {
-          templateUrl : 'views/login.html',
-          controller  : 'LoginCtrl'
+          templateUrl    : 'views/login.html',
+          controller     : 'LoginCtrl'
         })
         .when('/logout', {
-          template    : null,
-          controller  : 'LogoutCtrl'
+          template       : null,
+          controller     : 'LogoutCtrl'
         })
         .when('/signup', {
-          templateUrl : 'views/signup.html',
-          controller  : 'SignupCtrl'
+          templateUrl    : 'views/signup.html',
+          controller     : 'SignupCtrl'
         })
         .when('/user/:id', {
-          templateUrl : 'views/profile.html',
-          controller  : 'ProfileCtrl'/*,
-          resolve     : ensureAuthentication()*/
+          templateUrl    : 'views/profile.html',
+          controller     : 'ProfileCtrl'/*,
+          resolve        : ensureAuthentication()*/
         })
         .when('/forgot', {
-          templateUrl : 'views/forgot.html',
-          controller  : 'ForgotCtrl'
+          templateUrl    : 'views/forgot.html',
+          controller     : 'ForgotCtrl'
         })
         .when('/reset', {
-          templateUrl : 'views/reset.html',
-          controller  : 'ResetCtrl'
+          templateUrl    : 'views/reset.html',
+          controller     : 'ResetCtrl'
         })
         .when('/poem/:id', {
-          templateUrl : 'views/poem.html',
-          controller  : 'PoemCtrl'
+          templateUrl    : 'views/poem.html',
+          controller     : 'PoemCtrl'
         })
         .when('/feed/', {
-          templateUrl : 'views/feed.html',
-          controller  : 'FeedCtrl',
+          templateUrl    : 'views/feed.html',
+          controller     : 'FeedCtrl',
           reloadOnSearch : false
         })
         .when('/create', {
-          templateUrl : 'views/create.html',
-          controller  : 'CreateCtrl'
+          templateUrl    : 'views/create.html',
+          controller     : 'CreateCtrl'
         })
         .when('/edit/:id', {
-          templateUrl : 'views/edit.html',
-          controller  : 'EditCtrl'
+          templateUrl    : 'views/edit.html',
+          controller     : 'EditCtrl'
         })
         .when('/privacy', {
-          templateUrl : 'views/privacy.html',
-          controller  : 'PrivacyCtrl'
+          templateUrl    : 'views/privacy.html',
+          controller     : 'PrivacyCtrl'
         })
         .when('/terms', {
-          templateUrl : 'views/terms.html',
-          controller  : 'TermsCtrl'
+          templateUrl    : 'views/terms.html',
+          controller     : 'TermsCtrl'
         })
         .otherwise({
           redirectTo  : '/'
@@ -157,7 +158,9 @@ angular
   factory('socket', function(socketFactory, storageFactory, $rootScope) {
     var socket = io.connect('http://localhost:3000');
 
-    // Store client's socket id as browser cookie
+    // Store client's socket id as browser cookie even though this is already happening.
+    // Bug because I can't access the cookie socket.io already sets. So I set it myself
+    // and then can access it later on.
     socket.on('newSocketId', function(data) {
       storageFactory.setSocketId(data.id);
     });

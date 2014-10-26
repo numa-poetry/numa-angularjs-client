@@ -19,15 +19,16 @@ angular.module('numaApp')
       var _email;
       var _avatarUrl;
       var _unreadCommentsCount;
-      var _poems         = [];
-      var _comments      = [];
-      var _favoritePoems = [];
-      var _sId           = storageFactory.getId();
-      var _sToken        = storageFactory.getToken();
-      var _isLoggedIn    = false;
-      var userFactory    = {};
-      var serverDomain   = 'http://localhost:3000';
-      var apiVersion     = '/api/v1';
+      var _poems          = [];
+      var _comments       = [];
+      var _favoritePoems  = [];
+      var _unreadComments = [];
+      var _sId            = storageFactory.getId();
+      var _sToken         = storageFactory.getToken();
+      var _isLoggedIn     = false;
+      var userFactory     = {};
+      var serverDomain    = 'http://localhost:3000';
+      var apiVersion      = '/api/v1';
 
 // helper functions ------------------------------------------------------------
 
@@ -70,6 +71,7 @@ angular.module('numaApp')
               userFactory.setPoems(res.poems);
               userFactory.setComments(res.comments);
               userFactory.setFavoritePoems(res.favoritePoems);
+              userFactory.setUnreadComments(res.unreadComments);
             }
 
             $rootScope.$emit('finishedSettingUserDataOnPageRefresh');
@@ -176,6 +178,10 @@ angular.module('numaApp')
         _unreadCommentsCount = unreadCommentsCount;
       };
 
+      userFactory.setUnreadComments = function(unreadComments) {
+        _unreadComments = unreadComments;
+      };
+
       userFactory.setPoems = function(poems) {
         _poems = poems;
       };
@@ -218,6 +224,10 @@ angular.module('numaApp')
         return _unreadCommentsCount;
       };
 
+      userFactory.getUnreadComments = function() {
+        return _unreadComments;
+      };
+
       userFactory.getPoems = function() {
         return _poems;
       };
@@ -244,6 +254,7 @@ angular.module('numaApp')
         _poems               = undefined;
         _comments            = undefined;
         _favoritePoems       = undefined;
+        _unreadComments      = undefined;
         _isLoggedIn          = false;
       };
 

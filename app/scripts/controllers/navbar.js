@@ -15,7 +15,7 @@ angular.module('numaApp')
       $scope.isCollapsed = true;
 
       $scope.tooltipCreate = {
-        title   : 'Start writing.',
+        title   : 'Start creating.',
         checked : false
       };
 
@@ -25,7 +25,7 @@ angular.module('numaApp')
       };
 
       $scope.tooltipUnreadComments = {
-        title   : 'You have unread comments.',
+        title   : 'Someone gave you feedback!',
         checked : false
       };
 

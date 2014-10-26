@@ -2,7 +2,7 @@
 <div ng-hide="editorEnabled">
   <div class="panel panel-default" style="margin-top: 30px;">
     <div class="panel-heading">Profile
-      <div ng-show="currentUserId == userViewId" class="pull-right" style="line-height: 1px;">
+      <div ng-show="currentUserId == userViewId && isAuthenticated" class="pull-right" style="line-height: 1px;">
         <i class="ion-ios7-gear" style="font-size: 20px;" ng-click="enableEditor()" data-placement="bottom" bs-tooltip="tooltipEditProfile"></i>
       </div>
     </div>
@@ -25,41 +25,62 @@
         <li class="list-group-item dropdown-toggle text-right" ng-if="joinedDate">
           <span class="pull-left"><strong>Joined</strong></span>{{ joinedDate }}
         </li>
-        <li ng-show="currentUserId == userViewId" class="list-group-item dropdown-toggle text-right" ng-if="email">
+        <li ng-show="currentUserId == userViewId && isAuthenticated" class="list-group-item dropdown-toggle text-right" ng-if="email">
           <span class="pull-left"><strong>Email <i>(private)</i></strong></span>{{ workingEmail }}
         </li>
         <!-- <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span> ___</li> -->
       </ul>
-      <!-- <button ng-show="currentUserId == userViewId" type="button" class="btn btn-md btn-primary pull-right"
+      <!-- <button ng-show="currentUserId == userViewId && isAuthenticated" type="button" class="btn btn-md btn-primary pull-right"
         ng-click="enableEditor()" style="margin-bottom: 10px;">Edit Profile</button> -->
 
       <tabset justified="true">
         <tab>
           <tab-heading>
-            <i class="ion-edit"></i>&nbsp; Poems <span class="badge">{{ poems.length }}</span>
+            <i class="ion-edit"></i>&nbsp; Poems <span class="badge profile-poem-badge">{{ poems.length }}</span>
           </tab-heading>
-          <div ng-repeat="poem in poems" style="font-size: 20px; padding-top: 5px;">
+          <div ng-show="poems.length === 0" style="padding: 15px 20px 0 0; font-size: 20px;">
+            You haven't created any poems yet. <i class="ion-happy" style="font-size: 25px"></i>
+          </div>
+          <div ng-repeat="poem in poems" style="font-size: 20px; padding: 15px 20px 0 0;">
             {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
           </div>
         </tab>
-        <tab ng-show="currentUserId == userViewId">
+        <tab ng-show="currentUserId == userViewId && isAuthenticated">
           <tab-heading>
-            <i class="ion-android-forums"></i>&nbsp; Comments <span class="badge">{{ comments.length }}</span>
+            <i class="ion-android-forums"></i>&nbsp; Comments <span class="badge profile-comments-badge">{{ comments.length }}</span>
           </tab-heading>
-          <div ng-repeat="comment in comments" style="font-size: 20px; padding-top: 5px;">
+          <div ng-show="comments.length === 0" style="padding: 15px 20px 0 0; font-size: 20px;">
+            You haven't given anyone feedback yet. <i class="ion-happy" style="font-size: 25px"></i>
+          </div>
+          <div ng-repeat="comment in comments" style="font-size: 20px; padding: 15px 20px 0 0;">
             {{ $index+1 }}.&nbsp;
             <a ng-href="/#!/poem/{{ comment.poemId }}">"{{ comment.comment }}" <i><small>({{ comment.poemTitle }})</small></i></a>&nbsp;
             <i class="ion-close-round" style="font-size: 20px; line-height: 0px;" ng-click="deleteComment(comment.poemId, comment.id)"></i>
           </div>
         </tab>
-        <tab ng-show="currentUserId == userViewId">
+        <tab ng-show="currentUserId == userViewId && isAuthenticated">
           <tab-heading>
-            <i class="ion-heart"></i>&nbsp; Favorite poems <span class="badge">{{ favoritePoems.length }}</span>
+            <i class="ion-heart"></i>&nbsp; Favorites <span class="badge profile-favorite-poems-badge">{{ favoritePoems.length }}</span>
           </tab-heading>
-          <div ng-repeat="favoritePoem in favoritePoems" style="font-size: 20px; padding-top: 5px;">
+          <div ng-show="favoritePoems.length === 0" style="padding: 15px 20px 0 0; font-size: 20px;">
+            You haven't favorited any poems yet. <i class="ion-happy" style="font-size: 25px"></i>
+          </div>
+          <div ng-repeat="favoritePoem in favoritePoems" style="font-size: 20px; padding: 15px 20px 0 0;">
             {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ favoritePoem.id }}">{{ favoritePoem.title }}</a>
           </div>
         </tab>
+        <tab ng-show="currentUserId == userViewId && isAuthenticated">
+          <tab-heading>
+            <i class="ion-alert"></i>&nbsp; New feedback <span class="badge profile-unread-comments-badge">{{ unreadComments.length }}</span>
+          </tab-heading>
+          <div ng-show="unreadComments.length === 0" style="padding: 15px 20px 0 0; font-size: 20px;">
+            You have no new feedback. <i class="ion-happy" style="font-size: 25px"></i>
+          </div>
+          <div ng-repeat="unreadComment in unreadComments" style="font-size: 20px; padding: 15px 20px 0 0;">
+            {{ $index+1 }}.&nbsp;
+            <a ng-href="/#!/poem/{{ unreadComment.poemId }}">"{{ unreadComment.comment }}" <i><small>({{ unreadComment.poemTitle }})</small></i></a>&nbsp;
+            <i class="ion-close-round" style="font-size: 20px; line-height: 0px;" ng-click="deleteComment(unreadComment.poemId, unreadComment.id, true)"></i>
+          </div>
       </tabset>
     </div>
   </div>

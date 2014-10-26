@@ -8,8 +8,8 @@
   'use strict';
 
   var config = {
-    logoutRedirect: '/',
-    loginRedirect: '/',
+    logoutRedirect: '/feed',
+    loginRedirect: '/feed',
     loginUrl: '/auth/login',
     signupUrl: '/auth/signup',
     signupRedirect: '/login',
