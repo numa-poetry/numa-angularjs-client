@@ -636,3 +636,9 @@ a:not([name]) {
 .brand:focus {
   color: #FF9955;
 }
+
+.commentNotification {
+  color: #fff;
+  background-color: #dd4b39;
+  font-size: 19px;
+}

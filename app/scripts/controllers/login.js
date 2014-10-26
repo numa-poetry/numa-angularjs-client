@@ -168,7 +168,7 @@ angular.module('numaApp')
           storageFactory.setId(res.id);
           storageFactory.setToken(res.token);
 
-          $location.path('/');
+          $location.path('/feed');
 
           $rootScope.displayName     = req.displayName;
           $rootScope.isAuthenticated = true; // temp fix to work with satellizer

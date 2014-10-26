@@ -18,6 +18,7 @@ angular.module('numaApp')
       var _joinedDate;
       var _email;
       var _avatarUrl;
+      var _unreadCommentsCount;
       var _poems         = [];
       var _comments      = [];
       var _favoritePoems = [];
@@ -54,7 +55,7 @@ angular.module('numaApp')
 
             // Store basic user info
             userFactory.setInfo(res.id, res.displayName, res.createdAt.split('T')[0],
-              res.email, res.avatarUrl);
+              res.email, res.avatarUrl, res.unreadCommentsCount);
 
             if (_sId === paramsId) {
               // console.log('Viewing own profile');
@@ -137,13 +138,14 @@ angular.module('numaApp')
 
 // setters ---------------------------------------------------------------------
 
-      userFactory.setInfo = function(id, displayName, joinedDate, email, avatarUrl) {
-        _id          = id;
-        _displayName = displayName;
-        _joinedDate  = joinedDate;
-        _email       = email;
-        _avatarUrl   = avatarUrl;
-        _isLoggedIn  = true;
+      userFactory.setInfo = function(id, displayName, joinedDate, email, avatarUrl, unreadCommentsCount) {
+        _id                  = id;
+        _displayName         = displayName;
+        _joinedDate          = joinedDate;
+        _email               = email;
+        _avatarUrl           = avatarUrl;
+        _unreadCommentsCount = unreadCommentsCount;
+        _isLoggedIn          = true;
       };
 
       userFactory.setIsLoggedIn = function(isLoggedIn) {
@@ -168,6 +170,10 @@ angular.module('numaApp')
 
       userFactory.setAvatarUrl = function(avatarUrl) {
         _avatarUrl = avatarUrl;
+      };
+
+      userFactory.setUnreadCommentsCount = function(unreadCommentsCount) {
+        _unreadCommentsCount = unreadCommentsCount;
       };
 
       userFactory.setPoems = function(poems) {
@@ -208,6 +214,10 @@ angular.module('numaApp')
         return _avatarUrl;
       };
 
+      userFactory.getUnreadCommentsCount = function() {
+        return _unreadCommentsCount;
+      };
+
       userFactory.getPoems = function() {
         return _poems;
       };
@@ -223,17 +233,18 @@ angular.module('numaApp')
 // deletes ---------------------------------------------------------------------
 
       userFactory.deleteInfo = function() {
-        _sId            = undefined;
-        _sToken         = undefined;
-        _id             = undefined;
-        _displayName    = undefined;
-        _joinedDate     = undefined;
-        _email          = undefined;
-        _avatarUrl      = undefined;
-        _poems          = undefined;
-        _comments       = undefined;
-        _favoritePoems  = undefined;
-        _isLoggedIn     = false;
+        _sId                 = undefined;
+        _sToken              = undefined;
+        _id                  = undefined;
+        _displayName         = undefined;
+        _joinedDate          = undefined;
+        _email               = undefined;
+        _avatarUrl           = undefined;
+        _unreadCommentsCount = undefined;
+        _poems               = undefined;
+        _comments            = undefined;
+        _favoritePoems       = undefined;
+        _isLoggedIn          = false;
       };
 
 // $resource calls -------------------------------------------------------------

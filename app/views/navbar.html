@@ -48,6 +48,17 @@
         bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-edit" style="font-size: 20px;"></i></a>
       </li>
 
+      <li ng-show="isAuthenticated && unreadCommentsCount > 0" class="visible-xs" data-match-route="/create" data-placement="left" bs-tooltip="tooltipUnreadComments">
+        <a ng-href="/#!/create">
+          <span class="badge commentNotification">{{ unreadCommentsCount }}</span>
+        </a>
+      </li>
+      <li ng-show="isAuthenticated && unreadCommentsCount > 0" class="hidden-xs" data-match-route="/create" data-placement="bottom" bs-tooltip="tooltipUnreadComments">
+        <a ng-href="/#!/create">
+          <span class="badge commentNotification">{{ unreadCommentsCount }}</span>
+        </a>
+      </li>
+
       <li data-match-route="/login" ng-show="!isAuthenticated"><a ng-href="/#!/login">
         <i class="ion-log-in" style="font-size: 20px;"></i>&nbsp; Login</a>
       </li>
@@ -63,6 +74,7 @@
           <li><a ng-href="/#!/logout" ng-click="dontGoHome()"><i class="ion-log-out" style="font-size: 20px;"></i>&nbsp; Logout</a></li>
         </ul>
       </li>
+
     </ul>
   </div>
 </div>

@@ -24,9 +24,15 @@ angular.module('numaApp')
         checked : false
       };
 
+      $scope.tooltipUnreadComments = {
+        title   : 'You have unread comments.',
+        checked : false
+      };
+
       var unregisterRefresh = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function() {
-        $scope.id        = storageFactory.getId();
-        $scope.avatarUrl = userFactory.getAvatarUrl();
+        $scope.id                  = storageFactory.getId();
+        $scope.avatarUrl           = userFactory.getAvatarUrl();
+        $scope.unreadCommentsCount = userFactory.getUnreadCommentsCount();
       });
 
       var unregisterLogin = $rootScope.$on('login', function() {
@@ -37,6 +43,7 @@ angular.module('numaApp')
       var unregisterLogout = $rootScope.$on('logout', function() {
         $scope.id        = undefined;
         $scope.avatarUrl = undefined;
+        $location.path('/feed');
       });
 
       $scope.$on('$destroy', function() {
