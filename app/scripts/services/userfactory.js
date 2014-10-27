@@ -360,6 +360,30 @@ angular.module('numaApp')
         }).get();
       };
 
+      userFactory.rSaveUserFollowUser = function(followingUserId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userFollowUser, {
+          id          : _sId,
+          followingId : followingUserId
+        }).save();
+      };
+
+      userFactory.rSaveUserUnfollowUser = function(followingUserId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userUnfollowUser, {
+          id          : _sId,
+          followingId : followingUserId
+        }).save();
+      };
+
+      userFactory.rGetUserFollowUser = function(followingUserId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userFollowUser, {
+          id          : _sId,
+          followingId : followingUserId
+        }).get();
+      };
+
 // $http calls -----------------------------------------------------------------
 
       userFactory.hUpdateUser = function(info) {

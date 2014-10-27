@@ -10,6 +10,28 @@
       <div class="row">
         <div class="col-xs-12 col-sm-8">
           <h2 class="profile-display-name">{{ displayName }}</h2>
+
+          <br />
+
+          <div class="visible-xs">
+            <center>
+              <button type="button" ng-class="{ 'btn btn-danger btn-sm' : true, 'disabled' : !isFollowing }" ng-click="unfollowUser()">
+                <i class="ion-close"></i>&nbsp; Unfollow
+              </button>
+              <button type="button" ng-class="{ 'btn btn-info btn-sm' : true, 'disabled' : isFollowing }" ng-click="followUser()">
+                <i class="ion-plus"></i>&nbsp; Follow
+              </button>
+            </center>
+          </div>
+          <div class="hidden-xs">
+            <button type="button" ng-class="{ 'btn btn-danger btn-xs' : true, 'disabled' : !isFollowing }" ng-click="unfollowUser()">
+              <i class="ion-close"></i>&nbsp; Unfollow
+            </button>
+            <button type="button" ng-class="{ 'btn btn-info btn-xs' : true, 'disabled' : isFollowing }" ng-click="followUser()">
+              <i class="ion-plus"></i>&nbsp; Follow
+            </button>
+          </div>
+
         </div>
         <div class="col-xs-12 col-sm-4">
           <img ng-show="currentUserId !== userViewId || !isAuthenticated" ng-src="{{ avatarUrl }}"
@@ -143,7 +165,7 @@
 
       <button type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top"
         data-template="views/deleteaccountmodal.html" bs-modal="modal">
-        <i class="ion-close-round"></i>&nbsp; Delete/Unlink Account
+        <i class="ion-close"></i>&nbsp; Delete/Unlink Account
       </button>
     </div>
   </div>

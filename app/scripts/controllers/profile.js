@@ -43,6 +43,16 @@ angular.module('numaApp')
         $scope.email = $scope.workingEmail = userFactory.getEmail();
       });
 
+      var resource = userFactory.rGetUserFollowUser($scope.userViewId);
+
+      resource.$promise.then(function(res) {
+        console.log(res);
+        $scope.isFollowing = true;
+      }, function(res) {
+        console.log(res);
+        $scope.isFollowing = false;
+      });
+
       $scope.$on('$destroy', function() {
         unregister();
       });
@@ -82,6 +92,42 @@ angular.module('numaApp')
       $scope.uploading     = false;
 
 // functions -------------------------------------------------------------------
+
+      $scope.followUser = function() {
+        var resource = userFactory.rSaveUserFollowUser($scope.userViewId);
+
+        resource.$promise.then(function(res) {
+          $scope.isFollowing = true;
+          $alert({
+            type        : 'material',
+            dismissable : true,
+            title       : 'Success!',
+            content     : 'You are now following ' + $scope.displayName + '.',
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
+          });
+        }, function(res) {
+          console.log(res);
+        });
+      };
+
+      $scope.unfollowUser = function() {
+        var resource = userFactory.rSaveUserUnfollowUser($scope.userViewId);
+
+        resource.$promise.then(function(res) {
+          $scope.isFollowing = false;
+          $alert({
+            type        : 'material',
+            dismissable : true,
+            title       : 'Success!',
+            content     : 'You won\'t receive anymore updates from ' + $scope.displayName + '.',
+            duration    : 5,
+            animation   : 'fadeZoomFadeDown'
+          });
+        }, function(res) {
+          console.log(res);
+        });
+      }
 
       $scope.fileSizeLabel = function() {
         // Convert bytes to MB
