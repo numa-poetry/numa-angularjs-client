@@ -11,25 +11,27 @@
         <div class="col-xs-12 col-sm-8">
           <h2 class="profile-display-name">{{ displayName }}</h2>
 
-          <br />
+          <div ng-if="currentUserId !== userViewId && isAuthenticated">
+            <br />
 
-          <div class="visible-xs">
-            <center>
-              <button type="button" ng-class="{ 'btn btn-danger btn-sm' : true, 'disabled' : !isFollowing }" ng-click="unfollowUser()">
+            <div class="visible-xs">
+              <center>
+                <button type="button" ng-class="{ 'btn btn-danger btn-sm' : true, 'disabled' : !isFollowing }" ng-click="unfollowUser()">
+                  <i class="ion-close"></i>&nbsp; Unfollow
+                </button>
+                <button type="button" ng-class="{ 'btn btn-info btn-sm' : true, 'disabled' : isFollowing }" ng-click="followUser()">
+                  <i class="ion-plus"></i>&nbsp; Follow
+                </button>
+              </center>
+            </div>
+            <div class="hidden-xs">
+              <button type="button" ng-class="{ 'btn btn-danger btn-xs' : true, 'disabled' : !isFollowing }" ng-click="unfollowUser()">
                 <i class="ion-close"></i>&nbsp; Unfollow
               </button>
-              <button type="button" ng-class="{ 'btn btn-info btn-sm' : true, 'disabled' : isFollowing }" ng-click="followUser()">
+              <button type="button" ng-class="{ 'btn btn-info btn-xs' : true, 'disabled' : isFollowing }" ng-click="followUser()">
                 <i class="ion-plus"></i>&nbsp; Follow
               </button>
-            </center>
-          </div>
-          <div class="hidden-xs">
-            <button type="button" ng-class="{ 'btn btn-danger btn-xs' : true, 'disabled' : !isFollowing }" ng-click="unfollowUser()">
-              <i class="ion-close"></i>&nbsp; Unfollow
-            </button>
-            <button type="button" ng-class="{ 'btn btn-info btn-xs' : true, 'disabled' : isFollowing }" ng-click="followUser()">
-              <i class="ion-plus"></i>&nbsp; Follow
-            </button>
+            </div>
           </div>
 
         </div>
@@ -101,7 +103,8 @@
           <div ng-repeat="unreadComment in unreadComments" style="font-size: 20px; padding: 15px 20px 0 0;">
             {{ $index+1 }}.&nbsp;
             <a ng-href="/#!/poem/{{ unreadComment.poemId }}">"{{ unreadComment.comment }}" <i><small>({{ unreadComment.poemTitle }})</small></i></a>&nbsp;
-            <i class="ion-close-round" style="font-size: 20px; line-height: 0px;" ng-click="deleteComment(unreadComment.poemId, unreadComment.id, true)"></i>
+            <i class="ion-checkmark-circled" style="font-size: 20px; line-height: 0;" ng-click="markCommentAsRead(unreadComment.poemId, unreadComment.id)"></i>&nbsp;
+            <i class="ion-close-circled" style="font-size: 20px; line-height: 0;" ng-click="deleteComment(unreadComment.poemId, unreadComment.id, true)"></i>
           </div>
       </tabset>
     </div>

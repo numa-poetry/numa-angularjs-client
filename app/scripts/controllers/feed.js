@@ -22,7 +22,7 @@ angular.module('numaApp')
       $scope.searchByContent   = false;
       $scope.strictSearch      = false;
 
-      $scope.currentPage       = parseInt($location.search().page);
+      $scope.currentPage       = parseInt($location.search().page) || 1;
       $scope.queryParam        = $location.search().query;
       $scope.searchbyParam     = $location.search().searchby;
       $scope.strictSearchParam = $location.search().strict;

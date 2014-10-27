@@ -340,10 +340,6 @@ angular.module('numaApp')
         });
       };
 
-      $scope.markAsRead = function() {
-
-      };
-
       $scope.deleteAccount = function() {
         var resource = userFactory.rDeleteAccount();
 
@@ -375,6 +371,39 @@ angular.module('numaApp')
           });
         });
       };
+
+      $scope.markCommentAsRead = function(poemId, commentId) {
+        var resource = userFactory.rMarkCommentAsRead(poemId, commentId);
+
+        resource.$promise.then(function(res) {
+          $alert({
+            type        : 'material',
+            dismissable : false,
+            duration    : 5,
+            placement   : top,
+            title       : 'Success!',
+            content     : 'Comment marked as read.',
+            animation   : 'fadeZoomFadeDown'
+          });
+          for (var i = $scope.unreadComments.length - 1; i >= 0; --i) {
+            if ($scope.unreadComments[i].id === commentId) {
+              $scope.unreadComments.splice(i,1);
+            }
+          };
+        }, function(res) {
+          $alert({
+            type        : 'material-err',
+            dismissable : false,
+            duration    : 5,
+            placement   : top,
+            title       : 'Oops!',
+            content     : res.data.message,
+            animation   : 'fadeZoomFadeDown'
+          });
+        });
+      };
+
+      // markCommentAsRead(unreadComment.poemId, undreadComment.id)
 
       $scope.deleteComment = function(poemId, commentId, unread) {
         var resource = userFactory.rDeleteComment(poemId, commentId);
