@@ -18,6 +18,11 @@ angular.module('numaApp')
           $location.path(path);
         },
 
+        // temporary bug fix
+        restoreScrollbar: function() {
+          $('body').removeClass('modal-open');
+        },
+
         // If authentication error logout user and redirect to login.
         // Set query string paramters to
         // /login?session=expired&previousView=<previousView>

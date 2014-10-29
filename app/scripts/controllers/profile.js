@@ -9,9 +9,9 @@
  */
 angular.module('numaApp')
   .controller('ProfileCtrl', ['$scope', 'userFactory', '$alert', 'storageFactory',
-    '$location', '$rootScope', '$upload', '$routeParams', '$tooltip',
+    '$location', '$rootScope', '$upload', '$routeParams', '$tooltip', 'helperFactory',
     function ($scope, userFactory, $alert, storageFactory, $location, $rootScope,
-      $upload, $routeParams, $tooltip) {
+      $upload, $routeParams, $tooltip, helperFactory) {
 
       $scope.currentUserId = storageFactory.getId();
       $scope.userViewId    = $routeParams.id;
@@ -86,6 +86,8 @@ angular.module('numaApp')
       $scope.uploading     = false;
 
 // functions -------------------------------------------------------------------
+
+      $scope.restoreScrollbar = helperFactory.restoreScrollbar;
 
       $scope.followUser = function() {
         var resource = userFactory.rSaveUserFollowUser($scope.userViewId);

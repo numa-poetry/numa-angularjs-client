@@ -93,6 +93,8 @@ angular.module('numaApp')
         $scope.audio1.playPause();
       };
 
+      $scope.restoreScrollbar = helperFactory.restoreScrollbar;
+
       $scope.deletePoem = function() {
         var resource = userFactory.rDeletePoem($scope.poemId);
 
