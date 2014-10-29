@@ -13,45 +13,39 @@ angular.module('numaApp')
     function ($scope, userFactory, $alert, storageFactory, $location, $rootScope,
       $upload, $routeParams, $tooltip) {
 
-      // console.log('params=>', $routeParams.id);
-
       $scope.currentUserId = storageFactory.getId();
       $scope.userViewId    = $routeParams.id;
 
-      console.log('$scope.currentUserId',$scope.currentUserId);
-      console.log('$scope.userViewId', $scope.userViewId);
-      console.log('is isAuthenticated:', $rootScope.isAuthenticated)
-
       userFactory.init($routeParams.id, 'full');
 
-        // $scope.displayName   = userFactory.getDisplayName();
-        // $scope.joinedDate    = userFactory.getJoinedDate();
-        // $scope.avatarUrl     = userFactory.getAvatarUrl();
-        // $scope.poems         = userFactory.getPoems();
-        // $scope.comments      = userFactory.getComments();
-        // $scope.favoritePoems = userFactory.getFavoritePoems();
-        // $scope.email = $scope.workingEmail = userFactory.getEmail();
-
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
-        $scope.displayName    = userFactory.getDisplayName();
-        $scope.joinedDate     = userFactory.getJoinedDate();
-        $scope.avatarUrl      = userFactory.getAvatarUrl();
-        $scope.poems          = userFactory.getPoems();
-        $scope.comments       = userFactory.getComments();
-        $scope.favoritePoems  = userFactory.getFavoritePoems();
-        $scope.unreadComments = userFactory.getUnreadComments();
+        $scope.displayName          = userFactory.getDisplayName();
+        $scope.joinedDate           = userFactory.getJoinedDate();
+        $scope.avatarUrl            = userFactory.getAvatarUrl();
+        $scope.poems                = userFactory.getPoems();
+        $scope.comments             = userFactory.getComments();
+        $scope.favoritePoems        = userFactory.getFavoritePoems();
+        $scope.unreadComments       = userFactory.getUnreadComments();
+        $scope.unreadFollowingPoems = userFactory.getUnreadFollowingPoems();
+        $scope.followersCount       = userFactory.getFollowersCount();
         $scope.email = $scope.workingEmail = userFactory.getEmail();
       });
 
-      var resource = userFactory.rGetUserFollowUser($scope.userViewId);
+      if ($rootScope.isAuthenticated && $scope.currentUserId !== $scope.userViewId) {
+        var resource = userFactory.rGetUserFollowUser($scope.userViewId);
 
-      resource.$promise.then(function(res) {
-        console.log(res);
-        $scope.isFollowing = true;
-      }, function(res) {
-        console.log(res);
-        $scope.isFollowing = false;
-      });
+        resource.$promise.then(function(res) {
+          console.log(res);
+          if (res.following === 'yes') {
+            $scope.isFollowing = true;
+          } else {
+            $scope.isFollowing = false;
+          }
+        }, function(res) {
+          console.log(res);
+          $scope.isFollowing = false;
+        });
+      }
 
       $scope.$on('$destroy', function() {
         unregister();
@@ -98,12 +92,12 @@ angular.module('numaApp')
 
         resource.$promise.then(function(res) {
           $scope.isFollowing = true;
+          $scope.followersCount = parseInt($scope.followersCount) + 1;
           $alert({
             type        : 'material',
-            dismissable : true,
             title       : 'Success!',
             content     : 'You are now following ' + $scope.displayName + '.',
-            duration    : 5,
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
         }, function(res) {
@@ -116,12 +110,12 @@ angular.module('numaApp')
 
         resource.$promise.then(function(res) {
           $scope.isFollowing = false;
+          $scope.followersCount = parseInt($scope.followersCount) - 1;
           $alert({
             type        : 'material',
-            dismissable : true,
             title       : 'Success!',
             content     : 'You won\'t receive anymore updates from ' + $scope.displayName + '.',
-            duration    : 5,
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
         }, function(res) {
@@ -166,7 +160,6 @@ angular.module('numaApp')
       //     if ($scope.file.type !== 'image/png' && $scope.file.type !== 'image/jpeg') {
       //       $alert({
       //         type        : 'material-err',
-      //         dismissable : true,
       //         title       : 'Oops! ',
       //         content     : 'Only PNG and JPEG types are accepted.',
       //         duration    : 5,
@@ -181,7 +174,6 @@ angular.module('numaApp')
       //     if (fileSize > $scope.sizeLimit) {
       //       $alert({
       //         type        : 'material-err',
-      //         dismissable : true,
       //         title       : 'Oops! ',
       //         content     : 'Maximum file size is 5 MB. Your image is ' +
       //           $scope.fileSizeLabel() + '. Please upload a smaller image.',
@@ -206,7 +198,6 @@ angular.module('numaApp')
       //       if (err) {
       //         $alert({
       //           type        : 'material-err',
-      //           dismissable : true,
       //           title       : 'Oops! ',
       //           content     : 'Please try again.',
       //           duration    : 5,
@@ -226,7 +217,6 @@ angular.module('numaApp')
       //           // display it to user / store to userFactory
       //           $alert({
       //             type        : 'material',
-      //             dismissable : true,
       //             title       : 'Success! ',
       //             content     : 'Profile pic updated.',
       //             duration    : 5,
@@ -247,7 +237,6 @@ angular.module('numaApp')
       //   } else {
       //     $alert({
       //       type        : 'material-err',
-      //       dismissable : true,
       //       title       : 'Oops! ',
       //       content     : 'Please select an image to upload.',
       //       duration    : 5,
@@ -267,10 +256,9 @@ angular.module('numaApp')
             image.type !== 'image/gif') {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            title       : 'Oops! ',
+            title       : 'Oops!',
             content     : 'Only PNG, GIF, JPG, and JPEG are allowed.',
-            duration    : 5,
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
           $scope.uploading = false;
@@ -288,10 +276,9 @@ angular.module('numaApp')
 
           $alert({
             type        : 'material',
-            dismissable : true,
             title       : 'Success! ',
             content     : 'Profile pic updated.',
-            duration    : 5,
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
           $scope.avatarUrl = data.avatarUrl;
@@ -314,27 +301,23 @@ angular.module('numaApp')
         var req   = {};
         req.email = $scope.email;
 
-        // console.log('req:',req);
-
         var http = userFactory.hUpdateUser(req);
         http.then(function(res) {
           $scope.editorEnabled = false;
           $scope.workingEmail  = $scope.email;
           $alert({
             type        : 'material',
-            dismissable : false,
-            duration    : 5,
-            placement   : top,
-            content     : 'You have successfully updated your profile.',
+            duration    : 3,
+            title       : 'Success!',
+            content     : 'You have updated your profile.',
             animation   : 'fadeZoomFadeDown'
           });
         }, function(res) {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            title       : 'Oops! ',
+            title       : 'Oops!',
             content     : res.data.message,
-            duration    : 5,
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
         });
@@ -346,11 +329,9 @@ angular.module('numaApp')
         resource.$promise.then(function(res) {
           $alert({
             type        : 'material',
-            dismissable : false,
-            duration    : 5,
-            placement   : top,
-            // title       : 'Hello, ' + req.displayName + '!',
-            content     : 'You have successfully deleted your account.',
+            duration    : 3,
+            title       : 'Success!',
+            content     : 'You have deleted your account.',
             animation   : 'fadeZoomFadeDown'
           });
           storageFactory.deleteId();
@@ -363,10 +344,9 @@ angular.module('numaApp')
         }, function(res) {
           $alert({
             type        : 'material-err',
-            dismissable : true,
             title       : 'Oops! ',
             content     : res.data.message,
-            duration    : 5,
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
         });
@@ -378,9 +358,7 @@ angular.module('numaApp')
         resource.$promise.then(function(res) {
           $alert({
             type        : 'material',
-            dismissable : false,
-            duration    : 5,
-            placement   : top,
+            duration    : 3,
             title       : 'Success!',
             content     : 'Comment marked as read.',
             animation   : 'fadeZoomFadeDown'
@@ -393,9 +371,7 @@ angular.module('numaApp')
         }, function(res) {
           $alert({
             type        : 'material-err',
-            dismissable : false,
-            duration    : 5,
-            placement   : top,
+            duration    : 3,
             title       : 'Oops!',
             content     : res.data.message,
             animation   : 'fadeZoomFadeDown'
@@ -411,9 +387,8 @@ angular.module('numaApp')
         resource.$promise.then(function(res) {
           $alert({
             type        : 'material',
-            dismissable : false,
-            duration    : 5,
-            placement   : top,
+            duration    : 3,
+            title       : 'Success!',
             content     : 'Comment deleted.',
             animation   : 'fadeZoomFadeDown'
           });
@@ -435,9 +410,8 @@ angular.module('numaApp')
         }, function(res) {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            duration    : 5,
-            placement   : top,
+            duration    : 3,
+            title       : 'Oops!',
             content     : res.data.message,
             animation   : 'fadeZoomFadeDown'
           });

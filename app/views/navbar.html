@@ -58,7 +58,18 @@
         bs-tooltip="tooltipCreate"><a ng-href="/#!/create"><i class="ion-compose" style="font-size: 20px;"></i></a>
       </li>
 
-      <li ng-show="isAuthenticated && unreadCommentsCount > 0" class="visible-xs" data-match-route="/user" data-placement="left" bs-tooltip="tooltipUnreadComments">
+      <li ng-show="isAuthenticated && unreadFollowingPoemsCount > 0" class="visible-xs" data-match-route="/user">
+        <a ng-href="/#!/user/{{ id }}">
+          <span class="badge unread-poem-notification">{{ unreadFollowingPoemsCount }}</span>
+        </a>
+      </li>
+      <li ng-show="isAuthenticated && unreadFollowingPoemsCount > 0" class="hidden-xs" data-match-route="/user" data-placement="bottom" bs-tooltip="tooltipUnreadPoems">
+        <a ng-href="/#!/user/{{ id }}">
+          <span class="badge unread-poem-notification">{{ unreadFollowingPoemsCount }}</span>
+        </a>
+      </li>
+
+      <li ng-show="isAuthenticated && unreadCommentsCount > 0" class="visible-xs" data-match-route="/user">
         <a ng-href="/#!/user/{{ id }}">
           <span class="badge unread-comment-notification">{{ unreadCommentsCount }}</span>
         </a>

@@ -29,10 +29,16 @@ angular.module('numaApp')
         checked : false
       };
 
+      $scope.tooltipUnreadPoems = {
+        title   : 'Someone you\'re following recently wrote a new poem!',
+        checked : false
+      };
+
       var unregisterRefresh = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function() {
-        $scope.id                  = storageFactory.getId();
-        $scope.avatarUrl           = userFactory.getAvatarUrl();
-        $scope.unreadCommentsCount = userFactory.getUnreadCommentsCount();
+        $scope.id                        = storageFactory.getId();
+        $scope.avatarUrl                 = userFactory.getAvatarUrl();
+        $scope.unreadCommentsCount       = userFactory.getUnreadCommentsCount();
+        $scope.unreadFollowingPoemsCount = userFactory.getUnreadFollowingPoemsCount();
       });
 
       var unregisterLogin = $rootScope.$on('login', function() {

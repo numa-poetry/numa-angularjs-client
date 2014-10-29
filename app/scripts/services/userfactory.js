@@ -19,16 +19,19 @@ angular.module('numaApp')
       var _email;
       var _avatarUrl;
       var _unreadCommentsCount;
-      var _poems          = [];
-      var _comments       = [];
-      var _favoritePoems  = [];
-      var _unreadComments = [];
-      var _sId            = storageFactory.getId();
-      var _sToken         = storageFactory.getToken();
-      var _isLoggedIn     = false;
-      var userFactory     = {};
-      var serverDomain    = 'http://localhost:3000';
-      var apiVersion      = '/api/v1';
+      var _unreadFollowingPoemsCount;
+      var _followersCount;
+      var _poems                = [];
+      var _comments             = [];
+      var _favoritePoems        = [];
+      var _unreadComments       = [];
+      var _unreadFollowingPoems = [];
+      var _sId                  = storageFactory.getId();
+      var _sToken               = storageFactory.getToken();
+      var _isLoggedIn           = false;
+      var userFactory           = {};
+      var serverDomain          = 'http://localhost:3000';
+      var apiVersion            = '/api/v1';
 
 // helper functions ------------------------------------------------------------
 
@@ -56,14 +59,15 @@ angular.module('numaApp')
 
             // Store basic user info
             userFactory.setInfo(res.id, res.displayName, res.createdAt.split('T')[0],
-              res.email, res.avatarUrl, res.unreadCommentsCount);
+              res.email, res.avatarUrl, res.unreadCommentsCount, res.unreadFollowingPoemsCount,
+              res.followersCount);
 
             if (_sId === paramsId) {
-              // console.log('Viewing own profile');
+              console.log('Viewing own profile');
               $rootScope.displayName     = res.displayName;
               $rootScope.isAuthenticated = true; // temp fix to work with satellizer
             } else {
-              // console.log('Viewing other user profile');
+              console.log('Viewing other user profile');
             }
 
             // If 'full' profile was requested, store poem titles and comments
@@ -72,6 +76,7 @@ angular.module('numaApp')
               userFactory.setComments(res.comments);
               userFactory.setFavoritePoems(res.favoritePoems);
               userFactory.setUnreadComments(res.unreadComments);
+              userFactory.setUnreadFollowingPoems(res.unreadFollowingPoems);
             }
 
             $rootScope.$emit('finishedSettingUserDataOnPageRefresh');
@@ -140,14 +145,17 @@ angular.module('numaApp')
 
 // setters ---------------------------------------------------------------------
 
-      userFactory.setInfo = function(id, displayName, joinedDate, email, avatarUrl, unreadCommentsCount) {
-        _id                  = id;
-        _displayName         = displayName;
-        _joinedDate          = joinedDate;
-        _email               = email;
-        _avatarUrl           = avatarUrl;
-        _unreadCommentsCount = unreadCommentsCount;
-        _isLoggedIn          = true;
+      userFactory.setInfo = function(id, displayName, joinedDate, email, avatarUrl,
+        unreadCommentsCount, unreadFollowingPoemsCount, followersCount) {
+        _id                        = id;
+        _displayName               = displayName;
+        _joinedDate                = joinedDate;
+        _email                     = email;
+        _avatarUrl                 = avatarUrl;
+        _unreadCommentsCount       = unreadCommentsCount;
+        _unreadFollowingPoemsCount = unreadFollowingPoemsCount;
+        _followersCount            = followersCount;
+        _isLoggedIn                = true;
       };
 
       userFactory.setIsLoggedIn = function(isLoggedIn) {
@@ -178,8 +186,20 @@ angular.module('numaApp')
         _unreadCommentsCount = unreadCommentsCount;
       };
 
+      userFactory.setUnreadFollowingPoemsCount = function(unreadFollowingPoemsCount) {
+        _unreadFollowingPoemsCount = unreadFollowingPoemsCount;
+      };
+
+      userFactory.setFollowersCount = function(followersCount) {
+        _followersCount = followersCount;
+      };
+
       userFactory.setUnreadComments = function(unreadComments) {
         _unreadComments = unreadComments;
+      };
+
+      userFactory.setUnreadFollowingPoems = function(unreadFollowingPoems) {
+        _unreadFollowingPoems = unreadFollowingPoems;
       };
 
       userFactory.setPoems = function(poems) {
@@ -224,8 +244,20 @@ angular.module('numaApp')
         return _unreadCommentsCount;
       };
 
+      userFactory.getUnreadFollowingPoemsCount = function() {
+        return _unreadFollowingPoemsCount;
+      };
+
+      userFactory.getFollowersCount = function() {
+        return _followersCount;
+      };
+
       userFactory.getUnreadComments = function() {
         return _unreadComments;
+      };
+
+      userFactory.getUnreadFollowingPoems = function() {
+        return _unreadFollowingPoems;
       };
 
       userFactory.getPoems = function() {
@@ -243,19 +275,22 @@ angular.module('numaApp')
 // deletes ---------------------------------------------------------------------
 
       userFactory.deleteInfo = function() {
-        _sId                 = undefined;
-        _sToken              = undefined;
-        _id                  = undefined;
-        _displayName         = undefined;
-        _joinedDate          = undefined;
-        _email               = undefined;
-        _avatarUrl           = undefined;
-        _unreadCommentsCount = undefined;
-        _poems               = undefined;
-        _comments            = undefined;
-        _favoritePoems       = undefined;
-        _unreadComments      = undefined;
-        _isLoggedIn          = false;
+        _sId                       = undefined;
+        _sToken                    = undefined;
+        _id                        = undefined;
+        _displayName               = undefined;
+        _joinedDate                = undefined;
+        _email                     = undefined;
+        _avatarUrl                 = undefined;
+        _unreadCommentsCount       = undefined;
+        _unreadFollowingPoemsCount = undefined;
+        _followersCount            = undefined;
+        _poems                     = undefined;
+        _comments                  = undefined;
+        _favoritePoems             = undefined;
+        _unreadComments            = undefined;
+        _unreadFollowingPoems      = undefined;
+        _isLoggedIn                = false;
       };
 
 // $resource calls -------------------------------------------------------------
