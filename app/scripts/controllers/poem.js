@@ -14,8 +14,8 @@ angular.module('numaApp')
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
       $alert, helperFactory, $rootScope, $location, socket, $sce) {
 
-      var id = storageFactory.getId();
-      userFactory.init(id, 'Basic');
+      $scope.userId = storageFactory.getId();
+      userFactory.init($scope.userId, 'Basic');
 
       $scope.tags = {}; // This way $watch can update tags after the resource call
       var previousVote;

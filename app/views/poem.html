@@ -17,9 +17,11 @@
     <hr ng-if="videoUrl && imageUrl">
 
     <div ng-if="imageUrl">
-      <div class="poem-image-thumbnail" >
-        <img class="img-responsive" ng-src="{{ imageUrl }}" style="border-radius: 10px;"/>
-      </div>
+      <center>
+        <div class="poem-image-thumbnail">
+          <img class="img-responsive" ng-src="{{ imageUrl }}" style="border-radius: 10px;"/>
+        </div>
+      </center>
     </div>
 
     <pre class="poem-body-view">
@@ -103,7 +105,7 @@
             ⋅ <i class="ion-close-round" style="font-size: 15px; line-height: 0px;" ng-click="deleteComment(comment.id)"></i></span>
         </div>
         <div class="comment">
-          <span>{{ comment.comment }}</span> <i><small>{{ comment.id }}</small></i>
+          <span>{{ comment.comment }}</span> <!-- <i><small>{{ comment.id }}</small></i> -->
         </div>
       </div>
 <!--       <div class="col-xs-1">

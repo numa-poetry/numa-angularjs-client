@@ -19,6 +19,8 @@
     </h3>
     <input class="input-sm form-control" type="text" ng-model="videoUrl" placeholder="Add a YouTube or Vimeo URL."/>
 
+    <hr>
+
     <h3>
       <span ng-if="imageUrl">Change or remove your image</span>
       <span ng-if="!imageUrl">Add an image</span>
@@ -45,18 +47,20 @@
         </span>
       </div>
 
-      <div ng-show="!$flow.files.length && imageUrl" class="poem-image-thumbnail" style="padding-bottom: 15px;">
-        <img class="img-responsive" ng-src="{{ imageUrl }}" style="border-radius: 10px;"/>
+      <div ng-show="!$flow.files.length && imageUrl">
+        <div class="poem-image-thumbnail" style="margin-top: 30px;">
+          <img class="img-responsive" ng-src="{{ imageUrl }}" style="border-radius: 10px;"/>
+        </div>
       </div>
 
-      <div ng-show="$flow.files.length" style="padding-bottom: 15px;">
+      <div ng-show="$flow.files.length" style="margin-top: 30px;">
         <div class="poem-image-thumbnail">
           <img class="img-responsive" flow-img="$flow.files[0]" style="border-radius: 10px;"/>
         </div>
       </div>
-      <!-- <div style='padding-top: 10px;'> -->
-        <button type='button' class='btn btn-lg btn-block btn-primary' ng-click='updatePoemAndImage($flow.files)'>Update</button>
-      <!-- </div> -->
+
+      <button type='button' class='btn btn-lg btn-block btn-primary' ng-click='updatePoemAndImage($flow.files)'
+        style="margin-top: 30px;">Update</button>
     </div>
   </div>
 </div>

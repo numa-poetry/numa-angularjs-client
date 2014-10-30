@@ -48,7 +48,7 @@
           <span class="pull-left"><strong>Joined</strong></span>{{ joinedDate }}
         </li>
         <li ng-show="currentUserId == userViewId && isAuthenticated" class="list-group-item dropdown-toggle text-right" ng-if="email">
-          <span class="pull-left"><strong>Email <i>(private)</i></strong></span>{{ workingEmail }}
+          <span class="pull-left"><strong>Email<i>(private)</i></strong></span>{{ workingEmail }}
         </li>
         <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span>{{ followersCount }}</li>
       </ul>
@@ -114,8 +114,7 @@
           <div ng-repeat="unreadPoem in unreadFollowingPoems" style="font-size: 20px; padding: 15px 20px 0 0;">
             {{ $index+1 }}.&nbsp;
             <a ng-href="/#!/poem/{{ unreadPoem.id }}">{{ unreadPoem.title }}</a>&nbsp;
-            <!-- <i class="ion-checkmark-circled" style="font-size: 20px; line-height: 0;" ng-click="markCommentAsRead(unreadPoem.poemId, unreadPoem.id)"></i>&nbsp; -->
-            <!-- <i class="ion-close-circled" style="font-size: 20px; line-height: 0;" ng-click="deleteComment(unreadPoem.poemId, unreadPoem.id, true)"></i> -->
+            <i class="ion-checkmark-circled" style="font-size: 20px; line-height: 0;" ng-click="markPoemAsRead(unreadPoem.id)"></i>
           </div>
         </tab>
       </tabset>

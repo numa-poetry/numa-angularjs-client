@@ -350,6 +350,33 @@ angular.module('numaApp')
         });
       };
 
+      $scope.markPoemAsRead = function(poemId) {
+        var resource = userFactory.rMarkPoemAsRed(poemId);
+
+        resource.$promise.then(function(res) {
+          $alert({
+            type        : 'material',
+            duration    : 3,
+            title       : 'Success!',
+            content     : 'Poem marked as read.',
+            animation   : 'fadeZoomFadeDown'
+          });
+          for (var i = $scope.unreadFollowingPoems.length - 1; i >= 0; --i) {
+            if ($scope.unreadFollowingPoems[i].id === poemId) {
+              $scope.unreadFollowingPoems.splice(i,1);
+            }
+          };
+        }, function(res) {
+          $alert({
+            type        : 'material-err',
+            duration    : 3,
+            title       : 'Oops!',
+            content     : res.data.message,
+            animation   : 'fadeZoomFadeDown'
+          });
+        });
+      };
+
       $scope.markCommentAsRead = function(poemId, commentId) {
         var resource = userFactory.rMarkCommentAsRead(poemId, commentId);
 

@@ -366,6 +366,14 @@ angular.module('numaApp')
         }).delete();
       };
 
+      userFactory.rMarkPoemAsRed = function(poemId) {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.userPoemRead, {
+          userId : _sId,
+          poemId : poemId
+        }).delete();
+      };
+
       userFactory.rSaveVote = function(info, poemId) {
         _sId = storageFactory.getId();
         return $resource(endpointConstants.userPoemVote, {
