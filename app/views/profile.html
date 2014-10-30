@@ -58,6 +58,39 @@
         </li>
         <li class="list-group-item dropdown-toggle text-right">
           <span class="pull-left">
+            <strong>Following</strong>
+          </span>
+          <div ng-if="currentUserId == userViewId && isAuthenticated">
+            <div ng-if="followingCount > 0">
+              <button class="btn btn-xs btn-info" ng-click="viewFollowing(viewFollowingEnabled)">
+                {{ followingCount }}
+                <i class="ion-arrow-left-b" ng-show="!viewFollowingEnabled"></i>
+                <i class="ion-arrow-down-b" ng-show="viewFollowingEnabled"></i>
+              </button>
+            </div>
+            <div ng-if="followingCount <= 0">
+              {{ followingCount }}
+            </div>
+          </div>
+          <div ng-if="(currentUserId != userViewId || !isAuthenticated)">
+            {{ followingCount }}
+          </div>
+          <div masonry reload-on-show ng-show="viewFollowingEnabled"
+            style="margin-top: 30px;" column-width="150">
+            <div class="masonry-brick" ng-repeat="user in following">
+              <div class="brick" ng-click="go('/user/{{ user.id }}')">
+                <img ng-src="{{ user.avatarUrl }}" style="margin-right: 10px;
+                  -webkit-border-top-left-radius: 37px;
+                  -webkit-border-bottom-left-radius: 37px;">
+                <span style="padding-right: 15px;">
+                  {{ user.displayName }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item dropdown-toggle text-right">
+          <span class="pull-left">
             <strong>Followers</strong>
           </span>
           <div ng-if="currentUserId == userViewId && isAuthenticated">
@@ -75,22 +108,22 @@
           <div ng-if="(currentUserId != userViewId || !isAuthenticated)">
             {{ followersCount }}
           </div>
+          <div masonry reload-on-show ng-show="viewFollowersEnabled"
+            style="margin-top: 30px;" column-width="150">
+            <div class="masonry-brick" ng-repeat="follower in followers">
+              <div class="brick" ng-click="go('/user/{{ follower.id }}')">
+                <img ng-src="{{ follower.avatarUrl }}" style="margin-right: 10px;
+                  -webkit-border-top-left-radius: 37px;
+                  -webkit-border-bottom-left-radius: 37px;">
+                <span style="padding-right: 15px;">
+                  {{ follower.displayName }}
+                </span>
+              </div>
+            </div>
+          </div>
         </li>
       </ul>
 
-      <div masonry reload-on-show ng-show="viewFollowersEnabled"
-        style="margin-top: 30px;" column-width="150">
-        <div class="masonry-brick" ng-repeat="follower in followers">
-          <div class="follower-brick" ng-click="go('/user/{{ follower.id }}')">
-            <img ng-src="{{ follower.avatarUrl }}" style="margin-right: 10px;
-              -webkit-border-top-left-radius: 37px;
-              -webkit-border-bottom-left-radius: 37px;">
-            <span style="padding-right: 15px;">
-              {{ follower.displayName }}
-            </span>
-          </div>
-        </div>
-      </div>
 
       <!-- vertical="true" -->
       <tabset style="margin-top: 30px;">

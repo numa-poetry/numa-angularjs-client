@@ -46,6 +46,9 @@ angular.module('numaApp')
     // GET
     allUserFollowers    : serverDomain + apiVersion + '/user/:id/follower',
 
+    // GET
+    allUserFollowing    : serverDomain + apiVersion + '/user/:id/following',
+
     // DELETE
     userPoemImageDelete : serverDomain + apiVersion + '/user/:userId/poem/:poemId/image',
 

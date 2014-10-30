@@ -21,6 +21,7 @@ angular.module('numaApp')
       var _unreadCommentsCount;
       var _unreadFollowingPoemsCount;
       var _followersCount;
+      var _followingCount;
       var _poems                = [];
       var _comments             = [];
       var _favoritePoems        = [];
@@ -60,7 +61,7 @@ angular.module('numaApp')
             // Store basic user info
             userFactory.setInfo(res.id, res.displayName, res.createdAt.split('T')[0],
               res.email, res.avatarUrl, res.unreadCommentsCount, res.unreadFollowingPoemsCount,
-              res.followersCount);
+              res.followersCount, res.followingCount);
 
             if (_sId === paramsId) {
               console.log('Viewing own profile');
@@ -141,7 +142,8 @@ angular.module('numaApp')
 // setters ---------------------------------------------------------------------
 
       userFactory.setInfo = function(id, displayName, joinedDate, email, avatarUrl,
-        unreadCommentsCount, unreadFollowingPoemsCount, followersCount) {
+        unreadCommentsCount, unreadFollowingPoemsCount, followersCount,
+        followingCount) {
         _id                        = id;
         _displayName               = displayName;
         _joinedDate                = joinedDate;
@@ -150,6 +152,7 @@ angular.module('numaApp')
         _unreadCommentsCount       = unreadCommentsCount;
         _unreadFollowingPoemsCount = unreadFollowingPoemsCount;
         _followersCount            = followersCount;
+        _followingCount            = followingCount;
         _isLoggedIn                = true;
       };
 
@@ -187,6 +190,10 @@ angular.module('numaApp')
 
       userFactory.setFollowersCount = function(followersCount) {
         _followersCount = followersCount;
+      };
+
+      userFactory.setFollowingCount = function(followingCount) {
+        _followingCount = followingCount;
       };
 
       userFactory.setUnreadComments = function(unreadComments) {
@@ -247,6 +254,10 @@ angular.module('numaApp')
         return _followersCount;
       };
 
+      userFactory.getFollowingCount = function() {
+        return _followingCount;
+      };
+
       userFactory.getUnreadComments = function() {
         return _unreadComments;
       };
@@ -280,6 +291,7 @@ angular.module('numaApp')
         _unreadCommentsCount       = undefined;
         _unreadFollowingPoemsCount = undefined;
         _followersCount            = undefined;
+        _followingCount            = undefined;
         _poems                     = undefined;
         _comments                  = undefined;
         _favoritePoems             = undefined;
@@ -433,6 +445,13 @@ angular.module('numaApp')
       userFactory.rGetUserFollowers = function() {
         _sId = storageFactory.getId();
         return $resource(endpointConstants.allUserFollowers, {
+          id : _sId
+        }).get();
+      };
+
+      userFactory.rGetUserFollowing = function() {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.allUserFollowing, {
           id : _sId
         }).get();
       };
