@@ -33,7 +33,8 @@ angular
     'selectize',
     'angularUtils.directives.dirPagination',
     'btford.socket-io',
-    'flow'
+    'flow',
+    'wu.masonry'
   ])
   .config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider',
     '$popoverProvider', '$tooltipProvider', '$modalProvider',
@@ -76,8 +77,8 @@ angular
 
       $routeProvider
         .when('/', {
-          templateUrl    : 'views/main.html',
-          controller     : 'MainCtrl'
+          templateUrl    : 'views/feed.html',
+          controller     : 'FeedCtrl'
         })
         .when('/about', {
           templateUrl    : 'views/about.html',

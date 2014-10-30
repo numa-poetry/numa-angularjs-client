@@ -43,6 +43,9 @@ angular.module('numaApp')
     // POST
     userUnfollowUser    : serverDomain + apiVersion + '/user/:id/unfollow/user/:followingId',
 
+    // GET
+    allUserFollowers    : serverDomain + apiVersion + '/user/:id/follower',
+
     // DELETE
     userPoemImageDelete : serverDomain + apiVersion + '/user/:userId/poem/:poemId/image',
 

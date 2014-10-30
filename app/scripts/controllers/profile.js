@@ -27,6 +27,7 @@ angular.module('numaApp')
         $scope.unreadComments       = userFactory.getUnreadComments();
         $scope.unreadFollowingPoems = userFactory.getUnreadFollowingPoems();
         $scope.followersCount       = userFactory.getFollowersCount();
+        console.log($scope.followersCount);
         $scope.email = $scope.workingEmail = userFactory.getEmail();
       });
 
@@ -85,7 +86,28 @@ angular.module('numaApp')
 
 // functions -------------------------------------------------------------------
 
+      $scope.go = helperFactory.go;
+
       $scope.restoreScrollbar = helperFactory.restoreScrollbar;
+
+      $scope.viewFollowers = function(flag) {
+        console.log('flag',flag)
+        if (flag === true) {
+          $scope.viewFollowersEnabled = false;
+          return;
+        } else {
+          console.log('viewFollowers')
+          var resource = userFactory.rGetUserFollowers();
+
+          resource.$promise.then(function(res) {
+            console.log(res);
+            $scope.followers            = res.followers;
+            $scope.viewFollowersEnabled = true;
+          }, function(res) {
+            console.log(res);
+          });
+        }
+      };
 
       $scope.followUser = function() {
         var resource = userFactory.rSaveUserFollowUser($scope.userViewId);

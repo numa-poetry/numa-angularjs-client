@@ -34,10 +34,6 @@ angular.module('numaApp')
         checked : false
       };
 
-      if ($location.path() === '/') {
-        $scope.isHome = true;
-      }
-
       var unregisterRefresh = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function() {
         $scope.id                        = storageFactory.getId();
         $scope.avatarUrl                 = userFactory.getAvatarUrl();
@@ -63,14 +59,6 @@ angular.module('numaApp')
       });
 
 // functions -------------------------------------------------------------------
-
-      $scope.goHome = function() {
-        $scope.isHome = true;
-      };
-
-      $scope.dontGoHome = function() {
-        $scope.isHome = false;
-      };
 
       $scope.collapse = function() {
         $scope.isCollapsed = !$scope.isCollapsed;

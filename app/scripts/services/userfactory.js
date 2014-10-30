@@ -430,6 +430,13 @@ angular.module('numaApp')
         }).get();
       };
 
+      userFactory.rGetUserFollowers = function() {
+        _sId = storageFactory.getId();
+        return $resource(endpointConstants.allUserFollowers, {
+          id : _sId
+        }).get();
+      };
+
 // $http calls -----------------------------------------------------------------
 
       userFactory.hUpdateUser = function(info) {

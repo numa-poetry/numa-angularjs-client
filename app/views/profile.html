@@ -9,9 +9,9 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-xs-12 col-sm-8">
-          <h2 class="profile-display-name">{{ displayName }}</h2>
+          <h2 class="profile-display-name" style="margin-bottom: 20px;">{{ displayName }}</h2>
 
-          <div ng-if="currentUserId !== userViewId && isAuthenticated" style="padding-top: 10px; padding-bottom: 35px;">
+          <div ng-if="currentUserId !== userViewId && isAuthenticated" style="margin-bottom: 30px;">
             <div class="visible-xs">
               <center>
                 <button type="button" ng-class="{ 'btn btn-danger btn-sm' : true, 'disabled' : !isFollowing }" ng-click="unfollowUser()">
@@ -43,18 +43,57 @@
         </div>
       </div>
 
-      <ul class="list-group" style="margin-bottom: 10px;">
+      <ul class="list-group">
         <li class="list-group-item dropdown-toggle text-right" ng-if="joinedDate">
-          <span class="pull-left"><strong>Joined</strong></span>{{ joinedDate }}
+          <span class="pull-left">
+            <strong>Joined</strong>
+          </span>
+          {{ joinedDate }}
         </li>
-        <li ng-show="currentUserId == userViewId && isAuthenticated" class="list-group-item dropdown-toggle text-right" ng-if="email">
-          <span class="pull-left"><strong>Email<i>(private)</i></strong></span>{{ workingEmail }}
+        <li ng-show="currentUserId == userViewId && isAuthenticated && workingEmail" class="list-group-item dropdown-toggle text-right">
+          <span class="pull-left">
+            <strong>Email<i>(private)</i></strong>
+          </span>
+          {{ workingEmail }}
         </li>
-        <li class="list-group-item dropdown-toggle text-right"><span class="pull-left"><strong>Followers</strong></span>{{ followersCount }}</li>
+        <li class="list-group-item dropdown-toggle text-right">
+          <span class="pull-left">
+            <strong>Followers</strong>
+          </span>
+          <div ng-if="currentUserId == userViewId && isAuthenticated">
+            <div ng-if="followersCount > 0">
+              <button class="btn btn-xs btn-info" ng-click="viewFollowers(viewFollowersEnabled)">
+                {{ followersCount }}
+                <i class="ion-arrow-left-b" ng-show="!viewFollowersEnabled"></i>
+                <i class="ion-arrow-down-b" ng-show="viewFollowersEnabled"></i>
+              </button>
+            </div>
+            <div ng-if="followersCount <= 0">
+              {{ followersCount }}
+            </div>
+          </div>
+          <div ng-if="(currentUserId != userViewId || !isAuthenticated)">
+            {{ followersCount }}
+          </div>
+        </li>
       </ul>
 
+      <div masonry reload-on-show ng-show="viewFollowersEnabled"
+        style="margin-top: 30px;" column-width="150">
+        <div class="masonry-brick" ng-repeat="follower in followers">
+          <div class="follower-brick" ng-click="go('/user/{{ follower.id }}')">
+            <img ng-src="{{ follower.avatarUrl }}" style="margin-right: 10px;
+              -webkit-border-top-left-radius: 37px;
+              -webkit-border-bottom-left-radius: 37px;">
+            <span style="padding-right: 15px;">
+              {{ follower.displayName }}
+            </span>
+          </div>
+        </div>
+      </div>
+
       <!-- vertical="true" -->
-      <tabset>
+      <tabset style="margin-top: 30px;">
         <tab>
           <tab-heading>
             <i class="ion-edit"></i>&nbsp; Poems <span class="badge profile-poem-badge">{{ poems.length }}</span>

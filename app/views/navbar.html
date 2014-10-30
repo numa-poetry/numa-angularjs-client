@@ -6,7 +6,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" ng-if="!isHome" ng-href="/#!/" ng-click="goHome()">
+    <a class="navbar-brand" ng-href="/#!/feed">
       <span class="brand">Numa</span>
     </a>
     <div class="navbar-left" plangular="https://soundcloud.com/numa-wp/sets/numa" style="color: #FFFFFF; padding: 3px;">
@@ -33,20 +33,20 @@
   <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
     <ul class="nav navbar-nav pull-right">
 
-      <li class="visible-xs" data-match-route="/#!/">
-        <a ng-href="/#!/" ng-click="goHome()">
+      <!-- <li class="visible-xs" data-match-route="/#!/">
+        <a ng-href="/#!/">
           Home
         </a>
       </li>
-      <li class="hidden-xs" data-match-route="/#!/"><a ng-href="/#!/" ng-click="goHome()"><i class="ion-home" style="font-size: 20px;"></i></a></li>
+      <li class="hidden-xs" data-match-route="/#!/"><a ng-href="/#!/"><i class="ion-home" style="font-size: 20px;"></i></a></li> -->
 
-      <li class="visible-xs" data-match-route="/feed/">
-        <a ng-href="/#!/feed/?page=1" ng-click="dontGoHome()">
+      <li class="visible-xs" data-match-route="/feed">
+        <a ng-href="/#!/feed/?page=1">
           Feed
         </a>
       </li>
       <li class="hidden-xs" data-match-route="/feed/" data-placement="bottom" bs-tooltip="tooltipFeed">
-        <a ng-href="/#!/feed/?page=1" ng-click="dontGoHome()"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
+        <a ng-href="/#!/feed/?page=1"><i class="ion-android-earth" style="font-size: 20px;"></i></a>
       </li>
 
       <li ng-show="isAuthenticated" class="visible-xs" data-match-route="/create">
@@ -90,9 +90,9 @@
             &nbsp; {{ displayName }} <i class="ion-arrow-down-b"></i>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li><a ng-href="/#!/user/{{ id }}" ng-click="dontGoHome()"><i class="ion-person" style="font-size: 20px;"></i>&nbsp; Profile</a></li>
+          <li><a ng-href="/#!/user/{{ id }}"><i class="ion-person" style="font-size: 20px;"></i>&nbsp; Profile</a></li>
           <li class="divider"></li>
-          <li><a ng-href="/#!/logout" ng-click="dontGoHome()"><i class="ion-log-out" style="font-size: 20px;"></i>&nbsp; Logout</a></li>
+          <li><a ng-href="/#!/logout"><i class="ion-log-out" style="font-size: 20px;"></i>&nbsp; Logout</a></li>
         </ul>
       </li>
 
