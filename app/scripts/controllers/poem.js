@@ -14,6 +14,9 @@ angular.module('numaApp')
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
       $alert, helperFactory, $rootScope, $location, socket, $sce) {
 
+      var id = storageFactory.getId();
+      userFactory.init(id, 'Basic');
+
       $scope.tags = {}; // This way $watch can update tags after the resource call
       var previousVote;
 
@@ -24,9 +27,6 @@ angular.module('numaApp')
       $scope.modalDeleteComment = {
         'title': 'Are you sure?'
       };
-
-      $scope.userId = storageFactory.getId();
-      userFactory.init($scope.userId, 'Basic');
 
       $scope.poemId = $routeParams.id;
       if ($scope.poemId) {
@@ -44,8 +44,8 @@ angular.module('numaApp')
           $scope.totalVotes         = res.poem.positiveVotes - res.poem.negativeVotes;
 
           if (res.poem.inspirations) {
-            $scope.imageUrl     = res.poem.inspirations.imageUrl;
-            $scope.videoUrl     = res.poem.inspirations.videoUrl;
+            $scope.imageUrl = res.poem.inspirations.imageUrl;
+            $scope.videoUrl = res.poem.inspirations.videoUrl;
           }
         }, function(res) {
           console.log(res);
@@ -76,6 +76,10 @@ angular.module('numaApp')
 
 // functions -------------------------------------------------------------------
 
+      $scope.timeSince = helperFactory.timeSince;
+
+      $scope.restoreScrollbar = helperFactory.restoreScrollbar;
+
       socket.forward('newComment', $scope);
       var unregisterNewCommentEvent = $scope.$on('socket:newComment', function(ev, data) {
         console.log('newComment data', data);
@@ -93,19 +97,15 @@ angular.module('numaApp')
         $scope.audio1.playPause();
       };
 
-      $scope.restoreScrollbar = helperFactory.restoreScrollbar;
-
       $scope.deletePoem = function() {
         var resource = userFactory.rDeletePoem($scope.poemId);
 
         resource.$promise.then(function(res) {
           $alert({
             type        : 'material',
-            dismissable : false,
-            duration    : 5,
-            placement   : top,
-            // title       : 'Hello, ' + req.displayName + '!',
-            content     : 'You have successfully deleted your poem.',
+            duration    : 3,
+            title       : 'Success!',
+            content     : 'You have deleted your poem.',
             animation   : 'fadeZoomFadeDown'
           });
 
@@ -113,10 +113,9 @@ angular.module('numaApp')
         }, function(res) {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            title       : 'Oops! ',
+            title       : 'Oops!',
             content     : res.data.message,
-            duration    : 5,
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
         });
@@ -128,9 +127,8 @@ angular.module('numaApp')
         resource.$promise.then(function(res) {
           $alert({
             type        : 'material',
-            dismissable : false,
-            duration    : 5,
-            placement   : top,
+            duration    : 3,
+            title       : 'Success!',
             content     : 'Comment deleted.',
             animation   : 'fadeZoomFadeDown'
           });
@@ -145,9 +143,8 @@ angular.module('numaApp')
         }, function(res) {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            duration    : 5,
-            placement   : top,
+            duration    : 3,
+            title       : 'Oops',
             content     : res.data.message,
             animation   : 'fadeZoomFadeDown'
           });
@@ -155,16 +152,14 @@ angular.module('numaApp')
       };
 
       $scope.saveComment = function() {
-        console.log($scope.comment);
-
         var req     = {};
         req.comment = $scope.comment;
 
         if (req.comment === '' || req.comment === undefined) {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            duration    : 5,
+            duration    : 3,
+            title       : 'Oops!',
             content     : 'You haven\'t written anything!',
             animation   : 'fadeZoomFadeDown'
           });
@@ -174,18 +169,15 @@ angular.module('numaApp')
         var resource = userFactory.rSaveComment(req, $scope.poemId);
 
         resource.$promise.then(function(res) {
-
           // notify server->notify creator of new comment
           socket.emit('newComment', { creatorId : $scope.creatorId });
 
           // clear the comment box
           $scope.comment = "";
-
           $alert({
             type        : 'material',
-            dismissable : false,
-            duration    : 5,
-            placement   : top,
+            duration    : 3,
+            title       : 'Success!',
             content     : 'Comment saved.',
             animation   : 'fadeZoomFadeDown'
           });
@@ -205,17 +197,15 @@ angular.module('numaApp')
         }, function(res) {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            title       : 'Oops! ',
+            title       : 'Oops!',
             content     : res.data.message,
-            duration    : 5,
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
         });
       };
 
       $scope.saveFavoritedPoem = function() {
-
         var resource = userFactory.rSavePoemAsFavorite($scope.poemId);
 
         resource.$promise.then(function(res) {
@@ -257,8 +247,6 @@ angular.module('numaApp')
           console.log(res);
         });
       };
-
-      $scope.timeSince = helperFactory.timeSince;
 
     }
   ]);

@@ -23,27 +23,24 @@ angular.module('numaApp')
         resource.$promise.then(function(res) {
           $alert({
             type        : 'material',
-            dismissable : false,
-            duration    : 5,
-            placement   : top,
-            // title       : 'Hello, ' + res.displayName + '!',
+            duration    : 3,
+            title       : 'Success!',
             content     : 'An email has been sent to you with further instructions.',
             animation   : 'fadeZoomFadeDown'
           });
-          console.log('RES:',res);
+          console.log(res);
 
           $location.path('/');
 
         }, function(res) {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            title       : 'Oops! ',
+            title       : 'Oops!',
             content     : res.data.message,
-            duration    : 5,
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
-          console.log('RES:',res);
+          console.log(res);
         });
       };
 

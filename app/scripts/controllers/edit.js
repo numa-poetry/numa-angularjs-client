@@ -13,6 +13,9 @@ angular.module('numaApp')
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
       $alert, $location, $upload) {
 
+      $scope.userId = storageFactory.getId();
+      userFactory.init($scope.userId, 'Basic');
+
       $scope.tagOptions = ['love', 'life', 'happiness'];
 
       $scope.tagConfig = {
@@ -20,23 +23,19 @@ angular.module('numaApp')
         placeholder: 'Add tags to your poem for others to easily find it...',
       };
 
-      $scope.userId = storageFactory.getId();
-      userFactory.init($scope.userId, 'Basic');
-
       var poemId = $routeParams.id;
       if (poemId) {
-        // console.log($routeParams);
         var resource = poemFactory.rGet(poemId);
 
         resource.$promise.then(function(res) {
           console.log(res);
-          $scope.title      = res.poem.title;
-          $scope.poem       = res.poem.poem;
-          $scope.tags       = res.poem.tags;
-          $scope.imageUrl   = res.poem.inspirations.imageUrl;
-          $scope.videoUrl   = res.poem.inspirations.videoUrl;
+          $scope.title    = res.poem.title;
+          $scope.poem     = res.poem.poem;
+          $scope.tags     = res.poem.tags;
+          $scope.imageUrl = res.poem.inspirations.imageUrl;
+          $scope.videoUrl = res.poem.inspirations.videoUrl;
         }, function(res) {
-          // console.log(res);
+          console.log(res);
         });
       }
 
@@ -63,8 +62,8 @@ angular.module('numaApp')
         if ($scope.poem === '' || $scope.poem === undefined) {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            duration    : 5,
+            duration    : 3,
+            title       : 'Oops!',
             content     : 'You haven\'t written anything yet!',
             animation   : 'fadeZoomFadeDown'
           });
@@ -74,8 +73,8 @@ angular.module('numaApp')
         if ($scope.title === '' || $scope.poem === undefined || $scope.title === 'Untitled') {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            duration    : 5,
+            duration    : 3,
+            title       : 'Oops!',
             content     : 'You haven\'t spiced up your title!',
             animation   : 'fadeZoomFadeDown'
           });
@@ -97,12 +96,12 @@ angular.module('numaApp')
             image = image[0];
           }
 
-          if (image.file.type !== 'image/png' && image.file.type !== 'image/jpeg' && image.file.type !== 'image/jpg' &&
-              image.file.type !== 'image/gif') {
+          if (image.file.type !== 'image/png' && image.file.type !== 'image/jpeg' &&
+            image.file.type !== 'image/jpg' && image.file.type !== 'image/gif') {
             $alert({
               type        : 'material-err',
-              dismissable : true,
-              duration    : 5,
+              duration    : 3,
+              title       : 'Oops!',
               content     : 'Only PNG, GIF, JPG, and JPEG are allowed.',
               animation   : 'fadeZoomFadeDown'
             });
@@ -115,19 +114,15 @@ angular.module('numaApp')
             method : 'POST',
             file   : image.file
           }).success(function(data) {
-            console.log('Successful image upload.');
-            console.log(data.imageUrl);
-
-            // $scope.imageUrl = data.imageUrl;
             req.imageUrl    = data.imageUrl;
             var http        = userFactory.hUpdatePoem(req);
 
             http.then(function(res) {
               $alert({
                 type        : 'material',
-                dismissable : false,
-                duration    : 5,
-                title       : 'Your poem has been updated.',
+                duration    : 3,
+                title       : 'Success!',
+                content     : 'Your poem has been updated.',
                 animation   : 'fadeZoomFadeDown'
               });
 
@@ -135,10 +130,9 @@ angular.module('numaApp')
             }, function(res) {
               $alert({
                 type        : 'material-err',
-                dismissable : true,
-                title       : 'Oops! ',
+                title       : 'Oops!',
                 content     : res.data.message,
-                duration    : 5,
+                duration    : 3,
                 animation   : 'fadeZoomFadeDown'
               });
             });
@@ -152,9 +146,9 @@ angular.module('numaApp')
           http.then(function(res) {
             $alert({
               type        : 'material',
-              dismissable : false,
-              duration    : 5,
-              title       : 'Your poem has been updated.',
+              duration    : 3,
+              title       : 'Success!',
+              content     : 'Your poem has been updated.',
               animation   : 'fadeZoomFadeDown'
             });
 
@@ -162,10 +156,9 @@ angular.module('numaApp')
           }, function(res) {
             $alert({
               type        : 'material-err',
-              dismissable : true,
-              title       : 'Oops! ',
+              title       : 'Oops!',
               content     : res.data.message,
-              duration    : 5,
+              duration    : 3,
               animation   : 'fadeZoomFadeDown'
             });
           });

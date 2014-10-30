@@ -20,10 +20,9 @@ angular.module('numaApp')
           .then(function() {
             $alert({
               type        : 'material',
-              // title       : 'You have been logged out!',
+              title       : 'Success!',
               content     : 'You\'ve been logged out.',
-              duration    : 4,
-              dismissable : false,
+              duration    : 3,
               animation   : 'fadeZoomFadeDown'
             });
             storageFactory.deleteId();

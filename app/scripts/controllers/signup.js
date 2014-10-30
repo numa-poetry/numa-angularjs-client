@@ -15,8 +15,9 @@ angular.module('numaApp')
 
       $scope.popover = {
         title   : 'Protect your privacy',
-        content : 'If you close your browser without logging out, we\'ll store an access token to remember you.<br />' +
-          'Other people who use this computer will also be able to log in as you.',
+        content : 'If you close your browser without logging out, we\'ll store ' +
+          'an access token to remember you.<br />Other people who use this ' +
+          'computer will also be able to log in as you.',
         checked : false
       };
 
@@ -31,39 +32,31 @@ angular.module('numaApp')
         req.password     = $scope.password;
         req.stayLoggedIn = $scope.stayLoggedIn;
 
-        console.log('REQ:', req);
+        console.log(req);
         var resource    = userFactory.rSignUp(req);
 
         resource.$promise.then(function(res) {
           $alert({
             type        : 'material',
-            dismissable : false,
             duration    : 5,
-            placement   : top,
             title       : 'Hello, ' + req.displayName + '!',
             content     : 'You have successfully signed up.',
             animation   : 'fadeZoomFadeDown'
           });
-          console.log('RES:', res);
+          console.log(res);
           userFactory.setInfo(res.id, req.displayName);
           storageFactory.setId(res.id);
           storageFactory.setToken(res.token);
-
           $location.path('/feed');
-
           $rootScope.displayName     = req.displayName;
           $rootScope.isAuthenticated = true; // temp fix to work with satellizer
-          // Clear the query string parameters from the URL
-          // $location.url($location.path());
-
           usSpinnerService.stop('signup-spinner');
         }, function(res) {
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            title       : 'Oops! ',
+            title       : 'Oops!',
             content     : res.data.message,
-            duration    : 5,
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
           usSpinnerService.stop('signup-spinner');

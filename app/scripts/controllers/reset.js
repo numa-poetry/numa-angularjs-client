@@ -15,11 +15,17 @@ angular.module('numaApp')
 
       var token = $location.search().token;
 
+      // execute this function when the view is rendered
+      $scope.reset();
+
+// functions -------------------------------------------------------------------
+
       $scope.reset = function() {
         if (token) {
           usSpinnerService.spin('resetPassword-spinner');
 
           // Verify URL query parameters include reset password token
+
           var resource = $resource(endpointConstants.resetPassword, {
             token : token
           }).get();
@@ -30,10 +36,9 @@ angular.module('numaApp')
             usSpinnerService.stop('resetPassword-spinner');
             $alert({
               type        : 'material-err',
-              dismissable : true,
-              title       : 'Oops! ',
-              content     : 'Looks like your reset token expired and/or the specified user does not exists. Please request to reset your password again.',
-              duration    : 6,
+              title       : 'Oops!',
+              content     : 'Your reset token expired and/or the specified user does not exists. Please request to reset your password again.',
+              duration    : 4,
               animation   : 'fadeZoomFadeDown'
             });
 
@@ -48,23 +53,17 @@ angular.module('numaApp')
           usSpinnerService.stop('resetPassword-spinner');
           $alert({
             type        : 'material-err',
-            dismissable : true,
-            title       : 'Oops! ',
+            title       : 'Oops!',
             content     : 'Please follow the link in the email we sent you to reset your password.',
-            duration    : 5,
+            duration    : 4,
             animation   : 'fadeZoomFadeDown'
           });
 
           // clear parameters
           $location.url($location.path());
-
-          // redirect back to homepage
           $location.path('/');
         }
       };
-
-      // execute this function when the view is rendered
-      $scope.reset();
 
       $scope.updatePassword = function() {
         if (token) {
@@ -82,8 +81,7 @@ angular.module('numaApp')
 
             $alert({
               type        : 'material',
-              dismissable : false,
-              duration    : 5,
+              duration    : 3,
               placement   : top,
               title       : 'Success!',
               content     : 'Your password has been changed.',
@@ -95,10 +93,9 @@ angular.module('numaApp')
             usSpinnerService.stop('resetPassword-spinner');
             $alert({
               type        : 'material-err',
-              dismissable : true,
               title       : 'Oops!',
               content     : 'Please try again. If the problem persists please request to reset your password again.',
-              duration    : 5,
+              duration    : 3,
               animation   : 'fadeZoomFadeDown'
             });
           });
@@ -106,17 +103,14 @@ angular.module('numaApp')
           usSpinnerService.stop('resetPassword-spinner');
           $alert({
             type        : 'material-err',
-            dismissable : true,
             title       : 'Oops!',
-            content     : 'Looks like your reset token expired and/or the specified user does not exists. Please request to reset your password again.',
-            duration    : 6,
+            content     : 'Your reset token expired and/or the specified user does not exists. Please request to reset your password again.',
+            duration    : 3,
             animation   : 'fadeZoomFadeDown'
           });
 
           // clear parameters
           $location.url($location.path());
-
-          // redirect back to homepage
           $location.path('/');
         }
       };

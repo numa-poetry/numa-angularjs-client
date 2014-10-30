@@ -81,9 +81,7 @@ angular.module('numaApp')
 
             $rootScope.$emit('finishedSettingUserDataOnPageRefresh');
           }, function(res) {
-
             console.log('err:', res);
-
             // if backend is down
             if (res.status === 0) {
               $auth.logout()
@@ -91,9 +89,8 @@ angular.module('numaApp')
                   $alert({
                     type        : 'material-err',
                     title       : 'We\'ve lost connection to our backend.',
-                    content     : 'Please try logging back in',
-                    duration    : 4,
-                    dismissable : true
+                    content     : 'Please try logging back in.',
+                    duration    : 3
                   });
                   storageFactory.deleteId();
                   storageFactory.deleteToken();
@@ -106,10 +103,9 @@ angular.module('numaApp')
                 .then(function() {
                   $alert({
                     type        : 'material-err',
-                    title       : 'Your session has expired!',
-                    content     : 'Please log back in to continue',
-                    duration    : 4,
-                    dismissable : true
+                    title       : 'Your session has expired.',
+                    content     : 'Please log back in to continue.',
+                    duration    : 3
                   });
                   storageFactory.deleteId();
                   storageFactory.deleteToken();
@@ -124,22 +120,21 @@ angular.module('numaApp')
             // helperFactory.deleteDataAndRedirectToLogin($location.url());
           });
         } else if ($rootScope.isAuthenticated === true) {
-          console.log('auth logout');
           $auth.logout()
             .then(function() {
-              // $alert({
-              //   type        : 'material-err',
-              //   title       : 'Your browser\'s session cookie has been removed.',
-              //   content     : 'Please try logging back in',
-              //   duration    : 4,
-              //   dismissable : true
-              // });
+              $alert({
+                type        : 'material-err',
+                title       : 'Your browser\'s session cookie has been removed.',
+                content     : 'Please try logging back in.',
+                duration    : 3
+              });
               storageFactory.deleteId();
               storageFactory.deleteToken();
               userFactory.deleteInfo();
             });
+          $location.path('/login');
         } else {
-          console.log('no cookie or token found')
+          console.log('no cookie or token found');
         }
       };
 

@@ -15,8 +15,7 @@ angular.module('numaApp')
 
       $scope.currentUserId = storageFactory.getId();
       $scope.userViewId    = $routeParams.id;
-
-      userFactory.init($routeParams.id, 'full');
+      userFactory.init($scope.userViewId, 'full');
 
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
         $scope.displayName          = userFactory.getDisplayName();
@@ -73,13 +72,12 @@ angular.module('numaApp')
 
       // Temporary Amazon S3 bucket credentials. All images stored here for processing,
       // then transferred to permanent bucket.
-
       // Credentials invalidated for now.
-      $scope.creds = {
-        bucketName      : 'numa-temp',
-        accessKeyId     : 'AKIAIQXDLJ23NA3YRHCQ',
-        secretAccessKey : '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'
-      };
+      // $scope.creds = {
+      //   bucketName      : 'numa-temp',
+      //   accessKeyId     : 'AKIAIQXDLJ23NA3YRHCQ',
+      //   secretAccessKey : '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'
+      // };
 
       $scope.editorEnabled = false;
       $scope.sizeLimit     = 5292880; // 5MB in bytes
@@ -254,8 +252,8 @@ angular.module('numaApp')
           image = image[0];
         }
 
-        if (image.type !== 'image/png' && image.type !== 'image/jpeg' && image.type !== 'image/jpg' &&
-            image.type !== 'image/gif') {
+        if (image.type !== 'image/png' && image.type !== 'image/jpeg' &&
+          image.type !== 'image/jpg' && image.type !== 'image/gif') {
           $alert({
             type        : 'material-err',
             title       : 'Oops!',
@@ -339,14 +337,12 @@ angular.module('numaApp')
           storageFactory.deleteId();
           storageFactory.deleteToken();
           userFactory.deleteInfo();
-
           $location.path('/');
-
           $rootScope.isAuthenticated = false; // temp fix to work with satellizer
         }, function(res) {
           $alert({
             type        : 'material-err',
-            title       : 'Oops! ',
+            title       : 'Oops!',
             content     : res.data.message,
             duration    : 3,
             animation   : 'fadeZoomFadeDown'
@@ -381,8 +377,6 @@ angular.module('numaApp')
         });
       };
 
-      // markCommentAsRead(unreadComment.poemId, undreadComment.id)
-
       $scope.deleteComment = function(poemId, commentId, unread) {
         var resource = userFactory.rDeleteComment(poemId, commentId);
 
@@ -402,7 +396,6 @@ angular.module('numaApp')
               }
             };
           } else {
-            // find and remove comment from DOM
             for (var i = $scope.comments.length - 1; i >= 0; --i) {
               if ($scope.comments[i].id === commentId) {
                 $scope.comments.splice(i,1);

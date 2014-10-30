@@ -46,7 +46,7 @@ angular.module('numaApp')
           strictSearch = '';
         }
 
-        console.log('Search request:', endpointConstants.allPoems + '/?' + page + query + searchby + strictSearch);
+        // console.log('Search request:', endpointConstants.allPoems + '/?' + page + query + searchby + strictSearch);
         return $resource(endpointConstants.allPoems + '/?' + page + query + searchby + strictSearch).get();
       };
 

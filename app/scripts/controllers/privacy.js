@@ -8,10 +8,8 @@
  * Controller of the numaApp
  */
 angular.module('numaApp')
-  .controller('PrivacyCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('PrivacyCtrl', ['$scope',
+    function ($scope) {
+
+    }
+  ]);
