@@ -126,13 +126,19 @@
 
 
       <!-- vertical="true" -->
-      <tabset style="margin-top: 30px;">
+      <tabset style="margin-top: 30px; font-size: 13px;" justified="true">
         <tab>
           <tab-heading>
             <i class="ion-edit"></i>&nbsp; Poems <span class="badge profile-poem-badge">{{ poems.length }}</span>
           </tab-heading>
           <div ng-show="poems.length === 0" style="padding: 15px 20px 0 0; font-size: 20px;">
             You haven't created any poems yet. <i class="ion-happy" style="font-size: 25px"></i>
+          </div>
+          <div ng-show="poems.length > 0">
+            <a class="btn btn-xs btn-primary" target="_self" href="{{ pdfUrl }}"
+              download="poems.pdf" style="float: right; margin-top: 15px;">
+              Download Poems as PDF
+            </a>
           </div>
           <div ng-repeat="poem in poems" style="font-size: 20px; padding: 15px 20px 0 0;">
             {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>

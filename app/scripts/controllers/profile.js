@@ -18,6 +18,7 @@ angular.module('numaApp')
       userFactory.init($scope.userViewId, 'full');
 
       var unregister = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function () {
+        $scope.pdfUrl               = userFactory.getPdfUrl();
         $scope.displayName          = userFactory.getDisplayName();
         $scope.joinedDate           = userFactory.getJoinedDate();
         $scope.avatarUrl            = userFactory.getAvatarUrl();

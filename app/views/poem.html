@@ -36,10 +36,17 @@
       <span>by <a ng-href="/#!/user/{{ creatorId }}">{{ creatorDisplayName }}</a></span>&nbsp;
       <img class="img-circle" ng-src="{{ creatorAvatarUrl }}" style="min-height: 40px; height: 40px;">
     </div>
+
+    <i class="ion-earth" style="font-size: 30px; padding-right: 15px;"
+      data-placement="bottom" bs-tooltip="tooltipPublished"
+      ng-show="isPublished">
+    </i>
+
     <div class="pull-right" style="padding-right: 10px;" ng-show="userId === creatorId && isAuthenticated">
       <a ng-href="/#!/edit/{{ poemId }}" type="button" class="btn btn-sm btn-info">Edit</a>
       <a type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top"
-        data-template="views/deletepoemmodal.html" bs-modal="modalDeletePoem"><i class="ion-close-round"></i></a>
+        data-template="views/deletepoemmodal.html" bs-modal="modalDeletePoem"><i class="ion-close-round"></i>
+      </a>
     </div>
     <div class="pull-left" style="padding-left: 10px;">
       <div ng-if="userId !== creatorId && isAuthenticated">

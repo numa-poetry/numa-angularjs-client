@@ -278,6 +278,11 @@ angular.module('numaApp')
         return _favoritePoems;
       };
 
+      userFactory.getPdfUrl = function() {
+        _sId = storageFactory.getId();
+        return 'http://localhost:3000/api/v1/user/' + _sId + '/poem/pdf';
+      };
+
 // deletes ---------------------------------------------------------------------
 
       userFactory.deleteInfo = function() {

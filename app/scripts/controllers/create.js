@@ -9,9 +9,9 @@
  */
 angular.module('numaApp')
   .controller('CreateCtrl', ['$scope', '$resource', '$alert', 'userFactory',
-    '$location', 'storageFactory', '$upload', '$sce',
+    '$location', 'storageFactory', '$upload', '$sce', '$tooltip',
     function ($scope, $resource, $alert, userFactory, $location, storageFactory,
-      $upload, $sce) {
+      $upload, $sce, $tooltip) {
 
       var id = storageFactory.getId();
       userFactory.init(id, 'Basic');
@@ -21,6 +21,11 @@ angular.module('numaApp')
       $scope.tagConfig = {
         create: true,
         placeholder: 'Add tags to your poem for others to easily find it...',
+      };
+
+      $scope.tooltipPublish = {
+        title   : 'Or save as a draft.',
+        checked : false
       };
 
       $scope.title = 'Untitled';
@@ -73,12 +78,13 @@ angular.module('numaApp')
             method : 'POST',
             file   : image.file
           }).success(function(data) {
-            var req      = {};
-            req.poem     = $scope.poem;
-            req.title    = $scope.title;
-            req.tags     = $scope.tags;
-            req.videoUrl = $scope.videoUrl;
-            req.imageUrl = data.imageUrl;
+            var req       = {};
+            req.poem      = $scope.poem;
+            req.title     = $scope.title;
+            req.tags      = $scope.tags;
+            req.videoUrl  = $scope.videoUrl;
+            req.published = $scope.toPublish || false;
+            req.imageUrl  = data.imageUrl;
             // console.log(req);
 
             var resource = userFactory.rSavePoem(req);
@@ -105,12 +111,12 @@ angular.module('numaApp')
             console.log('Error uploading file: ' + err.message || err);
           });
         } else {
-          var req      = {};
-          req.poem     = $scope.poem;
-          req.title    = $scope.title;
-          req.tags     = $scope.tags;
-          req.videoUrl = $scope.videoUrl;
-          req.imageUrl = '';
+          var req       = {};
+          req.poem      = $scope.poem;
+          req.title     = $scope.title;
+          req.tags      = $scope.tags;
+          req.videoUrl  = $scope.videoUrl;
+          req.published = $scope.toPublish || false;
           // console.log(req);
 
           var resource = userFactory.rSavePoem(req);

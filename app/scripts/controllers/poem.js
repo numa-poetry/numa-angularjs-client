@@ -10,9 +10,9 @@
 angular.module('numaApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
     'userFactory', '$alert', 'helperFactory', '$rootScope', '$location', 'socket',
-    '$sce',
+    '$sce', '$tooltip',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
-      $alert, helperFactory, $rootScope, $location, socket, $sce) {
+      $alert, helperFactory, $rootScope, $location, socket, $sce, $tooltip) {
 
       $scope.userId = storageFactory.getId();
       userFactory.init($scope.userId, 'Basic');
@@ -28,6 +28,11 @@ angular.module('numaApp')
         'title': 'Are you sure?'
       };
 
+      $scope.tooltipPublished = {
+        title   : 'Published to the feed.',
+        checked : false
+      };
+
       $scope.poemId = $routeParams.id;
       if ($scope.poemId) {
         var poemResource = poemFactory.rGet($scope.poemId);
@@ -40,6 +45,7 @@ angular.module('numaApp')
           $scope.title              = res.poem.title;
           $scope.poem               = res.poem.poem;
           $scope.tags               = res.poem.tags.join(', ');
+          $scope.isPublished        = res.poem.published;
           $scope.comments           = res.poem.comments;
           $scope.totalVotes         = res.poem.positiveVotes - res.poem.negativeVotes;
 

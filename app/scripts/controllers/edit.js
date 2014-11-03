@@ -29,11 +29,15 @@ angular.module('numaApp')
 
         resource.$promise.then(function(res) {
           console.log(res);
-          $scope.title    = res.poem.title;
-          $scope.poem     = res.poem.poem;
-          $scope.tags     = res.poem.tags;
-          $scope.imageUrl = res.poem.inspirations.imageUrl;
-          $scope.videoUrl = res.poem.inspirations.videoUrl;
+          $scope.title     = res.poem.title;
+          $scope.poem      = res.poem.poem;
+          $scope.tags      = res.poem.tags || undefined;
+          $scope.toPublish = res.poem.published;
+
+          if (res.poem.inspirations) {
+            $scope.imageUrl = res.poem.inspirations.imageUrl || undefined;
+            $scope.videoUrl = res.poem.inspirations.videoUrl || undefined;
+          }
         }, function(res) {
           console.log(res);
         });
@@ -81,13 +85,13 @@ angular.module('numaApp')
           return;
         }
 
-        var req        = {};
-        req.id         = $routeParams.id;
-        req.poem       = $scope.poem;
-        req.title      = $scope.title;
-        req.tags       = $scope.tags;
-        req.videoUrl   = $scope.videoUrl;
-        req.imageUrl   = '';
+        var req       = {};
+        req.id        = $routeParams.id;
+        req.poem      = $scope.poem;
+        req.title     = $scope.title;
+        req.tags      = $scope.tags;
+        req.videoUrl  = $scope.videoUrl;
+        req.published = $scope.toPublish;
 
         // If an image has been added, update the scope property before the request
         if (image.length > 0 && image !== undefined) {
