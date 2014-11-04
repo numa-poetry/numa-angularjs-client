@@ -22,15 +22,24 @@ angular.module('numaApp')
         $scope.displayName          = userFactory.getDisplayName();
         $scope.joinedDate           = userFactory.getJoinedDate();
         $scope.avatarUrl            = userFactory.getAvatarUrl();
-        $scope.poems                = userFactory.getPoems();
         $scope.comments             = userFactory.getComments();
         $scope.favoritePoems        = userFactory.getFavoritePoems();
         $scope.unreadComments       = userFactory.getUnreadComments();
         $scope.unreadFollowingPoems = userFactory.getUnreadFollowingPoems();
         $scope.followersCount       = userFactory.getFollowersCount();
         $scope.followingCount       = userFactory.getFollowingCount();
-        console.log($scope.followersCount);
         $scope.email = $scope.workingEmail = userFactory.getEmail();
+
+        var poems     = userFactory.getPoems();
+        $scope.poems  = [];
+        $scope.drafts = [];
+        for (var i = poems.length - 1; i >= 0; --i) {
+          if (poems[i].published === true) {
+            $scope.poems.push(poems[i]);
+          } else {
+            $scope.drafts.push(poems[i]);
+          }
+        };
       });
 
       if ($rootScope.isAuthenticated && $scope.currentUserId !== $scope.userViewId) {

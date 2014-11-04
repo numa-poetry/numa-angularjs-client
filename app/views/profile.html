@@ -129,19 +129,36 @@
       <tabset style="margin-top: 30px; font-size: 13px;" justified="true">
         <tab>
           <tab-heading>
-            <i class="ion-edit"></i>&nbsp; Poems <span class="badge profile-poem-badge">{{ poems.length }}</span>
+            <i class="ion-edit"></i>&nbsp; Poems <span class="badge profile-poem-badge">{{ poems.length + drafts.length }}</span>
           </tab-heading>
-          <div ng-show="poems.length === 0" style="padding: 15px 20px 0 0; font-size: 20px;">
+          <div ng-show="poems.length === 0 && drafts.length === 0" style="padding: 15px 20px 0 0; font-size: 20px;">
             You haven't created any poems yet. <i class="ion-happy" style="font-size: 25px"></i>
           </div>
-          <div ng-show="poems.length > 0">
-            <a class="btn btn-xs btn-primary" target="_self" href="{{ pdfUrl }}"
-              download="poems.pdf" style="float: right; margin-top: 15px;">
-              Download Poems as PDF
-            </a>
-          </div>
-          <div ng-repeat="poem in poems" style="font-size: 20px; padding: 15px 20px 0 0;">
-            {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
+          <!-- <div class="row"> -->
+            <div ng-show="poems.length > 0 || drafts.length > 0" style="margin-top: 20px;">
+              <a class="hidden-xs btn btn-sm btn-primary" target="_self" href="{{ pdfUrl }}"
+                download="poems.pdf" >
+                Download Poems as PDF
+              </a>
+              <a class="visible-xs btn btn-md btn-block btn-primary" target="_self" href="{{ pdfUrl }}"
+                download="poems.pdf" >
+                Download Poems as PDF
+              </a>
+            </div>
+          <!-- </div> -->
+          <div class="row">
+            <div class="col-lg-6">
+              <h3><u>Published</u></h3>
+              <div ng-repeat="poem in poems" style="font-size: 20px; padding: 10px 20px 0 0;">
+                {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h3><u>Drafts</u></h3>
+              <div ng-repeat="draft in drafts" style="font-size: 20px; padding: 10px 20px 0 0;">
+                {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ draft.id }}">{{ draft.title }}</a>
+              </div>
+            </div>
           </div>
         </tab>
         <tab ng-show="currentUserId == userViewId && isAuthenticated">

@@ -19,7 +19,7 @@ angular.module('numaApp')
 
       $scope.poems             = [];
       $scope.totalPoems        = 0;
-      $scope.poemsPerPage      = 8; // this should match however many results your API puts on one page
+      $scope.poemsPerPage      = 15; // this should match however many results your API puts on one page
       $scope.searchByTitle     = false;
       $scope.searchByTag       = false;
       $scope.searchByContent   = false;
