@@ -84,7 +84,7 @@
     }
   };
 
-  angular.module('Satellizer', [])
+  angular.module('satellizer', [])
     .provider('$auth', function() {
 
       Object.defineProperties(this, {

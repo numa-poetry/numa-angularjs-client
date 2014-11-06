@@ -39,7 +39,7 @@
 
     <i class="ion-earth" style="font-size: 30px; padding-right: 15px;"
       data-placement="bottom" bs-tooltip="tooltipPublished"
-      ng-show="isPublished">
+      ng-show="userId === creatorId && isAuthenticated && isPublished">
     </i>
 
     <div class="pull-right" style="padding-right: 10px;" ng-show="userId === creatorId && isAuthenticated">

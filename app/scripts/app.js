@@ -17,7 +17,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngMessages',
-    'Satellizer',
+    'satellizer',
     'mgcrea.ngStrap',
     'angularSpinner',
     // include specific directives from Angular UI Bootstrap because of conflicts

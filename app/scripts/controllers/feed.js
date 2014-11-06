@@ -28,9 +28,10 @@ angular.module('numaApp')
       $scope.queryParam        = $location.search().query;
       $scope.searchbyParam     = $location.search().searchby;
       $scope.strictSearchParam = $location.search().strict;
+      $scope.sortbyParam       = $location.search().sortby;
 
       // Call this on page load
-      getPoemsPage($scope.currentPage, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam);
+      getPoemsPage($scope.currentPage, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam, $scope.sortbyParam);
 
       $scope.pagination = {
         current: 1
@@ -53,6 +54,12 @@ angular.module('numaApp')
           $location.search('strict', null);
         }
 
+        if ($scope.sortByVotes === true) {
+          $location.search('sortby', 'votes');
+        } else {
+          $location.search('sortby', null);
+        }
+
         if ($scope.searchByTag === true && $scope.searchByTitle === false && $scope.searchByContent === false) {
           $location.search('searchby', 'tag').search('strict', null);
         } else if ($scope.searchByTag === false && $scope.searchByTitle === true && $scope.searchByContent === false) {
@@ -72,12 +79,13 @@ angular.module('numaApp')
         $scope.queryParam        = $location.search().query;
         $scope.searchbyParam     = $location.search().searchby;
         $scope.strictSearchParam = $location.search().strict;
+        $scope.sortbyParam       = $location.search().sortby;
 
-        getPoemsPage($scope.currentPage, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam);
+        getPoemsPage($scope.currentPage, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam, $scope.sortbyParam);
       };
 
-      function getPoemsPage(page, query, searchby, strictSearch) {
-        var resource = poemFactory.rGetQuery(page, query, searchby, strictSearch);
+      function getPoemsPage(page, query, searchby, strictSearch, sortby) {
+        var resource = poemFactory.rGetQuery(page, query, searchby, strictSearch, sortby);
 
         resource.$promise.then(function(res) {
           $scope.currentPage = page;
@@ -92,12 +100,12 @@ angular.module('numaApp')
 
       $scope.nextPage = function() {
         getPoemsPage(parseInt($scope.currentPage) + 1, $scope.queryParam,
-          $scope.searchbyParam, $scope.strictSearchParam);
+          $scope.searchbyParam, $scope.strictSearchParam, $scope.sortbyParam);
       };
 
       $scope.previousPage = function() {
         getPoemsPage(parseInt($scope.currentPage) - 1, $scope.queryParam,
-          $scope.searchbyParam, $scope.strictSearchParam);
+          $scope.searchbyParam, $scope.strictSearchParam, $scope.sortbyParam);
       };
 
       $scope.pageChanged = function(newPageNumber) {
