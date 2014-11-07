@@ -23,6 +23,14 @@ angular.module('numaApp')
         placeholder: 'Add tags to your poem for others to easily find it...',
       };
 
+      $scope.publishPopover = {
+        title   : 'Publishing',
+        content : 'Publish your poem to the main feed for others to enjoy and ' +
+                  'provide feedback.<br /> Otherwise it will be saved as a ' +
+                  'draft which you can find from your profile.',
+        checked : false
+      };
+
       var poemId = $routeParams.id;
       if (poemId) {
         var resource = poemFactory.rGet(poemId);
@@ -31,7 +39,7 @@ angular.module('numaApp')
           console.log(res);
           $scope.title     = res.poem.title;
           $scope.poem      = res.poem.poem;
-          $scope.tags      = res.poem.tags || undefined;
+          $scope.tags      = res.poem.tags;
           $scope.toPublish = res.poem.published;
 
           if (res.poem.inspirations) {

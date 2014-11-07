@@ -23,8 +23,11 @@ angular.module('numaApp')
         placeholder: 'Add tags to your poem for others to easily find it...',
       };
 
-      $scope.tooltipPublish = {
-        title   : 'Or save as a draft.',
+      $scope.publishPopover = {
+        title   : 'Publishing',
+        content : 'Publish your poem to the main feed for others to enjoy and ' +
+                  'provide feedback.<br /> Otherwise it will be saved as a ' +
+                  'draft which you can find from your profile.',
         checked : false
       };
 

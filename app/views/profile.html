@@ -143,7 +143,8 @@
             You haven't created any poems yet. <i class="ion-happy" style="font-size: 25px"></i>
           </div>
           <!-- <div class="row"> -->
-            <div ng-show="poems.length > 0 || drafts.length > 0" style="margin-top: 20px;">
+            <div ng-show="(poems.length > 0 || drafts.length > 0) &&
+              currentUserId === userViewId && isAuthenticated" style="margin-top: 20px;">
               <a class="hidden-xs btn btn-sm btn-primary" target="_self" href="{{ pdfUrl }}"
                 download="poems.pdf" >
                 Download Poems as PDF

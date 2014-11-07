@@ -362,6 +362,11 @@ a:not([name]) {
   /*font-family: 'IM Fell Double Pica SC', serif;*/
 }
 
+.feed-description {
+  margin-bottom: 25px;
+  font-size: 20px;
+  font-family: 'Ariel';
+}
 .poem-comment {
   font-size: 15px;
   font-family: 'Enriqueta';

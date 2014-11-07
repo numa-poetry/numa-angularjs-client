@@ -4,20 +4,30 @@
 
   <div class="poem-image-widget">
 
-    <h3>Tag your poem</h3>
+    <h3>
+      <span ng-if="tags.length">Change your tags</span>
+      <span ng-if="!tags.length">Tag your poem</span>
+    </h3>
     <div selectize='tagConfig' style="-webkit-border-radius: 0; border-radius: 0" options='tagOptions' ng-model='tags' required></div>
 
     <hr>
 
-    <h3>Add a YouTube or Vimeo video</h3>
-    <input class="input-sm form-control" type="text" ng-model="videoUrl" placeholder="Add a YouTube or Vimeo URL."/>
+    <h3>
+      <span ng-if="videoUrl">Change your video link</span>
+      <span ng-if="!videoUrl">Add a YouTube or Vimeo video<span>
+    </h3>
+    <input class="input-sm form-control" type="text" ng-model="videoUrl"
+      placeholder="https://www.youtube.com/watch?v=kwH0BxtbeEA"/>
 
     <hr>
 
-    <!-- <span data-placement="bottom" bs-tooltip="tooltipPublish"> -->
-      <input type="checkbox" ng-model="toPublish">
-      Publish to feed
-    <!-- </span> -->
+    <input type="checkbox" ng-model="toPublish">
+    Publish to feed.
+    <button class="btn-text-link" data-placement="right"
+      title="{{ publishPopover.title }}" data-content="{{ publishPopover.content}}"
+      bs-popover>
+      Learn more
+    </button>
 
     <hr>
 
