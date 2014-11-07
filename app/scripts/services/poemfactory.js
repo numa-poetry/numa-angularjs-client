@@ -21,6 +21,10 @@ angular.module('numaApp')
         }).get();
       };
 
+      poemFactory.rGetCount = function() {
+        return $resource(endpointConstants.poemCount).get();
+      };
+
       poemFactory.rGetQuery = function(page, query, searchby, strictSearch, sortby) {
         if (typeof page !== 'undefined') {
           page = 'page=' + page + '&';

@@ -62,6 +62,13 @@ angular.module('numaApp')
         current: 1
       };
 
+      var resource = poemFactory.rGetCount();
+      resource.$promise.then(function(res) {
+        $scope.poemCount = res.count;
+      }, function(res) {
+        console.log(res);
+      });
+
 // functions -------------------------------------------------------------------
 
       $scope.timeSince = helperFactory.timeSince;

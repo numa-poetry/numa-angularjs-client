@@ -89,6 +89,9 @@ angular.module('numaApp')
     allPoems            : serverDomain + apiVersion + '/poem',
 
     // GET, PUT
-    poem                : serverDomain + apiVersion + '/poem/:id'
+    poem                : serverDomain + apiVersion + '/poem/:id',
+
+    // GET
+    poemCount           : serverDomain + apiVersion + '/poem/count'
 
   });
