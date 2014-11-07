@@ -25,10 +25,35 @@ angular.module('numaApp')
       $scope.searchByContent   = false;
       $scope.strictSearch      = false;
       $scope.currentPage       = parseInt($location.search().page) || 1;
-      $scope.queryParam        = $location.search().query;
-      $scope.searchbyParam     = $location.search().searchby;
+
+      $scope.queryParam = $location.search().query;
+      if ($scope.queryParam) {
+        $scope.query = $scope.queryParam;
+      }
+
+      $scope.searchbyParam = $location.search().searchby;
+      if ($scope.searchbyParam) {
+        var searchByParams = $scope.searchbyParam.split(',');
+        for (var i = searchByParams.length - 1; i >= 0; --i) {
+          if (searchByParams[i] === 'title') {
+            $scope.searchByTitle = true;
+          } else if (searchByParams[i] === 'content') {
+            $scope.searchByContent = true;
+          } else if (searchByParams[i] === 'tag') {
+            $scope.searchByTag = true;
+          }
+        };
+      }
+
       $scope.strictSearchParam = $location.search().strict;
-      $scope.sortbyParam       = $location.search().sortby;
+      if ($scope.strictSearchParam) {
+        $scope.strictSearch = true;
+      }
+
+      $scope.sortbyParam = $location.search().sortby;
+      if ($scope.sortbyParam) {
+        $scope.sortByVotes = true;
+      }
 
       // Call this on page load
       getPoemsPage($scope.currentPage, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam, $scope.sortbyParam);

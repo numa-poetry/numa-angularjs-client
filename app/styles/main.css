@@ -348,10 +348,10 @@ a:not([name]) {
 }
 
 .welcome-title {
-  font-size: 50px;
+  font-size: 55px;
   /*line-height: 150px;*/
   /*padding-bottom: 35px;*/
-  margin: 25px 45px 0px 45px;
+  margin: 30px 0 30px 0;
   text-align: center;
   /*font-family: 'Indie Flower', cursive;*/
   /*font-family: 'Shadows Into Light', cursive;*/
@@ -426,14 +426,11 @@ a:not([name]) {
   .profile-display-name {
     text-align: center;
     padding-bottom: 15px;
+    font-size: 60px;
   }
 
   .player-controls {
     padding: 10px;
-  }
-
-  .welcome-title {
-    font-size: 40px;
   }
 
   .poem-info-separator .text {
@@ -441,6 +438,22 @@ a:not([name]) {
   }
 
 }
+
+.brand {
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 40px;
+  line-height: 25px;
+}
+
+.brand:hover,
+.brand:focus {
+  color: #FF9955;
+}
+
+
+/*.navbar-brand {
+  font-size: 40px;
+}*/
 
 .feed-container {
   padding: 0 30px 0 30px;
@@ -580,7 +593,7 @@ a:not([name]) {
 
 .profile-display-name {
   font-family: 'Gloria Hallelujah', cursive;
-  font-size: 40px;
+  font-size: 50px;
 }
 
 .favorite-poem {
@@ -636,17 +649,6 @@ a:not([name]) {
   margin-bottom: 0;
   /*margin-top: 15px;*/
   /*border: 0;*/
-}
-
-.brand {
-  font-family: 'Gloria Hallelujah', cursive;
-  font-size: 40px;
-  line-height: 25px;
-}
-
-.brand:hover,
-.brand:focus {
-  color: #FF9955;
 }
 
 .unread-comment-notification {

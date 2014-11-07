@@ -23,7 +23,7 @@
 
   var providers = {
     google: {
-      url: 'http://localhost:3000/auth/google',
+      url: 'http://localhost:3000/api/v1/auth/google',
       authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
       redirectUri: window.location.origin,
       scope: 'openid profile email',
@@ -38,7 +38,7 @@
       }
     },
     facebook: {
-      url: 'http://localhost:3000/auth/facebook',
+      url: 'http://localhost:3000/api/v1/auth/facebook',
       authorizationEndpoint: 'https://www.facebook.com/dialog/oauth',
       redirectUri: window.location.origin + '/#!/', // add hashbang, '/' => '/#!/'
       scope: 'email',
@@ -67,7 +67,7 @@
     },
     github: {
       name: 'github',
-      url: 'http://localhost:3000/auth/github',
+      url: 'http://localhost:3000/api/v1/auth/github',
       authorizationEndpoint: 'https://github.com/login/oauth/authorize',
       redirectUri: window.location.origin,
       scope: [],

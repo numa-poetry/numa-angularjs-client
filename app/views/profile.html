@@ -9,9 +9,10 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-xs-12 col-sm-8">
-          <h2 class="profile-display-name" style="margin-bottom: 20px;">{{ displayName }}</h2>
+          <div class="profile-display-name hidden-xs">{{ displayName }}</div>
+          <div class="profile-display-name visible-xs" style="font-size: 60px;">{{ displayName }}</div>
 
-          <div ng-if="currentUserId !== userViewId && isAuthenticated" style="margin-bottom: 30px;">
+          <div ng-if="currentUserId !== userViewId && isAuthenticated">
             <div class="visible-xs">
               <center>
                 <button type="button" ng-class="{ 'btn btn-danger btn-sm' : true, 'disabled' : !isFollowing }" ng-click="unfollowUser()">
@@ -35,10 +36,11 @@
         </div>
         <div class="col-xs-12 col-sm-4">
           <img ng-show="currentUserId !== userViewId || !isAuthenticated" ng-src="{{ avatarUrl }}"
-            alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
+            alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px; border-radius: 10px;">
+
           <img ng-show="currentUserId === userViewId && isAuthenticated" ng-src="{{ avatarUrl }}"
             alt="" class="center-block img-rounded img-responsive"
-            ng-click="enableEditor()" style="margin-bottom: 10px;"
+            ng-click="enableEditor()" style="margin-bottom: 10px; border-radius: 10px;"
             data-placement="bottom" bs-tooltip="tooltipChangeAvatar">
         </div>
       </div>
@@ -129,7 +131,13 @@
       <tabset style="margin-top: 30px; font-size: 13px;" justified="true">
         <tab>
           <tab-heading>
-            <i class="ion-edit"></i>&nbsp; Poems <span class="badge profile-poem-badge">{{ poems.length + drafts.length }}</span>
+            <i class="ion-edit"></i>&nbsp; Poems
+            <span ng-if="currentUserId === userViewId && isAuthenticated" class="badge profile-poem-badge">
+              {{ poems.length + drafts.length }}
+            </span>
+            <span ng-if="currentUserId !== userViewId" class="badge profile-poem-badge">
+              {{ poems.length }}
+            </span>
           </tab-heading>
           <div ng-show="poems.length === 0 && drafts.length === 0" style="padding: 15px 20px 0 0; font-size: 20px;">
             You haven't created any poems yet. <i class="ion-happy" style="font-size: 25px"></i>
@@ -153,7 +161,7 @@
                 {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
               </div>
             </div>
-            <div class="col-lg-6">
+            <div ng-if="currentUserId === userViewId && isAuthenticated" class="col-lg-6">
               <h3><u>Drafts</u></h3>
               <div ng-repeat="draft in drafts" style="font-size: 20px; padding: 10px 20px 0 0;">
                 {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ draft.id }}">{{ draft.title }}</a>
@@ -226,7 +234,7 @@
         <div class="col-xs-4 col-sm-3">
           <div ng-if="uploading"><i class="ion-ios7-reloading" style="font-size: 80px;"></i></div>
           <img ng-if="!uploading" ng-src="{{ avatarUrl }}" alt=""
-            class="center-block img-rounded img-responsive" style="margin-bottom: 10px;">
+            class="center-block img-rounded img-responsive" style="margin-bottom: 10px; border-radius: 10px;">
         </div>
         <div class="col-xs-8 col-sm-9">
           <h4>Upload new avatar</h4>
