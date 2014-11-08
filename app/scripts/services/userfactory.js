@@ -483,6 +483,15 @@ angular.module('numaApp')
         });
       };
 
+      userFactory.hUpdateComment = function(info, poemId, commentId) {
+        _sId = storageFactory.getId();
+        return $http({
+          method : 'PUT',
+          url    : serverDomain+apiVersion+'/user/'+_sId+'/poem/'+poemId+'/comment/'+commentId,
+          data   : info
+        });
+      };
+
       userFactory.hDeletePoemImage = function(info) {
         _sId = storageFactory.getId();
         return $http({

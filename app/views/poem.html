@@ -87,41 +87,32 @@
 
   <div class="comments-border" ng-show="comments.length > 0">
     <div class="comment-item row" ng-repeat="comment in comments">
-      <!-- <div class="col-xs-1">
-        <div>
-          <span class="vote">
-            <i class="ion-arrow-up-a"></i>
-          </span>
-        </div>
-        <div>
-          <span class="vote">
-            <i class="ion-arrow-down-a"></i>
-          </span>
-        </div>
-      </div> -->
-      <!-- color: #A9C9A6; background-color: #A9C9A6; height: 1px; border: none;  -->
       <hr ng-if="!$first" style="width: 95%;" />
-      <div class="col-xs-1">
+      <div class="col-xs-2">
         <img class="img-rounded" ng-src="{{ comment.creator.avatarUrl }}" style="min-height: 40px; height: 40px; border-radius: 10px;">
       </div>
-      <div class="col-xs-10">
+      <div class="col-xs-9">
         <div class="comment-info">
           by <span><a ng-href="/#!/user/{{ comment.creator.id }}">{{ comment.creator.displayName }}</a></span>
           <span> ⋅ {{ timeSince(comment.createdAt)}} ago</span>
-          <span ng-if="isAuthenticated && (userId === creatorId || userId === comment.creator.id)">
-            ⋅ <i class="ion-close-round" style="font-size: 15px; line-height: 0px;" ng-click="deleteComment(comment.id)"></i></span>
+          <span ng-show="isAuthenticated && (userId === creatorId || userId === comment.creator.id) && !editing">
+            ⋅ <i class="ion-close-round" style="font-size: 15px; line-height: 0px;" ng-click="deleteComment(comment.id)"></i>
+          </span>
+          <span ng-show="isAuthenticated && userId === comment.creator.id && !editing">
+            ⋅ <i class="ion-edit" style="font-size: 15px; line-height: 0px;" ng-click="editing=true"></i>
+          </span>
         </div>
-        <div class="comment">
-          <span>{{ comment.comment }}</span> <!-- <i><small>{{ comment.id }}</small></i> -->
+        <div class="comment" ng-hide="editing">
+          <span>{{ comment.comment }}</span>
+        </div>
+        <div class="comment" ng-show="editing" style="padding-top: 10px;">
+          <textarea rows='3' cols='60' ng-model="comment.comment" autofocus></textarea>
+          <div style="padding-top: 10px;">
+            <button class="btn btn-sm btn-primary" ng-click="saveEditedComment(comment.id, comment.comment); editing=false">Save</button>
+            <button class="btn btn-sm btn-danger" ng-click="editing=false">Cancel</button>
+          </div>
         </div>
       </div>
-<!--       <div class="col-xs-1">
-        <div style="padding-top: 5px;" ng-show="userId === creatorId && isAuthenticated">
-          <a type="button" class="btn btn-sm btn-danger" ng-click="deleteComment(comment.id)"><i class="ion-close-round"></i></a> -->
-          <!-- data-animation="am-fade-and-slide-top"
-            data-template="views/deletecommentmodal.html" bs-modal="modalDeleteComment" -->
-<!--         </div>
-      </div> -->
     </div>
   </div>
 </div>

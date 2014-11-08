@@ -86,6 +86,30 @@ angular.module('numaApp')
 
       $scope.restoreScrollbar = helperFactory.restoreScrollbar;
 
+      $scope.saveEditedComment = function(commentId, comment) {
+        var req = {};
+        req.comment = comment;
+
+        var http = userFactory.hUpdateComment(req, $scope.poemId, commentId);
+        http.then(function(res) {
+          $alert({
+            type        : 'material',
+            duration    : 3,
+            title       : 'Success!',
+            content     : 'Comment updated.',
+            animation   : 'fadeZoomFadeDown'
+          });
+        }, function(res) {
+          $alert({
+            type        : 'material-err',
+            title       : 'Oops!',
+            content     : res.data.message,
+            duration    : 3,
+            animation   : 'fadeZoomFadeDown'
+          });
+        });
+      };
+
       socket.forward('newComment', $scope);
       var unregisterNewCommentEvent = $scope.$on('socket:newComment', function(ev, data) {
         console.log('newComment data', data);

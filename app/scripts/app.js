@@ -76,10 +76,10 @@ angular
       });
 
       $routeProvider
-        .when('/', {
-          templateUrl    : 'views/feed.html',
-          controller     : 'FeedCtrl'
-        })
+        // .when('/', {
+        //   templateUrl    : 'views/feed.html',
+        //   controller     : 'FeedCtrl'
+        // })
         .when('/about', {
           templateUrl    : 'views/about.html',
           controller     : 'AboutCtrl'
