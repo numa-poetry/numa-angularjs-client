@@ -20,6 +20,18 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.feed-top {
+  background-image: url(../images/clouds-sm.jpg), none;
+  background-position: top;
+  background-repeat: no-repeat;
+background-attachment: fixed;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  margin-right: -30px;
+  margin-left: -30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
