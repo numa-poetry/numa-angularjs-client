@@ -9,7 +9,7 @@ bower_components/
 
 build/
 # Git subtree command - http://yeoman.io/learning/deployment.html
-dist/
+# dist/
 
 ### Node ###
 # Logs
