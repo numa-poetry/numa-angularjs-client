@@ -9,7 +9,7 @@ I'm developing Numa because I care about connecting with people; sharing express
 ## Okay, how do I get the client running?
 * Download and install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
 * Download and install [Node.js package manager](https://github.com/npm/npm).
-* Install [Grunt](http://gruntjs.com/): `npm install -g grunt-cli` 
+* Install [Grunt](http://gruntjs.com/): `npm install -g grunt-cli`
 * Install [Bower](http://bower.io/): `npm install -g bower`
 * Clone the repo: `git clone https://github.com/boyz-2-men/numa-angularjs-client.git`
 * Install packages: `npm install`
@@ -17,3 +17,27 @@ I'm developing Numa because I care about connecting with people; sharing express
 * Launch: `grunt serve --no-color` or just `grunt serve`
 * Visit: `http://localhost:9000`
 * And now you'll want to get the [server](https://github.com/boyz-2-men/numa-restful-api) running.
+
+### License
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Andreas Basurto
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
