@@ -10,8 +10,9 @@
 angular.module('numaApp')
   .controller('ProfileCtrl', ['$scope', 'userFactory', '$alert', 'storageFactory',
     '$location', '$rootScope', '$upload', '$routeParams', '$tooltip', 'helperFactory',
+    'endpointConstants',
     function ($scope, userFactory, $alert, storageFactory, $location, $rootScope,
-      $upload, $routeParams, $tooltip, helperFactory) {
+      $upload, $routeParams, $tooltip, helperFactory, endpointConstants) {
 
       $scope.currentUserId = storageFactory.getId();
       $scope.userViewId    = $routeParams.id;
@@ -314,7 +315,8 @@ angular.module('numaApp')
         }
 
         $scope.upload = $upload.upload({
-          url: 'http://localhost:3000/api/v1/user/' + userFactory.getId() + '/avatar',
+          url: endpointConstants.serverDomain + endpointConstants.apiVersion +
+            '/user/' + userFactory.getId() + '/avatar',
           method: 'POST',
           file: image
         }).progress(function(event) {

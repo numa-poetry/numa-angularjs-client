@@ -7,6 +7,9 @@
 (function(window, angular, undefined) {
   'use strict';
 
+  var serverDomain = 'https://numabackend-40189.onmodulus.net';
+  var apiVersion   = '/api/v1';
+
   var config = {
     logoutRedirect: '/feed',
     loginRedirect: '/feed',
@@ -23,7 +26,7 @@
 
   var providers = {
     google: {
-      url: 'http://localhost:3000/api/v1/auth/google',
+      url: serverDomain + apiVersion + '/auth/google',
       authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
       redirectUri: window.location.origin,
       scope: 'openid profile email',
@@ -38,7 +41,7 @@
       }
     },
     facebook: {
-      url: 'http://localhost:3000/api/v1/auth/facebook',
+      url: serverDomain + apiVersion + '/auth/facebook',
       authorizationEndpoint: 'https://www.facebook.com/dialog/oauth',
       redirectUri: window.location.origin + '/#!/', // add hashbang, '/' => '/#!/'
       scope: 'email',
@@ -67,7 +70,7 @@
     },
     github: {
       name: 'github',
-      url: 'http://localhost:3000/api/v1/auth/github',
+      url: serverDomain + apiVersion + '/auth/github',
       authorizationEndpoint: 'https://github.com/login/oauth/authorize',
       redirectUri: window.location.origin,
       scope: [],

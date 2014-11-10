@@ -31,8 +31,6 @@ angular.module('numaApp')
       var _sToken               = storageFactory.getToken();
       var _isLoggedIn           = false;
       var userFactory           = {};
-      var serverDomain          = 'http://localhost:3000';
-      var apiVersion            = '/api/v1';
 
 // helper functions ------------------------------------------------------------
 
@@ -280,7 +278,8 @@ angular.module('numaApp')
 
       userFactory.getPdfUrl = function(id) {
         // _sId = storageFactory.getId();
-        return 'http://localhost:3000/api/v1/user/' + id + '/poem/pdf';
+        return endpointConstants.serverDomain + endpointConstants.apiVersion +
+          '/user/' + id + '/poem/pdf';
       };
 
 // deletes ---------------------------------------------------------------------
@@ -467,7 +466,8 @@ angular.module('numaApp')
         _sId = storageFactory.getId();
         return $http({
           method : 'PUT',
-          url    : serverDomain + apiVersion + '/user/' + _sId,
+          url    : endpointConstants.serverDomain + endpointConstants.apiVersion +
+            '/user/' + _sId,
           data   : {
             email: info.email
           }
@@ -478,7 +478,8 @@ angular.module('numaApp')
         _sId = storageFactory.getId();
         return $http({
           method : 'PUT',
-          url    : serverDomain + apiVersion + '/user/' + _sId + '/poem/' + info.id,
+          url    : endpointConstants.serverDomain + endpointConstants.apiVersion +
+            '/user/' + _sId + '/poem/' + info.id,
           data   : info
         });
       };
@@ -487,7 +488,8 @@ angular.module('numaApp')
         _sId = storageFactory.getId();
         return $http({
           method : 'PUT',
-          url    : serverDomain+apiVersion+'/user/'+_sId+'/poem/'+poemId+'/comment/'+commentId,
+          url    : endpointConstants.serverDomain + endpointConstants.apiVersion +
+            '/user/' + _sId + '/poem/' + poemId + '/comment/' + commentId,
           data   : info
         });
       };
@@ -496,7 +498,8 @@ angular.module('numaApp')
         _sId = storageFactory.getId();
         return $http({
           method   : 'DELETE',
-          url      : serverDomain + apiVersion + '/user/' + _sId + '/poem/' + info.id + '/image',
+          url      : endpointConstants.serverDomain + endpointConstants.apiVersion +
+            '/user/' + _sId + '/poem/' + info.id + '/image',
           headers  : {'Content-Type': 'application/json;charset=utf-8'},
           data     : {
             imageUrl : info.imageUrl

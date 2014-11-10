@@ -156,8 +156,9 @@ angular
       $locationProvider.hashPrefix('!');
     }
   ]).
-  factory('socket', function(socketFactory, storageFactory, $rootScope) {
-    var socket = io.connect('http://localhost:3000');
+  factory('socket', function(socketFactory, storageFactory, $rootScope,
+    endpointConstants) {
+    var socket = io.connect(endpointConstants.serverDomain); // 'http://localhost:3000'
 
     // Store client's socket id as browser cookie even though this is already happening.
     // Bug because I can't access the cookie socket.io already sets. So I set it myself

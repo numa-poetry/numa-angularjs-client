@@ -24,7 +24,7 @@ body {
   background-image: url(../images/clouds-sm.jpg), none;
   background-position: top;
   background-repeat: no-repeat;
-background-attachment: fixed;
+  background-attachment: fixed;
   padding-top: 1px;
   padding-bottom: 1px;
   margin-right: -30px;
@@ -32,6 +32,7 @@ background-attachment: fixed;
   padding-left: 30px;
   padding-right: 30px;
 }
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

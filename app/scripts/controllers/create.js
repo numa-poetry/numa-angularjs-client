@@ -10,8 +10,9 @@
 angular.module('numaApp')
   .controller('CreateCtrl', ['$scope', '$resource', '$alert', 'userFactory',
     '$location', 'storageFactory', '$upload', '$sce', '$tooltip',
+    'endpointConstants',
     function ($scope, $resource, $alert, userFactory, $location, storageFactory,
-      $upload, $sce, $tooltip) {
+      $upload, $sce, $tooltip, endpointConstants) {
 
       var id = storageFactory.getId();
       userFactory.init(id, 'Basic');
@@ -77,7 +78,8 @@ angular.module('numaApp')
           }
 
           $scope.upload = $upload.upload({
-            url    : 'http://localhost:3000/api/v1/user/' + storageFactory.getId() + '/poem/image',
+            url    : endpointConstants.serverDomain + endpointConstants.apiVersion +
+              '/user/' + storageFactory.getId() + '/poem/image',
             method : 'POST',
             file   : image.file
           }).success(function(data) {
