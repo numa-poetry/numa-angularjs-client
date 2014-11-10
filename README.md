@@ -18,6 +18,23 @@ I'm developing Numa because I care about connecting with people; sharing express
 * Visit: `http://localhost:9000`
 * And now you'll want to get the [server](https://github.com/boyz-2-men/numa-restful-api) running.
 
+## Feature list
+
+- Login with Facebook, Github, and Google
+- Mobile responsive layout
+- Search poems by vote count, tag, content, or title
+- Attach YouTube or Vimeo videos to poem
+- Upload image to Amazon S3 and attach to your poem
+- Tag your poem
+- Upvote/downvote poems
+- Save others' poems to your favorites for easy finding later on
+- Publish poems to the feed or keep them unlisted only for users with the URL
+- Follow other users and get notifications when they write a new poem
+- Get notifications when someone gives you feedback
+- Full RESTful API for backend server
+- Stream uninterrupted, select songs from Numa's SoundCloud playlist while browsing
+- Export your poems as a PDF document for backing up
+
 ### License
 
 The MIT License (MIT)

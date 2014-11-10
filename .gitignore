@@ -8,10 +8,9 @@ bower_components/
 .sass-cache
 
 build/
-# Git subtree command - http://yeoman.io/learning/deployment.html
 dist/
-
 firebase.json
+tech-logos/
 
 ### Node ###
 # Logs

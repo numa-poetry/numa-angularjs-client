@@ -21,10 +21,14 @@ body {
 }
 
 .feed-top {
-  background-image: url(../images/clouds-sm.jpg), none;
-  background-position: top;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-image: url(../images/clouds-gb.jpg), none;
+  background-position: bottom center;
+  /*background-repeat: no-repeat;*/
+  /*width: 100%;*/
+  /*background-attachment: fixed;*/
+  background-color: #EFF0EA;
+  display: inline-block;
+  vertical-align: middle;
   padding-top: 1px;
   padding-bottom: 1px;
   margin-right: -30px;
