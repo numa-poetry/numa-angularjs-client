@@ -1,6 +1,6 @@
 <!-- PROFILE VIEW -->
 <div ng-hide="editorEnabled">
-  <div class="panel panel-default" style="margin-top: 30px;">
+  <div class="panel panel-default" style="margin-top: 4%;">
     <div class="panel-heading">Profile
       <div ng-show="currentUserId == userViewId && isAuthenticated" class="pull-right" style="line-height: 1px;">
         <i class="ion-ios7-gear" style="font-size: 20px;" ng-click="enableEditor()" data-placement="bottom" bs-tooltip="tooltipEditProfile"></i>
@@ -156,13 +156,13 @@
             </div>
           <!-- </div> -->
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6">
               <h3><u>Published</u></h3>
               <div ng-repeat="poem in poems" style="font-size: 20px; padding: 10px 20px 0 0;">
                 {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ poem.id }}">{{ poem.title }}</a>
               </div>
             </div>
-            <div ng-if="currentUserId === userViewId && isAuthenticated" class="col-lg-6">
+            <div ng-if="currentUserId === userViewId && isAuthenticated" class="col-lg-6 col-md-6 col-sm-6">
               <h3><u>Drafts</u></h3>
               <div ng-repeat="draft in drafts" style="font-size: 20px; padding: 10px 20px 0 0;">
                 {{ $index+1 }}.&nbsp; <a ng-href="/#!/poem/{{ draft.id }}">{{ draft.title }}</a>
@@ -230,7 +230,7 @@
 
 <!-- EDIT PROFILE VIEW -->
 <div ng-show="editorEnabled">
-  <div class="panel panel-default" style="margin-top: 30px;">
+  <div class="panel panel-default" style="margin-top: 4%;">
     <div class="panel-heading">Edit Profile</div>
     <div class="panel-body">
       <div class="row">

@@ -34,17 +34,22 @@
           <a ng-href="" type="button submit" class="btn btn-sm btn-info" ng-click="searchPoems()"><i class="ion-search"></i></a>
         </div>
       </div>
-      <input type="checkbox" ng-model="searchByTag">&nbsp; Search by tag &nbsp;
-      <input type="checkbox" ng-model="searchByTitle">&nbsp; Search by title &nbsp;
-      <input type="checkbox" ng-model="searchByContent">&nbsp; Search by content &nbsp;
-      <input type="checkbox" ng-model="sortByVotes">&nbsp; Sort by votes
+      Search by tag&nbsp;
+      <input type="checkbox" ng-model="searchByTag">&nbsp;&nbsp;
+      Search by title&nbsp;
+      <input type="checkbox" ng-model="searchByTitle">&nbsp;&nbsp;
+      Search by content&nbsp;
+      <input type="checkbox" ng-model="searchByContent">&nbsp;&nbsp;
+      Sort by votes&nbsp;
+      <input type="checkbox" ng-model="sortByVotes">&nbsp;&nbsp;
 
       <!-- if 2>= checkboxes selected, show -->
-      <div ng-show="(searchByTag === true && searchByTitle === true) ||
+      <span ng-show="(searchByTag === true && searchByTitle === true) ||
                     (searchByTag === true && searchByContent === true) ||
                     (searchByTitle === true && searchByContent === true)">
-        <input type="checkbox" ng-model="strictSearch">&nbsp; Strict search
-      </div>
+        Strict search&nbsp;
+        <input type="checkbox" ng-model="strictSearch"/>
+      </span>
     </form>
   </div>
 
@@ -60,7 +65,7 @@
           {{ poem.title }}
         </a>
       </div>
-      <div class="feed-poem-info">
+      <div class="feed-poem-info row">
         <span style="color: #ED6307;">
           <span>{{ poem.positiveVotes - poem.negativeVotes }}</span>
           <span ng-show="(poem.positiveVotes - poem.negativeVotes) == 1 || (poem.positiveVotes - poem.negativeVotes) == -1">point</span>

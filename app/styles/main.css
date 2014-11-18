@@ -209,7 +209,7 @@ body {
 }
 
 .center-form {
-  margin-top: 5%;
+  margin-top: 4%;
   margin-right: auto;
   margin-left: auto;
 }
@@ -420,10 +420,12 @@ a:not([name]) {
   font-family: 'Lusitana';
   font-size: 25px;
   line-height: 20px;
+  margin-left: -15px;
 }
 
 .feed-poem-info {
   font-size: 12px;
+  margin-top: 5px;
 }
 
 .brand {
@@ -450,8 +452,10 @@ a:not([name]) {
   .feed-container {
     padding-top: 0 !important;
   }
+}
 
-
+.panel {
+  margin-bottom: 0
 }
 
 @media screen and (max-width: 768px) {
