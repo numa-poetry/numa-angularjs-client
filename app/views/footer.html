@@ -1,0 +1,23 @@
+<div class="navbar navbar-default navbar-fixed-bottom" ng-controller="FooterCtrl">
+
+    <div class="navbar-left" plangular="https://soundcloud.com/numa-wp/sets/numa" style="color: #FFFFFF; padding: 3px;">
+      <button class="btn btn-md btn-primary player-controls" ng-click="previous()">
+        <i class="ion-skip-backward" style="font-size: 20px;" ></i>
+      </button>
+      <button class="btn btn-md btn-primary player-controls" ng-click="player.playPause(player.i, player.playlistIndex)">
+        <i class="ion-play" ng-if="!player.playing" style="font-size: 20px;"></i>
+        <i class="ion-pause" ng-if="player.playing" style="font-size: 20px;"></i>
+      </button>
+      <button class="btn btn-md btn-primary player-controls" ng-click="next()">
+        <i class="ion-skip-forward" style="font-size: 20px;"></i>
+      </button>
+      &nbsp;
+      <i class="ion-loading-c" ng-show="!player.currentTrack"></i>
+      <span ng-show="player.currentTrack">
+        <a href="{{ player.currentTrack.permalink_url }}" target="_blank" style="color: #FFFFFF">
+          "{{ player.currentTrack.title }}"
+        </a>
+        &nbsp; <small><i>{{ player.currentTime | prettyTime }} - {{ player.duration | prettyTime }}</i></small>
+      </span>
+    </div>
+</div>

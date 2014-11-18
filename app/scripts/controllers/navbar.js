@@ -36,14 +36,14 @@ angular.module('numaApp')
 
       var unregisterRefresh = $rootScope.$on('finishedSettingUserDataOnPageRefresh', function() {
         $scope.id                        = storageFactory.getId();
-        $scope.avatarUrl                 = userFactory.getAvatarUrl();
-        $scope.unreadCommentsCount       = userFactory.getUnreadCommentsCount();
-        $scope.unreadFollowingPoemsCount = userFactory.getUnreadFollowingPoemsCount();
+        $scope.avatarUrl                 = userFactory.getLoggedInUserAvatarUrl();
+        $scope.unreadCommentsCount       = userFactory.getLoggedInUserUnreadCommentsCount();
+        $scope.unreadFollowingPoemsCount = userFactory.getLoggedInUserUnreadFollowingPoemsCount();
       });
 
       var unregisterLogin = $rootScope.$on('login', function() {
         $scope.id        = storageFactory.getId();
-        $scope.avatarUrl = userFactory.getAvatarUrl();
+        $scope.avatarUrl = userFactory.getLoggedInUserAvatarUrl();
       });
 
       var unregisterLogout = $rootScope.$on('logout', function() {

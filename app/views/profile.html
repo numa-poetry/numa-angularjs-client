@@ -203,7 +203,9 @@
           </div>
           <div ng-repeat="unreadComment in unreadComments" style="font-size: 20px; padding: 15px 20px 0 0;">
             {{ $index+1 }}.&nbsp;
-            <a ng-href="/#!/poem/{{ unreadComment.poemId }}">"{{ unreadComment.comment }}" <i><small>({{ unreadComment.poemTitle }})</small></i></a>&nbsp;
+            <a ng-href="/#!/poem/{{ unreadComment.poemId }}">"{{ unreadComment.comment }}"&nbsp;
+              <small><i>({{ unreadComment.poemTitle }})</i></a>&nbsp;
+                -&nbsp;{{ unreadComment.creatorDisplayName }}</small>
             <i class="ion-checkmark-circled" style="font-size: 20px; line-height: 0;" ng-click="markCommentAsRead(unreadComment.poemId, unreadComment.id)"></i>&nbsp;
             <i class="ion-close-circled" style="font-size: 20px; line-height: 0;" ng-click="deleteComment(unreadComment.poemId, unreadComment.id, true)"></i>
           </div>
@@ -217,7 +219,7 @@
           </div>
           <div ng-repeat="unreadPoem in unreadFollowingPoems" style="font-size: 20px; padding: 15px 20px 0 0;">
             {{ $index+1 }}.&nbsp;
-            <a ng-href="/#!/poem/{{ unreadPoem.id }}">{{ unreadPoem.title }}</a>&nbsp;
+            <a ng-href="/#!/poem/{{ unreadPoem.id }}">{{ unreadPoem.title }}</a>&nbsp;-&nbsp;<small>({{ unreadPoem.creatorDisplayName }})</small>&nbsp;
             <i class="ion-checkmark-circled" style="font-size: 20px; line-height: 0;" ng-click="markPoemAsRead(unreadPoem.id)"></i>
           </div>
         </tab>

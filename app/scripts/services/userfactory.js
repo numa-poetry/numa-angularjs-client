@@ -18,6 +18,9 @@ angular.module('numaApp')
       var _joinedDate;
       var _email;
       var _avatarUrl;
+      var _loggedInUserAvatarUrl;
+      var _loggedInUserUnreadCommentsCount;
+      var _loggedInUserUnreadFollowingPoemsCount;
       var _unreadCommentsCount;
       var _unreadFollowingPoemsCount;
       var _followersCount;
@@ -37,15 +40,15 @@ angular.module('numaApp')
       userFactory.init = function(paramsId, profile) {
         var _sId = storageFactory.getId();
 
-        console.log('id:',_sId);
-        console.log('params id:',paramsId);
+        // console.log('id:',_sId);
+        // console.log('params id:',paramsId);
         // console.log('fetching and initializing user data');
 
         // If no cookie found, logout
         // console.log(_sId);
 
         if (paramsId) {
-          console.log('yes here');
+          // console.log('yes here');
           profile === 'full' ? profile = ('profile=full') : profile = '';
 
           var resource = $resource(endpointConstants.user + '/?' + profile, {
@@ -53,8 +56,8 @@ angular.module('numaApp')
           }).get();
 
           resource.$promise.then(function(res) {
-            console.log('success!');
-            console.log(res);
+            // console.log('success!');
+            // console.log(res);
 
             // Store basic user info
             userFactory.setInfo(res.id, res.displayName, res.createdAt.split('T')[0],
@@ -62,16 +65,22 @@ angular.module('numaApp')
               res.followersCount, res.followingCount);
 
             if (_sId === paramsId) {
-              console.log('Viewing own profile');
-              $rootScope.displayName     = res.displayName;
+              console.log('_sId==paramsid')
+              $rootScope.loggedInUserDisplayName = res.displayName;
               $rootScope.isAuthenticated = true; // temp fix to work with satellizer
-            } else {
-              console.log('Viewing other user profile');
+              userFactory.setLoggedInUserAvatarUrl(res.avatarUrl);
+              userFactory.setLoggedInUserUnreadCommentsCount(res.unreadCommentsCount);
+              userFactory.setLoggedInUserUnreadFollowingPoemsCount(res.unreadFollowingPoemsCount);
             }
 
-            // If 'full' profile was requested, store poem titles and comments
             if (profile === 'profile=full') {
+              console.log('profile === profile=full')
               userFactory.setPoems(res.poems);
+            } else {
+            }
+
+            if (_sId === paramsId && profile === 'profile=full') {
+              console.log('_sId === paramsId && profile ===profile=full');
               userFactory.setComments(res.comments);
               userFactory.setFavoritePoems(res.favoritePoems);
               userFactory.setUnreadComments(res.unreadComments);
@@ -214,6 +223,18 @@ angular.module('numaApp')
         _favoritePoems = favoritePoems;
       };
 
+      userFactory.setLoggedInUserAvatarUrl = function(avatarUrl) {
+        _loggedInUserAvatarUrl = avatarUrl;
+      };
+
+      userFactory.setLoggedInUserUnreadCommentsCount = function(unreadCommentsCount) {
+        _loggedInUserUnreadCommentsCount = unreadCommentsCount;
+      };
+
+      userFactory.setLoggedInUserUnreadFollowingPoemsCount = function(unreadFollowingPoemsCount) {
+        _loggedInUserUnreadFollowingPoemsCount = unreadFollowingPoemsCount;
+      };
+
 // getters ---------------------------------------------------------------------
 
       userFactory.getIsLoggedIn = function() {
@@ -280,6 +301,18 @@ angular.module('numaApp')
         // _sId = storageFactory.getId();
         return endpointConstants.serverDomain + endpointConstants.apiVersion +
           '/user/' + id + '/poem/pdf';
+      };
+
+      userFactory.getLoggedInUserAvatarUrl = function() {
+        return _loggedInUserAvatarUrl;
+      };
+
+      userFactory.getLoggedInUserUnreadCommentsCount = function() {
+        return _loggedInUserUnreadCommentsCount;
+      };
+
+      userFactory.getLoggedInUserUnreadFollowingPoemsCount = function() {
+        return _loggedInUserUnreadFollowingPoemsCount;
       };
 
 // deletes ---------------------------------------------------------------------

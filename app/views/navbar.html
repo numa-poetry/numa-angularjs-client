@@ -10,7 +10,7 @@
       <span class="brand hidden-xs">Numa</span>
       <span class="brand visible-xs" style="font-size: 30px;">Numa</span>
     </a>
-    <div class="navbar-left" plangular="https://soundcloud.com/numa-wp/sets/numa" style="color: #FFFFFF; padding: 3px;">
+    <!-- <div class="navbar-left" plangular="https://soundcloud.com/numa-wp/sets/numa" style="color: #FFFFFF; padding: 3px;">
       <button class="btn btn-md btn-primary player-controls" ng-click="previous()">
         <i class="ion-skip-backward" style="font-size: 20px;" ></i>
       </button>
@@ -29,7 +29,7 @@
         </a>
         &nbsp; <small><i>{{ player.currentTime | prettyTime }} - {{ player.duration | prettyTime }}</i></small>
       </span>
-    </div>
+    </div> -->
   </div>
   <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
     <ul class="nav navbar-nav pull-right">
@@ -88,7 +88,7 @@
       <li ng-if="isAuthenticated" class="dropdown pull-right">
         <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
           <img class="img-circle" ng-src="{{ avatarUrl }}" style="min-height: 30px; height: 30px;">
-            &nbsp; {{ displayName }} <i class="ion-arrow-down-b"></i>
+            &nbsp; {{ loggedInUserDisplayName }} <i class="ion-arrow-down-b"></i>
         </a>
         <ul class="dropdown-menu" role="menu">
           <li><a ng-href="/#!/user/{{ id }}"><i class="ion-person" style="font-size: 20px;"></i>&nbsp; Profile</a></li>

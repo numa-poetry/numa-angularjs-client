@@ -44,17 +44,17 @@
     <!-- Add your site or application content here -->
     <div ng-include="'views/navbar.html'"></div>
     <div class="container fadeInAndOutAnimation" ng-view></div>
-    <footer style="border: 0;">
-      <div class="container" style="text-align: center; color: black; padding-bottom: 20px; padding-top: 20px;">
+    <footer class="footer" style="border: 0;">
+      <div class="container" style="text-align: center; color: black; padding-bottom: 60px; margin-top: -10px;">
         <a ng-href="//numa.readme.io/v1.0" target="_blank" style="color: black">API</a>
         ⋅ <a ng-href="/#!/about" style="color: black">About</a>
         ⋅ <a ng-href="mailto:someone@example.com?Subject=[Numa]%20hi!" target="_top" style="color: black">Say hi</a>
         ⋅ <a ng-href="/#!/privacy" style="color: black">Privacy Policy</a>
         ⋅ <a ng-href="/#!/terms" style="color: black">Terms</a>
-        <!-- | numa.com 2014 -->
         | All poems are property of their authors
       </div>
     </footer>
+    <div ng-include="'views/footer.html'"></div>
 
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
@@ -158,6 +158,7 @@
     <script src="scripts/directives/passwordstrength.js"></script>
     <script src="scripts/directives/repeatpassword.js"></script>
     <script src="scripts/directives/file.js"></script>
+    <script src="scripts/controllers/footer.js"></script>
     <!-- endbuild -->
   </body>
 </html>
