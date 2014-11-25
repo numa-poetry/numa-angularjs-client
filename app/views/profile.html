@@ -36,16 +36,26 @@
         </div>
         <div class="col-xs-12 col-sm-4">
           <img ng-show="currentUserId !== userViewId || !isAuthenticated" ng-src="{{ avatarUrl }}"
-            alt="" class="center-block img-rounded img-responsive" style="margin-bottom: 10px; border-radius: 10px;">
+            alt="" class="visible-xs center-block img-rounded img-responsive"
+            style="margin-bottom: 10px; border-radius: 10px; margin-top: 5%;">
+
+          <img ng-show="currentUserId !== userViewId || !isAuthenticated" ng-src="{{ avatarUrl }}"
+            alt="" class="hidden-xs img-rounded img-responsive"
+            style="margin-bottom: 10px; border-radius: 10px; float: right; margin-top: 5%;">
 
           <img ng-show="currentUserId === userViewId && isAuthenticated" ng-src="{{ avatarUrl }}"
-            alt="" class="center-block img-rounded img-responsive"
-            ng-click="enableEditor()" style="margin-bottom: 10px; border-radius: 10px;"
+            alt="" class="visible-xs center-block img-rounded img-responsive"
+            ng-click="enableEditor()" style="margin-bottom: 10px; border-radius: 10px; margin-top: 5%;"
+            data-placement="bottom" bs-tooltip="tooltipChangeAvatar">
+
+          <img ng-show="currentUserId === userViewId && isAuthenticated" ng-src="{{ avatarUrl }}"
+            alt="" class="hidden-xs img-rounded img-responsive"
+            ng-click="enableEditor()" style="margin-bottom: 10px; border-radius: 10px; float: right; margin-top: 5%;"
             data-placement="bottom" bs-tooltip="tooltipChangeAvatar">
         </div>
       </div>
 
-      <ul class="list-group">
+      <ul class="list-group" style="margin-top: 2%;">
         <li class="list-group-item dropdown-toggle text-right" ng-if="joinedDate">
           <span class="pull-left">
             <strong>Joined</strong>
@@ -281,12 +291,12 @@
         </div>
       </div>
 
-      <hr>
+      <!-- <hr>
 
       <button type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top"
         data-template="views/deleteaccountmodal.html" bs-modal="modal">
         <i class="ion-close"></i>&nbsp; Delete/Unlink Account
-      </button>
+      </button> -->
     </div>
   </div>
 </div>

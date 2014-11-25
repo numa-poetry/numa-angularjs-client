@@ -1,7 +1,7 @@
 'use strict';
 
-var serverDomain = 'http://localhost:3000';
-// var serverDomain = 'https://numabackend-40189.onmodulus.net';
+// var serverDomain = 'http://localhost:3000';
+var serverDomain = 'https://numabackend-40189.onmodulus.net';
 
 var apiVersion   = '/api/v1';
 
@@ -15,8 +15,8 @@ var apiVersion   = '/api/v1';
 angular.module('numaApp')
   .constant('endpointConstants', {
 
-    serverDomain        : 'http://localhost:3000',
-    // serverDomain        : 'https://numabackend-40189.onmodulus.net',
+    // serverDomain        : 'http://localhost:3000',
+    serverDomain        : 'https://numabackend-40189.onmodulus.net',
 
     apiVersion          : '/api/v1',
 

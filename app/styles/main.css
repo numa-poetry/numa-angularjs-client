@@ -275,7 +275,7 @@ body {
 .alert-material {
   position: fixed;
   right: 12px;
-  bottom: 12px;
+  bottom: 40px;
   z-index: 1;
   display: inline-block;
   min-height: 48px;
@@ -283,7 +283,7 @@ body {
   font-family: 'Roboto', sans-serif;
   color: #f1f1f1;
   cursor: default;
-  background: #323232;
+  background: #333333;
   border-radius: 2px;
   outline: none;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
@@ -335,13 +335,18 @@ a:not([name]) {
   padding-bottom: 7px;
 }
 
+pre {
+  word-break: normal;
+}
+
 .poem-body-view {
+  white-space: pre-wrap;
   font-size: 20px;
   font-family: 'Lusitana', cursive;
   color: #000000;
   background-color: rgba(246, 246, 239, -0.1);
   border: none!important;
-  padding: 60px 25px 70px 25px;
+  padding: 60px 25px 30px 25px;
 }
 
 .poem-body {
@@ -419,7 +424,7 @@ a:not([name]) {
   /*font-family: 'Open Sans', sans-serif;*/
   font-family: 'Lusitana';
   font-size: 25px;
-  line-height: 20px;
+  line-height: 30px;
   margin-left: -15px;
 }
 
@@ -431,7 +436,7 @@ a:not([name]) {
 .brand {
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 40px;
-  line-height: 32px;
+  line-height: 26px;
 }
 
 .brand:hover,
