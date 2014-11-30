@@ -43,8 +43,9 @@
     <div class="pull-right" style="padding-right: 10px;" ng-show="userId === creatorId && isAuthenticated">
       <a ng-href="/#!/edit/{{ poemId }}" type="button" class="btn btn-sm btn-info">Edit</a>
       <a type="button" class="btn btn-sm btn-danger" data-animation="am-fade-and-slide-top"
-        data-template="views/deletepoemmodal.html" bs-modal="modalDeletePoem"><i class="ion-close-round"></i>
+        data-template="views/deletepoemmodal.html" bs-modal="modalDeletePoem">Delete
       </a>
+      <!-- <i class="ion-close-round"></i> -->
     </div>
     <div class="pull-left" style="padding-left: 10px;">
       <div ng-if="userId !== creatorId && isAuthenticated">

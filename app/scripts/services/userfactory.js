@@ -65,7 +65,7 @@ angular.module('numaApp')
               res.followersCount, res.followingCount);
 
             if (_sId === paramsId) {
-              console.log('_sId==paramsid')
+              // console.log('_sId==paramsid')
               $rootScope.loggedInUserDisplayName = res.displayName;
               $rootScope.isAuthenticated = true; // temp fix to work with satellizer
               userFactory.setLoggedInUserAvatarUrl(res.avatarUrl);
@@ -74,13 +74,13 @@ angular.module('numaApp')
             }
 
             if (profile === 'profile=full') {
-              console.log('profile === profile=full')
+              // console.log('profile === profile=full')
               userFactory.setPoems(res.poems);
             } else {
             }
 
             if (_sId === paramsId && profile === 'profile=full') {
-              console.log('_sId === paramsId && profile ===profile=full');
+              // console.log('_sId === paramsId && profile ===profile=full');
               userFactory.setComments(res.comments);
               userFactory.setFavoritePoems(res.favoritePoems);
               userFactory.setUnreadComments(res.unreadComments);
@@ -142,7 +142,7 @@ angular.module('numaApp')
             });
           $location.path('/login');
         } else {
-          console.log('no cookie or token found');
+          // console.log('no cookie or token found');
         }
       };
 

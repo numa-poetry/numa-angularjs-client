@@ -33,6 +33,7 @@ angular.module('numaApp')
       };
 
       $scope.title = 'Untitled';
+      $scope.toPublish = true;
 
 // functions -------------------------------------------------------------------
 
