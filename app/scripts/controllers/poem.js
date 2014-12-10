@@ -9,10 +9,10 @@
  */
 angular.module('numaApp')
   .controller('PoemCtrl', ['$scope', '$routeParams', 'poemFactory', 'storageFactory',
-    'userFactory', '$alert', 'helperFactory', '$rootScope', '$location', 'socket',
+    'userFactory', '$alert', 'helperFactory', '$rootScope', '$location',
     '$sce', '$tooltip',
     function ($scope, $routeParams, poemFactory, storageFactory, userFactory,
-      $alert, helperFactory, $rootScope, $location, socket, $sce, $tooltip) {
+      $alert, helperFactory, $rootScope, $location, $sce, $tooltip) {
 
       $scope.userId = storageFactory.getId();
       userFactory.init($scope.userId, 'Basic');
@@ -110,14 +110,14 @@ angular.module('numaApp')
         });
       };
 
-      socket.forward('newComment', $scope);
-      var unregisterNewCommentEvent = $scope.$on('socket:newComment', function(ev, data) {
-        console.log('newComment data', data);
-      });
+      // socket.forward('newComment', $scope);
+      // var unregisterNewCommentEvent = $scope.$on('socket:newComment', function(ev, data) {
+      //   console.log('newComment data', data);
+      // });
 
-      $scope.$on('$destroy', function() {
-        unregisterNewCommentEvent();
-      });
+      // $scope.$on('$destroy', function() {
+      //   unregisterNewCommentEvent();
+      // });
 
       $scope.trustSrc = function(src) {
         return $sce.trustAsResourceUrl(src);
@@ -200,7 +200,7 @@ angular.module('numaApp')
 
         resource.$promise.then(function(res) {
           // notify server->notify creator of new comment
-          socket.emit('newComment', { creatorId : $scope.creatorId });
+          // socket.emit('newComment', { creatorId : $scope.creatorId });
 
           // clear the comment box
           $scope.comment = "";

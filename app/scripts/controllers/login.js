@@ -49,7 +49,7 @@ angular.module('numaApp')
 
             $rootScope.displayName = res.data.displayName;
             usSpinnerService.stop('login-spinner');
-            $rootScope.$emit('login');
+            $rootScope.$emit('loginOrSignup');
           })
           .catch(function(res) {
             // if backend is down
@@ -108,7 +108,7 @@ angular.module('numaApp')
           $rootScope.displayName     = req.displayName;
           $rootScope.isAuthenticated = true; // temp fix to work with satellizer
           usSpinnerService.stop('login-spinner');
-          $rootScope.$emit('login');
+          $rootScope.$emit('loginOrSignup');
         }, function(res) {
           // if backend is down
           if (res.status === 0) {

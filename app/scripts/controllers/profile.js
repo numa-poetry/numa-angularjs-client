@@ -345,6 +345,10 @@ angular.module('numaApp')
 
       $scope.disableEditor = function() {
         $scope.editorEnabled = false;
+
+        if (!$scope.email) {
+          $scope.email = $scope.workingEmail;
+        }
       };
 
       $scope.save = function() {

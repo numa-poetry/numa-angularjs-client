@@ -16,13 +16,13 @@ angular.module('numaApp')
       tokenInterceptorFactory.request = function(config) {
         config.headers = config.headers || {};
         var token      = storageFactory.getToken();
-        var socketId   = storageFactory.getSocketId();
+        // var socketId   = storageFactory.getSocketId();
         if (token) {
           config.headers.Authorization = 'Bearer ' + token;
         }
-        if (socketId) {
-          config.headers.SocketId = socketId;
-        }
+        // if (socketId) {
+        //   config.headers.SocketId = socketId;
+        // }
         return config;
       };
 

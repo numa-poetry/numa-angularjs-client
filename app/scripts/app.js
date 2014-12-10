@@ -32,7 +32,7 @@ angular
     'matchmedia-ng',
     'selectize',
     'angularUtils.directives.dirPagination',
-    'btford.socket-io',
+    // 'btford.socket-io',
     'flow',
     'wu.masonry'
   ])
@@ -155,7 +155,7 @@ angular
 
       $locationProvider.hashPrefix('!');
     }
-  ]).
+  ])/*.
   factory('socket', function(socketFactory, storageFactory, $rootScope,
     endpointConstants) {
     var socket = io.connect(endpointConstants.serverDomain); // 'http://localhost:3000'
@@ -168,4 +168,4 @@ angular
     });
 
     return socketFactory({ ioSocket: socket });
-  });
+  })*/;

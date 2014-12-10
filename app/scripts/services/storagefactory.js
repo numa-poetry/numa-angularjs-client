@@ -23,9 +23,9 @@ angular.module('numaApp')
         $cookieStore.put(storageConstants.id, id);
       };
 
-      storageFactory.setSocketId = function(id) {
-        $cookieStore.put(storageConstants.socketId, id);
-      };
+      // storageFactory.setSocketId = function(id) {
+      //   $cookieStore.put(storageConstants.socketId, id);
+      // };
 
 // getters ---------------------------------------------------------------------
 
@@ -37,9 +37,9 @@ angular.module('numaApp')
         return $window.localStorage.satellizer_token;
       };
 
-      storageFactory.getSocketId = function() {
-        return $cookieStore.get(storageConstants.socketId);
-      };
+      // storageFactory.getSocketId = function() {
+      //   return $cookieStore.get(storageConstants.socketId);
+      // };
 
 // deletes ---------------------------------------------------------------------
 

@@ -41,7 +41,7 @@ angular.module('numaApp')
         $scope.unreadFollowingPoemsCount = userFactory.getLoggedInUserUnreadFollowingPoemsCount();
       });
 
-      var unregisterLogin = $rootScope.$on('login', function() {
+      var unregisterLogin = $rootScope.$on('loginOrSignup', function() {
         $scope.id        = storageFactory.getId();
         $scope.avatarUrl = userFactory.getLoggedInUserAvatarUrl();
       });

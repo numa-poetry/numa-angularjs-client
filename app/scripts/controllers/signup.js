@@ -9,8 +9,9 @@
  */
 angular.module('numaApp')
   .controller('SignupCtrl', ['$location', '$scope',
-    'userFactory', 'storageFactory', '$alert', '$rootScope', 'usSpinnerService',
-    function ($location, $scope, userFactory, storageFactory,
+    'userFactory', 'storageFactory', '$auth', '$alert', '$rootScope',
+    'usSpinnerService',
+    function ($location, $scope, userFactory, storageFactory, $auth,
       $alert, $rootScope, usSpinnerService) {
 
       $scope.popover = {
@@ -22,6 +23,55 @@ angular.module('numaApp')
       };
 
 // functions -------------------------------------------------------------------
+
+      $scope.authenticate = function(provider) {
+        usSpinnerService.spin('signup-spinner');
+        $auth.authenticate(provider)
+          .then(function(res) {
+            $alert({
+              type        : 'material',
+              duration    : 3,
+              title       : 'Hello, ' + res.data.displayName + '!',
+              content     : 'You have successfully signed up.',
+              animation   : 'fadeZoomFadeDown'
+            });
+            console.log(res);
+
+            userFactory.setInfo(res.data.id, res.data.displayName);
+            storageFactory.setId(res.data.id);
+
+            $rootScope.displayName = res.data.displayName;
+            usSpinnerService.stop('signup-spinner');
+            $rootScope.$emit('loginOrSignup');
+          })
+          .catch(function(res) {
+            // if backend is down
+            if (res.status === 0) {
+              $auth.logout()
+                .then(function() {
+                  $alert({
+                    type        : 'material-err',
+                    title       : 'We\'ve lost connection to our backend.',
+                    content     : 'Please try logging back in.',
+                    duration    : 3,
+                    animation   : 'fadeZoomFadeDown'
+                  });
+                });
+            } else {
+              $alert({
+                type        : 'material-err',
+                title       : 'Oops!',
+                content     : res.data.message,
+                duration    : 3,
+                animation   : 'fadeZoomFadeDown'
+              });
+            }
+            storageFactory.deleteId();
+            storageFactory.deleteToken();
+            usSpinnerService.stop('signup-spinner');
+            $location.path('/signup');
+          });
+      };
 
       $scope.signUp = function() {
         usSpinnerService.spin('signup-spinner');

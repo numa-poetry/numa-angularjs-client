@@ -9,10 +9,10 @@
  */
 angular.module('numaApp')
   .controller('FeedCtrl', ['$scope', 'poemFactory', 'storageFactory',
-    'userFactory', 'helperFactory', 'socket', '$rootScope', '$cookieStore',
+    'userFactory', 'helperFactory', '$rootScope', '$cookieStore',
     '$location', '$resource',
     function ($scope, poemFactory, storageFactory, userFactory,
-      helperFactory, socket, $rootScope, $cookieStore, $location, $resource) {
+      helperFactory, $rootScope, $cookieStore, $location, $resource) {
 
       var id = storageFactory.getId();
       userFactory.init(id, 'Basic');
@@ -113,7 +113,8 @@ angular.module('numaApp')
         $scope.strictSearchParam = $location.search().strict;
         $scope.sortbyParam       = $location.search().sortby;
 
-        getPoemsPage($scope.currentPage, $scope.queryParam, $scope.searchbyParam, $scope.strictSearchParam, $scope.sortbyParam);
+        getPoemsPage(1 /* $scope.currentPage */, $scope.queryParam,
+          $scope.searchbyParam, $scope.strictSearchParam, $scope.sortbyParam);
       };
 
       function getPoemsPage(page, query, searchby, strictSearch, sortby) {
